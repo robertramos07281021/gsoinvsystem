@@ -10,7 +10,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
-    <title>GSO Invsys Sample</title>
+    <title>GSO Invsys</title>
 </head>
 <body>
     <div class="header">
