@@ -28,7 +28,7 @@
 <?php 
 if (isset($_SESSION['username'])): ?>
 
-    <p> Welcome <strong> <?php echo $_SESSION['firstname'] . $_SESSION['lastname'];  ?>  </strong></p>
+    <p> Welcome <strong> <?php echo $_SESSION['firstname'] ." ". $_SESSION['lastname'];  ?>  </strong></p>
     <p> <a href="index.php?logout='1'"> Logout </a></p>
 <?php endif ?>
 
