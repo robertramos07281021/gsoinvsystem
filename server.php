@@ -6,7 +6,7 @@ $errors = array();
 
 //connect to db
 
-$db = mysqli_connect('localhost','root', '', 'gsoinventory');
+$db = mysqli_connect('localhost','root', '','gsoinventory');
 
 //if register is clicked
 
