@@ -123,7 +123,7 @@ if(isset($_POST['login'])){
         $_SESSION['firstname'] = $row['firstname'];
         $_SESSION['lastname'] = $row['lastname'];
         $_SESSION['user_id'] = $row['user_id'];
-           
+
         header('location: index.php');
 
         
@@ -136,6 +136,9 @@ if(isset($_POST['login'])){
  
 
 }
+
+
+
 
 
 
