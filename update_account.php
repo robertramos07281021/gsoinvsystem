@@ -36,8 +36,25 @@
     
 
     </div>
- 
+ <?php
+        //connect to db and display account details
+        $user = $_SESSION['user_id'];
+        $sql = "SELECT * FROM users WHERE user_id = '$user'";
+        $result = mysqli_query($db, $sql);
+        $row = mysqli_fetch_assoc($result);
 
+        echo $row['firstname']. " ". $row['lastname'];
+
+ ?>
+<br>
+<?php  echo "Email: ".$row['email']. "&nbsp&nbsp&nbsp". "Phone Number: ".$row['phone_num']; ?>
+<br>
+<?php  echo "Address: ".$row['u_address']; ?>
+<br>
+<?php  echo "Username: ".$row['username']; ?>
+<br>
+<?php  echo "Role: ".ucfirst($row['role']); ?>
+<br><br>
     <form method="POST" action="login.php">
              
 
@@ -51,6 +68,19 @@
                 <input type="text" name="up_lastname" placeholder="Last Name">
             </div>
 
+            <div class="input-group">
+                <label >Email &nbsp; </label>
+                <input type="email" name="up_email" placeholder="Email">
+            </div>
+
+            <div class="input-group">
+                <label >Address</label>
+                <input type="text" name="up_address" placeholder="Address">
+            </div>
+            <div class="input-group">
+                <label >Phone</label>
+                <input type="text" name="up_phone" placeholder="Phone Number">
+            </div>
 
             <div class="input-group">
                 <label >Username</label>
@@ -59,7 +89,7 @@
 
             <div class="input-group">
                 <label >Password</label>
-                <input type="password" name="log_password" placeholder="Password">
+                <input type="password" name="up_password" placeholder="Password">
             </div>
 
            
