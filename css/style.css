@@ -3,11 +3,25 @@
     padding: 0px;
 }
 
-body{
-   
-    background: #F8F8FF;
-    border: 2px solid red;
+
+.registerForm{
+  background-image: url('../image/registerbg1.jpg');
 }
+
+.registerRight{
+  background-image: url('../image/registerbg2.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 
 /* .header {
     width: 30%;
@@ -70,13 +84,3 @@ form{
     text-align: left;
 }
 
-.success {
-    width: 90%;
-    margin: 0px auto;
-    padding: 10px;
-    border: 1px solid #42a944;
-    color: #3b7c38;
-    background: #f2dede;
-    border-radius: 5px;
-    text-align: left;
-}
