@@ -30,34 +30,36 @@ if(isset($_POST['submit'])){
         array_push($errors, "Username already exists. Please try again.");
     }
 
-    if(strlen(trim($firstname))==0){
+    if(strlen(trim($firstname))==0 || empty($firstname)){
         array_push($errors, "First name is required.");
     }
-    if(strlen(trim($lastname))==0){
+    if(strlen(trim($lastname))==0 || empty($lastname)){
         array_push($errors, "Last name is required.");
     }
-    if(strlen(trim($email))==0){
+    if(strlen(trim($email))==0 || empty($email)){
         array_push($errors, "Email is required.");
     }
-    if(strlen(trim($phone))==0){
+    if(strlen(trim($phone))==0 || empty($phone)){
         array_push($errors, "Contact number is required.");
     }
-    if(strlen($phone) < 11 ){
+    if(strlen($phone) != 11 ){
         array_push($errors, "Contact number is invalid.");
     }
 
-    if(strlen(trim($address))==0){
+    if(strlen(trim($address))==0 || empty($address)){
         array_push($errors, "Address is required.");
     }
-    if(strlen(trim($department))==0){
+    if(strlen(trim($department))==0 || empty($department)){
         array_push($errors, "Department is required.");
     }
-    if(strlen(trim($username))==0){
+    if(strlen(trim($username))==0 || empty($username)){
         array_push($errors, "Username is required.");
     }
-    if(strlen(trim($password1))==0){
+    if(strlen(trim($password1))==0 || empty($password1)){
         array_push($errors, "Password is required.");
     }
+
+   
 
     if($password1 !== $password2){
         array_push($errors, "Password does not match!");

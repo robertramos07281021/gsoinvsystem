@@ -27,7 +27,7 @@
                     <div class="w-full grid grid-cols-2 gap-2">
                         <div >
                             <label >First Name</label>
-                            <input type="text" name="firstname" value="<?php if(isset($_POST['submit'])){ echo $firstname; } else { echo "";}  ?>" required class="w-full border">
+                            <input type="text" name="firstname" value="<?php if(isset($_POST['submit'])){ echo $firstname; } else { echo "";}  ?>"  required class="w-full border">
                         </div>
                         <div>
                             <label >Last Name</label>

@@ -66,7 +66,7 @@
             <!-- Show hidden input textbox for updating -->
             <div id="lastname" style="display:none;"> 
 
-            <form method="POST">
+            <form method="POST"  >
                 <input type="text" name="up_lastname" placeholder="Last Name" required> 
                     <button type="submit" name="post_lname"> Save Changes</button>
                         </form>
@@ -77,8 +77,34 @@
         <br>
 
         <?php  echo "Email: ".$row['email']; ?>
+
+            <!-- Show hidden input textbox for updating -->
+            <div id="email" style="display:none;"> 
+
+            <form method="POST">
+                <input type="email" name="up_email" placeholder="Email" required> 
+                    <button type="submit" name="post_email"> Save Changes</button>
+                        </form>
+
+                        </div> 
+                            <button onclick="showEmail()">Edit</button>
+
+
         <br>
-        <?php "Phone Number: ".$row['phone_num']; ?>  
+        <?php echo "Phone Number: ".$row['phone_num']; ?> 
+        
+            <!-- Show hidden input textbox for updating -->
+            <div id="phone" style="display:none;"> 
+
+            <form method="POST">
+                <input type="number" name="up_phone" placeholder="Phone number" required> 
+                    <button type="submit" name="post_phone"> Save Changes</button>
+                        </form>
+
+                        </div> 
+                            <button onclick="showPhone()">Edit</button>
+
+
         <br>
         <?php  echo "Address: ".$row['u_address']; ?>
         <br>
@@ -103,8 +129,16 @@ $errors = array();
     $u_id = $_SESSION['user_id'];
     $firstname = mysqli_real_escape_string($db, $_POST['up_firstname']);
 
-    if(strlen(trim($firstname))==0){
+    if(strlen(trim($firstname))==0 || empty($firstname)){
         array_push($errors, "Please enter your firstname.");
+        echo "<div class='error' style='width: 90%;
+        margin: 0px auto;
+        padding: 10px;
+        border: 1px solid #a94442;
+        color: #a94442;
+        background: #f2dede;
+        border-radius: 5px;
+        text-align: left;'>Your firstname must not be empty!. </div>";
     }
 
     $query = "SELECT * FROM users WHERE user_id = '$u_id'";
@@ -130,11 +164,15 @@ $errors = array();
         mysqli_query($db, $sql);  //update to database
         ?>
         <script>
-                swal("Success!", "Firstname updated.", "success");
+                 swal({title: "Success!", text: "Firstname has been updated.", type: 
+                        "success"}).then(function(){ 
+                        location.reload();
+                        }
+                        );
         </script>
 
         <?php
-
+            
     }
 
 }
@@ -146,8 +184,16 @@ $errors = array();
     $u_id = $_SESSION['user_id'];
     $lastname = mysqli_real_escape_string($db, $_POST['up_lastname']);
 
-    if(strlen(trim($lastname))==0){
+    if(strlen(trim($lastname))==0 || empty($lastname)){
         array_push($errors, "Please enter your lastname.");
+        echo "<div class='error' style='width: 90%;
+        margin: 0px auto;
+        padding: 10px;
+        border: 1px solid #a94442;
+        color: #a94442;
+        background: #f2dede;
+        border-radius: 5px;
+        text-align: left;'>Your lastname must not be empty!. </div>";
     }
 
     $query = "SELECT * FROM users WHERE user_id = '$u_id'";
@@ -156,6 +202,14 @@ $errors = array();
 
     if($lastname === $row['lastname']){
         array_push($errors, "Your lastname is same as before.");
+        echo "<div class='error' style='width: 90%;
+        margin: 0px auto;
+        padding: 10px;
+        border: 1px solid #a94442;
+        color: #a94442;
+        background: #f2dede;
+        border-radius: 5px;
+        text-align: left;'>Your lastname is same as before. </div>";
     }
 
     if(count($errors) === 0){
@@ -165,7 +219,70 @@ $errors = array();
         mysqli_query($db, $sql);  //update to database
         ?>
         <script>
-                swal("Success!", "Lastname updated.", "success");
+                // swal("Success!", "Lastname updated.", "success");
+
+                swal({title: "Success!", text: "Lastname has been updated.", type: 
+                        "success"}).then(function(){ 
+                        location.reload();
+                        }
+                        );
+        </script>
+
+        <?php
+             
+    }
+
+}
+
+
+
+
+  //update Email in Accounts
+  if(isset($_POST['post_email'])){
+    $u_id = $_SESSION['user_id'];
+    $email = mysqli_real_escape_string($db, $_POST['up_email']);
+
+    if(strlen(trim($email))==0 || empty($email)){
+        array_push($errors, "Please enter your email address.");
+        echo "<div class='error' style='width: 90%;
+        margin: 0px auto;
+        padding: 10px;
+        border: 1px solid #a94442;
+        color: #a94442;
+        background: #f2dede;
+        border-radius: 5px;
+        text-align: left;'>Please enter your email address. </div>";
+    }
+
+    $query = "SELECT * FROM users WHERE user_id = '$u_id'";
+    $result = mysqli_query($db, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    if($email === $row['email']){
+        array_push($errors, "Your email address is same as before.");
+        echo "<div class='error' style='width: 90%;
+        margin: 0px auto;
+        padding: 10px;
+        border: 1px solid #a94442;
+        color: #a94442;
+        background: #f2dede;
+        border-radius: 5px;
+        text-align: left;'>Your email address is same as before. </div>";
+        
+    }
+
+    if(count($errors) === 0){
+
+        $sql= "UPDATE users SET email='$email' WHERE user_id='$u_id' ";
+
+        mysqli_query($db, $sql);  //update to database
+        ?>
+        <script>
+                 swal({title: "Success!", text: "Email address has been updated.", type: 
+                        "success"}).then(function(){ 
+                        location.reload();
+                        }
+                        );
         </script>
 
         <?php
@@ -173,6 +290,71 @@ $errors = array();
     }
 
 }
+
+
+
+
+  //update Phone number in Accounts
+  if(isset($_POST['post_phone'])){
+    $u_id = $_SESSION['user_id'];
+    $phone = mysqli_real_escape_string($db, $_POST['up_phone']);
+
+    if(strlen(trim($phone))==0 || empty($phone)){
+        array_push($errors, "Please enter your Phone number.");
+        echo $errors;
+        
+    }
+
+    $query = "SELECT * FROM users WHERE user_id = '$u_id'";
+    $result = mysqli_query($db, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    if($phone === $row['phone_num']){
+        array_push($errors, "Your Contact number is same as before.");
+        echo "<div class='error' style='width: 90%;
+        margin: 0px auto;
+        padding: 10px;
+        border: 1px solid #a94442;
+        color: #a94442;
+        background: #f2dede;
+        border-radius: 5px;
+        text-align: left;'>Your Contact number is same as before. </div>";
+    }
+
+    if(strlen($phone) != 11){
+        array_push($errors, "Contact number is invalid.");
+        echo "<div class='error' style='width: 90%;
+        margin: 0px auto;
+        padding: 10px;
+        border: 1px solid #a94442;
+        color: #a94442;
+        background: #f2dede;
+        border-radius: 5px;
+        text-align: left;'>Contact number is invalid. </div>";
+        
+    }
+
+    if(count($errors) === 0){
+
+        $sql= "UPDATE users SET phone_num='$phone' WHERE user_id='$u_id' ";
+
+        mysqli_query($db, $sql);  //update to database
+        ?>
+        <script>
+                 swal({title: "Success!", text: "Contact number has been updated.", type: 
+                        "success"}).then(function(){ 
+                        location.reload();
+                        }
+                        );
+        </script>
+
+        <?php
+
+    }
+
+}
+
+
 
 
 
@@ -221,6 +403,38 @@ $errors = array();
             } else{
                 lname.style.display = 'block';
                 lname_display = 1;
+            }
+        }
+
+
+//Email
+        var email = document.getElementById('email');
+        var email_display = 0;
+
+
+        function showEmail(){
+            if(email_display == 1){
+                email.style.display = 'none';
+                email_display = 0;
+            } else{
+                email.style.display = 'block';
+                email_display = 1;
+            }
+        }
+
+
+//Phone
+var phone = document.getElementById('phone');
+        var phone_display = 0;
+
+
+        function showPhone(){
+            if(phone_display == 1){
+                phone.style.display = 'none';
+                phone_display = 0;
+            } else{
+                phone.style.display = 'block';
+                phone_display = 1;
             }
         }
     
