@@ -6,95 +6,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-<!-- Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
     <title>GSO Invsys</title>
+    <style>
+        .welcomePageBg{
+            background-image: url("./image/welcomeBg.jpg");
+        }
+    </style>
+  
 </head>
-<body>
-<?php 
-    if (isset($_SESSION['success'])): 
 
-?>
-<h3>
+<body class=" text-black w-full h-screen grid grid-cols-5">
+
+    <?php 
+        if (isset($_SESSION['success'])): 
+    ?>
+
     <?php
         echo $_SESSION['success'];
         unset($_SESSION['success']);
     ?>
+    <?php endif ?>
 
-
-
-<?php endif ?>
-
-<?php 
-if (isset($_SESSION['username'])): ?>
+    <?php 
+    if (isset($_SESSION['username'])): 
+    ?>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">GSO InvSystem</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="update_account.php">My Profile</a>
-        </li>
-
+    <nav class=" p-6 fixed h-full w-[20%]">
+        <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center">
+            <a href="index.php" class="text-2xl font-bold"><span class="text-[red]">GSO</span> InvSystem</a>
+            <hr class="mt-5 border border-black">
+            <div class="text-start w-full mt-10">
+                <ul>
+                    <li class="mb-5 w-full bg-red-300/20 p-3 rounded-md font-bold">
+                      <a  aria-current="page" href="index.php">Dashboard</a>
+                    </li>
+                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
+                        <a href="#">User Management</a>
+                    </li>
+                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
+                        <a href="#">Office</a>
+                    </li>
+                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
+                      <a href="#">Reports</a>
+                    </li>   
+                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
+                      <a  href="update_account.php">My Profile</a>
+                    </li>
+                </ul>  
         
+            </div>
+        </div>
+    </nav>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Link
-          </a>
-
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="#">Manage Accounts</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="#">Requests</a>
-        </li>
-      </ul>  
-
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-         
-      </form>
-        <p style="margin-left:55px; margin-right:25px; text-align:center; margin-top:20px;"> <a href="index.php?logout='1'" style="text-decoration:none;"> Logout </a> </p>
+    <div class=" absolute top-0 left-0 -z-10 h-80 w-full welcomePageBg">
     </div>
-  </div>
-</nav>
- 
 
-<h1>Welcome !</h1>
+    <nav class="p-6 ">
+    </nav>
 
+    <article class=" col-span-4 py-6 pr-6 w-full h-full ">
+        
+        <div class="flex justify-between text-white">
+            <p> Welcome  Admin <strong><?php echo $_SESSION['firstname'] ." ". $_SESSION['lastname'];?></strong></p>
+            <p> <a href="index.php?logout='1'" class=" font-bold"> Logout </a> </p>
+            <?php endif ?>
+        </div>
 
-    <p> Welcome  Admin<strong> <?php echo $_SESSION['firstname'] ." ". $_SESSION['lastname'];  ?>  </strong></p>
-    
-<?php endif ?>
+        <div class="w-full grid grid-cols-4 mt-10 h-1/6 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+                total user
+            </div>
 
-</h3>
+            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+                active user
+            </div>
 
+            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+                total item
+            </div>
+
+            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+                
+            </div>
+        </div>
+
+        <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
+            <div class="col-span-3  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+                users
+
+            </div>
+
+            <div class="col-span-2  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+                items
+            </div>
+        </div>
+
+    </article>
 
 
 </body>
