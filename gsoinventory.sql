@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2023 at 05:18 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Jul 19, 2023 at 03:25 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,50 +24,47 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `items`
 --
 
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
-  `firstname` varchar(100) NOT NULL,
-  `lastname` varchar(100) NOT NULL,
-  `email` varchar(200) NOT NULL,
-  `phone_num` varchar(15) NOT NULL,
-  `u_address` varchar(200) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(10) NOT NULL,
-  `department` varchar(200) NOT NULL,
-  `role` varchar(100) NOT NULL,
-  `status` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL,
+  `item_name` varchar(50) NOT NULL,
+  `office_name` varchar(50) NOT NULL,
+  `property_code` varchar(20) DEFAULT NULL,
+  `end_user` varchar(50) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `items`
 --
 
-INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `phone_num`, `u_address`, `username`, `password`, `department`, `role`, `status`) VALUES
-(1, 'joyce', 'bravo', 'cj@gmail.com', '09061033195', 'legazpi', 'brunonotme', 'd41d8cd98f', 'engineering', 'user', 'active'),
-(2, 'joyce', 'bravo', 'cj@gmail.com', '09061033195', 'legazpi', 'brunonotme', 'e3928a3bc4', 'engineering', 'user', 'active');
+INSERT INTO `items` (`id`, `item_name`, `office_name`, `property_code`, `end_user`, `description`, `created_at`) VALUES
+(1, 'Refrigerator', 'MMO', '2022-107-07-99-990-1', 'Jude Sulla', 'Refrigerator for MMO', '2022-07-01 12:58:21'),
+(4, 'Laptop', 'SB', '987-654-321', 'Leymar Madjus', 'Laptop for Graphic design', '2023-07-17 21:23:47'),
+(7, 'Laptop', 'MMO', '987-654-177', 'Danilo Sanchez', 'Laptop for Graphic 2 design', '2023-07-17 21:37:14');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `users`
+-- Indexes for table `items`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+ALTER TABLE `items`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table `items`
 --
-ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
