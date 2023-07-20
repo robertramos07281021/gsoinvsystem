@@ -107,15 +107,63 @@
 
         <br>
         <?php  echo "Address: ".$row['u_address']; ?>
+
+              <!-- Show hidden input textbox for updating -->
+              <div id="address" style="display:none;"> 
+
+                <form method="POST">
+                    <input type="text" name="up_address" placeholder="Address" required> 
+                        <button type="submit" name="post_address"> Save Changes</button>
+                            </form>
+
+                            </div> 
+                                <button onclick="showAddress()">Edit</button>
+
+
+
         <br>
         <?php  echo "Username: ".$row['username']; ?>
+
+                <!-- Show hidden input textbox for updating -->
+                <div id="username" style="display:none;"> 
+
+                    <form method="POST">
+                        <input type="text" name="up_username" placeholder="Username" required> 
+                            <button type="submit" name="post_username"> Save Changes</button>
+                                </form>
+
+                                </div> 
+                                    <button onclick="showUsername()">Edit</button>
+
+
         <br>
         <?php  echo "Role: ".ucfirst($row['role']); ?>
         <br><br>
 
+        <p>
+        
 
+            <!-- Change password -->
+        <div id="pass" style="display:none;"> 
 
+            <form method="POST">
+                <input type="password" name="up_pass1" placeholder="Password" id="pass1" required>
+                <!-- An element to toggle between password visibility -->
+                    <input type="checkbox" onclick="myFunction1()">Show Password 
+                    <br><br>
 
+                    <input type="password" name="up_pass2" placeholder="Confirm Password" id="pass2"  required> 
+                    <!-- An element to toggle between password visibility -->
+                    <input type="checkbox" onclick="myFunction2()">Show Password 
+                    <br><br>
+
+                    <button type="submit" name="post_password"> Save Changes</button>
+                        </form>
+
+                        </div> <br>
+                            <button onclick="showPassword()">Change Password</button>
+
+        </p>
            
 
             <p><a href="index.php"  class="goBack">Go to Main page</a></p>
@@ -166,7 +214,7 @@ $errors = array();
         <script>
                  swal({title: "Success!", text: "Firstname has been updated.", type: 
                         "success"}).then(function(){ 
-                        location.reload();
+                            location.href="update_account.php";
                         }
                         );
         </script>
@@ -202,6 +250,7 @@ $errors = array();
 
     if($lastname === $row['lastname']){
         array_push($errors, "Your lastname is same as before.");
+
         echo "<div class='error' style='width: 90%;
         margin: 0px auto;
         padding: 10px;
@@ -211,6 +260,8 @@ $errors = array();
         border-radius: 5px;
         text-align: left;'>Your lastname is same as before. </div>";
     }
+
+
 
     if(count($errors) === 0){
 
@@ -223,7 +274,7 @@ $errors = array();
 
                 swal({title: "Success!", text: "Lastname has been updated.", type: 
                         "success"}).then(function(){ 
-                        location.reload();
+                            location.href="update_account.php";
                         }
                         );
         </script>
@@ -280,7 +331,7 @@ $errors = array();
         <script>
                  swal({title: "Success!", text: "Email address has been updated.", type: 
                         "success"}).then(function(){ 
-                        location.reload();
+                            location.href="update_account.php";
                         }
                         );
         </script>
@@ -343,7 +394,7 @@ $errors = array();
         <script>
                  swal({title: "Success!", text: "Contact number has been updated.", type: 
                         "success"}).then(function(){ 
-                        location.reload();
+                            location.href="update_account.php";
                         }
                         );
         </script>
@@ -357,7 +408,214 @@ $errors = array();
 
 
 
+//update Address in Accounts
+if(isset($_POST['post_address'])){
+    $u_id = $_SESSION['user_id'];
+    $address = mysqli_real_escape_string($db, $_POST['up_address']);
 
+    if(strlen(trim($address))==0 || empty($address)){
+        array_push($errors, "Please enter your address.");
+        echo "<div class='error' style='width: 90%;
+        margin: 0px auto;
+        padding: 10px;
+        border: 1px solid #a94442;
+        color: #a94442;
+        background: #f2dede;
+        border-radius: 5px;
+        text-align: left;'>Your address must not be empty!. </div>";
+    }
+
+    $query = "SELECT * FROM users WHERE user_id = '$u_id'";
+    $result = mysqli_query($db, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    if($address === $row['u_address']){
+        array_push($errors, "Your address is same as before.");
+       echo "<div class='error' style='width: 90%;
+       margin: 0px auto;
+       padding: 10px;
+       border: 1px solid #a94442;
+       color: #a94442;
+       background: #f2dede;
+       border-radius: 5px;
+       text-align: left;'>Your address is same as before. </div>";
+   }
+
+    if(count($errors) === 0){
+
+        $sql= "UPDATE users SET u_address='$address' WHERE user_id='$u_id' ";
+
+        mysqli_query($db, $sql);  //update to database
+        ?>
+        <script>
+                 swal({title: "Success!", text: "Address has been updated.", type: 
+                        "success"}).then(function(){ 
+                        location.href="update_account.php";
+                        }
+                        );
+        </script>
+
+        <?php
+            
+    }
+
+}
+
+
+
+
+
+//update Username in Accounts
+if(isset($_POST['post_username'])){
+    $u_id = $_SESSION['user_id'];
+    $username = mysqli_real_escape_string($db, $_POST['up_username']);
+
+    if(strlen(trim($username))==0 || empty($username)){
+        array_push($errors, "Please enter your username.");
+        echo "<div class='error' style='width: 90%;
+        margin: 0px auto;
+        padding: 10px;
+        border: 1px solid #a94442;
+        color: #a94442;
+        background: #f2dede;
+        border-radius: 5px;
+        text-align: left;'>Your username must not be empty!. </div>";
+    }
+
+    $query = "SELECT * FROM users WHERE user_id = '$u_id'";
+    $result = mysqli_query($db, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    if($username === $row['username']){
+         array_push($errors, "Your username is same as before.");
+        echo "<div class='error' style='width: 90%;
+        margin: 0px auto;
+        padding: 10px;
+        border: 1px solid #a94442;
+        color: #a94442;
+        background: #f2dede;
+        border-radius: 5px;
+        text-align: left;'>Your firstname is same as before. </div>";
+    }
+
+    if(count($errors) === 0){
+
+        $sql= "UPDATE users SET username='$username' WHERE user_id='$u_id' ";
+
+        mysqli_query($db, $sql);  //update to database
+        ?>
+        <script>
+                 swal({title: "Success!", text: "Your username has been updated.", type: 
+                        "success"}).then(function(){ 
+                            location.href="update_account.php";
+                        }
+                        );
+        </script>
+
+        <?php
+            
+    }
+
+}
+
+
+
+
+//Update password
+
+if(isset($_POST['post_password'])){
+    $u_id = $_SESSION['user_id'];
+    $passw = mysqli_real_escape_string($db, $_POST['up_pass1']);
+    $passw2 = mysqli_real_escape_string($db, $_POST['up_pass2']);
+    $password = md5($passw);
+    $password2 = md5($passw2);
+
+    if(strlen(trim($password))==0 || empty($password)){
+        array_push($errors, "Please enter a new password.");
+        echo "<div class='error' style='width: 90%;
+        margin: 0px auto;
+        padding: 10px;
+        border: 1px solid #a94442;
+        color: #a94442;
+        background: #f2dede;
+        border-radius: 5px;
+        text-align: left;'>Your new password must not be empty!. </div>";
+    }
+
+    if(strlen(trim($passw2))==0 || empty($passw2)){
+        array_push($errors, "Please confirm new password to continue.");
+        echo "<div class='error' style='width: 90%;
+        margin: 0px auto;
+        padding: 10px;
+        border: 1px solid #a94442;
+        color: #a94442;
+        background: #f2dede;
+        border-radius: 5px;
+        text-align: left;'>Please confirm new password to continue. </div>";
+    }
+
+    $query = "SELECT * FROM users WHERE user_id = '$u_id'";
+    $result = mysqli_query($db, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    if($password === $row['password']){
+        array_push($errors, "Your password is same as before.");
+       echo "<div class='error' style='width: 90%;
+       margin: 0px auto;
+       padding: 10px;
+       border: 1px solid #a94442;
+       color: #a94442;
+       background: #f2dede;
+       border-radius: 5px;
+       text-align: left;'>Your password is same as before. </div>";
+   }
+
+
+        if($passw !== $passw2){
+            array_push($errors, "Password does not match!");
+            echo "<div class='error' style='width: 90%;
+       margin: 0px auto;
+       padding: 10px;
+       border: 1px solid #a94442;
+       color: #a94442;
+       background: #f2dede;
+       border-radius: 5px;
+       text-align: left;'>Password does not match! </div>";
+        }
+
+        if(strlen($passw) < 8){
+            array_push($errors, "Password should be 8 characters long or more.");
+            echo "<div class='error' style='width: 90%;
+       margin: 0px auto;
+       padding: 10px;
+       border: 1px solid #a94442;
+       color: #a94442;
+       background: #f2dede;
+       border-radius: 5px;
+       text-align: left;'>Password should be 8 characters long or more. </div>";
+        }
+
+
+
+    if(count($errors) === 0){
+
+        $sql= "UPDATE users SET password='$password' WHERE user_id='$u_id' ";
+
+        mysqli_query($db, $sql);  //update to database
+        ?>
+        <script>
+                 swal({title: "Success!", text: "Password has been updated.", type: 
+                        "success"}).then(function(){ 
+                        location.href="update_account.php";
+                        }
+                        );
+        </script>
+
+        <?php
+            
+    }
+
+}
 
 
 
@@ -437,7 +695,77 @@ var phone = document.getElementById('phone');
                 phone_display = 1;
             }
         }
+
+
+
+        //Address
+        var address = document.getElementById('address');
+        var address_display = 0;
+
+
+        function showAddress(){
+            if(address_display == 1){
+                address.style.display = 'none';
+                address_display = 0;
+            } else{
+                address.style.display = 'block';
+                address_display = 1;
+            }
+        }
+
+
+        //Username
+        var username = document.getElementById('username');
+        var username_display = 0;
+
+
+        function showUsername(){
+            if(username_display == 1){
+                username.style.display = 'none';
+                username_display = 0;
+            } else{
+                username.style.display = 'block';
+                username_display = 1;
+            }
+        }
     
+
+    //Password
+    var password = document.getElementById('pass');
+        var password_display = 0;
+
+
+        function showPassword(){
+            if(password_display == 1){
+                password.style.display = 'none';
+                password_display = 0;
+            } else{
+                password.style.display = 'block';
+                password_display = 1;
+            }
+        }
+
+
+
+        //Show password
+
+        function myFunction1() {
+            var x = document.getElementById("pass1");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+            }
+
+            function myFunction2() {
+            var x = document.getElementById("pass2");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+            }
 </script>
 </body>
 </html>
