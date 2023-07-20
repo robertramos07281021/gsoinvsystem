@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
@@ -13,7 +13,7 @@
             background-image: url("./image/registerbg1.jpg");
             background-repeat: no-repeat;
             background-size: 100% 100%;
-        }
+    }
     </style>
 
 
@@ -25,7 +25,7 @@
         <div class=" h-full w-full registerRight rounded-l-[20px]">
 
         </div>
-        <div class="registerForm border w-full px-28 py-12 h-full  rounded-r-[20px]" id="registerForm">
+        <div class=" border w-full px-28 py-12 h-full  rounded-r-[20px]" id="registerForm">
             <div class=" h-full rounded-[10px] border-4 border-double p-3 border-red-500 bg-white" >
                 <div class="header">
                     <h2>Create Account</h2>

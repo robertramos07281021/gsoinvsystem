@@ -12,9 +12,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>GSO Invsys</title>
     <style>
-        .welcomePageBg{
-            background-image: url("./image/welcomeBg.jpg");
-        }
+     
     </style>
   
 </head>
@@ -108,6 +106,7 @@
 
     </article>
 
-
+<script href="./script/jscript.js"></script>
+<script src="" ></script>
 </body>
 </html>

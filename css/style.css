@@ -10,13 +10,14 @@
   background-size: 100% 100%;
 }
 
-.welcomePageBg{
-    background-image: url('../image/icons8-human-64.png');
-}
-
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+
+.welcomePageBg{
+    background-image: url('./image/welcomeBg.jpg');
 }
