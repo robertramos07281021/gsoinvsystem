@@ -1,4 +1,15 @@
-<?php include('server.php');   ?>
+<?php include('server.php'); 
+
+
+$displayUser = "SELECT * FROM users";
+$res_query = mysqli_query($db,$displayUser);
+
+$total_users = mysqli_num_rows($res_query);
+$act = "active";
+$active_query= "SELECT * FROM users WHERE status='$act'";
+$active_result = mysqli_query($db,$active_query);
+$total_active = mysqli_num_rows($active_result);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,10 +51,10 @@
             <hr class="mt-5 border border-black">
             <div class="text-start w-full mt-10">
                 <ul>
-                    <li class="mb-5 w-full bg-red-300/20 p-3 rounded-md font-bold">
+                    <li class="mb-5 w-full hover:bg-red-300/20 p-3 rounded-md ">
                       <a  aria-current="page" href="index.php">Dashboard</a>
                     </li>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
+                    <li class="mb-5 w-full p-3 bg-red-300/20 rounded-md font-bold">
                         <a href="user_management.php">User Management</a>
                     </li>
                     <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
@@ -78,10 +89,14 @@
         <div class="w-full grid grid-cols-4 mt-10 h-1/6 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
                 total user
+                <br>
+                <?php  echo $total_users; ?>
             </div>
 
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
                 active user
+                <br>
+                <?php  echo $total_active; ?>
             </div>
 
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
@@ -94,14 +109,67 @@
         </div>
 
         <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
-            <div class="col-span-3  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-                users
+            <div class="col-span-4  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+                 
+
+                <h1> List of Users </h1>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Contact#</th>
+                            <th>Address</th>
+                            <th>Username</th>
+                            <th>Department</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                         </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                    <?php   
+                            
+                            $num = 0;
+                            while($row = mysqli_fetch_assoc($res_query)){
+                                $num++;
+                                ?>
+                                
+                                    <!-- rowsss from database will be displayed -->
+                                    <td> <?php echo $num; ?> </td>
+                                    <td> <?php echo  $row['firstname'] ?>  </td>
+                                    <td> <?php echo  $row['lastname'] ?>  </td>
+                                    <td> <?php echo  $row['email'] ?>  </td>
+                                    <td> <?php echo  $row['phone_num'] ?>  </td>
+                                    <td> <?php echo  $row['u_address'] ?>  </td>
+                                    <td> <?php echo  $row['username'] ?>  </td>
+                                    <td> <?php echo  $row['department'] ?>  </td>
+                                    <td> <?php echo  $row['role'] ?>  </td>
+                                    <td> <?php echo  $row['status'] ?>  </td>
+
+
+
+                                    </tr>
+                                <?php
+                            }
+                    
+                    ?>
+                         
+                    </tbody>
+
+                </table>
+
 
             </div>
 
-            <div class="col-span-2  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-                items
-            </div>
+              <div class="col-span-1  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+                departments
+            </div> 
         </div>
 
     </article>
