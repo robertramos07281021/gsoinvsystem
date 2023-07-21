@@ -6,13 +6,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
-
+    <!-- <link rel="stylesheet" type="text/css" href="./css/style.css"> -->
+    <link rel="stylesheet" type="text/css" src="css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>GSO Invsys</title>
     <style>
-     
+        .welcomePageBg{
+            background-image: url('./image/welcomeBg.jpg');
+        }
+        #logoutModal{
+    display: none;
+        }   
     </style>
   
 </head>
@@ -67,12 +72,14 @@
     <nav class="p-6 ">
     </nav>
 
+    
+
     <article class=" col-span-4 py-6 pr-6 w-full h-full ">
         
         <div class="flex justify-between text-white">
             <p> Welcome  Admin <strong><?php echo $_SESSION['firstname'] ." ". $_SESSION['lastname'];?></strong></p>
-            <p> <a href="index.php?logout='1'" class=" font-bold"> Logout </a> </p>
-            <?php endif ?>
+            <button onclick="logoutModal()" class="font-bold"> Logout  </button>
+            
         </div>
 
         <div class="w-full grid grid-cols-4 mt-10 h-1/6 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
@@ -103,10 +110,31 @@
                 items
             </div>
         </div>
+        
+    
 
     </article>
+    
+    <div class="absolute top-0 left-0 h-full w-full bg-white/30" id="logoutModal" >
+        <div class="flex w-full h-full justify-center items-center">
+            <div class="h-56 w-80 bg-[red] fixed rounded px-1 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
+                <p class="text-white font-bold">GSO InvSystem</p>
+                <div class="bg-white h-[87.2%] w-full flex justify-center items-center">
+                    <div class="text-center ">
+                        <p>Do you want to logout?</p>
+                        <div class="flex justify-center gap-10 mt-10">
+                            <button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red]"><a href="index.php?logout='1'" class=" font-bold"> Yes </a></button>
+                            <?php endif ?>
+                            <button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red] font-bold" onclick="noLogout()">No</button>
+                        </div>    
+                    </div>
+                </div>
+            <div>
+        </div>
+    </div>
+<script src="./script/jscript.js"> 
 
-<script href="./script/jscript.js"></script>
-<script src="" ></script>
+ </script>
+
 </body>
 </html>
