@@ -9,6 +9,8 @@ $act = "active";
 $active_query= "SELECT * FROM users WHERE status='$act'";
 $active_result = mysqli_query($db,$active_query);
 $total_active = mysqli_num_rows($active_result);
+
+$errors = array();
 ?>
 
 <!DOCTYPE html>
@@ -168,9 +170,125 @@ $total_active = mysqli_num_rows($active_result);
             </div>
 
               <div class="col-span-1  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-                departments
+               Add departments
+
+               <form method="POST">
+                    
+               <label>Department: </label> <input type="text" name="dep" placeholder="Enter department"
+               
+               value="<?php if(isset($_POST['post_dep'])){
+                    
+        
+                    echo $_POST['dep'];
+                    
+                    }?>"   required > 
+                    
+                    <br><br>
+               <label>Enter your password: </label> <br>
+               <input type="password" name="pass1" placeholder="Password" id="pass1" required>
+               <button type="submit" name="post_dep"> Save Changes</button>
+
+               </form>
+
+
+               <?php
+
+              
+
+                
+                if(isset($_POST['post_dep'])){
+                    $u_id = $_SESSION['user_id'];
+                    $department = mysqli_real_escape_string($db, $_POST['dep']);
+                    $password = mysqli_real_escape_string($db, $_POST['pass1']);
+
+
+                    if(strlen(trim($department))==0 || empty($department)){
+                        array_push($errors, "Please enter a valid department.");
+                        echo "<div class='error' style='width: 90%;
+                        margin: 0px auto;
+                        padding: 10px;
+                        border: 1px solid #a94442;
+                        color: #a94442;
+                        background: #f2dede;
+                        border-radius: 5px;
+                        text-align: left;'>Department name must not be empty!. </div>";
+                    }
+
+
+                    $query1 = "SELECT * FROM users WHERE user_id = '$u_id'";
+                    $result1 = mysqli_query($db, $query1);
+                    $row1 = mysqli_fetch_assoc($result1);
+
+                    $enc_pass = md5($password);
+
+
+                    $dep_q =  "SELECT * FROM department WHERE dep_name = '$department'";
+                    $res = mysqli_query($db, $dep_q);
+                    $dep_row = mysqli_num_rows($res);
+
+                    if($enc_pass !== $row1['password']){
+                        array_push($errors, "Invalid password.");
+                        echo "<div class='error' style='width: 90%;
+                        margin: 0px auto;
+                        padding: 10px;
+                        border: 1px solid #a94442;
+                        color: #a94442;
+                        background: #f2dede;
+                        border-radius: 5px;
+                        text-align: left;'>Invalid password. </div>";
+                    }
+
+
+                    if($dep_row != 0){
+                        array_push($errors, "Department already exists.");
+                        echo "<div class='error' style='width: 90%;
+                        margin: 0px auto;
+                        padding: 10px;
+                        border: 1px solid #a94442;
+                        color: #a94442;
+                        background: #f2dede;
+                        border-radius: 5px;
+                        text-align: left;'>Department already exists. </div>";
+                    }
+
+
+                    if(count($errors) === 0){
+
+                            $sql2 = "INSERT INTO department (dep_name) VALUES ('$department')";
+
+                            mysqli_query($db, $sql2);  //insert to database
+                        ?>
+                        <script>
+                                swal({title: "Success!", text: "New department has been added.", type: 
+                                        "success"}).then(function(){ 
+                                            location.href="user_management.php";
+                                        }
+                                        );
+                        </script>
+
+                        <?php
+
+
+                    }
+
+
+                }
+
+
+                ?>
+
+
+
+
             </div> 
         </div>
+
+
+
+                
+
+
+
 
     </article>
 
