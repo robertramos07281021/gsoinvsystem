@@ -58,7 +58,7 @@
                       <a href="#">Reports</a>
                     </li>   
                     <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                      <a  href="update_account2.php">My Profile</a>
+                      <a  href="update_account.php">My Profile</a>
                     </li>
                 </ul>  
         

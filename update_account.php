@@ -55,12 +55,18 @@
     <div class=" absolute top-0 left-0 -z-10 h-80 w-full welcomePageBg">
     </div>
 
-    
+    <?php
+                    //connect to db and display account details
+                    $user = $_SESSION['user_id'];
+                    $sql = "SELECT * FROM users WHERE user_id = '$user'";
+                    $result = mysqli_query($db, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                ?>
 
 
     <article class="col-span-4 py-6 pr-6 w-full h-full col-start-2 ">
         <div class="flex justify-between text-white">
-            <p> Welcome  Admin <strong><?php echo $_SESSION['firstname'] ." ". $_SESSION['lastname'];?></strong></p>
+            <p> Welcome  Admin <strong><?php echo $row['firstname']. " " .$row['lastname']?></strong></p>
             <button onclick="logoutModal()" class="font-bold"> Logout  </button>
         </div>
     
@@ -70,48 +76,257 @@
               
                 <img src="https://media.gettyimages.com/id/1180926773/photo/studio-waist-up-portrait-of-a-beautiful-businesswoman-with-crossed-arms.jpg?s=612x612&w=gi&k=20&c=BlCz_Y26FpXviP-1E7P9uISFsbO-W9ducNo0gJ8r9jM="  class="border-4 border White h-36 w-36 rounded-full absolute -top-16 left-5 ">
 
-                <?php
-                    //connect to db and display account details
-                    $user = $_SESSION['user_id'];
-                    $sql = "SELECT * FROM users WHERE user_id = '$user'";
-                    $result = mysqli_query($db, $sql);
-                    $row = mysqli_fetch_assoc($result);
-                ?>
+                
                 <div class=" grid grid-flow-row-dense grid-cols-4 grid-rows-5  h-full">
                     <div class="col-start-2 col-span-3 pt-5 pr-5">
-                        <p class="text-4xl"><?php echo $row['firstname']; echo $row['lastname']?></p>
+                        <p class="text-4xl"><?php echo $row['firstname']. " " .$row['lastname']?></p>
                         <hr class="border-2 border-[black]/60">
                     </div>
                     <div class="row-start-2 col-span-5 row-span-4">
-                        <form class="h-full w-full px-5 pt-5">
+                        
+<!-- php code  -->
+
+
+<?php
+$errors = array();
+ 
+
+            //update user Account
+            if(isset($_POST['post_update'])){
+                    
+                $u_id = $_SESSION['user_id'];
+                $firstname = mysqli_real_escape_string($db, $_POST['firstName']);
+                $lastname = mysqli_real_escape_string($db, $_POST['lastName']);
+                $email = mysqli_real_escape_string($db, $_POST['email']);
+                $address = mysqli_real_escape_string($db, $_POST['address']);
+                $phone = mysqli_real_escape_string($db, $_POST['mobileNum']);
+                $username = mysqli_real_escape_string($db, $_POST['userName']);
+                $pass1 = mysqli_real_escape_string($db, $_POST['up_pass1']);
+                $pass2 = mysqli_real_escape_string($db, $_POST['up_pass2']);
+
+
+                if(strlen(trim($firstname))==0 || empty($firstname)){
+                    array_push($errors, "Please enter your firstname.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your firstname must not be empty!. </div>";
+                }
+
+                if(strlen(trim($lastname))==0 || empty($lastname)){
+                    array_push($errors, "Please enter your lastname.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your lastname must not be empty!. </div>";
+                }
+
+                
+                if(strlen(trim($email))==0 || empty($email)){
+                    array_push($errors, "Please enter your email.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your email must not be empty!. </div>";
+                }
+
+
+                if(strlen(trim($phone))==0 || empty($phone)){
+                    array_push($errors, "Please enter your phone.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your phone must not be empty!. </div>";
+                }
+
+
+
+                if(strlen(trim($address))==0 || empty($address)){
+                    array_push($errors, "Please enter your address.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your address must not be empty!. </div>";
+                }
+
+
+
+                if(strlen(trim($username))==0 || empty($username)){
+                    array_push($errors, "Please enter your username.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your username must not be empty!. </div>";
+                }
+
+
+
+                if(strlen(trim($pass1))==0 || empty($pass1)){
+                    array_push($errors, "Please enter your password.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your password must not be empty!. </div>";
+                }
+
+
+                if(strlen($pass1) < 8){
+                    array_push($errors, "Password must be atleast 8 characters long.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Password must be atleast 8 characters long. </div>";
+                }
+
+                if($pass1 !== $pass2){
+                    array_push($errors, "Password does not match.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Password does not match. Please try again. </div>";
+                }
+
+
+                $password = md5($pass1);
+
+                if($password === $row['password']){
+                    array_push($errors, "Password already used.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Password already used. Please try again. </div>";
+                }
+
+                if(count($errors) === 0){
+
+                    $sql= "UPDATE users SET firstname='$firstname',lastname='$lastname',
+                    email='$email', phone_num='$phone', u_address='$address', username='$username', password='$password' WHERE user_id='$u_id' ";
+                    
+                    mysqli_query($db, $sql);  //update to database
+                        ?>
+                        <script>
+                                swal({title: "Success!", text: "Your Account has been updated.", type: 
+                                        "success"}).then(function(){ 
+                                            location.href="update_account.php";
+                                        }
+                                        );
+                        </script>
+
+                        <?php
+
+                        
+
+                }
+
+
+            }
+
+
+
+?>
+    
+
+
+
+
+
+
+                        <form class="h-full w-full px-5 pt-5" method="POST">
                             <div class="grid grid-cols-2 gap-5">
                                 <div>
                                     <label for="firstName">Firstname: </label>
-                                    <input type="text" name="firstName" class="border w-full pl-2" max="50" value="<?php echo $row['firstname']?>" disabled>
+                                    <input type="text" name="firstName" class="border w-full pl-2" max="50" value="<?php 
+                                    if(isset($_POST['post_update'])){
+                                        echo $_POST['firstName'];
+                                    }else{ echo $row['firstname']; } ?>" required>
                                 </div>
                                 <div>
                                     <label for="lastName">Lastname: </label>
-                                    <input type="text" name="lastName" class="border w-full pl-2" max="50" value="<?php echo $row['lastname']?>" disabled>
+                                    <input type="text" name="lastName" class="border w-full pl-2" max="50" value="<?php 
+                                    if(isset($_POST['post_update'])){
+
+                                        echo $_POST['lastName'];
+                                    }else{
+                                        echo $row['lastname']; } ?>" required>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-5 pt-3">
                                 <div>
                                     <label for="email">Email address:</label>
-                                    <input type="text" name="email" class="border w-full pl-2" value="<?php echo $row['email']?>" disabled>
+                                    <input type="text" name="email" class="border w-full pl-2" value="<?php 
+                                    if(isset($_POST['post_update'])){
+
+                                        echo $_POST['email'];
+                                    }else{
+                                        echo $row['email']; } ?>" required>
                                 </div>
                                 <div>
                                     <label for="mobileNum">Phone Number:</label>
-                                    <input type="number" name="mobileNum" class="border w-full pl-2" min="0" max="11" value="<?php echo $row['phone_num']?>" disabled>
+                                    <input type="number" name="mobileNum" class="border w-full pl-2"   value="<?php 
+                                    if(isset($_POST['post_update'])){
+
+                                        echo $_POST['mobileNum'];
+                                    }else{
+                                        echo $row['phone_num']; } ?>" required>
                                 </div>
                             </div>
                             <div class="pt-3">
                                 <label for="address">Address:</label>
-                                <input type="text" name="address" class="w-full border pl-2" max="30" value="<?php echo $row['u_address']?>" disabled>
+                                <input type="text" name="address" class="w-full border pl-2" max="30" value="<?php 
+                                if(isset($_POST['post_update'])){
+
+                                    echo $_POST['address'];
+                                }else{ echo $row['u_address']; } ?>" required>
                             </div>
                             <div class="grid grid-cols-2 gap-5 pt-3">
                                 <div>
                                     <label for="userName">Username:</label>
-                                    <input type="text" name="userName" class="border w-full pl-2" value="<?php echo $row['username']?>" disabled >
+                                    <input type="text" name="userName" class="border w-full pl-2" value="<?php 
+                                    if(isset($_POST['post_update'])){
+
+                                        echo $_POST['userName'];
+                                    }else{
+                                         echo $row['username']; }?>" required >
                                 </div>
                                 <div>
                                     <label for="role">Role:</label>
@@ -122,12 +337,33 @@
                                 <label for="role">Department:</label>
                                 <input type="text" name="role" class="border w-full pl-2" value="<?php echo $row['department']?>" disabled>
                             </div>
+
+
+
+                            <div class="grid grid-cols-2 gap-5 pt-3">
+                                <div>
+                                    <label for="userName">New Password:</label>
+                                    
+                                    <input type="password" name="up_pass1" class="border w-full pl-2" placeholder="Password" id="passw1" required>
+                                </div>
+                                <div>
+                                    <label for="role">Confirm Password:</label>
+                                    <input type="password" name="up_pass2" class="border w-full pl-2" placeholder="Confirm Password" id="passw2" required>
+                                </div>
+                            </div>
+
+
+
+
                             <div class="flex justify-center mt-5 gap-10">
-                                <button class="border px-5 py-1">Edit</button>
-                                <button class="border px-5 py-1">Save</button>
+                                <button class="border px-5 py-1" >Edit</button>
+                                <button class="border px-5 py-1" type="submit" name="post_update">Save</button>
                                 
                             </div>
                         </form>
+
+
+
                     </div> 
                 </div>
                 
