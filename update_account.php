@@ -83,51 +83,59 @@
                         <hr class="border-2 border-[black]/60">
                     </div>
                     <div class="row-start-2 col-span-5 row-span-4">
-                        <form class="h-full w-full px-5 pt-5">
+                        <form class="h-[85%] w-full px-5 pt-5">
                             <div class="grid grid-cols-2 gap-5">
                                 <div>
                                     <label for="firstName">Firstname: </label>
-                                    <input type="text" name="firstName" class="border w-full pl-2" max="50" value="<?php echo $row['firstname']?>" disabled>
+                                    <input type="text" name="firstName" id="firstName" class="border w-full pl-2" max="50" value="<?php echo $row['firstname']?>" disabled>
                                 </div>
                                 <div>
                                     <label for="lastName">Lastname: </label>
-                                    <input type="text" name="lastName" class="border w-full pl-2" max="50" value="<?php echo $row['lastname']?>" disabled>
+                                    <input type="text" name="lastName" id="lastName" class="border w-full pl-2" max="50" value="<?php echo $row['lastname']?>" disabled>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-5 pt-3">
                                 <div>
                                     <label for="email">Email address:</label>
-                                    <input type="text" name="email" class="border w-full pl-2" value="<?php echo $row['email']?>" disabled>
+                                    <input type="text" name="email" id="email" class="border w-full pl-2" value="<?php echo $row['email']?>" disabled>
                                 </div>
                                 <div>
                                     <label for="mobileNum">Phone Number:</label>
-                                    <input type="number" name="mobileNum" class="border w-full pl-2" min="0" max="11" value="<?php echo $row['phone_num']?>" disabled>
+                                    <input type="number" name="mobileNum" id="mobileNum" class="border w-full pl-2" value="<?php echo $row['phone_num']?>" disabled>
                                 </div>
                             </div>
                             <div class="pt-3">
                                 <label for="address">Address:</label>
-                                <input type="text" name="address" class="w-full border pl-2" max="30" value="<?php echo $row['u_address']?>" disabled>
+                                <input type="text" name="address" id="address" class="w-full border pl-2" max="30" value="<?php echo $row['u_address']?>" disabled>
                             </div>
                             <div class="grid grid-cols-2 gap-5 pt-3">
                                 <div>
                                     <label for="userName">Username:</label>
-                                    <input type="text" name="userName" class="border w-full pl-2" value="<?php echo $row['username']?>" disabled >
+                                    <input type="text" name="userName" id="userName" class="border w-full pl-2" value="<?php echo $row['username']?>" disabled >
                                 </div>
                                 <div>
                                     <label for="role">Role:</label>
-                                    <input type="text" name="role" class="border w-full pl-2" value="<?php echo $row['role']?>" disabled>
+                                    <input type="text" name="role" id="role" class="border w-full pl-2" value="<?php echo $row['role']?>" disabled>
                                 </div>
                             </div>
                             <div class="pt-3">
-                                <label for="role">Department:</label>
-                                <input type="text" name="role" class="border w-full pl-2" value="<?php echo $row['department']?>" disabled>
+                                <label for="department">Department:</label>
+                                <input type="text" name="department" id="department" class="border w-full pl-2" value="<?php echo $row['department']?>" disabled>
                             </div>
-                            <div class="flex justify-center mt-5 gap-10">
-                                <button class="border px-5 py-1">Edit</button>
-                                <button class="border px-5 py-1">Save</button>
+                            <div class="pt-5 flex justify-center gap-5">
+                                <button class="border px-5 py-1 " id="saveButton" style="display:none">Save</button>
+                                <div class="px-3 py-1 border  cursor-pointer" id="cancelButton" style="display:none" onclick="cancelButton()">
+                                    <p>Cancel</p>
+                                </div>
+                            </div>
+                            
+                        </form>
+                            <div class="flex justify-center mt-1 gap-10">
+                                <div>
+                                    <button class="border px-5 py-1" id="editButton" onclick="editForm()" >Edit</button>
+                                </div>
                                 
                             </div>
-                        </form>
                     </div> 
                 </div>
                 
@@ -418,138 +426,10 @@
 
 <!-- Script for hidden textbox -->
 
-<script>
-        var fname = document.getElementById('firstname');
-        var fname_display = 0;
+<script src="./script/accountCreat.js">
 
-
-        function showFirstname(){
-            if(fname_display == 1){
-                fname.style.display = 'none';
-                fname_display = 0;
-            } else{
-                fname.style.display = 'block';
-                fname_display = 1;
-            }
-        }
-
-//Lastname
-        var lname = document.getElementById('lastname');
-        var lname_display = 0;
-
-
-        function showLastname(){
-            if(lname_display == 1){
-                lname.style.display = 'none';
-                lname_display = 0;
-            } else{
-                lname.style.display = 'block';
-                lname_display = 1;
-            }
-        }
-
-
-//Email
-        var email = document.getElementById('email');
-        var email_display = 0;
-
-
-        function showEmail(){
-            if(email_display == 1){
-                email.style.display = 'none';
-                email_display = 0;
-            } else{
-                email.style.display = 'block';
-                email_display = 1;
-            }
-        }
-
-
-//Phone
-var phone = document.getElementById('phone');
-        var phone_display = 0;
-
-
-        function showPhone(){
-            if(phone_display == 1){
-                phone.style.display = 'none';
-                phone_display = 0;
-            } else{
-                phone.style.display = 'block';
-                phone_display = 1;
-            }
-        }
-
-
-
-        //Address
-        var address = document.getElementById('address');
-        var address_display = 0;
-
-
-        function showAddress(){
-            if(address_display == 1){
-                address.style.display = 'none';
-                address_display = 0;
-            } else{
-                address.style.display = 'block';
-                address_display = 1;
-            }
-        }
-
-
-        //Username
-        var username = document.getElementById('username');
-        var username_display = 0;
-
-
-        function showUsername(){
-            if(username_display == 1){
-                username.style.display = 'none';
-                username_display = 0;
-            } else{
-                username.style.display = 'block';
-                username_display = 1;
-            }
-        }
-    
-
-    //Password
-    var password = document.getElementById('pass');
-        var password_display = 0;
-
-
-        function showPassword(){
-            if(password_display == 1){
-                password.style.display = 'none';
-                password_display = 0;
-            } else{
-                password.style.display = 'block';
-                password_display = 1;
-            }
-        }
-
-
-
-        //Show password
-
-        function myFunction1() {
-            var x = document.getElementById("pass1");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-            }
-
-            function myFunction2() {
-            var x = document.getElementById("pass2");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-            }
 </script>
+
+
 </body>
 </html>
