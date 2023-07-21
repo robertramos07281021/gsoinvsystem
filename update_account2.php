@@ -45,7 +45,52 @@
         $result = mysqli_query($db, $sql);
         $row = mysqli_fetch_assoc($result);
 ?>
+            <form method="POST">
 
+          <label> Firstname: </label>  <input type="text" name="up_firstname" placeholder="Firstname" 
+            value="<?php echo $row['firstname'] ?>" required> 
+
+            <br>
+
+            <label> Lastname: </label>  <input type="text" name="up_lastname" placeholder="Lastname" 
+            value="<?php echo $row['lastname'] ?>" required> 
+
+            <br>
+
+            <label> Email: </label>  <input type="email" name="up_email" placeholder="Email" 
+            value="<?php echo $row['email'] ?>" required> 
+
+            <br>
+
+            <label> Phone: </label>  <input type="number" name="up_phone" placeholder="Phone number" 
+            value="<?php echo $row['phone_num'] ?>" required> 
+
+            <br>
+
+            <label> Address: </label>  <input type="text" name="up_address" placeholder="Address" 
+            value="<?php echo $row['u_address'] ?>" required> 
+
+            <br>
+
+            <label> Username: </label>  <input type="text" name="up_username" placeholder="Username" 
+            value="<?php echo $row['username'] ?>" required> 
+    <br> <br>
+            <!-- <br> <br><p> Enter your current password to save changes. </p> <br> -->
+
+            <input type="password" name="up_pass1" placeholder="Password" id="pass1" required>
+                <!-- An element to toggle between password visibility -->
+                    <input type="checkbox" onclick="myFunction1()">Show Password 
+                    <br><br>
+
+                    <input type="password" name="up_pass2" placeholder="Confirm Password" id="pass2"  required> 
+                    <!-- An element to toggle between password visibility -->
+                    <input type="checkbox" onclick="myFunction2()">Show Password 
+                    <br><br>
+
+                    <button type="submit" name="post_update"> Save Changes</button>
+                    <br><br>
+
+            </form>
 
 
      
@@ -56,7 +101,162 @@
 $errors = array();
  
 
-  
+            //update user Account
+            if(isset($_POST['post_update'])){
+                    
+                $u_id = $_SESSION['user_id'];
+                $firstname = mysqli_real_escape_string($db, $_POST['up_firstname']);
+                $lastname = mysqli_real_escape_string($db, $_POST['up_lastname']);
+                $email = mysqli_real_escape_string($db, $_POST['up_email']);
+                $address = mysqli_real_escape_string($db, $_POST['up_address']);
+                $phone = mysqli_real_escape_string($db, $_POST['up_phone']);
+                $username = mysqli_real_escape_string($db, $_POST['up_username']);
+                $pass1 = mysqli_real_escape_string($db, $_POST['up_pass1']);
+                $pass2 = mysqli_real_escape_string($db, $_POST['up_pass2']);
+
+
+                if(strlen(trim($firstname))==0 || empty($firstname)){
+                    array_push($errors, "Please enter your firstname.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your firstname must not be empty!. </div>";
+                }
+
+                if(strlen(trim($lastname))==0 || empty($lastname)){
+                    array_push($errors, "Please enter your lastname.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your lastname must not be empty!. </div>";
+                }
+
+                
+                if(strlen(trim($email))==0 || empty($email)){
+                    array_push($errors, "Please enter your email.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your email must not be empty!. </div>";
+                }
+
+
+                if(strlen(trim($phone))==0 || empty($phone)){
+                    array_push($errors, "Please enter your phone.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your phone must not be empty!. </div>";
+                }
+
+
+
+                if(strlen(trim($address))==0 || empty($address)){
+                    array_push($errors, "Please enter your address.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your address must not be empty!. </div>";
+                }
+
+
+
+                if(strlen(trim($username))==0 || empty($username)){
+                    array_push($errors, "Please enter your username.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your username must not be empty!. </div>";
+                }
+
+
+
+                if(strlen(trim($pass1))==0 || empty($pass1)){
+                    array_push($errors, "Please enter your password.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Your password must not be empty!. </div>";
+                }
+
+
+                if(strlen($pass1) < 8){
+                    array_push($errors, "Password must be atleast 8 characters long.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Password must be atleast 8 characters long.. </div>";
+                }
+
+                if($pass1 !== $pass2){
+                    array_push($errors, "Password does not match.");
+                    echo "<div class='error' style='width: 90%;
+                    margin: 0px auto;
+                    padding: 10px;
+                    border: 1px solid #a94442;
+                    color: #a94442;
+                    background: #f2dede;
+                    border-radius: 5px;
+                    text-align: left;'>Password does not match. Please try again. </div>";
+                }
+
+
+                $password = md5($pass1);
+                if(count($errors) === 0){
+
+                    $sql= "UPDATE users SET firstname='$firstname',lastname='$lastname',
+                    email='$email', phone_num='$phone', u_address='$address', username='$username', password='$password' WHERE user_id='$u_id' ";
+                    
+                    mysqli_query($db, $sql);  //update to database
+                        ?>
+                        <script>
+                                swal({title: "Success!", text: "Your Account has been updated.", type: 
+                                        "success"}).then(function(){ 
+                                            location.href="update_account2.php";
+                                        }
+                                        );
+                        </script>
+
+                        <?php
+
+                        
+
+                }
+
+
+            }
 
 
 
