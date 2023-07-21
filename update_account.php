@@ -83,7 +83,6 @@
                         <hr class="border-2 border-[black]/60">
                     </div>
                     <div class="row-start-2 col-span-5 row-span-4">
-<<<<<<< HEAD
                         
 <!-- php code  -->
 
@@ -289,23 +288,11 @@ $errors = array();
                                         echo $_POST['lastName'];
                                     }else{
                                         echo $row['lastname']; } ?>" required>
-=======
-                        <form class="h-[85%] w-full px-5 pt-5">
-                            <div class="grid grid-cols-2 gap-5">
-                                <div>
-                                    <label for="firstName">Firstname: </label>
-                                    <input type="text" name="firstName" id="firstName" class="border w-full pl-2" max="50" value="<?php echo $row['firstname']?>" disabled>
-                                </div>
-                                <div>
-                                    <label for="lastName">Lastname: </label>
-                                    <input type="text" name="lastName" id="lastName" class="border w-full pl-2" max="50" value="<?php echo $row['lastname']?>" disabled>
->>>>>>> f34feb818ae39dd5c0631f76a648de8b695a03ca
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-5 pt-3">
                                 <div>
                                     <label for="email">Email address:</label>
-<<<<<<< HEAD
                                     <input type="text" name="email" class="border w-full pl-2" value="<?php 
                                     if(isset($_POST['post_update'])){
 
@@ -321,53 +308,25 @@ $errors = array();
                                         echo $_POST['mobileNum'];
                                     }else{
                                         echo $row['phone_num']; } ?>" required>
-=======
-                                    <input type="text" name="email" id="email" class="border w-full pl-2" value="<?php 
-                                    if(isset($_POST['post_update'])){
-
-                                        echo $_POST['email'];
-                                    }else{ echo $row['email']; } ?>" required>
-                                </div>
-                                <div>
-                                    <label for="mobileNum">Phone Number:</label>
-                                    <input type="number" name="mobileNum" id="mobileNum" class="border w-full pl-2" value="<?php 
-                                    if(isset($_POST['post_update'])){
-
-                                        echo $_POST['mobileNum'];
-                                    }else{ 
-                                        echo $row['phone_num']; } ?>" required>
->>>>>>> f34feb818ae39dd5c0631f76a648de8b695a03ca
                                 </div>
                             </div>
                             <div class="pt-3">
                                 <label for="address">Address:</label>
-<<<<<<< HEAD
                                 <input type="text" name="address" class="w-full border pl-2" max="30" value="<?php 
                                 if(isset($_POST['post_update'])){
 
                                     echo $_POST['address'];
                                 }else{ echo $row['u_address']; } ?>" required>
-=======
-                                <input type="text" name="address" id="address" class="w-full border pl-2" max="30" value="<?php echo $row['u_address']?>" disabled>
->>>>>>> f34feb818ae39dd5c0631f76a648de8b695a03ca
                             </div>
                             <div class="grid grid-cols-2 gap-5 pt-3">
                                 <div>
                                     <label for="userName">Username:</label>
-<<<<<<< HEAD
                                     <input type="text" name="userName" class="border w-full pl-2" value="<?php 
                                     if(isset($_POST['post_update'])){
 
                                         echo $_POST['userName'];
                                     }else{
                                          echo $row['username']; }?>" required >
-=======
-                                    <input type="text" name="userName" id="userName" class="border w-full pl-2" value="<?php 
-                                    if(isset($_POST['post_update'])){
-
-                                        echo $_POST['userName'];
-                                    }else{ echo $row['username']; }?>" required>
->>>>>>> f34feb818ae39dd5c0631f76a648de8b695a03ca
                                 </div>
                                 <div>
                                     <label for="role">Role:</label>
@@ -378,7 +337,6 @@ $errors = array();
                                 <label for="department">Department:</label>
                                 <input type="text" name="department" id="department" class="border w-full pl-2" value="<?php echo $row['department']?>" disabled>
                             </div>
-<<<<<<< HEAD
 
 
 
@@ -406,22 +364,6 @@ $errors = array();
 
 
 
-=======
-                            <div class="pt-5 flex justify-center gap-5">
-                                <button class="border px-5 py-1 " id="saveButton" style="display:none">Save</button>
-                                <div class="px-3 py-1 border  cursor-pointer" id="cancelButton" style="display:none" onclick="cancelButton()">
-                                    <p>Cancel</p>
-                                </div>
-                            </div>
-                            
-                        </form>
-                            <div class="flex justify-center mt-1 gap-10">
-                                <div>
-                                    <button class="border px-5 py-1" id="editButton" onclick="editForm()" >Edit</button>
-                                </div>
-                                
-                            </div>
->>>>>>> f34feb818ae39dd5c0631f76a648de8b695a03ca
                     </div> 
                 </div>
                 
