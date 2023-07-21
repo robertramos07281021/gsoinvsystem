@@ -90,7 +90,7 @@
 
 <?php
 $errors = array();
- 
+  
 
             //update user Account
             if(isset($_POST['post_update'])){
@@ -322,11 +322,20 @@ $errors = array();
                                     }else{
                                         echo $row['phone_num']; } ?>" required>
 =======
-                                    <input type="text" name="email" id="email" class="border w-full pl-2" value="<?php echo $row['email']?>" disabled>
+                                    <input type="text" name="email" id="email" class="border w-full pl-2" value="<?php 
+                                    if(isset($_POST['post_update'])){
+
+                                        echo $_POST['email'];
+                                    }else{ echo $row['email']; } ?>" required>
                                 </div>
                                 <div>
                                     <label for="mobileNum">Phone Number:</label>
-                                    <input type="number" name="mobileNum" id="mobileNum" class="border w-full pl-2" value="<?php echo $row['phone_num']?>" disabled>
+                                    <input type="number" name="mobileNum" id="mobileNum" class="border w-full pl-2" value="<?php 
+                                    if(isset($_POST['post_update'])){
+
+                                        echo $_POST['mobileNum'];
+                                    }else{ 
+                                        echo $row['phone_num']; } ?>" required>
 >>>>>>> f34feb818ae39dd5c0631f76a648de8b695a03ca
                                 </div>
                             </div>
@@ -353,7 +362,11 @@ $errors = array();
                                     }else{
                                          echo $row['username']; }?>" required >
 =======
-                                    <input type="text" name="userName" id="userName" class="border w-full pl-2" value="<?php echo $row['username']?>" disabled >
+                                    <input type="text" name="userName" id="userName" class="border w-full pl-2" value="<?php 
+                                    if(isset($_POST['post_update'])){
+
+                                        echo $_POST['userName'];
+                                    }else{ echo $row['username']; }?>" required>
 >>>>>>> f34feb818ae39dd5c0631f76a648de8b695a03ca
                                 </div>
                                 <div>
