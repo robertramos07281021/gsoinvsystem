@@ -115,9 +115,11 @@ if(isset($_POST['login'])){
 
     $result = mysqli_query($db, $sql);
     $count = mysqli_num_rows($result);
-    
-    if( $count === 1){
-        $row = mysqli_fetch_assoc($result);
+    $row = mysqli_fetch_assoc($result);
+    $stat = "active";
+
+    if( $count === 1 && $row['status']=== $stat){
+        
 
         if($row['username'] === $log_user && $row['password'] === $pass){
 

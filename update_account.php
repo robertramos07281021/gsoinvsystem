@@ -479,7 +479,77 @@ var phone = document.getElementById('phone');
                 phone_display = 1;
             }
         }
+
+
+
+        //Address
+        var address = document.getElementById('address');
+        var address_display = 0;
+
+
+        function showAddress(){
+            if(address_display == 1){
+                address.style.display = 'none';
+                address_display = 0;
+            } else{
+                address.style.display = 'block';
+                address_display = 1;
+            }
+        }
+
+
+        //Username
+        var username = document.getElementById('username');
+        var username_display = 0;
+
+
+        function showUsername(){
+            if(username_display == 1){
+                username.style.display = 'none';
+                username_display = 0;
+            } else{
+                username.style.display = 'block';
+                username_display = 1;
+            }
+        }
     
+
+    //Password
+    var password = document.getElementById('pass');
+        var password_display = 0;
+
+
+        function showPassword(){
+            if(password_display == 1){
+                password.style.display = 'none';
+                password_display = 0;
+            } else{
+                password.style.display = 'block';
+                password_display = 1;
+            }
+        }
+
+
+
+        //Show password
+
+        function myFunction1() {
+            var x = document.getElementById("pass1");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+            }
+
+            function myFunction2() {
+            var x = document.getElementById("pass2");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+            }
 </script>
 </body>
 </html>
