@@ -35,7 +35,7 @@
                       <a  aria-current="page" href="index.php">Dashboard</a>
                     </li>
                     <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                        <a href="#">User Management</a>
+                        <a href="user_management.php">User Management</a>
                     </li>
                     <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
                         <a href="#">Office</a>
