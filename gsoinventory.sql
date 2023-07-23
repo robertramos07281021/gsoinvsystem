@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2023 at 02:46 PM
+-- Generation Time: Jul 23, 2023 at 08:17 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -29,22 +29,42 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
-  `item_name` varchar(50) NOT NULL,
-  `office_name` varchar(50) NOT NULL,
-  `property_code` varchar(20) DEFAULT NULL,
-  `end_user` varchar(50) DEFAULT NULL,
-  `description` varchar(200) DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+  `item_name` varchar(255) DEFAULT NULL,
+  `office_id` int(11) DEFAULT NULL,
+  `property_code` varchar(50) DEFAULT NULL,
+  `end_user` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id`, `item_name`, `office_name`, `property_code`, `end_user`, `description`, `created_at`) VALUES
-(1, 'Refrigerator', 'MMO', '2022-107-07-99-990-1', 'Jude Sulla', 'Refrigerator for MMO', '2022-07-01 12:58:21'),
-(4, 'Laptop', 'SB', '987-654-321', 'Leymar Madjus', 'Laptop for Graphic design', '2023-07-17 21:23:47'),
-(7, 'Laptop', 'MMO', '987-654-177', 'Danilo Sanchez', 'Laptop for Graphic 2 design', '2023-07-17 21:37:14');
+INSERT INTO `items` (`id`, `item_name`, `office_id`, `property_code`, `end_user`, `description`, `created_at`) VALUES
+(1, 'Computer', 2, '987-654-177', 'Leymar Madjus', 'Laptop for Graphic 1 design', '2023-07-23 14:06:19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `office`
+--
+
+CREATE TABLE `office` (
+  `office_id` int(11) UNSIGNED NOT NULL,
+  `officeName` varchar(50) CHARACTER SET armscii8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `office`
+--
+
+INSERT INTO `office` (`office_id`, `officeName`) VALUES
+(1, 'MMO'),
+(2, 'BAC'),
+(3, 'SB'),
+(4, 'HRMO'),
+(5, 'MDRRMO');
 
 --
 -- Indexes for dumped tables
@@ -57,6 +77,12 @@ ALTER TABLE `items`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `office`
+--
+ALTER TABLE `office`
+  ADD PRIMARY KEY (`office_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -64,7 +90,13 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `office`
+--
+ALTER TABLE `office`
+  MODIFY `office_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
