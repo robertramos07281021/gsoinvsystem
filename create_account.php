@@ -126,19 +126,6 @@
                                 <p class="text-xs self-center text-red-500">Username is already exist</p>
                             <?php } }?>
                         </div>
-                        <?php  
-                       
-                        if(isset($_POST['submit'])){
-                            if(mysqli_num_rows($user_query_run) > 0) {
-                                    $_SESSION['attnum']++;
-                            } else {
-                                $_SESSION['attnum'] = 1;
-                            }
-                        }       
-                        ?>
-                        <input type="number" value="<?php 
-                                echo  $_SESSION['attnum'];
-                        ?>" class="" id="increament" onchange="accountGenerate()" >
 
                         <input type="text" name="username" id="username" value="<?php if(isset($_POST['submit'])){ echo $username; } else { echo "";}?>" required  class="w-full border pl-1
                         <?php  
