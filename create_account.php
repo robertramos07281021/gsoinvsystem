@@ -55,8 +55,25 @@
                         <input type="text" name="address" value="<?php if(isset($_POST['submit'])){ echo $address; } else { echo "";} ?>" required class="w-full border">
                     </div>
                     <div>
-                        <label >Department</label>
-                        <input type="text" name="department" value="<?php if(isset($_POST['submit'])){ echo $department; } else { echo "";} ?>" required class="w-full border">
+                        <label >Department</label> <!-- DROP DOWN MENU FOR DEPARTMENT-->
+                        <!-- <input type="text" name="department" value="" required class="w-full border"> -->
+                       
+                       <?php  
+                            $displayDep = "SELECT * FROM department";
+                            $dep_query = mysqli_query($db, $displayDep);
+
+                       ?>
+                        <select name="department">
+                            <?php   $num = 0;
+                            while($row1 = mysqli_fetch_assoc($dep_query)){
+                                $num++;  ?>
+                                        
+                                        <option value="<?php echo $row1['dep_name']; ?>" > <?php echo $row1['dep_name']; ?> </option>
+
+                        <?php  } ?>
+                        </select>
+
+
                     </div>
                     <div>
                         <label >Preferred Username</label>

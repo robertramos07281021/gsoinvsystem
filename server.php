@@ -118,7 +118,7 @@ if(isset($_POST['login'])){
     $row = mysqli_fetch_assoc($result);
     $stat = "active";
 
-    if( $count === 1 && $row['status']=== $stat){
+    if( $count === 1 && $row['status']=== $stat && $row['role'] === "admin"){
         
 
         if($row['username'] === $log_user && $row['password'] === $pass){
@@ -129,6 +129,22 @@ if(isset($_POST['login'])){
         $_SESSION['user_id'] = $row['user_id'];
 
         header('location: index.php');
+
+        
+        }
+
+        
+    } else if( $count === 1 && $row['status']=== $stat && $row['role'] === "user"){
+        
+
+        if($row['username'] === $log_user && $row['password'] === $pass){
+
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['firstname'] = $row['firstname'];
+        $_SESSION['lastname'] = $row['lastname'];
+        $_SESSION['user_id'] = $row['user_id'];
+
+        header('location: index_user.php');
 
         
         }
