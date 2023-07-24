@@ -3,6 +3,7 @@ session_start();
 
 $errors = array();
 
+$deptChoice = array("HR","SB","ACCOUNTING","GSO/BAC","RHU","BFP","PNP","MCR","BUDGET","MTO","BPLO","MPDO","ENGINEERING","COMELEC","BIR","ASSESOR","DILG","MSWDO","MENDO","DA","MDDRRMO","MDRRMO");
 
 //connect to db
 

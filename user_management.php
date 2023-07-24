@@ -25,7 +25,12 @@ $errors = array();
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>GSO Invsys</title>
     <style>
-     
+        .welcomePageBg{
+            background-image: url('./image/welcomeBg.jpg');
+        }
+        #logoutModal{
+    display: none;
+        }   
     </style>
   
 </head>
@@ -76,7 +81,7 @@ $errors = array();
             </div>
         </div>
     </nav>
-
+    
     <div class=" absolute top-0 left-0 -z-10 h-80 w-full welcomePageBg">
     </div>
 
@@ -87,197 +92,69 @@ $errors = array();
         
         <div class="flex justify-between text-white">
             <p> Welcome  Admin <strong><?php echo $_SESSION['firstname'] ." ". $_SESSION['lastname'];?></strong></p>
-            <p> <a href="index.php?logout='1'" class=" font-bold"> Logout </a> </p>
-            <?php endif ?>
+            <p> <button onclick="logoutModal()" class="font-bold"> Logout  </button></p>
+          
         </div>
 
         <div class="w-full grid grid-cols-4 mt-10 h-1/6 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                total user
-                <br>
-                <?php  echo $total_users; ?>
-            </div>
-
-            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                active user
-                <br>
-                <?php  echo $total_active; ?>
-            </div>
-
-            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                total item
-            </div>
-
-            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                
-            </div>
+            
         </div>
 
         <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
-            <div class="col-span-4  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-                 
+            <div class="col-span-5  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 px-10 pt-10 ">
+                <div class="overflow-auto h-full">
+                    <table class="w-[175%]">
+                        <thead>
+                            <tr>
+                                <th class="w-20 pb-3 border">Action</th>
+                                <th class="w-10 pb-3">ID</th>
+                                <th class="w-40 pb-3">Firstname</th>
+                                <th class="w-40 pb-3">Lastname</th>
+                                <th class="w-96 pb-3">Email</th>
+                                <th class="w-40 pb-3">Contact#</th>
+                                <th class="w-96 pb-3">Address</th>
+                                <th class="w-40 pb-3">Username</th>
+                                <th class="w-40 pb-3">Department</th>
+                                <th class="w-40 pb-3">Role</th>
+                                <th class="w-40 pb-3">Status</th>
+                                
+                             </tr>
+                        </thead>
 
-                <h1> List of Users </h1>
-                <br>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Contact#</th>
-                            <th>Address</th>
-                            <th>Username</th>
-                            <th>Department</th>
-                            <th>Role</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                         </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                    <?php   
+                        <tbody>
                             
+                        <?php   
                             $num = 0;
                             while($row = mysqli_fetch_assoc($res_query)){
                                 $num++;
                                 ?>
-                                
-                                    <!-- rowsss from database will be displayed -->
-                                    <td> <?php echo  $num; ?> </td>
-                                    <td> <?php echo  $row['firstname'] ?>  </td>
-                                    <td> <?php echo  $row['lastname'] ?>  </td>
-                                    <td> <?php echo  $row['email'] ?>  </td>
-                                    <td> <?php echo  $row['phone_num'] ?>  </td>
-                                    <td> <?php echo  $row['u_address'] ?>  </td>
-                                    <td> <?php echo  $row['username'] ?>  </td>
-                                    <td> <?php echo  $row['department'] ?>  </td>
-                                    <td> <?php echo  $row['role'] ?>  </td>
-                                    <td> <?php echo  $row['status'] ?>  </td>
-
+                                    <tr class="border-b">
+                                        <!-- rowsss from database will be displayed -->
+                                        <td class="py-3 text-center"><a href="#">edit</a></td>
+                                        <td class="py-3 text-center"> <?php echo  $num; ?> </td>
+                                        <td class="py-3 text-center"> <?php echo  $row['firstname'] ?>  </td>
+                                        <td class="py-3 text-center"> <?php echo  $row['lastname'] ?>  </td>
+                                        <td class="py-3 text-center"> <?php echo  $row['email'] ?>  </td>
+                                        <td class="py-3 text-center"> <?php echo  $row['phone_num'] ?>  </td>
+                                        <td class="py-3 text-center"> <?php echo  $row['u_address'] ?>  </td>
+                                        <td class="py-3 text-center"> <?php echo  $row['username'] ?>  </td>
+                                        <td class="py-3 text-center"> <?php echo  $row['department'] ?>  </td>
+                                        <td class="py-3 text-center"> <?php echo  $row['role'] ?>  </td>
+                                        <td class="py-3 text-center"> <?php echo  $row['status'] ?>  </td>
+                                        
                                     </tr>
                                 <?php
                             }
-                    
-                    ?>
-                         
-                    </tbody>
+                        ?>
 
-                </table>
+                        </tbody>
 
+                    </table>
 
+                </div>
             </div>
 
-              <div class="col-span-1  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-               Add departments
-
-               <form method="POST">
-                    
-               <label>Department: </label> <input type="text" name="dep" placeholder="Enter department" 
-               value="<?php if(isset($_POST['post_dep'])){
-                        echo $_POST['dep'];
-                    }?>"   required > 
-                    
-                <br><br>
-               <label>Enter your password: </label> <br>
-               <input type="password" name="pass1" placeholder="Password" id="pass1" required>
-               <button type="submit" name="post_dep"> Save Changes</button>
-
-               </form>
-
-
-               <?php
-
-              
-
-                
-                if(isset($_POST['post_dep'])){
-                    $u_id = $_SESSION['user_id'];
-                    $department = mysqli_real_escape_string($db, $_POST['dep']);
-                    $password = mysqli_real_escape_string($db, $_POST['pass1']);
-
-
-                    if(strlen(trim($department))==0 || empty($department)){
-                        array_push($errors, "Please enter a valid department.");
-                        echo "<div class='error' style='width: 90%;
-                        margin: 0px auto;
-                        padding: 10px;
-                        border: 1px solid #a94442;
-                        color: #a94442;
-                        background: #f2dede;
-                        border-radius: 5px;
-                        text-align: left;'>Department name must not be empty!. </div>";
-                    }
-
-
-                    $query1 = "SELECT * FROM users WHERE user_id = '$u_id'";
-                    $result1 = mysqli_query($db, $query1);
-                    $row1 = mysqli_fetch_assoc($result1);
-
-                    $enc_pass = md5($password);
-
-
-                    $dep_q =  "SELECT * FROM department WHERE dep_name = '$department'";
-                    $res = mysqli_query($db, $dep_q);
-                    $dep_row = mysqli_num_rows($res);
-
-                    if($enc_pass !== $row1['password']){
-                        array_push($errors, "Invalid password.");
-                        echo "<div class='error' style='width: 90%;
-                        margin: 0px auto;
-                        padding: 10px;
-                        border: 1px solid #a94442;
-                        color: #a94442;
-                        background: #f2dede;
-                        border-radius: 5px;
-                        text-align: left;'>Invalid password. </div>";
-                    }
-
-
-                    if($dep_row != 0){
-                        array_push($errors, "Department already exists.");
-                        echo "<div class='error' style='width: 90%;
-                        margin: 0px auto;
-                        padding: 10px;
-                        border: 1px solid #a94442;
-                        color: #a94442;
-                        background: #f2dede;
-                        border-radius: 5px;
-                        text-align: left;'>Department already exists. </div>";
-                    }
-
-
-                    if(count($errors) === 0){
-
-                            $sql2 = "INSERT INTO department (dep_name) VALUES ('$department')";
-
-                            mysqli_query($db, $sql2);  //insert to database
-                        ?>
-                        <script>
-                                swal({title: "Success!", text: "New department has been added.", type: 
-                                        "success"}).then(function(){ 
-                                            location.href="user_management.php";
-                                        }
-                                        );
-                        </script>
-
-                        <?php
-
-
-                    }
-
-
-                }
-
-
-                ?>
-
-
-
-
-            </div> 
+             
         </div>
 
 
@@ -288,8 +165,25 @@ $errors = array();
 
 
     </article>
+    <div class="absolute top-0 left-0 h-full w-full bg-white/30" id="logoutModal" >
+        <div class="flex w-full h-full justify-center items-center">
+            <div class="h-56 w-80 bg-[red] fixed rounded px-1 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
+                <p class="text-white font-bold">GSO InvSystem</p>
+                <div class="bg-white h-[87.2%] w-full flex justify-center items-center">
+                    <div class="text-center ">
+                        <p>Do you want to logout?</p>
+                        <div class="flex justify-center gap-10 mt-10">
+                            <button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red]"><a href="index.php?logout='1'" class=" font-bold"> Yes </a></button>
+                            <button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red] font-bold" onclick="noLogout()">No</button>
+                        </div>    
+                    </div>
+                </div>
+            <div>
+        </div>
+    </div>
 
-<script href="./script/jscript.js"></script>
+<script src="./script/jscript.js"></script>
 <script src="" ></script>
+<?php endif ?>
 </body>
 </html>

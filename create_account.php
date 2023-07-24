@@ -32,7 +32,6 @@
             <div class=" h-full rounded-[10px] border-4 border-double p-3 border-red-500 bg-white" >
                 <div class="header flex justify-center">
                     <div>
-                    
                         <p class="text-xl font-semibold">Create Account</p>
                         <?php if(count($errors) > 0):?>
                             <p class="text-xs text-center text-red-500">All fields are required</p>
@@ -92,24 +91,35 @@
                         <label for="address" class="text-sm">Address:</label>
                         <input type="text" name="address" value="<?php if(isset($_POST['submit'])){ echo $address; } else { echo "";} ?>" required class="w-full border pl-1 <?php 
                             if(isset($_POST['submit'])) {
-                                if(strlen(trim($address))==0 || empty($address)) { 
-                                    
+                                if(strlen(trim($address))== 0 || empty($address)) { 
                                     echo "required:border-red-500"; 
                                 } else {
                                     echo "border-[green] border-2";
                                 }
                             } ?>">
                     </div>
-                    <div>
+                
+                    <div>   
                         <label for="department" class="text-sm">Department:</label>
-                        <input type="text" name="department" value="<?php if(isset($_POST['submit'])){ echo $department; } else { echo "";} ?>" required class="w-full border pl-1 <?php 
+                        <select name="department" id="department" value="<?php if(isset($_POST['submit'])){ echo $department; } else { echo $department=""; }?>" class="w-full border pl-1 <?php 
                             if(isset($_POST['submit'])) {
-                                if(strlen(trim($department))==0 || empty($department)) { 
-                                    echo "required:border-red-500"; 
+                                if(trim($errors[array_search("department",$errors)]) == "department" ) {
+                                    echo "required:border-red-500";
                                 } else {
                                     echo "border-[green] border-2";
                                 }
-                            } ?>">
+                            }
+                            
+                        ?>" required>
+                                <option value="" <?php if($department == "" ) { echo "selected";}?> >Select Department</option>
+                            <?php if(count($deptChoice) > 0 ) {?>
+                                <?php foreach($deptChoice as $deptChoices) { ?>
+                                <option value="<?php echo $deptChoices ?>" <?php if($department == $deptChoices) { echo "selected";} ?>><?php echo $deptChoices ?></option>
+                                <?php } ?>
+                            <?php } ?>
+
+                        </select>
+
                     </div>
 
                     <div class="mt-5">
@@ -121,11 +131,11 @@
                                 $user_query_run = mysqli_query($db, $user_query);
                                 
                                 if(mysqli_num_rows($user_query_run) > 0) { 
-                                echo mysqli_num_rows($user_query_run);
+                               
                             ?>  
                                 <p class="text-xs self-center text-red-500">Username is already exist</p>
                             <?php } }?>
-                        </div>
+                             </div>
 
                         <input type="text" name="username" id="username" value="<?php if(isset($_POST['submit'])){ echo $username; } else { echo "";}?>" required  class="w-full border pl-1
                         <?php  
