@@ -99,12 +99,12 @@ $errors = array();
         <div class="w-full grid grid-cols-6 mt-10 h-1/6 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
             <div class="">
                 <div class=" flex justify-center items-end h-full ">
-                    <a href="user_management.php"><div class="bg-white p-3 rounded-xl">Account manangement</div></a>
+                <a href="user_management.php"><div class="bg-white p-3 rounded-xl">Account manangement</div></a>
                 </div>
             </div>
             <div  class="">
                 <div class=" flex justify-center items-end h-full ">
-                    <a href="user_management_dept.php"><div class="bg-white p-3 rounded-xl">Department manangement</div></a>
+                <a href="user_management_dept.php"><div class="bg-white p-3 rounded-xl">Department manangement</div></a>
                 </div>
             </div>
         </div>
@@ -138,18 +138,7 @@ $errors = array();
                                 $num++;
                                 ?>
                                     <tr class="border-b">
-                                        <!-- rowsss from database will be displayed -->
-                                        <td class="py-3 text-center"><a href="#">edit</a></td>
-                                        <td class="py-3 text-center"> <?php echo  $num; ?> </td>
-                                        <td class="py-3 text-center"> <?php echo  $row['firstname'] ?>  </td>
-                                        <td class="py-3 text-center"> <?php echo  $row['lastname'] ?>  </td>
-                                        <td class="py-3 text-center"> <?php echo  $row['email'] ?>  </td>
-                                        <td class="py-3 text-center"> <?php echo  $row['phone_num'] ?>  </td>
-                                        <td class="py-3 text-center"> <?php echo  $row['u_address'] ?>  </td>
-                                        <td class="py-3 text-center"> <?php echo  $row['username'] ?>  </td>
-                                        <td class="py-3 text-center"> <?php echo  $row['department'] ?>  </td>
-                                        <td class="py-3 text-center"> <?php echo  $row['role'] ?>  </td>
-                                        <td class="py-3 text-center"> <?php echo  $row['status'] ?>  </td>
+                                       
                                         
                                     </tr>
                                 <?php

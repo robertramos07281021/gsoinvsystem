@@ -176,8 +176,8 @@ $total_active = mysqli_num_rows($active_result);
                     <div class="text-center ">
                         <p>Do you want to logout?</p>
                         <div class="flex justify-center gap-10 mt-10">
-                            <button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red]"><a href="index.php?logout='1'" class=" font-bold"> Yes </a></button>
-                            <?php endif ?>
+                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red]">Yes</button></a>
+                            
                             <button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red] font-bold" onclick="noLogout()">No</button>
                         </div>    
                     </div>
@@ -189,6 +189,6 @@ $total_active = mysqli_num_rows($active_result);
 <script src="./script/jscript.js"> 
 
  </script>
-
+<?php endif ?>
 </body>
 </html>
