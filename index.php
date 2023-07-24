@@ -46,6 +46,7 @@ $total_active = mysqli_num_rows($active_result);
 
     <?php 
     if (isset($_SESSION['username'])): 
+        
     ?>
 
 <!-- Navbar -->
@@ -85,12 +86,16 @@ $total_active = mysqli_num_rows($active_result);
     <nav class="p-6 ">
     </nav>
 
-    
+    <?php           $user = $_SESSION['user_id'];
+                    $sql = "SELECT * FROM users WHERE user_id = '$user'";
+                    $result = mysqli_query($db, $sql);
+                    $row = mysqli_fetch_assoc($result);  
+    ?>
 
     <article class=" col-span-4 py-6 pr-6 w-full h-full ">
         
         <div class="flex justify-between text-white">
-            <p> Welcome  Admin <strong><?php echo $_SESSION['firstname'] ." ". $_SESSION['lastname'];?></strong></p>
+            <p> Welcome  Admin <strong><?php echo $row['firstname'] ." ". $row['lastname'];?></strong></p>
             <button onclick="logoutModal()" class="font-bold"> Logout  </button>
             
         </div>
