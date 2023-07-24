@@ -52,22 +52,25 @@ $errors = array();
             <a href="index.php" class="text-2xl font-bold"><span class="text-[red]">GSO</span> InvSystem</a>
             <hr class="mt-5 border border-black">
             <div class="text-start w-full mt-10">
-                <ul>
-                    <li class="mb-5 w-full hover:bg-red-300/20 p-3 rounded-md ">
-                      <a  aria-current="page" href="index.php">Dashboard</a>
-                    </li>
-                    <li class="mb-5 w-full p-3 bg-red-300/20 rounded-md font-bold">
-                        <a href="user_management.php">User Management</a>
-                    </li>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                        <a href="#">Office</a>
-                    </li>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                      <a href="#">Reports</a>
-                    </li>   
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                      <a  href="update_account.php">My Profile</a>
-                    </li>
+            <ul>
+                    <a aria-current="page" href="index.php">
+                        <li class="mb-5 w-full hover:bg-red-300/20 p-3 rounded-md">Dashboard</li>
+                    </a>
+                    <a href="user_management.php">
+                        <li class="mb-5 w-full p-3 rounded-md bg-red-300/20 p-3 font-bold">User Management</li>
+                    </a>
+                    
+                    <a href="offices.php">
+                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">Office</li>
+                    </a>
+
+                    <a href="#">
+                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">Reports</li>   
+                    </a>
+
+                    <a href="update_account.php">
+                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">My Profile</li>
+                    </a>
                 </ul>  
         
             </div>
@@ -143,7 +146,7 @@ $errors = array();
                                 ?>
                                 
                                     <!-- rowsss from database will be displayed -->
-                                    <td> <?php echo $num; ?> </td>
+                                    <td> <?php echo  $num; ?> </td>
                                     <td> <?php echo  $row['firstname'] ?>  </td>
                                     <td> <?php echo  $row['lastname'] ?>  </td>
                                     <td> <?php echo  $row['email'] ?>  </td>
@@ -153,8 +156,6 @@ $errors = array();
                                     <td> <?php echo  $row['department'] ?>  </td>
                                     <td> <?php echo  $row['role'] ?>  </td>
                                     <td> <?php echo  $row['status'] ?>  </td>
-
-
 
                                     </tr>
                                 <?php
@@ -174,16 +175,12 @@ $errors = array();
 
                <form method="POST">
                     
-               <label>Department: </label> <input type="text" name="dep" placeholder="Enter department"
-               
+               <label>Department: </label> <input type="text" name="dep" placeholder="Enter department" 
                value="<?php if(isset($_POST['post_dep'])){
-                    
-        
-                    echo $_POST['dep'];
-                    
+                        echo $_POST['dep'];
                     }?>"   required > 
                     
-                    <br><br>
+                <br><br>
                <label>Enter your password: </label> <br>
                <input type="password" name="pass1" placeholder="Password" id="pass1" required>
                <button type="submit" name="post_dep"> Save Changes</button>

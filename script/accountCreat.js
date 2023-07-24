@@ -1,25 +1,26 @@
 
 
 
-function editForm(){
 
-   document.getElementById("saveButton").style.display="inline";
-   document.getElementById("cancelButton").style.display="inline";
-   document.getElementById("editButton").hidden = true;
-   document.getElementById("firstName").disabled = false;
-   document.getElementById("lastName").disabled = false;
-   document.getElementById("email").disabled = false;
-   document.getElementById("mobileNum").disabled = false;
-   document.getElementById("address").disabled = false;
-   document.getElementById("userName").disabled = false;
-   document.getElementById("role").disabled = false;
-   document.getElementById("department").disabled = false;
+function editForm(){
+    document.getElementById("saveForm").style.display="flex";
+    document.querySelector("#changePass").style.display = "flex";
+    document.getElementById("editButton").hidden = true;
+    document.getElementById("firstName").disabled = false;
+    document.getElementById("lastName").disabled = false;
+    document.getElementById("email").disabled = false;
+    document.getElementById("mobileNum").disabled = false;
+    document.getElementById("address").disabled = false;
+    document.getElementById("userName").disabled = false;
+    document.getElementById("role").disabled = false;
+    document.getElementById("department").disabled = false;
+   
 }
 
 
 function cancelButton(){
-    document.getElementById("saveButton").style.display="none";
-    document.getElementById("cancelButton").style.display="none";
+    document.getElementById("saveForm").style.display="none";   
+    document.getElementById("changePass").style.display="none";   
     document.getElementById("editButton").hidden = false;
     document.getElementById("firstName").disabled = true;
     document.getElementById("lastName").disabled = true;

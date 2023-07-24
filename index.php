@@ -1,4 +1,14 @@
-<?php include('server.php');   ?>
+<?php include('server.php');   
+$displayUser = "SELECT * FROM users";
+$res_query = mysqli_query($db,$displayUser);
+
+$total_users = mysqli_num_rows($res_query);
+$act = "active";
+$active_query= "SELECT * FROM users WHERE status='$act'";
+$active_result = mysqli_query($db,$active_query);
+$total_active = mysqli_num_rows($active_result);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,21 +55,24 @@
             <hr class="mt-5 border border-black">
             <div class="text-start w-full mt-10">
                 <ul>
-                    <li class="mb-5 w-full bg-red-300/20 p-3 rounded-md font-bold">
-                      <a  aria-current="page" href="index.php">Dashboard</a>
-                    </li>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                        <a href="user_management.php">User Management</a>
-                    </li>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                        <a href="#">Office</a>
-                    </li>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                      <a href="#">Reports</a>
-                    </li>   
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                      <a  href="update_account.php">My Profile</a>
-                    </li>
+                    <a aria-current="page" href="index.php">
+                        <li class="mb-5 w-full bg-red-300/20 p-3 rounded-md font-bold">Dashboard</li>
+                    </a>
+                    <a href="user_management.php">
+                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">User Management</li>
+                    </a>
+                    
+                    <a href="offices.php">
+                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">Office</li>
+                    </a>
+
+                    <a href="#">
+                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">Reports</li>   
+                    </a>
+
+                    <a href="update_account.php">
+                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">My Profile</li>
+                    </a>
                 </ul>  
         
             </div>
@@ -83,8 +96,16 @@
         </div>
 
         <div class="w-full grid grid-cols-4 mt-10 h-1/6 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                total user
+            <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <p class="text-xl flex font-bold">Total User</p>
+                        <p class="text-lg font-semibold"><?php echo $total_users; ?></p>
+                    </div>
+                    <div class="flex justify-end">
+                        <i><img src="./image/icons8-account-24.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
+                    </div>
+                </div>
             </div>
 
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
@@ -101,8 +122,35 @@
         </div>
 
         <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
-            <div class="col-span-3  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-                users
+            <div class="col-span-3 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+                <table class="w-full">
+                    <thead> 
+                        <tr >
+                            <th class="pb-3">ID</th>
+                            <th class="pb-3">Firstname</th>
+                            <th class="pb-3">Lastname</th>
+                            <th class="pb-3">Username</th>
+                            <th class="pb-3">Department</th>
+                            <th class="pb-3">Login Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            $num = 0;
+                            while($row = mysqli_fetch_assoc($res_query)) {
+                                $num++;
+                        ?>
+                            <tr class="border-b">
+                                <td class="text-center py-2"> <?php echo $num; ?></td>
+                                <td class="text-center py-2"> <?php echo ucfirst($row['firstname']); ?></td>
+                                <td class="text-center py-2"> <?php echo ucfirst($row['lastname']); ?></td>
+                                <td class="text-center py-2"> <?php echo ucfirst($row['username']); ?></td>
+                                <td class="text-center py-2"> <?php echo ucfirst($row['department']);?></td>
+                                <td class="text-center py-2"> ???? </td>
+                            </tr>
+                        <?php  }  ?>
+                    </tbody>    
+                </table>
 
             </div>
 
@@ -132,6 +180,7 @@
             <div>
         </div>
     </div>
+
 <script src="./script/jscript.js"> 
 
  </script>

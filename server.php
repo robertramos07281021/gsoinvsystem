@@ -27,46 +27,77 @@ if(isset($_POST['submit'])){
     $user_query_run = mysqli_query($db, $user_query);
 
     if(mysqli_num_rows($user_query_run) > 0){
-        array_push($errors, "Username already exists. Please try again.");
+        array_push($errors, "alreadyexist");
+    } else {
+        unset($errors["alreadyexist"]);
     }
 
     if(strlen(trim($firstname))==0 || empty($firstname)){
-        array_push($errors, "First name is required.");
+        array_push($errors, "firstname");
+    } else {
+        unset($errors["firstname"]);
     }
+
     if(strlen(trim($lastname))==0 || empty($lastname)){
-        array_push($errors, "Last name is required.");
+        array_push($errors, "lastname.");
+    } else {
+        unset($errors["lastname"]);
     }
+
     if(strlen(trim($email))==0 || empty($email)){
-        array_push($errors, "Email is required.");
+        array_push($errors, "email");
+    } else {
+        unset($errors["email"]);
     }
+
+
     if(strlen(trim($phone))==0 || empty($phone)){
-        array_push($errors, "Contact number is required.");
+        array_push($errors, "phonenum");
+    } else {
+        unset($errors["phonenum"]);
     }
+
     if(strlen($phone) != 11 ){
-        array_push($errors, "Contact number is invalid.");
+        array_push($errors, "phoneinvalid");
+    } else {
+        unset($errors["phoneinvalid"]);
     }
 
     if(strlen(trim($address))==0 || empty($address)){
-        array_push($errors, "Address is required.");
-    }
-    if(strlen(trim($department))==0 || empty($department)){
-        array_push($errors, "Department is required.");
-    }
-    if(strlen(trim($username))==0 || empty($username)){
-        array_push($errors, "Username is required.");
-    }
-    if(strlen(trim($password1))==0 || empty($password1)){
-        array_push($errors, "Password is required.");
+        array_push($errors, "address");
+    } else {
+        unset($errors["address"]);
     }
 
-   
+
+    if(strlen(trim($department))==0 || empty($department)){
+        array_push($errors, "department");
+    } else {
+        unset($errors["department"]);
+    }
+
+    if(strlen(trim($username))==0 || empty($username)){
+        array_push($errors, "usernameReq");
+    } else {
+        unset($errors["usernameReq"]);
+    } 
+
+    if(strlen(trim($password1))==0 || empty($password1)){
+        array_push($errors, "passReq");
+    } else {
+        unset($errors["passReq"]);
+    } 
 
     if($password1 !== $password2){
-        array_push($errors, "Password does not match!");
+        array_push($errors, "passNotMatch");
+    } else {
+        unset($errors["passNotMatch"]);
     }
 
-    if(strlen($password1) < 8){
-        array_push($errors, "Password should be 8 characters long or more.");
+    if(strlen($password1) < 8 || strlen($password1) > 16 ) {
+        array_push($errors, "816character");
+    } else {
+        unset($errors["816character"]);
     }
 
 //no errors
