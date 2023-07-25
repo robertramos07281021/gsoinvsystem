@@ -26,28 +26,41 @@
 
 
 <nav class=" p-6 fixed h-full w-[20%]">
-        <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center">
+        <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center flex flex-col">
             <a href="index.php" class="text-2xl font-bold"><span class="text-[red]">GSO</span> InvSystem</a>
             <hr class="mt-5 border border-black">
             <div class="text-start w-full mt-10">
                 <ul>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                      <a  aria-current="page" href="index.php">Dashboard</a>
-                    </li>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                        <a href="user_management.php">User Management</a>
-                    </li>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                        <a href="#">Office</a>
-                    </li>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                      <a href="#">Reports</a>
-                    </li>   
-                    <li class="mb-5 w-full p-3 bg-red-300/20 rounded-md font-bold">
-                      <a  href="update_account.php">My Profile</a>
-                    </li>
+                <a aria-current="page" href="index.php">
+                        <li class="mb-2 w-full hover:bg-red-300/20 p-3 rounded-md font-semibold flex gap-1 "><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard</li>
+                    </a>
+                    <a href="user_management.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/users.png" class="bg-white p-1 rounded w-6 h-6">Users</li>
+                    </a>
+
+                    <a href="user_management_dept.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/department.png"  class="bg-white p-1 rounded w-6 h-6">Departments</li>
+                    </a>
+                    
+                    <a href="offices.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/office.png"  class="bg-white p-1 rounded w-6 h-6">Office</li>
+                    </a>
+
+                    <a href="item.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
+                    </a>
+
+                    <a href="#">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
+                    </a>
+
+                    <a href="update_account.php">
+                        <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 items-center"><img src="./image/user.png"  class="bg-white p-1 rounded w-6 h-6">My Profile</li>
+                    </a>
                 </ul>  
-        
+            </div>
+            <div class="flex  h-full w-full items-end">
+                <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full justify-end items-center  py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
             </div>
         </div>
     </nav>
@@ -65,9 +78,8 @@
 
 
     <article class="col-span-4 py-6 pr-6 w-full h-full col-start-2 ">
-        <div class="flex justify-between text-white">
-            <p> Welcome  Admin <strong><?php echo $row['firstname']. " " .$row['lastname']?></strong></p>
-            <button onclick="logoutModal()" class="font-bold"> Logout  </button>
+        <div class="flex justify-end text-white">
+            <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
         </div>
     
       

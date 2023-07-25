@@ -53,31 +53,42 @@ $errors = array();
 
 <!-- Navbar -->
     <nav class=" p-6 fixed h-full w-[20%]">
-        <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center">
+        <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center flex flex-col">
             <a href="index.php" class="text-2xl font-bold"><span class="text-[red]">GSO</span> InvSystem</a>
             <hr class="mt-5 border border-black">
             <div class="text-start w-full mt-10">
-            <ul>
-                    <a aria-current="page" href="index.php">
-                        <li class="mb-5 w-full hover:bg-red-300/20 p-3 rounded-md">Dashboard</li>
+                <ul>
+                <a aria-current="page" href="index.php">
+                        <li class="mb-2 w-full hover:bg-red-300/20 p-3 rounded-md font-semibold flex gap-1 "><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard</li>
                     </a>
                     <a href="user_management.php">
-                        <li class="mb-5 w-full p-3 rounded-md bg-red-300/20 p-3 font-bold">User Management</li>
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/users.png" class="bg-white p-1 rounded w-6 h-6">Users</li>
+                    </a>
+
+                    <a href="user_management_dept.php">
+                        <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 items-center"><img src="./image/department.png"  class="bg-white p-1 rounded w-6 h-6">Departments</li>
                     </a>
                     
                     <a href="offices.php">
-                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">Office</li>
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/office.png"  class="bg-white p-1 rounded w-6 h-6">Office</li>
+                    </a>
+
+                    <a href="item.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
                     <a href="#">
-                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">Reports</li>   
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
                     <a href="update_account.php">
-                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">My Profile</li>
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/user.png"  class="bg-white p-1 rounded w-6 h-6">My Profile</li>
                     </a>
                 </ul>  
         
+            </div>
+            <div class="flex  h-full w-full items-end">
+                <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full justify-end items-center  py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
             </div>
         </div>
     </nav>
@@ -97,22 +108,13 @@ $errors = array();
         </div>
 
         <div class="w-full grid grid-cols-6 mt-10 h-1/6 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-            <div class="">
-                <div class=" flex justify-center items-end h-full ">
-                <a href="user_management.php"><div class="bg-white p-3 rounded-xl">Account manangement</div></a>
-                </div>
-            </div>
-            <div  class="">
-                <div class=" flex justify-center items-end h-full ">
-                <a href="user_management_dept.php"><div class="bg-white p-3 rounded-xl">Department manangement</div></a>
-                </div>
-            </div>
+            
         </div>
 
         <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
-            <div class="col-span-5  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 px-10 pt-10 ">
+            <div class="col-span-3  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 px-10 pt-10 ">
                 <div class="overflow-auto h-full">
-                    <table class="w-[175%]">
+                    <table class="">
                         <thead>
                             <tr>
                                 <th class="w-20 pb-3">Action</th>
