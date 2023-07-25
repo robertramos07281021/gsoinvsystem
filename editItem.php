@@ -8,7 +8,7 @@ $database = "gsoinventory";
 $connection = new mysqli($servername, $username, $password, $database);
 
 $item_name = "";
-$office_id = "";
+$dep_id = "";
 $property_code = "";
 $end_user = "";
 $description = "";
@@ -16,19 +16,19 @@ $description = "";
 $errorMessage = "";
 $successMessage = "";
 
-// Retrieve office names from the database
-$officeNames = array();
-$sql = "SELECT office_id, officeName FROM office";
+// Retrieve department names from the database
+$dep_names = array();
+$sql = "SELECT dep_id, dep_name FROM department";
 $result = $connection->query($sql);
 if ($result) {
     while ($row = $result->fetch_assoc()) {
-        $officeNames[$row['office_id']] = $row['officeName'];
+        $dep_names[$row['dep_id']] = $row['dep_name'];
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (!isset($_GET["id"])) {
-        header("Location: /GSOInvSys/additem.php");
+        header("Location: /gsoinvsystem/additem.php");
         exit;
     }
 
@@ -39,28 +39,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $row = $result->fetch_assoc();
 
     if (!$row) {
-        header("Location: /GSOInvSys/additem.php");
+        header("Location: /gsoinvsystem/additem.php");
         exit;
     }
 
     $item_name = $row["item_name"];
-    $office_id = isset($row["office_id"]) ? $row["office_id"] : ""; // Handle undefined key
+    $dep_id = isset($row["dep_id"]) ? $row["dep_id"] : ""; // Handle undefined key
     $property_code = $row["property_code"];
     $end_user = $row["end_user"];
     $description = $row["description"];
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST["id"];
     $item_name = $_POST["item_name"];
-    $office_id = $_POST["office_id"];
+    $dep_id = $_POST["dep_id"];
     $property_code = $_POST["property_code"];
     $end_user = $_POST["end_user"];
     $description = $_POST["description"];
 
-    if (empty($id) || empty($item_name) || empty($office_id) || empty($property_code) || empty($end_user) || empty($description)) {
+    if (empty($id) || empty($item_name) || empty($dep_id) || empty($property_code) || empty($end_user) || empty($description)) {
         $errorMessage = "All fields are required";
     } else {
         $sql = "UPDATE items " .
-            "SET item_name = '$item_name', office_id = '$office_id', property_code = '$property_code', end_user = '$end_user', description = '$description' " .
+            "SET item_name = '$item_name', dep_id = '$dep_id', property_code = '$property_code', end_user = '$end_user', description = '$description' " .
             "WHERE id = $id";
 
         $result = $connection->query($sql);
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         } else {
             $successMessage = "Item Updated";
 
-            header("Location: /GSOInvSys/Item.php");
+            header("Location: /gsoinvsystem/Item.php");
             exit;
         }
     }
@@ -109,12 +109,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Office</label>
+                <label class="col-sm-3 col-form-label">department</label>
                 <div class="col-sm-6">
-                    <select class="form-select" name="office_id">
-                        <?php foreach ($officeNames as $officeId => $officeName) {
-                            $selected = ($officeId == $office_id) ? 'selected' : '';
-                            echo "<option value='$officeId' $selected>$officeName</option>";
+                    <select class="form-select" name="dep_id">
+                        <?php foreach ($dep_names as $depId => $dep_name) {
+                            $selected = ($depId == $dep_id) ? 'selected' : '';
+                            echo "<option value='$depId' $selected>$dep_name</option>";
                         } ?>
                     </select>
                 </div>
@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="/GSOInvSys/Item.php" role="button">Cancel</a>
+                    <a class="btn btn-outline-primary" href="/gsoinvsystem/Item.php" role="button">Cancel</a>
                 </div>
             </div>
         </form>

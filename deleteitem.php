@@ -30,6 +30,6 @@ if (isset($_GET["id"])) {
 }
 
 // Redirect back to the list of items (Item.php) after deletion and resetting the ID count
-header("Location: /GSOInvSys/Item.php");
+header("Location: /gsoinvsystem/Item.php");
 exit;
 ?>
