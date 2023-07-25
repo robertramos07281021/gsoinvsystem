@@ -42,8 +42,9 @@
 </nav> -->
     <article class=" col-span-4 py-6 pr-6 w-full h-full ">
         <div class="container my-5">
+            <a href="index.php"><button>Back</button></a>
             <h2>List of Items</h2>
-            <a class="btn btn-primary" href="/gsoinvsystem/additem.php" role="button">New Item</a>
+            <a class="btn btn-primary" href="additem.php" role="button">New Item</a>
         </div>
 
         <br>

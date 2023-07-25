@@ -91,14 +91,13 @@
                 
                 <div class=" grid grid-flow-row-dense grid-cols-4 grid-rows-5  h-full">
                     <div class="col-start-2 col-span-3 pt-5 pr-5">
-                        <p class="text-4xl"><?php echo $row['firstname']. " " .$row['lastname']?></p>
+                        <p class="text-4xl"><?php echo ucfirst($row['firstname']). " " .ucfirst($row['lastname'])?></p>
                         <hr class="border-2 border-[black]/60">
                     </div>
                     <div class="row-start-2 col-span-5 row-span-4">
                         <!-- php code  -->
                         <?php
                             $errors = array();
-
                             //update user Account
                             if(isset($_POST['post_update'])){
                             
@@ -111,7 +110,6 @@
                                 $username = mysqli_real_escape_string($db, $_POST['userName']);
                                 $pass1 = mysqli_real_escape_string($db, $_POST['up_pass1']);
                                 $pass2 = mysqli_real_escape_string($db, $_POST['up_pass2']);
-                                
                                 if(count($errors) === 0){
                                     $sql= "UPDATE users SET firstname='$firstname',lastname='$lastname',
                                     email='$email', phone_num='$phone', u_address='$address', username='$username', password='$password' WHERE user_id='$u_id' ";
@@ -130,93 +128,81 @@
                         ?>
 
 
-                        <form class="h-full w-full px-5 pt-5 border" method="POST">
-                            <div class="grid grid-cols-2 gap-5">
-                                <div>
-                                    <label for="firstName">Firstname: </label>
-                                    <input type="text" name="firstName" id="firstName" class="border w-full pl-2" max="50" value="<?php 
-                                    if(isset($_POST['post_update'])){
-                                        echo $_POST['firstName'];
-                                    }else{ echo $row['firstname']; } ?>" required disabled>
-                                </div>
-                                <div>
-                                    <label for="lastName">Lastname: </label>
-                                    <input type="text" name="lastName" id="lastName" class="border w-full pl-2" max="50" value="<?php 
-                                    if(isset($_POST['post_update'])){
+                        <form class="h-full w-full grid grid-row-6 px-5 pt-5 " method="POST">
+                            <div class="row-span-5">
+                                <div class="grid grid-cols-2 gap-5 ">
+                                    <div>
+                                        <label for="firstName">Firstname: </label>
+                                        <input type="text" name="firstName" id="firstName" class="border w-full pl-2" max="50" value="<?php 
+                                        if(isset($_POST['post_update'])){
+                                            echo $_POST['firstName'];
+                                        }else{ echo ucfirst($row['firstname']); } ?>" required disabled>
+                                    </div>
+                                    <div>
+                                        <label for="lastName">Lastname: </label>
+                                        <input type="text" name="lastName" id="lastName" class="border w-full pl-2" max="50" value="<?php 
+                                        if(isset($_POST['post_update'])){
 
-                                        echo $_POST['lastName'];
-                                    }else{
-                                        echo $row['lastname']; } ?>" required disabled>
+                                            echo $_POST['lastName'];
+                                        }else{
+                                            echo ucfirst($row['lastname']); } ?>" required disabled>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-5 pt-3">
-                                <div>
-                                    <label for="email">Email address:</label>
-                                    <input type="text" name="email" id="email" class="border w-full pl-2" value="<?php 
+                        
+                                <div class="grid grid-cols-2 gap-5 pt-3">
+                                    <div>
+                                        <label for="email">Email address:</label>
+                                        <input type="text" name="email" id="email" class="border w-full pl-2" value="<?php 
+                                        if(isset($_POST['post_update'])){
+
+                                            echo $_POST['email'];
+                                        }else{
+                                            echo $row['email']; } ?>" required disabled>
+                                    </div>
+                                    <div>
+                                        <label for="mobileNum">Phone Number:</label>
+                                        <input type="number" name="mobileNum" id="mobileNum" class="border w-full pl-2"   value="<?php 
+                                        if(isset($_POST['post_update'])){
+
+                                            echo $_POST['mobileNum'];
+                                        }else{
+                                            echo $row['phone_num']; } ?>" required disabled>
+                                    </div>
+                                </div>
+                                <div class="pt-3">
+                                    <label for="address">Address:</label>
+                                    <input type="text" name="address" id="address" class="w-full border pl-2" max="30" value="<?php 
                                     if(isset($_POST['post_update'])){
-
-                                        echo $_POST['email'];
-                                    }else{
-                                        echo $row['email']; } ?>" required disabled>
+                                        echo $_POST['address'];
+                                    }else{ echo $row['u_address']; } ?>" required disabled>
                                 </div>
-                                <div>
-                                    <label for="mobileNum">Phone Number:</label>
-                                    <input type="number" name="mobileNum" id="mobileNum" class="border w-full pl-2"   value="<?php 
-                                    if(isset($_POST['post_update'])){
-
-                                        echo $_POST['mobileNum'];
-                                    }else{
-                                        echo $row['phone_num']; } ?>" required disabled>
+                                <div class="grid grid-cols-2 gap-5 pt-3">
+                                    <div>
+                                        <label for="userName">Username:</label>
+                                    <p class="border w-full pl-2 bg-gray-200/20"><?php echo $row['username'];?></p>
+                                    </div>
+                                    <div>
+                                        <label for="role">Role:</label>
+                                        <input type="text" name="role" id="role" class="border w-full pl-2" value="<?php echo $row['role']?>" disabled>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="pt-3">
-                                <label for="address">Address:</label>
-                                <input type="text" name="address" id="address" class="w-full border pl-2" max="30" value="<?php 
-                                if(isset($_POST['post_update'])){
-                                    echo $_POST['address'];
-                                }else{ echo $row['u_address']; } ?>" required disabled>
-                            </div>
-                            <div class="grid grid-cols-2 gap-5 pt-3">
-                                <div>
-                                    <label for="userName">Username:</label>
-                                    <input type="text" name="userName" id="userName" class="border w-full pl-2" value="<?php 
-                                    if(isset($_POST['post_update'])){
-                                        echo $_POST['userName'];
-                                    }else{
-                                         echo $row['username']; }?>" required disabled>
-                                </div>
-                                <div>
-                                    <label for="role">Role:</label>
-                                    <input type="text" name="role" id="role" class="border w-full pl-2" value="<?php echo $row['role']?>" disabled>
+                                <div class="pt-3">
+                                    <label for="department">Department:</label>
+                                    <input type="text" name="department" id="department" class="border w-full pl-2" value="<?php echo $row['department']?>" disabled>
                                 </div>
                             </div>
-                            <div class="pt-3">
-                                <label for="department">Department:</label>
-                                <input type="text" name="department" id="department" class="border w-full pl-2" value="<?php echo $row['department']?>" disabled>
-                            </div>
-
-                            <div class=" flex grid grid-cols-2 gap-5 pt-3 border w-full " id="changePass"  style="display:none;">
-                                <div class=" w-full">
-                                    <label for="up_pass1">New Password:</label>
-                                    
-                                    <input type="password" name="up_pass1" id="up_pass1"  class="border w-full pl-2" placeholder="Password" required>
-                                </div>
-                                <div class=" w-full">
-                                    <label for="up_pass2">Confirm Password:</label>
-                                    <input type="password" name="up_pass2" class="border w-full pl-2" placeholder="Confirm Password" id="passw2" required>
-                                </div>
-                            </div>
-
+                           
+                            
                             <div class="pt-5">
-                                <div class="flex justify-center gap-10 " id="saveForm" style="display:none;">
-                                    <button class="border px-5 py-1" type="submit" name="post_update">Save</button>
+                                <div class="flex justify-end gap-5 " id="saveForm" >
+                                    <button class="border px-5 py-1" type="submit" name="">Save</button>
                                     <div class=" border px-4 py-1 cursor-pointer" onclick="cancelButton()">
                                         Cancel
                                     </div>
                                 </div>
 
-                                <div class="flex justify-center">
-                                    <div class="border px-5 py-1" onclick="editForm()" id="editButton" style="cursor:pointer;">Edit</div>
+                                <div class="flex justify-end" id="editButton">
+                                    <div class="border px-5 py-1" onclick="editForm()"  style="cursor:pointer;">Edit</div>
                                 </div>
                             </div>
                         </form>
@@ -244,51 +230,8 @@
 
 <!-- Script for hidden textbox -->
 
-<script>
+<script src="./script/accountcreate.js">
 
 </script>
-
-<script src="./script/accountCreat.js">
-// <script src="./script/jscript.js">
-</script>
-
-<script>
-
-
-
-
-function editForm(){
-    document.getElementById("saveForm").style.display="flex";
-    document.querySelector("#changePass").style.display = "flex";
-    document.getElementById("editButton").hidden = true;
-    document.getElementById("firstName").disabled = false;
-    document.getElementById("lastName").disabled = false;
-    document.getElementById("email").disabled = false;
-    document.getElementById("mobileNum").disabled = false;
-    document.getElementById("address").disabled = false;
-    document.getElementById("userName").disabled = false;
-    document.getElementById("role").disabled = false;
-    document.getElementById("department").disabled = false;
-   
-}
-
-
-function cancelButton(){
-    document.getElementById("saveForm").style.display="none";   
-    document.getElementById("changePass").style.display="none";   
-    document.getElementById("editButton").hidden = false;
-    document.getElementById("firstName").disabled = true;
-    document.getElementById("lastName").disabled = true;
-    document.getElementById("email").disabled = true;
-    document.getElementById("mobileNum").disabled = true;
-    document.getElementById("address").disabled = true;
-    document.getElementById("userName").disabled = true;
-    document.getElementById("role").disabled = true;
-    document.getElementById("department").disabled = true;
- }
-
-
-</script>
-
 </body>
 </html>

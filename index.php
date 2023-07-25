@@ -176,17 +176,17 @@ $total_active = mysqli_num_rows($active_result);
 
     </article>
     
-    <div class="absolute top-0 left-0 h-full w-full bg-white/30" id="logoutModal" >
+    <div class="absolute top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
         <div class="flex w-full h-full justify-center items-center">
-            <div class="h-56 w-80 bg-[red] fixed rounded px-1 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
-                <p class="text-white font-bold">GSO InvSystem</p>
-                <div class="bg-white h-[87.2%] w-full flex justify-center items-center">
-                    <div class="text-center ">
-                        <p>Do you want to logout?</p>
+            <div class="h-56 w-80 fixed rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
+                <div class="bg-white h-full w-full flex flex-col rounded-md">
+                    <p class="text-black font-bold pl-2 py-2 self-start border w-full flex "><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20">Log Out</p>
+                    <div class="text-center flex flex-col justify-center border w-full h-full">
+                        <p class="font-semibold">Do you want to logout?</p>
                         <div class="flex justify-center gap-10 mt-10">
-                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red]">Yes</button></a>
+                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red] transition ease-in-out delay-150 drop-shadow-lg">Yes</button></a>
                             
-                            <button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red] font-bold" onclick="noLogout()">No</button>
+                            <button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red] transition ease-in-out delay-150 drop-shadow-lg font-bold" onclick="noLogout()">No</button>
                         </div>    
                     </div>
                 </div>
