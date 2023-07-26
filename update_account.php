@@ -26,28 +26,41 @@
 
 
 <nav class=" p-6 fixed h-full w-[20%]">
-        <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center">
+        <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center flex flex-col">
             <a href="index.php" class="text-2xl font-bold"><span class="text-[red]">GSO</span> InvSystem</a>
             <hr class="mt-5 border border-black">
             <div class="text-start w-full mt-10">
                 <ul>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                      <a  aria-current="page" href="index.php">Dashboard</a>
-                    </li>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                        <a href="user_management.php">User Management</a>
-                    </li>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                        <a href="#">Office</a>
-                    </li>
-                    <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">
-                      <a href="#">Reports</a>
-                    </li>   
-                    <li class="mb-5 w-full p-3 bg-red-300/20 rounded-md font-bold">
-                      <a  href="update_account.php">My Profile</a>
-                    </li>
+                <a aria-current="page" href="index.php">
+                        <li class="mb-2 w-full hover:bg-red-300/20 p-3 rounded-md font-semibold flex gap-1 "><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard</li>
+                    </a>
+                    <a href="user_management.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/users.png" class="bg-white p-1 rounded w-6 h-6">Users</li>
+                    </a>
+
+                    <a href="user_management_dept.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/department.png"  class="bg-white p-1 rounded w-6 h-6">Departments</li>
+                    </a>
+                    
+                    <a href="offices.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/office.png"  class="bg-white p-1 rounded w-6 h-6">Office</li>
+                    </a>
+
+                    <a href="item.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
+                    </a>
+
+                    <a href="#">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
+                    </a>
+
+                    <a href="update_account.php">
+                        <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 items-center"><img src="./image/user.png"  class="bg-white p-1 rounded w-6 h-6">My Profile</li>
+                    </a>
                 </ul>  
-        
+            </div>
+            <div class="flex  h-full w-full items-end">
+                <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full justify-end items-center  py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
             </div>
         </div>
     </nav>
@@ -65,9 +78,8 @@
 
 
     <article class="col-span-4 py-6 pr-6 w-full h-full col-start-2 ">
-        <div class="flex justify-between text-white">
-            <p> Welcome  Admin <strong><?php echo $row['firstname']. " " .$row['lastname']?></strong></p>
-            <button onclick="logoutModal()" class="font-bold"> Logout  </button>
+        <div class="flex justify-end text-white">
+            <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
         </div>
     
       
@@ -79,14 +91,13 @@
                 
                 <div class=" grid grid-flow-row-dense grid-cols-4 grid-rows-5  h-full">
                     <div class="col-start-2 col-span-3 pt-5 pr-5">
-                        <p class="text-4xl"><?php echo $row['firstname']. " " .$row['lastname']?></p>
+                        <p class="text-4xl"><?php echo ucfirst($row['firstname']). " " .ucfirst($row['lastname'])?></p>
                         <hr class="border-2 border-[black]/60">
                     </div>
                     <div class="row-start-2 col-span-5 row-span-4">
                         <!-- php code  -->
                         <?php
                             $errors = array();
-
                             //update user Account
                             if(isset($_POST['post_update'])){
                             
@@ -140,39 +151,41 @@
                         ?>
 
 
-                        <form class="h-full w-full px-5 pt-5 border" method="POST">
-                            <div class="grid grid-cols-2 gap-5">
-                                <div>
-                                    <label for="firstName">Firstname: </label>
-                                    <input type="text" name="firstName" id="firstName" class="border w-full pl-2" max="50" value="<?php 
-                                    if(isset($_POST['post_update'])){
-                                        echo $_POST['firstName'];
-                                    }else{ echo $row['firstname']; } ?>" required disabled>
-                                </div>
-                                <div>
-                                    <label for="lastName">Lastname: </label>
-                                    <input type="text" name="lastName" id="lastName" class="border w-full pl-2" max="50" value="<?php 
-                                    if(isset($_POST['post_update'])){
+                        <form class="h-full w-full grid grid-row-6 px-5 pt-5 " method="POST">
+                            <div class="row-span-5">
+                                <div class="grid grid-cols-2 gap-5 ">
+                                    <div>
+                                        <label for="firstName">Firstname: </label>
+                                        <input type="text" name="firstName" id="firstName" class="border w-full pl-2" max="50" value="<?php 
+                                        if(isset($_POST['post_update'])){
+                                            echo $_POST['firstName'];
+                                        }else{ echo ucfirst($row['firstname']); } ?>" required disabled>
+                                    </div>
+                                    <div>
+                                        <label for="lastName">Lastname: </label>
+                                        <input type="text" name="lastName" id="lastName" class="border w-full pl-2" max="50" value="<?php 
+                                        if(isset($_POST['post_update'])){
 
-                                        echo $_POST['lastName'];
-                                    }else{
-                                        echo $row['lastname']; } ?>" required disabled>
+                                            echo $_POST['lastName'];
+                                        }else{
+                                            echo ucfirst($row['lastname']); } ?>" required disabled>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-5 pt-3">
-                                <div>
-                                    <label for="email">Email address:</label>
-                                    <input type="text" name="email" id="email" class="border w-full pl-2" value="<?php 
-                                    if(isset($_POST['post_update'])){
+                        
+                                <div class="grid grid-cols-2 gap-5 pt-3">
+                                    <div>
+                                        <label for="email">Email address:</label>
+                                        <input type="text" name="email" id="email" class="border w-full pl-2" value="<?php 
+                                        if(isset($_POST['post_update'])){
 
-                                        echo $_POST['email'];
-                                    }else{
-                                        echo $row['email']; } ?>" required disabled>
-                                </div>
-                                <div>
-                                    <label for="mobileNum">Phone Number:</label>
-                                    <input type="number" name="mobileNum" id="mobileNum" class="border w-full pl-2"   value="<?php 
-                                    if(isset($_POST['post_update'])){
+                                            echo $_POST['email'];
+                                        }else{
+                                            echo $row['email']; } ?>" required disabled>
+                                    </div>
+                                    <div>
+                                        <label for="mobileNum">Phone Number:</label>
+                                        <input type="number" name="mobileNum" id="mobileNum" class="border w-full pl-2"   value="<?php 
+                                        if(isset($_POST['post_update'])){
 
                                         echo $_POST['mobileNum'];
                                     }else{
@@ -231,17 +244,18 @@
                                     <input type="password" name="up_pass2" class="border w-full pl-2" placeholder="Confirm Password" id="passw2" required>
                                 </div> -->
                             </div>
-
+                           
+                            
                             <div class="pt-5">
-                                <div class="flex justify-center gap-10 " id="saveForm" style="display:none;">
-                                    <button class="border px-5 py-1" type="submit" name="post_update">Save</button>
+                                <div class="flex justify-end gap-5 " id="saveForm" >
+                                    <button class="border px-5 py-1" type="submit" name="">Save</button>
                                     <div class=" border px-4 py-1 cursor-pointer" onclick="cancelButton()">
                                         Cancel
                                     </div>
                                 </div>
 
-                                <div class="flex justify-center">
-                                    <div class="border px-5 py-1" onclick="editForm()" id="editButton" style="cursor:pointer;">Edit</div>
+                                <div class="flex justify-end" id="editButton">
+                                    <div class="border px-5 py-1" onclick="editForm()"  style="cursor:pointer;">Edit</div>
                                 </div>
                             </div>
                         </form>
@@ -330,7 +344,7 @@
 
 <!-- Script for hidden textbox -->
 
-<script>
+<script src="./script/accountcreate.js">
 
 </script>
 

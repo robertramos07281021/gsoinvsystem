@@ -52,7 +52,7 @@ $errors = array();
     ?>
 
 <!-- Navbar -->
-    <nav class=" p-6 fixed h-full w-[20%]">
+<nav class=" p-6 fixed h-full w-[20%]">
         <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center flex flex-col">
             <a href="index.php" class="text-2xl font-bold"><span class="text-[red]">GSO</span> InvSystem</a>
             <hr class="mt-5 border border-black">
@@ -104,72 +104,39 @@ $errors = array();
         
         <div class="flex justify-end text-white">
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst ($_SESSION['lastname']);?></span></p>
+
         </div>
 
         <div class="w-full grid grid-cols-6 mt-10 h-1/6 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
             <!-- <div class="col-start-5 col-span-2 flex items-end">
                 <input type="text" class="w-full rounded-full pl-2 py-1">
             </div> -->
-            <div class="col-start-1 flex items-end">
-                <a href="create_account.php"><button class="p-2 bg-white rounded-xl">Create Account</button></a>
-            </div>
         </div>
 
         <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
             <div class="col-span-5  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 px-10 pt-10 ">
-                <div class="overflow-auto h-full">
-                    <table class="w-full">
-                        <thead>
-                            <tr>
-                                
-                                <th class="w-10 pb-3">ID</th>
-                                <th class="w-40 pb-3">Full Name</th>
-                                <th class="w-40 pb-3">Username</th>
-                                <th class="w-40 pb-3">Department</th>
-                                <th class="w-40 pb-3">Role</th>
-                                <th class="w-40 pb-3">Status</th>
-                                <th class="w-40 pb-3">Action</th>
-                                
-                             </tr>
-                        </thead>
-
-                        <tbody>
-                        <?php   
-                            $num = 0;
-                            while($row = mysqli_fetch_assoc($res_query)) {
-                            $num++;
-                        ?>
-                            <tr class="border-b">
-                                <!-- rowsss from database will be displayed -->
-                                
-                                <td class="py-3 text-center"> <?php echo  $row['user_id']; ?> </td>
-                                <td class="py-3 text-center"> <?php echo  ucfirst($row['firstname']); echo " "; echo ucfirst($row['lastname']) ;?></td>
-                                <td class="py-3 text-center"> <?php echo  $row['username'] ?>  </td>
-                                <td class="py-3 text-center"> <?php echo  $row['department'] ?>  </td>
-                                <td class="py-3 text-center"> <?php echo  $row['role'] ?>  </td>
-                                <td class="py-3 text-center"> <?php echo  $row['status'] ?>  </td>
-                                <td class="py-3 text-center"><a href="user_edit.php" class="border-r pr-2 mr-2">View</a><button>Activate</button></td>
-                            </tr>
-                        <?php } ?>
-
-                        </tbody>
-                    </table>
-                </div>
+                <a href="user_management.php"><button>Back</button></a>
             </div>
         </div>
-    </article>
 
-    <div class="absolute top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
+
+       
+                
+
+
+
+
+    </article>
+    <div class="absolute top-0 left-0 h-full w-full bg-white/30" id="logoutModal" >
         <div class="flex w-full h-full justify-center items-center">
-            <div class="h-56 w-80 fixed rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
-                <div class="bg-white h-full w-full flex flex-col rounded-md">
-                    <p class="text-black font-bold pl-2 py-2 self-start border w-full flex "><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20">Log Out</p>
-                    <div class="text-center flex flex-col justify-center border w-full h-full">
-                        <p class="font-semibold">Do you want to logout?</p>
+            <div class="h-56 w-80 bg-[red] fixed rounded px-1 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
+                <p class="text-white font-bold">GSO InvSystem</p>
+                <div class="bg-white h-[87.2%] w-full flex justify-center items-center">
+                    <div class="text-center ">
+                        <p>Do you want to logout?</p>
                         <div class="flex justify-center gap-10 mt-10">
-                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red] transition ease-in-out delay-150 drop-shadow-lg">Yes</button></a>
-                            
-                            <button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red] transition ease-in-out delay-150 drop-shadow-lg font-bold" onclick="noLogout()">No</button>
+                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red]">Yes</button></a>
+                            <button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red] font-bold" onclick="noLogout()">No</button>
                         </div>    
                     </div>
                 </div>

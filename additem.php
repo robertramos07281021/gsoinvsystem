@@ -7,34 +7,35 @@ $database = "gsoinventory";
 // Connection to the database
 $connection = new mysqli($servername, $username, $password, $database);
 
-$item_name = $officeName = $property_code = $end_user = $description = "";
+$item_name = $dep_names = $property_code = $end_user = $description = "";
 
 $errorMessage = $successMessage = "";
 
-// Retrieve office names from the database
-$officeNames = array();
-$sql = "SELECT office_id, officeName FROM office"; // Include officeName in the SELECT query
+// Retrieve department names from the database
+// Retrieve department names from the database
+$dep_names = array();
+$sql = "SELECT dep_id, dep_name FROM department"; // Corrected column name: dep_name
 $result = $connection->query($sql);
 if ($result) {
     while ($row = $result->fetch_assoc()) {
-        $officeNames[$row['office_id']] = $row['officeName']; // Use office_id as the array key
+        $dep_names[$row['dep_id']] = $row['dep_name']; // Use dep_id as the array key, and use dep_name as the value
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $item_name = $_POST["item_name"];
-    $office_id = $_POST["officeName"]; // Use office_id as the selected value
+    $dep_id = $_POST["dep_names"]; // Use dep_id as the selected value
     $property_code = $_POST["property_code"];
     $end_user = $_POST["end_user"];
     $description = $_POST["description"];
 
-    if (empty($item_name) || empty($office_id) || empty($property_code) || empty($end_user) || empty($description)) {
+    if (empty($item_name) || empty($dep_id) || empty($property_code) || empty($end_user) || empty($description)) {
         $errorMessage = "All fields are required";
     } else {
         // Add new item to the database
        // Add new item to the database with the current timestamp for created_at
-        $sql = "INSERT INTO items (item_name, office_id, property_code, end_user, description, created_at) " .
-        "VALUES ('$item_name','$office_id','$property_code','$end_user','$description', NOW())";
+        $sql = "INSERT INTO items (item_name, dep_id, property_code, end_user, description, created_at) " .
+        "VALUES ('$item_name','$dep_id','$property_code','$end_user','$description', NOW())";
 
         $result = $connection->query($sql);
 
@@ -43,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $successMessage = "Item added correctly";
             // Redirect to a success page
-            header("Location: /GSOInvSys/Item.php");
+            header("Location: /gsoinvsystem/Item.php");
             exit;
         }
     }
@@ -56,9 +57,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Item</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" ></script>
 </head>
 <body>
+<!-- <nav class=" p-6 fixed h-full w-[20%]">
+        <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center">
+            <a href="index.php" class="text-2xl font-bold"><span class="text-[red]">GSO</span> InvSystem</a>
+            <hr class="mt-5 border border-black">
+            <div class="text-start w-full mt-10">
+            <ul>
+                    <a aria-current="page" href="index.php">
+                        <li class="mb-5 w-full hover:bg-red-300/20 p-3 rounded-md">Dashboard</li>
+                    </a>
+                    <a href="user_management.php">
+                        <li class="mb-5 w-full p-3 rounded-md bg-red-300/20 p-3 font-bold">User Management</li>
+                    </a>
+                    
+                    <a href="department.php">
+                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">department</li>
+                    </a>
+
+                    <a href="#">
+                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">Reports</li>   
+                    </a>
+
+                    <a href="update_account.php">
+                        <li class="mb-5 w-full p-3 hover:bg-red-300/20 rounded-md">My Profile</li>
+                    </a>
+                </ul>  
+        
+            </div>
+        </div>
+    </nav> -->
     <div class="container my-5">
         <h2>New Item</h2>
         <?php
@@ -80,11 +113,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Office</label>
+                <label class="col-sm-3 col-form-label">department</label>
                 <div class="col-sm-6">
-                    <select class="form-select" name="officeName">
-                        <?php foreach ($officeNames as $office_id => $officeName) { // Loop through officeNames array
-                            echo "<option value='" . htmlspecialchars($office_id) . "'>" . htmlspecialchars($officeName) . "</option>";
+                    <select class="form-select" name="dep_names">
+                        <?php foreach ($dep_names as $dep_id => $dep_names) { // Loop through dep_names array
+                            echo "<option value='" . htmlspecialchars($dep_id) . "'>" . htmlspecialchars($dep_names) . "</option>";
                         } ?>
                     </select>
                 </div>
@@ -128,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="/GSOinvsys/additem.php" role="button">Cancel</a>
+                    <a class="btn btn-outline-primary" href="item.php" role="button">Cancel</a>
                 </div>
             </div>
         </form>

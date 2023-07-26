@@ -125,7 +125,7 @@ if(isset($_POST['submit'])){
             
 
  
-        header('location: login.php');  //redirect to create account
+        header('location: index.php');  //redirect to create account
 
         
 
@@ -151,10 +151,7 @@ if(isset($_POST['login'])){
     $stat = "active";
 
     if( $count === 1 && $row['status']=== $stat && $row['role'] === "admin"){
-        
-
         if($row['username'] === $log_user && $row['password'] === $pass){
-
         $_SESSION['username'] = $row['username'];
         $_SESSION['firstname'] = $row['firstname'];
         $_SESSION['lastname'] = $row['lastname'];

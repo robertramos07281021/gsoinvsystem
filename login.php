@@ -53,11 +53,7 @@
                                 <button type="submit" name="login" class="font-bold text-white border px-4 py-1 rounded-lg w-full flex justify-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" id="btnLog">
                                     <img src="./image/icons8-login-64.png" class="w-6 h-6">
                                     Login
-                                </button>
-
-                                <button class="font-bold text-white border px-4 py-1 rounded-lg w-full flex justify-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-red-500 duration-300 mt-2" id="btnLog">
-                                    <a href="create_account.php">Register</a>
-                                </button>
+                            </button>
                             </div>
 
                         </form>
