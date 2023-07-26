@@ -248,19 +248,31 @@
                             
                             <div class="pt-5">
                                 <div class="flex justify-end gap-5 " id="saveForm" >
-                                    <button class="border px-5 py-1" type="submit" name="">Save</button>
-                                    <div class=" border px-4 py-1 cursor-pointer" onclick="cancelButton()">
+                                    <button class="border px-5 py-1" type="submit" name="post_update" style="background-color: green; color: white;">Save</button>
+                                    <div class=" border px-4 py-1 cursor-pointer" onclick="cancelButton()" style="background-color: red; color: white;">
                                         Cancel
                                     </div>
                                 </div>
 
                                 <div class="flex justify-end" id="editButton">
-                                    <div class="border px-5 py-1" onclick="editForm()"  style="cursor:pointer;">Edit</div>
+                                    <div class="border px-5 py-1" onclick="editForm()"  style="cursor:pointer;" style="background-color: #808080; color: white;">Edit</div>
                                 </div>
                             </div>
-                        </form>
+                        </form><br>
                         
-                    
+                        <h3 >Change password? </h3>
+
+<br>
+
+<form method="POST"> 
+<label>New Password: </label><br>
+<input type="password" name="change1" class="border w-full pl-2" placeholder="Password" required>
+<br>
+<label>Confirm Password: </label> <br>
+<input type="password" name="change2" class="border w-full pl-2" placeholder="Password" required>
+<br>
+<button type="submit" name="change_pass" class="border px-5 py-1" style="background-color: green; color: white;"> Save </button>
+</form>
 
                     </div> 
                 </div>
@@ -317,20 +329,8 @@
 
 
             </div>
-            <div class="bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] border col-start-2 row-start-2 row-span-4 col-start-3 rounded-xl">
-                                                <h3 >Change password? </h3>
-
-                                                <br>
-
-                <form method="POST"> 
-                    <label>New Password: </label><br>
-                    <input type="password" name="change1">
-                    <br>
-                    <label>Confirm Password: </label> <br>
-                    <input type="password" name="change2">
-                    <br>
-                    <button type="submit" name="change_pass"> Save </button>
-                </form>
+            <div class="bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] border col-start-1 row-start-2 row-span-4 col-start-3 rounded-xl">
+                                               
 
             </div>
 
