@@ -35,7 +35,7 @@ $errors = array();
   
 </head>
 
-<body class=" text-black w-full h-screen grid grid-cols-5">
+<body class=" text-black w-full h-screen grid grid-cols-5 overflow-hidden">
 
     <?php 
         if (isset($_SESSION['success'])): 
@@ -99,7 +99,7 @@ $errors = array();
     <nav class="p-6 ">
     </nav>
 
-    <article class=" col-span-4 py-6 pr-6 ">
+    <article class=" col-span-4 pt-6 pb-7 pr-6 ">
         
             <div class="flex justify-end text-white">
                 <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst($_SESSION['lastname']);?></span></p>
@@ -108,8 +108,9 @@ $errors = array();
 
             <div class="col-span-3 row-start-2 ">
                     <div class="h-full bg-white row-span-2  rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] p-3">    
-                        <p class="font-bold text-lg">DEPARTMENTS:</p>
+                        <p class="font-bold text-lg">DEPARTMENT:</p>
                         <select class="w-full p-1 border-t border-black font-semibold outline-0">
+                            <option>Select Department</option>
                             <?php if(count($deptChoice) > 0 ) { 
                                 foreach($deptChoice as $deptChoices ){    
                             ?>
@@ -121,30 +122,78 @@ $errors = array();
                     </div>    
             </div>
             <div class=" col-span-3 ">
-                <div class="w-full h-full grid grid-cols-2 gap-6"> 
-                    <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                        total department user
+                <div class="w-full h-full grid grid-cols-3 gap-6"> 
+                    <div class="flex items-end ">
+                        <div class="w-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] text-center p-1">
+                            Manage Departments
+                        </div>
                     </div>
-                
-                    <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                        total department items
+                    <div class="col-span-2 grid grid-cols-2 gap-6">
+<!-- paki lagay po dito ung total ng users sa specific na department-->
+                        <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+                            total department user
+
+
+                            
+                        </div>
+
+
+ <!-- paki lagay po dito ung total ng users sa specific na department-->                       
+                        <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+                            total department items
+
+
+
+                        </div>
                     </div>
                 </div>
             </div>
+
+<!-- paki lagay po dito ung mga items na naka specific na department -->
 
             <div class="col-span-3 row-span-6 ">
                 <div class="col-span-3 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] p-10 ">
                     <div class="h-full">
-                        <table>
+                        paki lagay po dito ung mga items na naka specific na department
 
-                        </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     </div>
                 </div>
             </div>
+
+<!-- paki lagay po dito ung mga Users na naka specific na department -->
             <div class="row-start-3 row-span-5 col-span-3 mb-6 ">
-                <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full">
-                    users
+                <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full p-10">
+                    
+                paki lagay po dito ung mga Users na naka specific na department
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
             </div>
         </div>

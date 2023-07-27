@@ -125,7 +125,7 @@ if(isset($_POST['submit'])){
             
 
  
-        header('location: index.php');  //redirect to create account
+        header('location: user_management.php');  //redirect to create account
 
         
 

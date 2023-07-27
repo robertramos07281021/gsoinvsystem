@@ -17,3 +17,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+#registerButton{
+    box-shadow:4px 6px 0px 0px #ff0000 ;
+}
+
