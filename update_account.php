@@ -109,10 +109,18 @@
                                 $phone = mysqli_real_escape_string($db, $_POST['mobileNum']);
                                 $username = mysqli_real_escape_string($db, $_POST['userName']);
                                 $pass1 = mysqli_real_escape_string($db, $_POST['up_pass1']);
-                                $pass2 = mysqli_real_escape_string($db, $_POST['up_pass2']);
+                                // $pass2 = mysqli_real_escape_string($db, $_POST['up_pass2']);
+                                
+                                $pass_enc = md5($pass1);
+                            //check password is match
+                                $sql_pass = "SELECT * FROM users WHERE user_id='$u_id' ";
+
                                 if(count($errors) === 0){
+
+                                        if($pass_enc === $row['password']){
+
                                     $sql= "UPDATE users SET firstname='$firstname',lastname='$lastname',
-                                    email='$email', phone_num='$phone', u_address='$address', username='$username', password='$password' WHERE user_id='$u_id' ";
+                                    email='$email', phone_num='$phone', u_address='$address', username='$username' WHERE user_id='$u_id' ";
 
                                     mysqli_query($db, $sql);  //update to database
                         ?>
@@ -123,6 +131,21 @@
                                                 });
                                         </script>
                                         <?php
+
+                                            }else {
+                                                ?>
+
+                                        <script>
+                                                swal({title: "Sorry!", text: "Your current password is invalid. Try again.", type:"error", icon: "error"})
+                                                // .then(function(){ 
+                                                //     location.href="update_account.php";
+                                                // });
+                                        </script>
+
+
+                                                <?php
+
+                                            }
                                 }
                             }
                         ?>
@@ -164,59 +187,150 @@
                                         <input type="number" name="mobileNum" id="mobileNum" class="border w-full pl-2"   value="<?php 
                                         if(isset($_POST['post_update'])){
 
-                                            echo $_POST['mobileNum'];
-                                        }else{
-                                            echo $row['phone_num']; } ?>" required disabled>
-                                    </div>
+                                        echo $_POST['mobileNum'];
+                                    }else{
+                                        echo $row['phone_num']; } ?>" required disabled>
                                 </div>
-                                <div class="pt-3">
-                                    <label for="address">Address:</label>
-                                    <input type="text" name="address" id="address" class="w-full border pl-2" max="30" value="<?php 
+                            </div>
+                            <div class="pt-3">
+                                <label for="address">Address:</label>
+                                <input type="text" name="address" id="address" class="w-full border pl-2" max="30" value="<?php 
+                                if(isset($_POST['post_update'])){
+                                    echo $_POST['address'];
+                                }else{ echo $row['u_address']; } ?>" required disabled>
+                            </div>
+                            <div class="grid grid-cols-2 gap-5 pt-3">
+                                <div>
+                                    <label for="userName">Username:</label>
+                                    <input type="text" name="userName" id="userName" class="border w-full pl-2" value="<?php 
                                     if(isset($_POST['post_update'])){
-                                        echo $_POST['address'];
-                                    }else{ echo $row['u_address']; } ?>" required disabled>
+                                        echo $_POST['userName'];
+                                    }else{
+                                         echo $row['username']; }?>" required disabled>
                                 </div>
-                                <div class="grid grid-cols-2 gap-5 pt-3">
-                                    <div>
-                                        <label for="userName">Username:</label>
-                                    <p class="border w-full pl-2 bg-gray-200/20"><?php echo $row['username'];?></p>
-                                    </div>
-                                    <div>
-                                        <label for="role">Role:</label>
-                                        <input type="text" name="role" id="role" class="border w-full pl-2" value="<?php echo $row['role']?>" disabled>
-                                    </div>
+                                <div>
+                                    <label for="role">Role:</label>
+                                    <input type="text" name="role" id="role" class="border w-full pl-2" value="<?php echo $row['role']?>" disabled>
                                 </div>
-                                <div class="pt-3">
-                                    <label for="department">Department:</label>
-                                    <input type="text" name="department" id="department" class="border w-full pl-2" value="<?php echo $row['department']?>" disabled>
+                            </div>
+                            <div class="pt-3">
+                                <label for="department">Department:</label>
+                                <!-- <input type="text" name="department" id="department" class="border w-full pl-2" value="#" disabled> -->
+                                <select name="department" id="department" class="border w-full pl-2" disabled>
+                                        <?php  
+                                            $dp_query = "SELECT * FROM department";
+                                            $res_q = mysqli_query($db,$dp_query);
+                                            while($deprow = mysqli_fetch_assoc($res_q)){
+                                                ?>
+
+                                            <option value="<?php echo $deprow['dep_name']; ?>" >
+                                            <?php echo $deprow['dep_name']; ?>  </option>
+                                                <?php
+
+                                            }
+
+                                        ?>
+                                </select>
+                            </div>
+
+                            <div class=" flex grid grid-cols-2 gap-5 pt-3 border w-full " id="changePass"  style="display:none;">
+                                <div class=" w-full">
+                                    <label for="up_pass1">To save changes, confirm current Password:</label>
+                                    
+                                    <input type="password" name="up_pass1" id="up_pass1"  class="border w-full pl-2" placeholder="Password" required>
                                 </div>
+                                <!-- <div class=" w-full">
+                                    <label for="up_pass2">Confirm Password:</label>
+                                    <input type="password" name="up_pass2" class="border w-full pl-2" placeholder="Confirm Password" id="passw2" required>
+                                </div> -->
                             </div>
                            
                             
                             <div class="pt-5">
                                 <div class="flex justify-end gap-5 " id="saveForm" >
-                                    <button class="border px-5 py-1" type="submit" name="">Save</button>
-                                    <div class=" border px-4 py-1 cursor-pointer" onclick="cancelButton()">
+                                    <button class="border px-5 py-1" type="submit" name="post_update" style="background-color: green; color: white;">Save</button>
+                                    <div class=" border px-4 py-1 cursor-pointer" onclick="cancelButton()" style="background-color: red; color: white;">
                                         Cancel
                                     </div>
                                 </div>
 
                                 <div class="flex justify-end" id="editButton">
-                                    <div class="border px-5 py-1" onclick="editForm()"  style="cursor:pointer;">Edit</div>
+                                    <div class="border px-5 py-1" onclick="editForm()"  style="cursor:pointer;" style="background-color: #808080; color: white;">Edit</div>
                                 </div>
                             </div>
-                        </form>
+                        </form><br>
                         
-                    
+                        <h3 >Change password? </h3>
+
+<br>
+
+<form method="POST"> 
+<label>New Password: </label><br>
+<input type="password" name="change1" class="border w-full pl-2" placeholder="Password" required>
+<br>
+<label>Confirm Password: </label> <br>
+<input type="password" name="change2" class="border w-full pl-2" placeholder="Password" required>
+<br>
+<button type="submit" name="change_pass" class="border px-5 py-1" style="background-color: green; color: white;"> Save </button>
+</form>
 
                     </div> 
                 </div>
                 
-                   
+                   <?php
+
+                        //update Password
+                        if(isset($_POST['change_pass'])){
+                            $u_id = $_SESSION['user_id'];
+                            $change1 = mysqli_real_escape_string($db, $_POST['change1']);
+                            $change2 = mysqli_real_escape_string($db, $_POST['change2']);
+
+                            $encPass = md5($change1);
+
+                            if($change1 !== $change2){
+                                ?>
+                                <script>
+                                                swal({title: "Sorry!", text: "Your password does not match. Try again.", type:"error", icon: "error"})
+                                                // .then(function(){ 
+                                                //     location.href="update_account.php";
+                                                // });
+                                        </script>
+                                <?php
+                            }else if($change1 === $change2 && $encPass === $row['password']){
+                                ?>
+                                <script>
+                                                swal({title: "Sorry!", text: "Password already used. Please enter a new password.", type:"error", icon: "error"})
+                                                // .then(function(){ 
+                                                //     location.href="update_account.php";
+                                                // });
+                                        </script>
+                                <?php
+                               
+                            }else if($change1 === $change2 && $encPass !== $row['password']){
+
+                                $sql= "UPDATE users SET password='$encPass' WHERE user_id='$u_id' ";
+
+                                mysqli_query($db, $sql);  //update to database
+
+                                 ?>
+                                    <script>
+                                            swal({title: "Success!", text: "You have changed your password.", type:"success"})
+                                            .then(function(){ 
+                                                location.href="update_account.php";
+                                            });
+                                    </script>
+                                    <?php
+
+                            }
+
+                        }
+
+                    ?>
 
 
             </div>
-            <div class="bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] border col-start-2 row-start-2 row-span-4 col-start-3 rounded-xl">
+            <div class="bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] border col-start-1 row-start-2 row-span-4 col-start-3 rounded-xl">
+                                               
 
             </div>
 
@@ -233,5 +347,48 @@
 <script src="./script/accountcreate.js">
 
 </script>
+
+<script src="./script/accountCreat.js">
+// <script src="./script/jscript.js">
+</script>
+
+<script>
+
+
+
+
+function editForm(){
+    document.getElementById("saveForm").style.display="flex";
+    document.querySelector("#changePass").style.display = "flex";
+    document.getElementById("editButton").hidden = true;
+    document.getElementById("firstName").disabled = false;
+    document.getElementById("lastName").disabled = false;
+    document.getElementById("email").disabled = false;
+    document.getElementById("mobileNum").disabled = false;
+    document.getElementById("address").disabled = false;
+    document.getElementById("userName").disabled = false;
+    document.getElementById("role").disabled = true;
+    document.getElementById("department").disabled = false;
+   
+}
+
+
+function cancelButton(){
+    document.getElementById("saveForm").style.display="none";   
+    document.getElementById("changePass").style.display="none";   
+    document.getElementById("editButton").hidden = false;
+    document.getElementById("firstName").disabled = true;
+    document.getElementById("lastName").disabled = true;
+    document.getElementById("email").disabled = true;
+    document.getElementById("mobileNum").disabled = true;
+    document.getElementById("address").disabled = true;
+    document.getElementById("userName").disabled = true;
+    document.getElementById("role").disabled = true;
+    document.getElementById("department").disabled = true;
+ }
+
+
+</script>
+
 </body>
 </html>
