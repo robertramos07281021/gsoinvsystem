@@ -150,12 +150,17 @@ if(isset($_POST['login'])){
     $row = mysqli_fetch_assoc($result);
     $stat = "active";
 
+    $user_id = $row['user_id'];
+    $on = "online";
     if( $count === 1 && $row['status']=== $stat && $row['role'] === "admin"){
         if($row['username'] === $log_user && $row['password'] === $pass){
         $_SESSION['username'] = $row['username'];
         $_SESSION['firstname'] = $row['firstname'];
         $_SESSION['lastname'] = $row['lastname'];
         $_SESSION['user_id'] = $row['user_id'];
+
+        $mquery= "UPDATE users SET mode='$on' WHERE user_id='$user_id' ";
+        mysqli_query($db, $mquery);  //update mode as online
 
         header('location: index.php');
 
@@ -172,6 +177,9 @@ if(isset($_POST['login'])){
         $_SESSION['firstname'] = $row['firstname'];
         $_SESSION['lastname'] = $row['lastname'];
         $_SESSION['user_id'] = $row['user_id'];
+
+        $mquery= "UPDATE users SET mode='$on' WHERE user_id='$user_id' ";
+        mysqli_query($db, $mquery);  //update mode as online
 
         header('location: index_user.php');
 
@@ -196,6 +204,13 @@ if(isset($_POST['login'])){
 //logout
 
 if(isset($_GET['logout'])){
+ 
+    $user_id = $_SESSION['user_id'];
+    $off = "offline";
+
+    $mquery= "UPDATE users SET mode='$off' WHERE user_id='$user_id' ";
+        mysqli_query($db, $mquery);  //update mode as online
+
     session_destroy();
     unset($_SESSION['username']);
     header('location: login.php');
