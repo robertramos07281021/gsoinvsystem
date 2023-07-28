@@ -76,9 +76,6 @@ $total_active = mysqli_num_rows($active_result);
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/department.png"  class="bg-white p-1 rounded w-6 h-6">Departments</li>
                     </a>
                     
-                    <a href="offices.php">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/office.png"  class="bg-white p-1 rounded w-6 h-6">Office</li>
-                    </a>
 
                     <a href="item.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
@@ -306,7 +303,7 @@ $total_active = mysqli_num_rows($active_result);
 
             <div class="col-span-2 row-span-5 ">
                 <div class="w-full h-full grid grid-flow-row-dense grid-rows-5 grid-cols-2 gap-6">
-                    <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(255,0,0,0.5)]">
+                    <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
 <!-- pa display po ng total account user kasama ung inactive user -->
                         total user with Deactivated user
 
