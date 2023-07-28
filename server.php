@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
     $username = mysqli_real_escape_string($db, $_POST['username']);
     $password1 = mysqli_real_escape_string($db, $_POST['password_1']);
     $password2 = mysqli_real_escape_string($db, $_POST['password_2']);
-    
+    $role = mysqli_real_escape_string($db, $_POST['accountRole']);
 
     $user_query = "SELECT * FROM users WHERE username='$username'";
     $user_query_run = mysqli_query($db, $user_query);
@@ -108,7 +108,7 @@ if(isset($_POST['submit'])){
         $password = md5($password1); //encrypt password.
 
         $sql = "INSERT INTO users (firstname, lastname, email, phone_num, u_address, username, password, department, role, status)
-                VALUES ('$firstname', '$lastname', '$email', '$phone', '$address' , '$username', '$password', '$department', 'user', 'active')";
+                VALUES ('$firstname', '$lastname', '$email', '$phone', '$address' , '$username', '$password', '$department', '$role', 'active')";
 
         mysqli_query($db, $sql);  //insert to database
 

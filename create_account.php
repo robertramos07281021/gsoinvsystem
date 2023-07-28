@@ -211,9 +211,25 @@ $total_active = mysqli_num_rows($active_result);
                             <div class="mt-3" >
                                 <p class="font-bold text-sm">Role:</p>
                                 <div class="flex items-center pl-2">
-                                    <input type="radio" id="userAccount" name="accountRole" class="mr-2">
+                                    <input type="radio" id="userAccount" name="accountRole" class="mr-2" value="user" 
+                                    <?php  if(isset($_POST['submit'])){ 
+                                        if($role === "user"){
+                                            echo "checked";
+                                        } else if($role !== "user"){
+                                            echo "";
+                                        }
+                                    }else {
+                                        echo "checked";
+                                    }  ?>>
                                     <label for="userAccount">User</labal>
-                                    <input type="radio" id="adminAccount" name="accountRole" class="ml-2">
+                                    <input type="radio" id="adminAccount" name="accountRole" class="ml-2" value="admin" 
+                                    <?php  if(isset($_POST['submit'])){ 
+                                        if($role === "admin"){
+                                            echo "checked";
+                                        } else if($role !== "admin"){
+                                            echo "";
+                                        }
+                                    } ?>    >
                                     <label for="adminAccount">Admin</labal>
                                 </div>
                             </div>
