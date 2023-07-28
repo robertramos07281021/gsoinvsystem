@@ -1,14 +1,7 @@
 <?php include('server.php'); 
 
 
-$displayUser = "SELECT * FROM users";
-$res_query = mysqli_query($db,$displayUser);
 
-$total_users = mysqli_num_rows($res_query);
-$act = "active";
-$active_query= "SELECT * FROM users WHERE status='$act'";
-$active_result = mysqli_query($db,$active_query);
-$total_active = mysqli_num_rows($active_result);
 
 $errors = array();
 ?>
@@ -148,7 +141,7 @@ $errors = array();
                                 <td class="py-3 text-center"> <?php echo  $row['department'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row['role'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row['status'] ?>  </td>
-                                <td class="py-3 text-center"><a href="user_edit.php" class="border-r pr-2 mr-2">View</a><button>Activate</button></td>
+                                <td class="py-3 text-center"><a href="user_edit.php?id=<?php echo $row['user_id']; ?>" class="border-r pr-2 mr-2">View</a><button>Activate</button></td>
                             </tr>
                         <?php } ?>
 

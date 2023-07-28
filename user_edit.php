@@ -1,14 +1,9 @@
 <?php include('server.php'); 
 
+$id_view = $_GET['id'];
+$view_q = mysqli_query($db, "SELECT * FROM users WHERE user_id='$id_view'");
+$row_view = mysqli_fetch_array($view_q);
 
-$displayUser = "SELECT * FROM users";
-$res_query = mysqli_query($db,$displayUser);
-
-$total_users = mysqli_num_rows($res_query);
-$act = "active";
-$active_query= "SELECT * FROM users WHERE status='$act'";
-$active_result = mysqli_query($db,$active_query);
-$total_active = mysqli_num_rows($active_result);
 
 $errors = array();
 ?>
@@ -37,15 +32,7 @@ $errors = array();
 
 <body class=" text-black w-full h-screen grid grid-cols-5">
 
-    <?php 
-        if (isset($_SESSION['success'])): 
-    ?>
-
-    <?php
-        echo $_SESSION['success'];
-        unset($_SESSION['success']);
-    ?>
-    <?php endif ?>
+   
 
     <?php 
     if (isset($_SESSION['username'])): 
@@ -115,7 +102,18 @@ $errors = array();
 
         <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
             <div class="col-span-5  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 px-10 pt-10 ">
-                <a href="user_management.php"><button>Back</button></a>
+                <a href="user_management.php"><button>Back</button></a>  <br> <br>
+
+                    <p>Name: <?php echo $row_view['firstname']." ". $row_view['lastname']; ?> </p>  <br>
+                    <p>Address: <?php echo $row_view['u_address']; ?> </p>  <br>
+                    <p>Email: <?php echo $row_view['email']; ?> </p>  <br>
+                    <p>Phone: <?php echo $row_view['phone_num']; ?> </p>  <br><br>
+                    <p>Username: <?php echo $row_view['username']; ?> </p>  <br>
+                    <p>Department: <?php echo $row_view['department']; ?> </p>  <br>
+                    <p>Role: <?php echo $row_view['role']; ?> </p>  <br>
+                    <p>Status: <?php echo $row_view['status']; ?> </p>  <br>
+
+
             </div>
         </div>
 

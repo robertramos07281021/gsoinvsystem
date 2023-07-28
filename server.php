@@ -11,6 +11,26 @@ $db = mysqli_connect('localhost','root', '','gsoinventory');
 
 //if register is clicked
 
+//display total users, active users and online users  
+
+$displayUser = "SELECT * FROM users";
+$res_query = mysqli_query($db,$displayUser);
+
+$total_users = mysqli_num_rows($res_query);
+$act = "active";
+$active_query= "SELECT * FROM users WHERE status='$act'";
+$active_result = mysqli_query($db,$active_query);
+$total_active = mysqli_num_rows($active_result);
+
+$online = "online";
+$ol_query = "SELECT * FROM users WHERE mode='$online'";
+$ol_result = mysqli_query($db,$ol_query);
+$total_online = mysqli_num_rows($ol_result);
+
+
+
+
+
 if(isset($_POST['submit'])){
 
     $firstname = mysqli_real_escape_string($db, $_POST['firstname']);
