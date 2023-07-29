@@ -42,9 +42,6 @@
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/department.png"  class="bg-white p-1 rounded w-6 h-6">Departments</li>
                     </a>
                     
-                    <a href="offices.php">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/office.png"  class="bg-white p-1 rounded w-6 h-6">Office</li>
-                    </a>
 
                     <a href="item.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
@@ -260,19 +257,19 @@
                             </div>
                         </form><br>
                         
-                        <h3 >Change password? </h3>
+                    <h3 >Change password? </h3>
 
-<br>
+                    <br>
 
-<form method="POST"> 
-<label>New Password: </label><br>
-<input type="password" name="change1" class="border w-full pl-2" placeholder="Password" required>
-<br>
-<label>Confirm Password: </label> <br>
-<input type="password" name="change2" class="border w-full pl-2" placeholder="Password" required>
-<br>
-<button type="submit" name="change_pass" class="border px-5 py-1" style="background-color: green; color: white;"> Save </button>
-</form>
+                    <form method="POST"> 
+                    <label>New Password: </label><br>
+                    <input type="password" name="change1" class="border w-full pl-2" placeholder="Password" required>
+                    <br>
+                    <label>Confirm Password: </label> <br>
+                    <input type="password" name="change2" class="border w-full pl-2" placeholder="Password" required>
+                    <br>
+                    <button type="submit" name="change_pass" class="border px-5 py-1" style="background-color: green; color: white;"> Save </button>
+                    </form>
 
                     </div> 
                 </div>
@@ -344,19 +341,10 @@
 
 <!-- Script for hidden textbox -->
 
-<script src="./script/accountcreate.js">
+<script src="./script/jscript.js"></script>
 
-</script>
-
-<script src="./script/accountCreat.js">
-// <script src="./script/jscript.js">
-</script>
 
 <script>
-
-
-
-
 function editForm(){
     document.getElementById("saveForm").style.display="flex";
     document.querySelector("#changePass").style.display = "flex";
@@ -386,6 +374,10 @@ function cancelButton(){
     document.getElementById("role").disabled = true;
     document.getElementById("department").disabled = true;
  }
+
+
+
+
 
 
 </script>

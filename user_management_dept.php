@@ -59,30 +59,26 @@ $errors = array();
             <div class="text-start w-full mt-10">
                 <ul>
                 <a aria-current="page" href="index.php">
-                        <li class="mb-2 w-full hover:bg-red-300/20 p-3 rounded-md font-semibold flex gap-1 "><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard</li>
+                        <li class="mb-2 w-full hover:bg-red-300/20 p-3 rounded-md font-semibold flex gap-1 transition ease-out duration-300"><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard</li>
                     </a>
                     <a href="user_management.php">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/users.png" class="bg-white p-1 rounded w-6 h-6">Users</li>
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/users.png" class="bg-white p-1 rounded w-6 h-6">Users</li>
                     </a>
 
                     <a href="user_management_dept.php">
                         <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 items-center"><img src="./image/department.png"  class="bg-white p-1 rounded w-6 h-6">Departments</li>
                     </a>
                     
-                    <a href="offices.php">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/office.png"  class="bg-white p-1 rounded w-6 h-6">Office</li>
-                    </a>
-
                     <a href="item.php">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
                     <a href="#">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
                     <a href="update_account.php">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/user.png"  class="bg-white p-1 rounded w-6 h-6">My Profile</li>
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/user.png"  class="bg-white p-1 rounded w-6 h-6">My Profile</li>
                     </a>
                 </ul>  
         
@@ -124,9 +120,11 @@ $errors = array();
             <div class=" col-span-3 ">
                 <div class="w-full h-full grid grid-cols-3 gap-6"> 
                     <div class="flex items-end ">
+                        <a href="department_mgmt.php" class="w-full">
                         <div class="w-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] text-center p-1">
                             Manage Departments
                         </div>
+                        </a>
                     </div>
                     <div class="col-span-2 grid grid-cols-2 gap-6">
 <!-- paki lagay po dito ung total ng users sa specific na department-->
@@ -206,9 +204,9 @@ $errors = array();
                     <div class="text-center flex flex-col justify-center border w-full h-full">
                         <p class="font-semibold">Do you want to logout?</p>
                         <div class="flex justify-center gap-10 mt-10">
-                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red] transition ease-in-out delay-150 drop-shadow-lg">Yes</button></a>
+                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1  w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" id="logOutButton">Yes</button></a>
                             
-                            <button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red] transition ease-in-out delay-150 drop-shadow-lg font-bold" onclick="noLogout()">No</button>
+                            <button class="p-1 w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" onclick="noLogout()" id="logOutButton">No</button>
                         </div>    
                     </div>
                 </div>

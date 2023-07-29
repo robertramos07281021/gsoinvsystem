@@ -21,3 +21,10 @@ input::-webkit-inner-spin-button {
     box-shadow:4px 6px 0px 0px #ff0000 ;
 }
 
+
+#logOutButton{
+    box-shadow: 2px 2px 0px 0px #000000;
+}
+#logOutButton:hover{
+    box-shadow:2px 2px 0px 0px #ff4d4d;
+}
