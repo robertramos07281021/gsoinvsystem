@@ -1,14 +1,7 @@
 <?php include('server.php'); 
 
 
-$displayUser = "SELECT * FROM users";
-$res_query = mysqli_query($db,$displayUser);
 
-$total_users = mysqli_num_rows($res_query);
-$act = "active";
-$active_query= "SELECT * FROM users WHERE status='$act'";
-$active_result = mysqli_query($db,$active_query);
-$total_active = mysqli_num_rows($active_result);
 
 $errors = array();
 ?>
@@ -152,9 +145,32 @@ $errors = array();
                                 <td class="py-3 text-center"> <?php echo  $row['department'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row['role'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row['status'] ?>  </td>
-                                <td class="py-3 text-center"><a href="user_edit.php" class="border-r pr-2 mr-2">View</a><button>Activate</button></td>
+                                <td class="py-3 text-center"><a href="user_edit.php?id=<?php echo $row['user_id']; ?>" class="border-r pr-2 mr-2" style='color:blue; font-weight:700;'>View</a>
+                                
+                                 
+                                <?php if($row['status'] === "inactive"){ ?>
+                                    <a href="user_management.php?id=<?php echo $row['user_id']; ?>" style="background: green; color:white; font-weight:700;">&nbsp;&nbsp; Activate&nbsp;&nbsp;</a>
+                                
+                                <?php } elseif($row['status'] === "active"){
+                                    ?>
+                                    <a href="user_management.php?id=<?php echo $row['user_id']; ?>" style="background: tomato; color:white; font-weight:700;">&nbsp;Deativate&nbsp;</a>
+                                    <?php
+                                } ?>
+                                
+                                </td>
                             </tr>
-                        <?php } ?>
+
+
+
+
+                        <?php 
+                    
+                    
+                    
+                    
+                    
+                    
+                    } //end of while ?>
 
                         </tbody>
                     </table>
@@ -162,6 +178,51 @@ $errors = array();
             </div>
         </div>
     </article>
+
+                        <?php
+                            if(isset($_GET['id'])){
+                                $id = $_GET['id'];
+
+                                $select = mysqli_query($db, "SELECT * FROM users WHERE user_id='$id'");
+                                $rows = mysqli_fetch_assoc($select);
+
+
+                                if($rows['status']=== "inactive"){
+                                   mysqli_query($db, "UPDATE users SET status='active' WHERE user_id='$id'");
+
+                                   ?>
+                                         <script>
+                                                swal({title: "Activated!", text: "User has been activated.", type:"success"})
+                                                .then(function(){ 
+                                                    location.href="user_management.php";
+                                                });
+                                        </script>
+                                   <?php
+                                    
+
+                                }elseif($rows['status']=== "active"){
+                                    mysqli_query($db, "UPDATE users SET status='inactive' WHERE user_id='$id'");
+                                    ?>
+                                    <script>
+                                           swal({title: "Deactivated!", text: "User has been deactivated.", type:"success"})
+                                           .then(function(){ 
+                                               location.href="user_management.php";
+                                           });
+                                   </script>
+                              <?php
+                                    
+                                }
+    
+                      
+    
+                        }
+
+
+                        ?>
+
+
+
+
 
     <div class="absolute top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
         <div class="flex w-full h-full justify-center items-center">

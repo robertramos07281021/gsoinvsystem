@@ -11,6 +11,26 @@ $db = mysqli_connect('localhost','root', '','gsoinventory');
 
 //if register is clicked
 
+//display total users, active users and online users  
+
+$displayUser = "SELECT * FROM users";
+$res_query = mysqli_query($db,$displayUser);
+
+$total_users = mysqli_num_rows($res_query);
+$act = "active";
+$active_query= "SELECT * FROM users WHERE status='$act'";
+$active_result = mysqli_query($db,$active_query);
+$total_active = mysqli_num_rows($active_result);
+
+$online = "online";
+$ol_query = "SELECT * FROM users WHERE mode='$online'";
+$ol_result = mysqli_query($db,$ol_query);
+$total_online = mysqli_num_rows($ol_result);
+
+
+
+
+
 if(isset($_POST['submit'])){
 
     $firstname = mysqli_real_escape_string($db, $_POST['firstname']);
@@ -22,7 +42,7 @@ if(isset($_POST['submit'])){
     $username = mysqli_real_escape_string($db, $_POST['username']);
     $password1 = mysqli_real_escape_string($db, $_POST['password_1']);
     $password2 = mysqli_real_escape_string($db, $_POST['password_2']);
-    
+    $role = mysqli_real_escape_string($db, $_POST['accountRole']);
 
     $user_query = "SELECT * FROM users WHERE username='$username'";
     $user_query_run = mysqli_query($db, $user_query);
@@ -108,7 +128,7 @@ if(isset($_POST['submit'])){
         $password = md5($password1); //encrypt password.
 
         $sql = "INSERT INTO users (firstname, lastname, email, phone_num, u_address, username, password, department, role, status)
-                VALUES ('$firstname', '$lastname', '$email', '$phone', '$address' , '$username', '$password', '$department', 'user', 'active')";
+                VALUES ('$firstname', '$lastname', '$email', '$phone', '$address' , '$username', '$password', '$department', '$role', 'active')";
 
         mysqli_query($db, $sql);  //insert to database
 
@@ -150,12 +170,17 @@ if(isset($_POST['login'])){
     $row = mysqli_fetch_assoc($result);
     $stat = "active";
 
+    $user_id = $row['user_id'];
+    $on = "online";
     if( $count === 1 && $row['status']=== $stat && $row['role'] === "admin"){
         if($row['username'] === $log_user && $row['password'] === $pass){
         $_SESSION['username'] = $row['username'];
         $_SESSION['firstname'] = $row['firstname'];
         $_SESSION['lastname'] = $row['lastname'];
         $_SESSION['user_id'] = $row['user_id'];
+
+        $mquery= "UPDATE users SET mode='$on' WHERE user_id='$user_id' ";
+        mysqli_query($db, $mquery);  //update mode as online
 
         header('location: index.php');
 
@@ -172,6 +197,9 @@ if(isset($_POST['login'])){
         $_SESSION['firstname'] = $row['firstname'];
         $_SESSION['lastname'] = $row['lastname'];
         $_SESSION['user_id'] = $row['user_id'];
+
+        $mquery= "UPDATE users SET mode='$on' WHERE user_id='$user_id' ";
+        mysqli_query($db, $mquery);  //update mode as online
 
         header('location: index_user.php');
 
@@ -196,6 +224,13 @@ if(isset($_POST['login'])){
 //logout
 
 if(isset($_GET['logout'])){
+ 
+    $user_id = $_SESSION['user_id'];
+    $off = "offline";
+
+    $mquery= "UPDATE users SET mode='$off' WHERE user_id='$user_id' ";
+        mysqli_query($db, $mquery);  //update mode as online
+
     session_destroy();
     unset($_SESSION['username']);
     header('location: login.php');

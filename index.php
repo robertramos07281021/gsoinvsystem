@@ -1,12 +1,5 @@
 <?php include('server.php');   
-$displayUser = "SELECT * FROM users";
-$res_query = mysqli_query($db,$displayUser);
 
-$total_users = mysqli_num_rows($res_query);
-$act = "active";
-$active_query= "SELECT * FROM users WHERE status='$act'";
-$active_result = mysqli_query($db,$active_query);
-$total_active = mysqli_num_rows($active_result);
 
 ?>
 
@@ -133,8 +126,20 @@ $total_active = mysqli_num_rows($active_result);
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                user online
+            <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+               
+
+                
+
+                <div class="grid grid-cols-3">
+                    <div class="col-span-2">
+                        <p class="text-xl flex font-bold">Total Users Online</p>
+                        <p class="text-lg font-semibold"><?php echo $total_online; ?></p>
+                    </div>
+                    <div class="flex justify-end">
+                        <i><img src="./image/icons8-account-24.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
+                    </div>
+                </div>
             </div>
 
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
@@ -171,7 +176,21 @@ $total_active = mysqli_num_rows($active_result);
                                 <td class="text-center py-2"> <?php echo ucfirst($row['lastname']); ?></td>
                                 <td class="text-center py-2"> <?php echo ucfirst($row['username']); ?></td>
                                 <td class="text-center py-2"> <?php echo ucfirst($row['department']);?></td>
-                                <td class="text-center py-2"> ???? </td>
+                                <td class="text-center py-2">  <?php 
+                                
+                                    if($row['mode'] ==="online" ){
+                                        ?>
+                                            <p style='color: green; font-weight: 700;'> <?php echo ucfirst($row['mode']);  ?>  </p>
+
+                                    <?php
+                                    }else if($row['mode'] ==="offline" ){
+                                        ?>
+                                             <p style='color: black; font-weight: 700;'> <?php echo ucfirst($row['mode']);  ?>  </p>
+                                        <?php
+                                    }
+                                
+                                
+                                ?> </td>
                             </tr>
                         <?php  }  ?>
                     </tbody>    
