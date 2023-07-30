@@ -31,19 +31,19 @@
             <hr class="mt-5 border border-black">
             <div class="text-start w-full mt-10">
                 <ul>
-                <a aria-current="page" href="index.php">
+                <a aria-current="page" href="index_user.php">
                         <li class="mb-2 w-full hover:bg-red-300/20 p-3 rounded-md font-semibold flex gap-1 "><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard</li>
                     </a>
-                    <a href="user_management.php">
+                    <a href="#">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/users.png" class="bg-white p-1 rounded w-6 h-6">Users</li>
                     </a>
 
-                    <a href="user_management_dept.php">
+                    <a href="#">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/department.png"  class="bg-white p-1 rounded w-6 h-6">Departments</li>
                     </a>
                     
 
-                    <a href="item.php">
+                    <a href="#">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
@@ -51,7 +51,7 @@
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
-                    <a href="update_account.php">
+                    <a href="update_account_user.php">
                         <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 items-center"><img src="./image/user.png"  class="bg-white p-1 rounded w-6 h-6">My Profile</li>
                     </a>
                 </ul>  
@@ -76,7 +76,7 @@
 
     <article class="col-span-4 py-6 pr-6 w-full h-full col-start-2 ">
         <div class="flex justify-end text-white">
-            <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
+            <p class="font-semibold"> Welcome &nbsp; <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
         </div>
     
       
@@ -375,6 +375,7 @@ function cancelButton(){
     document.getElementById("department").disabled = true;
  }
 
+
  function noLogout() {
     document.getElementById("logoutModal").style.display="none";
 }
@@ -382,7 +383,6 @@ function cancelButton(){
  function logoutModal() {
     document.getElementById("logoutModal").style.display="block";
 }
-
 
 
 
