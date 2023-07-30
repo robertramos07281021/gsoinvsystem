@@ -16,6 +16,22 @@
             background-image: url('./image/welcomeBg.jpg');
         }
 
+        #logoutModal{
+    display: none;
+        }   
+        #logOutButtonYes{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonNo{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonYes:hover{
+            box-shadow:2px 2px 0px 0px #66cc00;
+}
+#logOutButtonNo:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d; 
+    }
+
     </style>
 
 
@@ -335,7 +351,23 @@
            
     </article>
 
-
+    <div class="absolute top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
+        <div class="flex w-full h-full justify-center items-center">
+            <div class="h-56 w-80 fixed rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
+                <div class="bg-white h-full w-full flex flex-col rounded-md">
+                    <p class="text-black font-bold pl-2 py-2 self-start border w-full flex "><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20">Log Out</p>
+                    <div class="text-center flex flex-col justify-center border w-full h-full">
+                        <p class="font-semibold">Do you want to logout?</p>
+                        <div class="flex justify-center gap-10 mt-10">
+                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1  w-20 bg-green-500 rounded text-white border border-green-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-green-500 hover:border-green-500" id="logOutButtonYes">Yes</button></a>
+                            
+                            <button class="p-1 w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" onclick="noLogout()" id="logOutButtonNo">No</button>
+                        </div>    
+                    </div>
+                </div>
+            <div>
+        </div>
+    </div>
 
 
 
