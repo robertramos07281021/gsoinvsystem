@@ -124,7 +124,7 @@
                                         <script>
                                                 swal({title: "Success!", text: "Your Account has been updated.", type:"success"})
                                                 .then(function(){ 
-                                                    location.href="update_account.php";
+                                                    location.href="update_account_user.php";
                                                 });
                                         </script>
                                         <?php
@@ -313,7 +313,7 @@
                                     <script>
                                             swal({title: "Success!", text: "You have changed your password.", type:"success"})
                                             .then(function(){ 
-                                                location.href="update_account.php";
+                                                location.href="update_account_user.php";
                                             });
                                     </script>
                                     <?php
