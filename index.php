@@ -19,7 +19,7 @@
             background-image: url('./image/welcomeBg.jpg');
         }
         #logoutModal{
-    display: none;
+            display: none;
         }   
         #logOutButtonYes{
             box-shadow: 2px 2px 0px 0px #000000;
@@ -29,10 +29,10 @@
         }
         #logOutButtonYes:hover{
             box-shadow:2px 2px 0px 0px #66cc00;
-}
-#logOutButtonNo:hover{
+        }
+        #logOutButtonNo:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
-    }
+        }
     </style>
   
 </head>
@@ -109,7 +109,7 @@
     <article class=" col-span-4 py-6 pr-6 w-full h-full ">
         
         <div class="flex justify-between text-white">
-            <div class="font-semibold flex flex-cols"><p>DashBoard</p><p></p></div>
+            <div class="font-semibold flex flex-cols"><p>DashBoard</p></div>
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
         </div>
 
@@ -151,7 +151,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
+        <div class="grid grid-cols-5 mt-6 h-[73.5%] pb-6 gap-6">
             <div class="col-span-3 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
                 <table class="w-full">
                     <thead> 
@@ -205,7 +205,7 @@
 
     </article>
     
-    <div class="absolute top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
+    <div class="fixed top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
         <div class="flex w-full h-full justify-center items-center">
             <div class="h-56 w-80 fixed rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
                 <div class="bg-white h-full w-full flex flex-col rounded-md">

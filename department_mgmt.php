@@ -96,7 +96,8 @@ $total_active = mysqli_num_rows($active_result);
 
     <article class=" col-span-4 pt-6 pr-6 w-full h-full  ">
         
-            <div class="flex justify-end text-white">
+            <div class="flex justify-between text-white">
+                <p class="font-semibold "><a href="user_management_dept.php">Departments</a> / <span class="text-gray-300">Manage Departments</span></p>
                 <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row  ['lastname']);?></span></p>
             </div>
             <div class="w-full h-[93%] ">

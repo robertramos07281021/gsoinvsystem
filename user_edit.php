@@ -24,7 +24,19 @@ $errors = array();
             background-image: url('./image/welcomeBg.jpg');
         }
         #logoutModal{
-    display: none;
+            display: none;
+        }
+        #logOutButtonYes{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonNo{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonYes:hover{
+            box-shadow:2px 2px 0px 0px #66cc00;
+        }
+        #logOutButtonNo:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d; 
         }   
     </style>
   
@@ -46,35 +58,35 @@ $errors = array();
             <div class="text-start w-full mt-10">
                 <ul>
                     <a aria-current="page" href="index.php">
-                        <li class="mb-2 w-full hover:bg-red-300/20 p-3 rounded-md font-semibold flex gap-1 "><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard</li>
+                        <li class="mb-2 w-full hover:bg-red-300/20 p-3 rounded-md font-semibold flex gap-1 transition ease-out duration-300 "><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard</li>
                     </a>
                     <a href="user_management.php">
-                        <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 items-center"><img src="./image/users.png" class="bg-white p-1 rounded w-6 h-6">Users</li>
+                        <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 items-center transition ease-out duration-300"><img src="./image/users.png" class="bg-white p-1 rounded w-6 h-6">Users</li>
                     </a>
 
                     <a href="user_management_dept.php">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/department.png"  class="bg-white p-1 rounded w-6 h-6">Departments</li>
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/department.png"  class="bg-white p-1 rounded w-6 h-6">Departments</li>
                     </a>
                     
                     <a href="offices.php">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/office.png"  class="bg-white p-1 rounded w-6 h-6">Office</li>
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/office.png"  class="bg-white p-1 rounded w-6 h-6">Office</li>
                     </a>
 
                     <a href="item.php">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
                     <a href="#">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
                     <a href="update_account.php">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/user.png"  class="bg-white p-1 rounded w-6 h-6">My Profile</li>
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/user.png"  class="bg-white p-1 rounded w-6 h-6">My Profile</li>
                     </a>
                 </ul>  
             </div>
             <div class="flex  h-full w-full items-end">
-                <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full justify-end items-center py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
+                <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full items-center py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2 transition ease-out duration-300"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
             </div>
         </div>
     </nav>
@@ -87,54 +99,61 @@ $errors = array();
     
     </nav>
 
-    <article class=" col-span-4 py-6 pr-6 w-full h-full  ">
+    <article class=" col-span-4 py-6 pr-6 w-full h-screen  ">
         
-        <div class="flex justify-end text-white">
+        <div class="flex justify-between text-white ">
+            <p class="font-semibold "><a href="user_management.php">Users</a> / <span class="text-gray-300">User Profile</span></p>
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst ($_SESSION['lastname']);?></span></p>
-
         </div>
 
-        <div class="w-full grid grid-cols-6 mt-10 h-1/6 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-            <!-- <div class="col-start-5 col-span-2 flex items-end">
-                <input type="text" class="w-full rounded-full pl-2 py-1">
-            </div> -->
-        </div>
+       
 
-        <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
-            <div class="col-span-5  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 px-10 pt-10 ">
-                <a href="user_management.php"><button>Back</button></a>  <br> <br>
-
-                    <p>Name: <?php echo $row_view['firstname']." ". $row_view['lastname']; ?> </p>  <br>
-                    <p>Address: <?php echo $row_view['u_address']; ?> </p>  <br>
-                    <p>Email: <?php echo $row_view['email']; ?> </p>  <br>
-                    <p>Phone: <?php echo $row_view['phone_num']; ?> </p>  <br><br>
-                    <p>Username: <?php echo $row_view['username']; ?> </p>  <br>
-                    <p>Department: <?php echo $row_view['department']; ?> </p>  <br>
-                    <p>Role: <?php echo $row_view['role']; ?> </p>  <br>
-                    <p>Status: <?php echo $row_view['status']; ?> </p>  <br>
-
+        <div class="grid grid-flow-row-dense grid-cols-6 h-[96%]  grid-rows-6 mt-6 pb-6 gap-6">
+            <div class="col-span-4 row-span-3  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 ">
+                
+                <div class="grid grid-cols-4 h-full">
+                    <div class="border-r-2 border-gray-200 flex justify-center items-center">   
+                        <div class="text-center">
+                            <img src="https://static.vecteezy.com/system/resources/previews/002/002/403/original/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" class="w-44 h-44">
+                            <p><?php echo ucfirst($row_view['firstname'])." ". ucfirst($row_view['lastname']); ?></p>
+                        </div>
+                    </div>
+                    <div class="col-span-3" >             
+                        
+                        <p>Address: <?php echo $row_view['u_address']; ?> </p> 
+                        <p>Email: <?php echo $row_view['email']; ?> </p>  
+                        <p>Phone: <?php echo $row_view['phone_num']; ?> </p>  
+                        <p>Username: <?php echo $row_view['username']; ?> </p> 
+                        <p>Department: <?php echo $row_view['department']; ?> </p> 
+                        <p>Role: <?php echo $row_view['role']; ?> </p>  
+                        <p>Status: <?php echo $row_view['status']; ?> </p>
+                    </div>
+                </div>  
 
             </div>
+            <div class="row-start-4 row-span-3 col-span-4 bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl">
+
+            </div>
+            <div class="col-start-5 row-span-6 col-span-2 bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl">
+            </div>
+        
         </div>
 
 
        
-                
-
-
-
-
+            
     </article>
-    <div class="absolute top-0 left-0 h-full w-full bg-white/30" id="logoutModal" >
+    <div class="fixed top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
         <div class="flex w-full h-full justify-center items-center">
-            <div class="h-56 w-80 bg-[red] fixed rounded px-1 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
-                <p class="text-white font-bold">GSO InvSystem</p>
-                <div class="bg-white h-[87.2%] w-full flex justify-center items-center">
-                    <div class="text-center ">
-                        <p>Do you want to logout?</p>
+            <div class="h-56 w-80 fixed rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
+                <div class="bg-white h-full w-full flex flex-col rounded-md">
+                    <p class="text-black font-bold pl-2 py-2 self-start border w-full flex "><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20">Log Out</p>
+                    <div class="text-center flex flex-col justify-center border w-full h-full">
+                        <p class="font-semibold">Do you want to logout?</p>
                         <div class="flex justify-center gap-10 mt-10">
-                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red]">Yes</button></a>
-                            <button class="p-1 px-5 rounded-lg text-white bg-[red] outline outline-double hover:outline-[red] hover:bg-white hover:text-[red] font-bold" onclick="noLogout()">No</button>
+                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1  w-20 bg-green-500 rounded text-white border border-green-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-green-500 hover:border-green-500" id="logOutButtonYes">Yes</button></a>
+                            
+                            <button class="p-1 w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" onclick="noLogout()" id="logOutButtonNo">No</button>
                         </div>    
                     </div>
                 </div>

@@ -31,6 +31,25 @@ $errors = array();
         #logoutModal{
     display: none;
         }   
+        #logOutButtonYes{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonNo{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonYes:hover{
+            box-shadow:2px 2px 0px 0px #66cc00;
+        }
+        #logOutButtonNo:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d; 
+        }
+
+        #manageDepartments{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #manageDepartments:hover{
+            box-shadow: 2px 2px 0px 0px white;
+        }
     </style>
   
 </head>
@@ -84,7 +103,7 @@ $errors = array();
         
             </div>
             <div class="flex  h-full w-full items-end">
-                <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full justify-end items-center  py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
+                <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full items-center  py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2 transition ease-out duration-300"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
             </div>
         </div>
     </nav>
@@ -97,7 +116,8 @@ $errors = array();
 
     <article class=" col-span-4 pt-6 pb-7 pr-6 ">
         
-            <div class="flex justify-end text-white">
+            <div class="flex justify-between text-white">
+                <p class="font-semibold flex flex-cols">Departments</p>
                 <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst($_SESSION['lastname']);?></span></p>
             </div>
         <div class="grid grid-flow-row-dense h-full grid-cols-6 grid-rows-6 gap-6 pt-6">
@@ -121,9 +141,9 @@ $errors = array();
                 <div class="w-full h-full grid grid-cols-3 gap-6"> 
                     <div class="flex items-end ">
                         <a href="department_mgmt.php" class="w-full">
-                        <div class="w-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] text-center p-1">
+                        <button class="w-full bg-green-400 font-semibold rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] text-center p-2 hover:bg-gray-700 hover:text-white transition ease-out duration-300" id="manageDepartments">
                             Manage Departments
-                        </div>
+                        </button>
                         </a>
                     </div>
                     <div class="col-span-2 grid grid-cols-2 gap-6">
@@ -196,7 +216,7 @@ $errors = array();
             </div>
         </div>
     </article>
-    <div class="absolute top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
+    <div class="fixed top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
         <div class="flex w-full h-full justify-center items-center">
             <div class="h-56 w-80 fixed rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
                 <div class="bg-white h-full w-full flex flex-col rounded-md">
@@ -204,9 +224,9 @@ $errors = array();
                     <div class="text-center flex flex-col justify-center border w-full h-full">
                         <p class="font-semibold">Do you want to logout?</p>
                         <div class="flex justify-center gap-10 mt-10">
-                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1  w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" id="logOutButton">Yes</button></a>
+                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1  w-20 bg-green-500 rounded text-white border border-green-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-green-500 hover:border-green-500" id="logOutButtonYes">Yes</button></a>
                             
-                            <button class="p-1 w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" onclick="noLogout()" id="logOutButton">No</button>
+                            <button class="p-1 w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" onclick="noLogout()" id="logOutButtonNo">No</button>
                         </div>    
                     </div>
                 </div>

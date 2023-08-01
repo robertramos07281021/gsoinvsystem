@@ -37,10 +37,16 @@ $total_active = mysqli_num_rows($active_result);
         #registerButton:hover {
             box-shadow:2px 2px 0px 0px #ff4d4d ;
         }
-        #logOutButton{
+        #logOutButtonYes{
             box-shadow: 2px 2px 0px 0px #000000;
         }
-        #logOutButton:hover{
+        #logOutButtonNo{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonYes:hover{
+            box-shadow:2px 2px 0px 0px #66cc00;
+        }
+        #logOutButtonNo:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
         }
     </style>
@@ -111,7 +117,8 @@ $total_active = mysqli_num_rows($active_result);
     
     <article class=" col-span-4 pt-6 pr-6 w-full ">
         
-        <div class="flex justify-end text-white">
+        <div class="flex justify-between text-white ">
+            <p class="font-semibold "><a href="user_management.php">Users</a> / <span class="text-gray-300">Creat Account</span></p>
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst ($_SESSION['lastname']);?></span></p>
         </div>
 
@@ -388,9 +395,9 @@ $total_active = mysqli_num_rows($active_result);
                     <div class="text-center flex flex-col justify-center border  w-full h-full">
                         <p class="font-semibold">Do you want to logout?</p>
                         <div class="flex justify-center gap-10 mt-10">
-                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1  w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" id="logOutButton">Yes</button></a>
+                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1  w-20 bg-green-500 rounded text-white border border-green-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-green-500 hover:border-green-500" id="logOutButtonYes">Yes</button></a>
                             
-                            <button class="p-1 w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" onclick="noLogout()" id="logOutButton">No</button>
+                            <button class="p-1 w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" onclick="noLogout()" id="logOutButtonNo">No</button>
                         </div>    
                     </div>
                 </div>
