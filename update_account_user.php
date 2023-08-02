@@ -302,7 +302,7 @@
                             if($change1 !== $change2){
                                 ?>
                                 <script>
-                                                swal({title: "Sorry!", text: "Your password does not match. Try again.", type:"error", icon: "error"})
+                                                swal({title: "Your password does not match!", text: "Try again.", type:"error", icon: "error"})
                                                 // .then(function(){ 
                                                 //     location.href="update_account.php";
                                                 // });
@@ -311,7 +311,7 @@
                             }else if($change1 === $change2 && $encPass === $row['password']){
                                 ?>
                                 <script>
-                                                swal({title: "Sorry!", text: "Password already used. Please enter a new password.", type:"error", icon: "error"})
+                                                swal({title: "Sorry! Password already used.", text: "Please enter a new password.", type:"error", icon: "error"})
                                                 // .then(function(){ 
                                                 //     location.href="update_account.php";
                                                 // });

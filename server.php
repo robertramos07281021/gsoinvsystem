@@ -28,7 +28,9 @@ $ol_result = mysqli_query($db,$ol_query);
 $total_online = mysqli_num_rows($ol_result);
 
 
-
+//display all departments
+$display_dep = "SELECT * FROM department";
+$res_dep = mysqli_query($db,$display_dep);
 
 
 if(isset($_POST['submit'])){
@@ -213,6 +215,13 @@ if(isset($_POST['login'])){
  
 
 }
+
+
+
+
+ 
+
+
 
 
 

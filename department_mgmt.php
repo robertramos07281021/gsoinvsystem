@@ -19,9 +19,27 @@ $total_active = mysqli_num_rows($active_result);
     <link rel="stylesheet" type="text/css" href="../GSOInvSys/css/department_mgmt.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <title>GSO Invsys</title>
-   
+   <style>
+    
+    #logoutModal{
+    display: none;
+        }   
+        #logOutButtonYes{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonNo{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonYes:hover{
+            box-shadow:2px 2px 0px 0px #66cc00;
+}
+#logOutButtonNo:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d; 
+    }
+    </style>
   
 </head>
 
@@ -104,15 +122,58 @@ $total_active = mysqli_num_rows($active_result);
                 <div class="w-full h-full gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
                     <div class="w-full h-full grid-flow-row-dense grid grid-cols-6 grid-rows-6 gap-6  pt-6">
                         <div class="bg-white col-span-3 rounded-lg p-2 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+
+                        <?php
+                            //Add Department
+
+                                
+                                if(isset($_POST['AddDep'])){
+
+                                    $add_dep = strtoupper(mysqli_real_escape_string($db, $_POST['dept_name']));
+
+
+                                    $dep = mysqli_query($db, "SELECT * FROM department WHERE dep_name='$add_dep'");
+                                    $rows = mysqli_fetch_assoc($dep);
+                                    $already_exists = mysqli_num_rows($dep);
+
+                                    if($already_exists > 0){
+                                        ?>
+                                    <script>
+                                        swal({title: "Department already exists!", text: "Please try again. Thank you.", type:"error", icon: "error"})
+                                        </script>
+
+                                <?php
+                                    }elseif($already_exists == 0){
+
+                                        $sql = "INSERT INTO department (dep_name) VALUES ('$add_dep')";
+                                        mysqli_query($db, $sql);  //insert to database
+
+                                        ?>
+                                        <script>
+                                            swal({title: "Success!", text: "New Department has been added.", type:"success", icon: "success"})
+                                            </script>
+    
+                                    <?php
+
+                                    }
+
+
+
+                                }
+
+                        ?>
+                       
                 <!-- Add department -->
-                            <form class="w-full flex-col flex items-end gap-1">
+                            <form class="w-full flex-col flex items-end gap-1" method="POST">
                                 <input type="text" class="w-full border-2 pl-1 py-[2px] focus:outline-none border-gray-400 rounded" name="dept_name" placeholder="Department Name">
-                                <button class="px-4 py-1 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500 " id="addDeptButton">Add Department</button>
+                                <button type="submit" name="AddDep" class="px-4 py-1 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500 " id="addDeptButton">Add Department</button>
                             </form>
 
                         </div>
                         <div class="row-start-2 col-span-3 row-span-5 border bg-white rounded-lg p-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
+               
                 <!-- Display department -->
+
                 <!-- sample only -->
                             <table class="w-full ">
                                 <thead>
@@ -121,15 +182,82 @@ $total_active = mysqli_num_rows($active_result);
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>HR</td>
-                                        <td class="flex justify-end gap-2"><span class="border-r border-gray-500/50 px-2">Edit</span><span>Delete</span></td>
+
+                                <?php      //input text will appear when edit button is selected 
+
+                                        if(isset($_GET['id'])){
+                                            $id = $_GET['id'];
+
+                                            $select_dep = mysqli_query($db, "SELECT * FROM department WHERE dep_id='$id'");
+                                            $rows = mysqli_fetch_assoc($select_dep);
+
+                                            ?>
+                                            <br><br>
+                                            <form method="POST">
+
+                                                <input type="text" name="edit_dep" style="border:1;">
+                                                <button name="edit" style="background:green; color:white;">&nbsp; Save &nbsp; </button>
+
+                                           </form>
+
+                                            
+                                    <?php
+
+                                                if(isset($_POST['edit'])){   //if save button is submitted in edit department id
+
+                                                    $edit_dep = strtoupper(mysqli_real_escape_string($db, $_POST['edit_dep']));
+
+                                                    $dep = mysqli_query($db, "SELECT * FROM department WHERE dep_name='$edit_dep'");
+                                                    $rows = mysqli_fetch_assoc($dep);
+                                                    $already_exists = mysqli_num_rows($dep);
+
+                                                    if($already_exists > 0){
+                                                        ?>
+                                                    <script>
+                                                        swal({title: "Department already exists!", text: "Please try again. Thank you.", type:"error", icon: "error"})
+                                                        </script>
+                
+                                                <?php
+                                                    } elseif($already_exists == 0){
+
+                                                        mysqli_query($db, "UPDATE department SET dep_name='$edit_dep' WHERE dep_id='$id'");
+
+                                                        ?>
+                                                                <script>
+                                                                        swal({title: "Updated!", text: "Department has been updated.", type:"success"})
+                                                                        .then(function(){ 
+                                                                            location.href="department_mgmt.php";
+                                                                        });
+                                                                </script>
+                                                        <?php
+
+                                                    }
+                                                
+                                                }
+
+                                        }
+                                    
+
+                                    ?>
+                                <?php   
+                                    $num = 0;
+                                    while($rowdep = mysqli_fetch_assoc($res_dep)) {
+                                    $num++;
+                                ?>
+                                    <tr>   <!-- rowsss from database will be displayed -->
+                                        <td><?php echo $num; ?></td>
+                                        <td><?php echo $rowdep['dep_name']; ?> </td>
+                                        <td class="flex justify-end gap-2"><span class="border-r border-gray-500/50 px-2">
+                                            <a href="department_mgmt.php?id=<?php echo $rowdep['dep_id']; ?>" style="color: green ;">Edit</a></span><span>Delete</span></td>
                                         
                                     </tr>
+
+
+                                    <?php } //end of while ?>
                                 </tbody>
                             </table>
 
-
+                                    
                             
                         </div>
                         <div class="col-start-4 col-span-3 row-span-3 bg-white rounded-lg p-3">
