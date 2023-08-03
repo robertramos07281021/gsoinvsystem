@@ -263,7 +263,7 @@ $total_active = mysqli_num_rows($active_result);
                             
                         </div>
                         <div class="col-start-4 col-span-3 row-span-3 bg-white rounded-lg p-3">
-                            <form class="flex h-[100%] flex-col " method="POST">
+                            <form class="flex h-[100%] flex-col " method="POST" >
                                 <p class="text-xl font-semibold">Merge Department</p>
                                 <ul class="w-full grid grid-cols-4 mt-2"> 
                                 
@@ -313,21 +313,23 @@ $total_active = mysqli_num_rows($active_result);
                                                         if(!empty($newDepName)){   //if checkbox is checked and input text is not empty
                                                              $dep = $_POST['dep'];
                                                             
-                                                             $items = array();
+                                                             $allData = implode(",",$dep);
+                                                           $dp =  mysqli_query($db,"INSERT INTO mergedep (m_name, old_dep) VALUES ('$newDepName', '$allData')");
+                                                         
                                                             foreach ($dep as $newDep){
                                                               
-                                                               // mysqli_query($db, "UPDATE department SET merge='yes', merge_name='$newDepName' WHERE dep_name='$newDep'");
-
-                                                               // mysqli_query($db,"INSERT INTO mergedep (m_name, old_dep) VALUES ('$newDepName', '$newDep')");
+                                                                mysqli_query($db, "UPDATE department SET merge='yes', merge_name='$newDepName' WHERE dep_name='$newDep'");
                                                                 ?>
-                                         <script>
-                                                swal({title: "Merged successfully!", text: "Department merged.", type:"success"});
-                                               
-                                        </script>
-                                   <?php
-                                                            } 
-
-
+                                                                <script>
+                                                                    swal({title: "Merged successfully!", text: "Department merged.", type:"success"});
+                                                                    
+                                                            </script>
+                                                        <?php 
+                                                               
+                                            } //for each end
+                                           
+                                                            
+                                                           
                                                         }else{
                                                             ?>
                                                             <script>
@@ -370,17 +372,29 @@ $total_active = mysqli_num_rows($active_result);
                                      <tr>
                                         <th>ID</th>
                                         <th>New Department</th>
-                                        <th>Previous Department</th>
+                                        <th>Previous</th>
                                     </tr>
 
 
                                 <?php
+                                $num_merge = 0;
                                 while($mdep = mysqli_fetch_assoc($mergeDep)){
+                                    $num_merge++;
                                     $new = $mdep['m_name'];
-                                    $old = $mdep['old_dep'];
-                                    $sql_dep = mysqli_query($db,"SELECT * FROM mergedep WHERE m_name='$new'");
-                                    $totals = mysqli_num_rows($sql_dep);
-                                    echo $totals;
+                                    $prev = $mdep['old_dep'];
+
+                                    ?>
+                                <tr>
+                                    <td><?php echo $num_merge;  ?></td>  
+                                    <td><?php echo $new;  ?></td>  
+                                    <td><?php echo $prev;  ?></td>  
+                            
+                                </tr>
+
+
+                                    <?php
+                                    
+                                    
                                            
 
                                          }  
