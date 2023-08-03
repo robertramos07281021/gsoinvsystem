@@ -195,7 +195,7 @@ $total_active = mysqli_num_rows($active_result);
                                             <br><br>
                                             <form method="POST">
 
-                                                <input type="text" name="edit_dep" style="border:1;">
+                                                <input type="text" name="edit_dep" style="border:1;" placeholder="Enter Department">
                                                 <button name="edit" style="background:green; color:white;">&nbsp; Save &nbsp; </button>
 
                                            </form>

@@ -114,7 +114,9 @@
             <div class="col-span-3 row-start-2 ">
                     <div class="h-full bg-white row-span-2  rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] p-3">    
                         <p class="font-bold text-lg">DEPARTMENT:</p>
-                        <select class="w-full p-1 border-t border-black font-semibold outline-0" id="deptSelect">
+
+                        <form method="POST">
+                        <select class="w-full p-1 border-t border-black font-semibold outline-0" id="deptSelect" name="selectDep">
                         <option value="">Select Department</option>
                         <?php
                         if (count($deptChoice) > 0) {
@@ -125,7 +127,15 @@
                             }
                         }
                         ?>
-                    </select>
+                    </select><br>
+                    <div class="flex items-end ">
+                        <!-- <a href="department_mgmt.php" class="w-full"> -->
+                        <button name="depView" type="submit" class="w-full bg-red-400 font-semibold rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] text-center p-2 hover:bg-gray-700 hover:text-white transition ease-out duration-300" id="depView">
+                            Submit
+                        </button>
+                        <!-- </a> -->
+                    </div>
+                    </form>
 
                     </div>    
             </div>
@@ -163,6 +173,9 @@
                             </thead>
                             <tbody>
                                 <?php
+
+                               
+
                                 // Assuming $db is your database connection
                                 $res_item_query = mysqli_query($db, "SELECT * FROM items");
 
@@ -183,6 +196,8 @@
                                 } else {
                                     echo "No items found.";
                                 }
+
+                             
                                 ?>
                             </tbody>
                         </table>
@@ -194,6 +209,30 @@
             <div class="row-start-3 row-span-5 col-span-3 mb-6 ">
                 <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full p-10">
                 <table class="w-full" id="userTable">
+                        
+                            <?php
+                                
+                            if(isset($_POST['depView'])){
+                                $dept = strtoupper($_POST['selectDep']);
+
+                                if(empty($dept)){
+                                    ?>
+                                    <script>
+                                        swal({title: "Invalid!", text: "Please select a department.", type:"error", icon: "error"})
+                                        </script>
+
+                                <?php
+                                }elseif(!empty($dept)){
+                                    $display = "SELECT * FROM users WHERE department='$dept'";
+                                   
+                                    $query = mysqli_query($db,$display);
+
+                                    $total_users = mysqli_num_rows($query);
+
+                                    if($total_users !=0){
+
+                                        ?>
+
                         <thead>
                             <tr>
                                 <th class="pb-3">ID</th>
@@ -205,7 +244,56 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
+
+
+                                <?php
+                                    $num = 0;
+                                    while ($row = mysqli_fetch_assoc($query)) {
+                                        $num++;
+                                ?>
+                                    <tr class="border-b" data-department="<?php echo $row['department']; ?>">
+                                        <td class="text-center py-2"><?php echo $num; ?></td>
+                                        <td class="text-center py-2"><?php echo ucfirst($row['firstname']); ?></td>
+                                        <td class="text-center py-2"><?php echo ucfirst($row['lastname']); ?></td>
+                                        <td class="text-center py-2"><?php echo ucfirst($row['username']); ?></td>
+                                        <td class="text-center py-2"><?php echo ucfirst($row['department']); ?></td>
+                                        <td class="text-center py-2">
+                                            <?php
+                                            if ($row['mode'] === "online") {
+                                                echo "<p style='color: green; font-weight: 700;'>Online</p>";
+                                            } else if ($row['mode'] === "offline") {
+                                                echo "<p style='color: black; font-weight: 700;'>Offline</p>";
+                                            }
+                                            ?>
+                                        </td>
+                                    </tr>
+
+                                <?php }
+                                } //if not equal to zero total users
+                                    elseif($total_users == 0){
+                                        echo "<p style='font-weight:700; color:black;' > No users found under <u>$dept</u>. </p>";
+                                    }
+
+                                }
+
+
+                                }else{
+                                    ?>
+                                <thead>
+                                    <tr>
+                                        <th class="pb-3">ID</th>
+                                        <th class="pb-3">Firstname</th>
+                                        <th class="pb-3">Lastname</th>
+                                        <th class="pb-3">Username</th>
+                                        <th class="pb-3">Department</th>
+                                        <th class="pb-3">Login Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+
+                                <?php
                                 $num = 0;
                                 while ($row = mysqli_fetch_assoc($res_query)) {
                                     $num++;
@@ -226,7 +314,8 @@
                                         ?>
                                     </td>
                                 </tr>
-                            <?php } ?>
+                            <?php }
+                            } ?>
                         </tbody>
                     </table>
                 </div>
