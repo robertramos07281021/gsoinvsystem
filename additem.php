@@ -12,30 +12,29 @@ $item_name = $dep_names = $property_code = $end_user = $description = "";
 $errorMessage = $successMessage = "";
 
 // Retrieve department names from the database
-// Retrieve department names from the database
 $dep_names = array();
-$sql = "SELECT dep_id, dep_name FROM department"; // Corrected column name: dep_name
+$sql = "SELECT dep_name, dep_name FROM department"; // Corrected column name: dep_name
 $result = $connection->query($sql);
 if ($result) {
     while ($row = $result->fetch_assoc()) {
-        $dep_names[$row['dep_id']] = $row['dep_name']; // Use dep_id as the array key, and use dep_name as the value
+        $dep_names[$row['dep_name']] = $row['dep_name']; // Use dep_name as the array key, and use dep_name as the value
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $item_name = $_POST["item_name"];
-    $dep_id = $_POST["dep_names"]; // Use dep_id as the selected value
+    $dep_name = $_POST["dep_names"]; // Use dep_name as the selected value
     $property_code = $_POST["property_code"];
     $end_user = $_POST["end_user"];
     $description = $_POST["description"];
 
-    if (empty($item_name) || empty($dep_id) || empty($property_code) || empty($end_user) || empty($description)) {
+    if (empty($item_name) || empty($dep_name) || empty($property_code) || empty($end_user) || empty($description)) {
         $errorMessage = "All fields are required";
     } else {
         // Add new item to the database
        // Add new item to the database with the current timestamp for created_at
-        $sql = "INSERT INTO items (item_name, dep_id, property_code, end_user, description, created_at) " .
-        "VALUES ('$item_name','$dep_id','$property_code','$end_user','$description', NOW())";
+        $sql = "INSERT INTO items (item_name, dep_name, property_code, end_user, description, created_at) " .
+        "VALUES ('$item_name','$dep_name','$property_code','$end_user','$description', NOW())";
 
         $result = $connection->query($sql);
 
@@ -116,8 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label class="col-sm-3 col-form-label">department</label>
                 <div class="col-sm-6">
                     <select class="form-select" name="dep_names">
-                        <?php foreach ($dep_names as $dep_id => $dep_names) { // Loop through dep_names array
-                            echo "<option value='" . htmlspecialchars($dep_id) . "'>" . htmlspecialchars($dep_names) . "</option>";
+                        <?php foreach ($dep_names as $dep_name => $dep_names) { // Loop through dep_names array
+                            echo "<option value='" . htmlspecialchars($dep_name) . "'>" . htmlspecialchars($dep_names) . "</option>";
                         } ?>
                     </select>
                 </div>
