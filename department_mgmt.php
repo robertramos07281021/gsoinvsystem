@@ -307,22 +307,25 @@ $total_active = mysqli_num_rows($active_result);
                                     <?php
                                                         //if new dep name button is submitted
                                             if(isset($_POST['mergeDep'])){
-                                                    $newDepName = $_POST['newDepartmentName'];
+                                                    $newDepName = strtoupper($_POST['newDepartmentName']);
 
                                                    if(isset($_POST['dep'])){
                                                         if(!empty($newDepName)){   //if checkbox is checked and input text is not empty
                                                              $dep = $_POST['dep'];
-
+                                                            
+                                                             $items = array();
                                                             foreach ($dep as $newDep){
-                                                                
-                                                                mysqli_query($db, "UPDATE department SET merge='yes', merge_name='$newDepName' WHERE dep_name='$newDep'");
+                                                              
+                                                               // mysqli_query($db, "UPDATE department SET merge='yes', merge_name='$newDepName' WHERE dep_name='$newDep'");
+
+                                                               // mysqli_query($db,"INSERT INTO mergedep (m_name, old_dep) VALUES ('$newDepName', '$newDep')");
                                                                 ?>
                                          <script>
                                                 swal({title: "Merged successfully!", text: "Department merged.", type:"success"});
                                                
                                         </script>
                                    <?php
-                                                            }
+                                                            } 
 
 
                                                         }else{
@@ -351,7 +354,54 @@ $total_active = mysqli_num_rows($active_result);
 
 
                         <div class="col-start-4 col-span-3 row-start-4 row-span-3 bg-white rounded-lg">
-                            
+                           <h3> Merged Departments </h3>
+
+
+                                            <table>
+
+                           <?php  
+                                //display merge department
+                                $mergeDep = mysqli_query($db,"SELECT * FROM mergedep");
+                                 $totalDept = mysqli_num_rows($mergeDep);
+                                 
+                                 if($totalDept != 0 ){ 
+
+                                    ?>
+                                     <tr>
+                                        <th>ID</th>
+                                        <th>New Department</th>
+                                        <th>Previous Department</th>
+                                    </tr>
+
+
+                                <?php
+                                while($mdep = mysqli_fetch_assoc($mergeDep)){
+                                    $new = $mdep['m_name'];
+                                    $old = $mdep['old_dep'];
+                                    $sql_dep = mysqli_query($db,"SELECT * FROM mergedep WHERE m_name='$new'");
+                                    $totals = mysqli_num_rows($sql_dep);
+                                    echo $totals;
+                                           
+
+                                         }  
+                                       
+                                        
+                                    // $mergeRow = 
+
+
+                                
+
+                            } //if merge table not empty\
+                            else{
+                                ?><br>
+                                <h3> There are no Merged Departments. </h3>
+
+                                <?php
+                            }
+                           ?>
+
+
+                            </table>
                         </div>
 
                     </div>
