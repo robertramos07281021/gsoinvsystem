@@ -1,5 +1,35 @@
 <?php include('server.php');   
 
+ // Assuming $db is your database connection
+ $servername = "localhost";
+ $username = "root";
+ $password = "";
+ $database = "gsoinventory";
+
+ // Connection to the database
+ $connection = new mysqli($servername, $username, $password, $database);
+
+ // Check connection
+ if ($connection->connect_error) {
+     die("Connection failed: " . $connection->connect_error);
+ }
+
+ // Fetch item data from the "items" table and count the total number of items
+ $sql = "SELECT COUNT(*) AS total_items FROM items";
+ $result = $connection->query($sql);
+
+ // Initialize $items variable
+ $items = 0;
+
+ // Store the count of items in the $items variable
+ if ($result && $result->num_rows > 0) {
+     $row = $result->fetch_assoc();
+     $items = (int)$row['total_items'];
+ }
+
+ // Close the database connection
+ $connection->close();
+
 
 ?>
 
@@ -77,7 +107,7 @@
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
-                    <a href="#">
+                    <a href="report.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
@@ -143,7 +173,17 @@
             </div>
 
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                total item
+                <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+                    <div class="grid grid-cols-3">
+                        <div class="col-span-2">
+                            <p class="text-xl flex font-bold">Total Items</p>
+                            <p class="text-lg font-semibold"><?php echo $items; ?></p>
+                        </div>
+                        <div class="flex justify-end">
+                            <i><img src="./image/packaging.png" class="h-10 w-10 rounded-full border p-2 bg-green-200"></img></i>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
@@ -199,7 +239,58 @@
             </div>
 
             <div class="col-span-2  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-                items
+                <div class="h-full">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th class="pb-3">ID</th>
+                            <th class="pb-3">Item Name</th>
+                            <th class="pb-3">Department Name</th>
+                            <th class="pb-3">Property Code</th>
+                            <th class="pb-3">User</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $database = "gsoinventory";
+
+                        // Connection to the database
+                        $connection = new mysqli($servername, $username, $password, $database);
+
+                        // Check connection
+                        if ($connection->connect_error) {
+                            die("Connection failed: " . $connection->connect_error);
+                        }
+
+                        // Read all rows from the database table "items" and join with "department" table to get department name
+                        $sql = "SELECT items.*, department.dep_name FROM items 
+                                LEFT JOIN department ON items.dep_name = department.dep_name";
+                        $result = $connection->query($sql);
+
+                        if (!$result) {
+                            die("Invalid query: " . $connection->error);
+                        }
+
+                        // Read data of each row and display in the table
+                        while ($row = $result->fetch_assoc()) {
+                            echo "
+                            <tr data-dep-id='{$row['dep_name']}'>
+                                <td>{$row['id']}</td>
+                                <td>{$row['item_name']}</td>
+                                <td>{$row['dep_name']}</td>
+                                <td>{$row['property_code']}</td>
+                                <td>{$row['end_user']}</td>
+                            </tr>
+                            ";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                </div>
             </div>
         </div>
 
