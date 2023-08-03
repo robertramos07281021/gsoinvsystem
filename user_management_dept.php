@@ -1,16 +1,5 @@
 <?php include('server.php'); 
 
-
-$displayUser = "SELECT * FROM users";
-$res_query = mysqli_query($db,$displayUser);
-
-$total_users = mysqli_num_rows($res_query);
-$act = "active";
-$active_query= "SELECT * FROM users WHERE status='$act'";
-$active_result = mysqli_query($db,$active_query);
-$total_active = mysqli_num_rows($active_result);
-
-$errors = array();
 ?>
 
 <!DOCTYPE html>
@@ -125,15 +114,18 @@ $errors = array();
             <div class="col-span-3 row-start-2 ">
                     <div class="h-full bg-white row-span-2  rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] p-3">    
                         <p class="font-bold text-lg">DEPARTMENT:</p>
-                        <select class="w-full p-1 border-t border-black font-semibold outline-0">
-                            <option>Select Department</option>
-                            <?php if(count($deptChoice) > 0 ) { 
-                                foreach($deptChoice as $deptChoices ){    
-                            ?>
+                        <select class="w-full p-1 border-t border-black font-semibold outline-0" id="deptSelect">
+                        <option value="">Select Department</option>
+                        <?php
+                        if (count($deptChoice) > 0) {
+                            foreach ($deptChoice as $deptChoices) {
+                                ?>
                                 <option value="<?php echo $deptChoices ?>"><?php echo $deptChoices ?></option>
-                            <?php }
-                        } ?>
-                        </select>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </select>
 
                     </div>    
             </div>
@@ -148,21 +140,7 @@ $errors = array();
                     </div>
                     <div class="col-span-2 grid grid-cols-2 gap-6">
 <!-- paki lagay po dito ung total ng users sa specific na department-->
-                        <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                            total department user
-
-
-                            
-                        </div>
-
-
- <!-- paki lagay po dito ung total ng users sa specific na department-->                       
-                        <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                            total department items
-
-
-
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -172,22 +150,42 @@ $errors = array();
             <div class="col-span-3 row-span-6 ">
                 <div class="col-span-3 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] p-10 ">
                     <div class="h-full">
-                        paki lagay po dito ung mga items na naka specific na department
+                    <table class="w-full" id="itemTable">
+                            <thead>
+                                <tr>
+                                    <th class="pb-3">ID</th>
+                                    <th class="pb-3">Item Name</th>
+                                    <th class="pb-3">Property Code</th>
+                                    <th class="pb-3">End User</th>
+                                    <th class="pb-3">Description</th>
+                                    <th class="pb-3">Department</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Assuming $db is your database connection
+                                $res_item_query = mysqli_query($db, "SELECT * FROM items");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                if ($res_item_query && mysqli_num_rows($res_item_query) > 0) {
+                                    $num1 = 0;
+                                    while ($row = mysqli_fetch_assoc($res_item_query)) {
+                                        $num1++;
+                                        // Code to display the items inside the loop
+                                        echo "<tr class='border-b' data-department='" . (isset($row['dep_name']) ? ucfirst($row['dep_name']) : '') . "'>";
+                                        echo "<td class='text-center py-2'>" . $num1 . "</td>";
+                                        echo "<td class='text-center py-2'>" . ucfirst($row['item_name']) . "</td>";
+                                        echo "<td class='text-center py-2'>" . ucfirst($row['property_code']) . "</td>";
+                                        echo "<td class='text-center py-2'>" . ucfirst($row['end_user']) . "</td>";
+                                        echo "<td class='text-center py-2'>" . ucfirst($row['description']) . "</td>";
+                                        echo "<td class='text-center py-2'>" . (isset($row['dep_name']) ? ucfirst($row['dep_name']) : '') . "</td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "No items found.";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -195,23 +193,42 @@ $errors = array();
 <!-- paki lagay po dito ung mga Users na naka specific na department -->
             <div class="row-start-3 row-span-5 col-span-3 mb-6 ">
                 <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full p-10">
-                    
-                paki lagay po dito ung mga Users na naka specific na department
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                <table class="w-full" id="userTable">
+                        <thead>
+                            <tr>
+                                <th class="pb-3">ID</th>
+                                <th class="pb-3">Firstname</th>
+                                <th class="pb-3">Lastname</th>
+                                <th class="pb-3">Username</th>
+                                <th class="pb-3">Department</th>
+                                <th class="pb-3">Login Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $num = 0;
+                                while ($row = mysqli_fetch_assoc($res_query)) {
+                                    $num++;
+                            ?>
+                                <tr class="border-b" data-department="<?php echo ucfirst($row['department']); ?>">
+                                    <td class="text-center py-2"><?php echo $num; ?></td>
+                                    <td class="text-center py-2"><?php echo ucfirst($row['firstname']); ?></td>
+                                    <td class="text-center py-2"><?php echo ucfirst($row['lastname']); ?></td>
+                                    <td class="text-center py-2"><?php echo ucfirst($row['username']); ?></td>
+                                    <td class="text-center py-2"><?php echo ucfirst($row['department']); ?></td>
+                                    <td class="text-center py-2">
+                                        <?php
+                                        if ($row['mode'] === "online") {
+                                            echo "<p style='color: green; font-weight: 700;'>Online</p>";
+                                        } else if ($row['mode'] === "offline") {
+                                            echo "<p style='color: black; font-weight: 700;'>Offline</p>";
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -233,9 +250,40 @@ $errors = array();
             <div>
         </div>
     </div>
+    <script>
+    // Function to filter users and items based on selected department
+    function filterDataByDepartment() {
+        const selectedDepartment = deptSelect.value;
 
+        userTableRows.forEach(userRow => {
+            const userDepartment = userRow.getAttribute('data-department');
+
+            if (!selectedDepartment || selectedDepartment === userDepartment) {
+                userRow.style.display = 'table-row';
+            } else {
+                userRow.style.display = 'none';
+            }
+        });
+
+        itemTableRows.forEach(itemRow => {
+            const itemDepartment = itemRow.getAttribute('data-department');
+
+            if (!selectedDepartment || selectedDepartment === itemDepartment) {
+                itemRow.style.display = 'table-row';
+            } else {
+                itemRow.style.display = 'none';
+            }
+        });
+    }
+
+    // Add event listener to the department select element
+    deptSelect.addEventListener('change', filterDataByDepartment);
+
+    // Initial filtering when the page loads
+    filterDataByDepartment();
+</script>
 <script src="./script/jscript.js"></script>
-<script src="" ></script>
+<script src="./script/selectbydepartment.js" ></script>
 <?php endif ?>
 </body>
 </html>
