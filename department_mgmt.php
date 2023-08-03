@@ -144,8 +144,8 @@ $total_active = mysqli_num_rows($active_result);
 
                                 <?php
                                     }elseif($already_exists == 0){
-
-                                        $sql = "INSERT INTO department (dep_name) VALUES ('$add_dep')";
+                                        $merge = "no";
+                                        $sql = "INSERT INTO department (dep_name, merge) VALUES ('$add_dep', '$merge')";
                                         mysqli_query($db, $sql);  //insert to database
 
                                         ?>
@@ -243,6 +243,7 @@ $total_active = mysqli_num_rows($active_result);
                                     $num = 0;
                                     while($rowdep = mysqli_fetch_assoc($res_dep)) {
                                     $num++;
+                                            if($rowdep['merge']=='no'){
                                 ?>
                                     <tr>   <!-- rowsss from database will be displayed -->
                                         <td><?php echo $num; ?></td>
@@ -253,7 +254,8 @@ $total_active = mysqli_num_rows($active_result);
                                     </tr>
 
 
-                                    <?php } //end of while ?>
+                                    <?php } 
+                                    } //end of while ?>
                                 </tbody>
                             </table>
 
@@ -261,30 +263,93 @@ $total_active = mysqli_num_rows($active_result);
                             
                         </div>
                         <div class="col-start-4 col-span-3 row-span-3 bg-white rounded-lg p-3">
-                            <form class="flex h-[100%] flex-col ">
+                            <form class="flex h-[100%] flex-col " method="POST">
                                 <p class="text-xl font-semibold">Merge Department</p>
                                 <ul class="w-full grid grid-cols-4 mt-2"> 
-                                    <?php if(count($deptChoice) > 0 ) {?>
-                                        <?php foreach($deptChoice as $deptChoices) { ?>
-                                            <li class=" w-full  flex justify-center">
-                                                <input type="checkbox" name="<?php echo $deptChoices ?>" id="<?php echo $deptChoices ?>" value="<?php echo $deptChoices ?>">
-                                                <label for="<?php echo $deptChoices ?>" class="  w-full ">
-                                                <p class="w-full flex items-center ml-2"><?php echo $deptChoices ?></p>
+                                
+                                    <?php 
+                                    //display all departments
+                                    $disDep = "SELECT * FROM department WHERE merge='no'";
+                                    $rdep = mysqli_query($db,$disDep);
+                                    while($dprows = mysqli_fetch_assoc($rdep)){
+                                        $sel_dept = $dprows['dep_name'];   ?>
+                                            
+                                                <li class="w-full  flex justify-center">
+                                                <input type="checkbox" name="dep[]" id="<?php echo $sel_dept ?>" value="<?php echo $sel_dept ?>">
+                                                <label for="<?php echo $sel_dept ?>" class="  w-full ">
+                                                <p class="w-full flex items-center ml-2"><?php echo $sel_dept ?></p>
                                                 </label>
                                             </li>
-                                        <?php } ?>
-                                    <?php } ?>
+
+                                        <?php
+                                    }
+                                    
+                                    
+
+                                    
+
+                                    
+                                    
+                                    
+                                    
+                                    ?>
                                 </ul>
                                 
                                 <div class=" h-full flex items-end ">
                                     <div class="w-full flex justify-between border-t-2 border-gray-200 pt-3">
                                         <input type="text" name="newDepartmentName" placeholder="New Department Name" class="p-1 border-2 border-gray-400 rounded focus:outline-none" size="50">
-                                        <button class="px-14 border border-red-500 text-white bg-red-500 text-lg font-semibold rounded transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" id="logOutButton">Submit</button>
+                                        <button type="submit" name="mergeDep" class="px-14 border border-red-500 text-white bg-red-500 text-lg font-semibold rounded transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" id="logOutButton">Submit</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        
+                                    
+                                    <?php
+                                                        //if new dep name button is submitted
+                                            if(isset($_POST['mergeDep'])){
+                                                    $newDepName = $_POST['newDepartmentName'];
+
+                                                   if(isset($_POST['dep'])){
+                                                        if(!empty($newDepName)){   //if checkbox is checked and input text is not empty
+                                                             $dep = $_POST['dep'];
+
+                                                            foreach ($dep as $newDep){
+                                                                
+                                                                mysqli_query($db, "UPDATE department SET merge='yes', merge_name='$newDepName' WHERE dep_name='$newDep'");
+                                                                ?>
+                                         <script>
+                                                swal({title: "Merged successfully!", text: "Department merged.", type:"success"});
+                                               
+                                        </script>
+                                   <?php
+                                                            }
+
+
+                                                        }else{
+                                                            ?>
+                                                            <script>
+                                                                    swal({title: "Invalid! New department name required.", text: "Please enter a new department for merging.", type:"error", icon: "error"});
+                                                                    
+                                                            </script>
+                                                    <?php
+                                                        }
+
+                                                    }else{
+                                                        ?>
+                                                                <script>
+                                                                        swal({title: "Invalid!", text: "Please select a department.", type:"error", icon: "error"});
+                                                                        
+                                                                </script>
+                                                        <?php
+                                                    }
+
+
+
+                                            }
+
+                                    ?>
+
+
                         <div class="col-start-4 col-span-3 row-start-4 row-span-3 bg-white rounded-lg">
                             
                         </div>
