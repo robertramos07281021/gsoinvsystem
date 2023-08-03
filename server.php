@@ -2,12 +2,18 @@
 session_start();
 
 $errors = array();
-
-$deptChoice = array("HR","SB","ACCOUNTING","GSO/BAC","RHU","BFP","PNP","MCR","BUDGET","MTO","BPLO","MPDO","ENGINEERING","COMELEC","BIR","ASSESOR","DILG","MSWDO","MENDO","DA","MDDRRMO","MDRRMO");
-
 //connect to db
 
 $db = mysqli_connect('localhost','root', '','gsoinventory');
+
+//display all departments
+$display_dep = "SELECT * FROM department";
+$res_dep = mysqli_query($db,$display_dep);
+// $deprow = mysqli_fetch_assoc($res_dep);
+
+ $deptChoice = array("HR","SB","ACCOUNTING","GSO/BAC","RHU","BFP","PNP","MCR","BUDGET","MTO","BPLO","MPDO","ENGINEERING","COMELEC","BIR","ASSESOR","DILG","MSWDO","MENDO","DA","MDDRRMO","MDRRMO");
+
+
 
 //if register is clicked
 
@@ -28,9 +34,7 @@ $ol_result = mysqli_query($db,$ol_query);
 $total_online = mysqli_num_rows($ol_result);
 
 
-//display all departments
-$display_dep = "SELECT * FROM department";
-$res_dep = mysqli_query($db,$display_dep);
+
 
 
 if(isset($_POST['submit'])){

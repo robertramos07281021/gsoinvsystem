@@ -119,13 +119,16 @@
                         <select class="w-full p-1 border-t border-black font-semibold outline-0" id="deptSelect" name="selectDep">
                         <option value="">Select Department</option>
                         <?php
-                        if (count($deptChoice) > 0) {
-                            foreach ($deptChoice as $deptChoices) {
-                                ?>
-                                <option value="<?php echo $deptChoices ?>"><?php echo $deptChoices ?></option>
-                                <?php
-                            }
-                        }
+                        
+                                    while($dp_row = mysqli_fetch_assoc($res_dep)){
+                                        $sel_dept = $dp_row['dep_name'];
+                                        ?>
+                                            <option value="<?php  echo $sel_dept; ?>"> <?php  echo $sel_dept; ?></option>
+                                        <?php
+
+                                    }
+
+
                         ?>
                     </select><br>
                     <div class="flex items-end ">
