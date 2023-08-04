@@ -88,7 +88,7 @@ $total_active = mysqli_num_rows($active_result);
                     </a>
                     
 
-                    <a href="item.php">
+                    <a href="items_page.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 

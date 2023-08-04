@@ -45,7 +45,7 @@ $errors = array();
         }
 
         #manageDepartments{
-            box-shadow: 2px 2px 0px 0px #000000;
+            box-shadow: 2px 2px 0px 0px black;
         }
         #manageDepartments:hover{
             box-shadow: 2px 2px 0px 0px white;
@@ -88,7 +88,7 @@ $errors = array();
                         <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 items-center"><img src="./image/department.png"  class="bg-white p-1 rounded w-6 h-6">Departments</li>
                     </a>
                     
-                    <a href="item.php">
+                    <a href="items_page.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
@@ -141,7 +141,7 @@ $errors = array();
                 <div class="w-full h-full grid grid-cols-3 gap-6"> 
                     <div class="flex items-end ">
                         <a href="department_mgmt.php" class="w-full">
-                        <button class="w-full bg-green-400 font-semibold rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] text-center p-2 hover:bg-gray-700 hover:text-white transition ease-out duration-300" id="manageDepartments">
+                        <button class=" w-full bg-white text-black font-bold rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] text-center p-2 hover:bg-gray-700 hover:text-white transition ease-out duration-500" id="manageDepartments">
                             Manage Departments
                         </button>
                         </a>
