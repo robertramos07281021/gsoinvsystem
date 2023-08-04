@@ -8,7 +8,7 @@ $database = "gsoinventory";
 $connection = new mysqli($servername, $username, $password, $database);
 
 $item_name = "";
-$dep_id = "";
+$dep_name = "";
 $property_code = "";
 $end_user = "";
 $description = "";
@@ -18,11 +18,11 @@ $successMessage = "";
 
 // Retrieve department names from the database
 $dep_names = array();
-$sql = "SELECT dep_id, dep_name FROM department";
+$sql = "SELECT dep_name, dep_name FROM department";
 $result = $connection->query($sql);
 if ($result) {
     while ($row = $result->fetch_assoc()) {
-        $dep_names[$row['dep_id']] = $row['dep_name'];
+        $dep_names[$row['dep_name']] = $row['dep_name'];
     }
 }
 
@@ -44,23 +44,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 
     $item_name = $row["item_name"];
-    $dep_id = isset($row["dep_id"]) ? $row["dep_id"] : ""; // Handle undefined key
+    $dep_name = isset($row["dep_name"]) ? $row["dep_name"] : ""; // Handle undefined key
     $property_code = $row["property_code"];
     $end_user = $row["end_user"];
     $description = $row["description"];
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST["id"];
     $item_name = $_POST["item_name"];
-    $dep_id = $_POST["dep_id"];
+    $dep_name = $_POST["dep_name"];
     $property_code = $_POST["property_code"];
     $end_user = $_POST["end_user"];
     $description = $_POST["description"];
 
-    if (empty($id) || empty($item_name) || empty($dep_id) || empty($property_code) || empty($end_user) || empty($description)) {
+    if (empty($id) || empty($item_name) || empty($dep_name) || empty($property_code) || empty($end_user) || empty($description)) {
         $errorMessage = "All fields are required";
     } else {
         $sql = "UPDATE items " .
-            "SET item_name = '$item_name', dep_id = '$dep_id', property_code = '$property_code', end_user = '$end_user', description = '$description' " .
+            "SET item_name = '$item_name', dep_name = '$dep_name', property_code = '$property_code', end_user = '$end_user', description = '$description' " .
             "WHERE id = $id";
 
         $result = $connection->query($sql);
@@ -111,9 +111,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">department</label>
                 <div class="col-sm-6">
-                    <select class="form-select" name="dep_id">
+                    <select class="form-select" name="dep_name">
                         <?php foreach ($dep_names as $depId => $dep_name) {
-                            $selected = ($depId == $dep_id) ? 'selected' : '';
+                            $selected = ($depId == $dep_name) ? 'selected' : '';
                             echo "<option value='$depId' $selected>$dep_name</option>";
                         } ?>
                     </select>

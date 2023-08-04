@@ -19,6 +19,7 @@ $total_active = mysqli_num_rows($active_result);
     <link rel="stylesheet" type="text/css" href="../GSOInvSys/css/department_mgmt.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <style>
         #logOutButtonYes{
@@ -119,15 +120,58 @@ $total_active = mysqli_num_rows($active_result);
                 <div class="w-full h-full gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
                     <div class="w-full h-full grid-flow-row-dense grid grid-cols-6 grid-rows-6 gap-6  pt-6">
                         <div class="bg-white col-span-3 rounded-lg p-2 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+
+                            <?php
+                            //Add Department
+
+                                
+                                if(isset($_POST['AddDep'])){
+
+                                    $add_dep = strtoupper(mysqli_real_escape_string($db, $_POST['dept_name']));
+
+
+                                    $dep = mysqli_query($db, "SELECT * FROM department WHERE dep_name='$add_dep'");
+                                    $rows = mysqli_fetch_assoc($dep);
+                                    $already_exists = mysqli_num_rows($dep);
+
+                                    if($already_exists > 0){
+                                        ?>
+                                    <script>
+                                        swal({title: "Department already exists!", text: "Please try again. Thank you.", type:"error", icon: "error"})
+                                        </script>
+
+                                <?php
+                                    }elseif($already_exists == 0){
+                                        $merge = "no";
+                                        $sql = "INSERT INTO department (dep_name, merge) VALUES ('$add_dep', '$merge')";
+                                        mysqli_query($db, $sql);  //insert to database
+
+                                        ?>
+                                        <script>
+                                            swal({title: "Success!", text: "New Department has been added.", type:"success", icon: "success"})
+                                            </script>
+    
+                                    <?php
+
+                                    }
+
+
+
+                                }
+
+                            ?>
+                       
                 <!-- Add department -->
-                            <form class="w-full flex-col flex items-end gap-1">
+                            <form class="w-full flex-col flex items-end gap-1" method="POST">
                                 <input type="text" class="w-full border-2 pl-1 py-[2px] focus:outline-none border-gray-400 rounded" name="dept_name" placeholder="Department Name">
-                                <button class="px-4 py-1 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500 " id="addDeptButton">Add Department</button>
+                                <button type="submit" name="AddDep" class="px-4 py-1 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500 " id="addDeptButton">Add Department</button>
                             </form>
 
                         </div>
                         <div class="row-start-2 col-span-3 row-span-5 border bg-white rounded-lg p-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
+               
                 <!-- Display department -->
+
                 <!-- sample only -->
                             <table class="w-full ">
                                 <thead>
@@ -136,44 +180,240 @@ $total_active = mysqli_num_rows($active_result);
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>HR</td>
-                                        <td class="flex justify-end gap-2"><span class="border-r border-gray-500/50 px-2">Edit</span><span>Delete</span></td>
+
+                                <?php      //input text will appear when edit button is selected 
+
+                                        if(isset($_GET['id'])){
+                                            $id = $_GET['id'];
+
+                                            $select_dep = mysqli_query($db, "SELECT * FROM department WHERE dep_id='$id'");
+                                            $rows = mysqli_fetch_assoc($select_dep);
+
+                                            ?>
+                                            <br><br>
+                                            <form method="POST">
+
+                                                <input type="text" name="edit_dep" style="border:1;" placeholder="Enter Department">
+                                                <button name="edit" style="background:green; color:white;">&nbsp; Save &nbsp; </button>
+
+                                           </form>
+
+                                            
+                                    <?php
+
+                                                if(isset($_POST['edit'])){   //if save button is submitted in edit department id
+
+                                                    $edit_dep = strtoupper(mysqli_real_escape_string($db, $_POST['edit_dep']));
+
+                                                    $dep = mysqli_query($db, "SELECT * FROM department WHERE dep_name='$edit_dep'");
+                                                    $rows = mysqli_fetch_assoc($dep);
+                                                    $already_exists = mysqli_num_rows($dep);
+
+                                                    if($already_exists > 0){
+                                                        ?>
+                                                    <script>
+                                                        swal({title: "Department already exists!", text: "Please try again. Thank you.", type:"error", icon: "error"})
+                                                        </script>
+                
+                                                <?php
+                                                    } elseif($already_exists == 0){
+
+                                                        mysqli_query($db, "UPDATE department SET dep_name='$edit_dep' WHERE dep_id='$id'");
+
+                                                        ?>
+                                                                <script>
+                                                                        swal({title: "Updated!", text: "Department has been updated.", type:"success"})
+                                                                        .then(function(){ 
+                                                                            location.href="department_mgmt.php";
+                                                                        });
+                                                                </script>
+                                                        <?php
+
+                                                    }
+                                                
+                                                }
+
+                                        }
+                                    
+
+                                    ?>
+                                <?php   
+                                    $num = 0;
+                                    while($rowdep = mysqli_fetch_assoc($res_dep)) {
+                                    $num++;
+                                            if($rowdep['merge']=='no'){
+                                ?>
+                                    <tr>   <!-- rowsss from database will be displayed -->
+                                        <td><?php echo $num; ?></td>
+                                        <td><?php echo $rowdep['dep_name']; ?> </td>
+                                        <td class="flex justify-end gap-2"><span class="border-r border-gray-500/50 px-2">
+                                            <a href="department_mgmt.php?id=<?php echo $rowdep['dep_id']; ?>" style="color: green ;">Edit</a></span><span>Delete</span></td>
                                         
                                     </tr>
+
+
+                                    <?php } 
+                                    } //end of while ?>
                                 </tbody>
                             </table>
 
-
+                                    
                             
                         </div>
                         <div class="col-start-4 col-span-3 row-span-3 bg-white rounded-lg p-3">
-                            <form class="flex h-[100%] flex-col ">
+                            <form class="flex h-[100%] flex-col " method="POST" >
                                 <p class="text-xl font-semibold">Merge Department</p>
                                 <ul class="w-full grid grid-cols-4 mt-2"> 
-                                    <?php if(count($deptChoice) > 0 ) {?>
-                                        <?php foreach($deptChoice as $deptChoices) { ?>
-                                            <li class=" w-full  flex justify-center">
-                                                <input type="checkbox" name="<?php echo $deptChoices ?>" id="<?php echo $deptChoices ?>" value="<?php echo $deptChoices ?>">
-                                                <label for="<?php echo $deptChoices ?>" class="  w-full ">
-                                                <p class="w-full flex items-center ml-2"><?php echo $deptChoices ?></p>
+                                
+                                    <?php 
+                                    //display all departments
+                                    $disDep = "SELECT * FROM department WHERE merge='no'";
+                                    $rdep = mysqli_query($db,$disDep);
+                                    while($dprows = mysqli_fetch_assoc($rdep)){
+                                        $sel_dept = $dprows['dep_name'];   ?>
+                                            
+                                                <li class="w-full  flex justify-center">
+                                                <input type="checkbox" name="dep[]" id="<?php echo $sel_dept ?>" value="<?php echo $sel_dept ?>">
+                                                <label for="<?php echo $sel_dept ?>" class="  w-full ">
+                                                <p class="w-full flex items-center ml-2"><?php echo $sel_dept ?></p>
                                                 </label>
                                             </li>
-                                        <?php } ?>
-                                    <?php } ?>
+
+                                        <?php
+                                    }
+                                    
+                                    
+
+                                    
+
+                                    
+                                    
+                                    
+                                    
+                                    ?>
                                 </ul>
                                 
                                 <div class=" h-full flex items-end ">
                                     <div class="w-full flex justify-between border-t-2 border-gray-200 pt-3">
                                         <input type="text" name="newDepartmentName" placeholder="New Department Name" class="p-1 border-2 border-gray-400 rounded focus:outline-none" size="50">
-                                        <button class="px-14 border border-red-500 text-white bg-red-500 text-lg font-semibold rounded transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" id="logOutButton">Submit</button>
+                                        <button type="submit" name="mergeDep" class="px-14 border border-red-500 text-white bg-red-500 text-lg font-semibold rounded transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" id="logOutButton">Submit</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        
+                                    
+                                    <?php
+                                                        //if new dep name button is submitted
+                                            if(isset($_POST['mergeDep'])){
+                                                    $newDepName = strtoupper($_POST['newDepartmentName']);
+
+                                                   if(isset($_POST['dep'])){
+                                                        if(!empty($newDepName)){   //if checkbox is checked and input text is not empty
+                                                             $dep = $_POST['dep'];
+                                                            
+                                                             $allData = implode(",",$dep);
+                                                           $dp =  mysqli_query($db,"INSERT INTO mergedep (m_name, old_dep) VALUES ('$newDepName', '$allData')");
+                                                         
+                                                            foreach ($dep as $newDep){
+                                                              
+                                                                mysqli_query($db, "UPDATE department SET merge='yes', merge_name='$newDepName' WHERE dep_name='$newDep'");
+                                                                ?>
+                                                                <script>
+                                                                    swal({title: "Merged successfully!", text: "Department merged.", type:"success"});
+                                                                    
+                                                            </script>
+                                                        <?php 
+                                                               
+                                            } //for each end
+                                           
+                                                            
+                                                           
+                                                        }else{
+                                                            ?>
+                                                            <script>
+                                                                    swal({title: "Invalid! New department name required.", text: "Please enter a new department for merging.", type:"error", icon: "error"});
+                                                                    
+                                                            </script>
+                                                    <?php
+                                                        }
+
+                                                    }else{
+                                                        ?>
+                                                                <script>
+                                                                        swal({title: "Invalid!", text: "Please select a department.", type:"error", icon: "error"});
+                                                                        
+                                                                </script>
+                                                        <?php
+                                                    }
+
+
+
+                                            }
+
+                                    ?>
+
+
                         <div class="col-start-4 col-span-3 row-start-4 row-span-3 bg-white rounded-lg">
+                           <h3> Merged Departments </h3>
+
+
+                                            <table>
+
+                           <?php  
+                                //display merge department
+                                $mergeDep = mysqli_query($db,"SELECT * FROM mergedep");
+                                 $totalDept = mysqli_num_rows($mergeDep);
+                                 
+                                 if($totalDept != 0 ){ 
+
+                                    ?>
+                                     <tr>
+                                        <th>ID</th>
+                                        <th>New Department</th>
+                                        <th>Previous</th>
+                                    </tr>
+
+
+                                <?php
+                                $num_merge = 0;
+                                while($mdep = mysqli_fetch_assoc($mergeDep)){
+                                    $num_merge++;
+                                    $new = $mdep['m_name'];
+                                    $prev = $mdep['old_dep'];
+
+                                    ?>
+                                <tr>
+                                    <td><?php echo $num_merge;  ?></td>  
+                                    <td><?php echo $new;  ?></td>  
+                                    <td><?php echo $prev;  ?></td>  
                             
+                                </tr>
+
+
+                                    <?php
+                                    
+                                    
+                                           
+
+                                         }  
+                                       
+                                        
+                                    // $mergeRow = 
+
+
+                                
+
+                            } //if merge table not empty\
+                            else{
+                                ?><br>
+                                <h3> There are no Merged Departments. </h3>
+
+                                <?php
+                            }
+                           ?>
+
+
+                            </table>
                         </div>
 
                     </div>
