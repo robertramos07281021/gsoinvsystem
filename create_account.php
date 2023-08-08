@@ -118,7 +118,7 @@ $total_active = mysqli_num_rows($active_result);
     <article class=" col-span-4 pt-6 pr-6 w-full ">
         
         <div class="flex justify-between text-white ">
-            <p class="font-semibold "><a href="user_management.php">Users</a> / <span class="text-gray-300">Creat Account</span></p>
+            <p class="font-semibold text-2xl "><a href="user_management.php">Users</a> / <span class="text-gray-300">Create Account</span></p>
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst ($_SESSION['lastname']);?></span></p>
         </div>
 
@@ -321,7 +321,7 @@ $total_active = mysqli_num_rows($active_result);
                                 </div>
                             </div>
                             <div class="mt-12">   
-                                <button type="submit" name="submit" class="w-full bg-red-500 border border-red-500 p-1 text-white font-semibold rounded hover:scale-[1.01] transition ease-out duration-300 hover:bg-white hover:text-red-500 focus:bg-white focus:text-red-500 " id="registerButton" >Register</button>
+                                <button type="submit" name="submit" class="w-full bg-red-500 border border-red-500 p-1 text-white font-semibold rounded  transition ease-out duration-300 hover:bg-white hover:text-red-500 focus:bg-white focus:text-red-500 " id="registerButton" >Register</button>
                             </div>
                         </form>
                     </div>    

@@ -112,16 +112,14 @@ $total_active = mysqli_num_rows($active_result);
     <article class=" col-span-4 pt-6 pr-6 w-full h-full  ">
         
             <div class="flex justify-between text-white">
-                <p class="font-semibold "><a href="user_management_dept.php">Items</a></p>
+                <p class="font-semibold text-2xl">Items</a></p>
                 <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row  ['lastname']);?></span></p>
             </div>
-            <div class="w-full h-[84%]  ">
+            <div class="w-full h-[92.5%]  ">
                 <div class="w-full h-full gap-6 ">
-                    <div class="w-full mb-6">
-                        <button class=" py-2 px-4 border rounded bg-white">Additem</button>
-                    </div>
-                   g <div class="w-full h-full grid-flow-row-dense grid grid-cols-6 grid-rows-6 gap-6 border">
-                        
+                 
+                    <div class="w-full h-full grid-flow-row-dense grid grid-cols-6 grid-rows-6 gap-6 border">
+
                         
                        
 

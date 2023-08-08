@@ -18,7 +18,7 @@
             background-image: url('./image/welcomeBg.jpg');
         }
         #logoutModal{
-    display: none;
+            display: none;
         }   
         #logOutButtonYes{
             box-shadow: 2px 2px 0px 0px #000000;
@@ -38,6 +38,12 @@
         }
         #manageDepartments:hover{
             box-shadow: 2px 2px 0px 0px white;
+        }
+        #depView{
+            box-shadow: 2px 2px 0px 0px black;
+        }
+        #depView:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d;
         }
     </style>
   
@@ -105,62 +111,46 @@
 
     <article class=" col-span-4 pt-6 pb-7 pr-6 ">
         
-            <div class="flex justify-between text-white">
-                <p class="font-semibold flex flex-cols">Departments</p>
-                <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst($_SESSION['lastname']);?></span></p>
-            </div>
-        <div class="grid grid-flow-row-dense h-full grid-cols-6 grid-rows-6 gap-6 pt-6">
-
-            <div class="col-span-3 row-start-2 ">
-                    <div class="h-full bg-white row-span-2  rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] p-3">    
-                        <p class="font-bold text-lg">DEPARTMENT:</p>
-
-                        <form method="POST">
-                        <select class="w-full p-1 border-t border-black font-semibold outline-0" id="deptSelect" name="selectDep">
-                        <option value="">Select Department</option>
-                        <?php
-                        
-                                    while($dp_row = mysqli_fetch_assoc($res_dep)){
-                                        $sel_dept = $dp_row['dep_name'];
-                                        ?>
-                                            <option value="<?php  echo $sel_dept; ?>"> <?php  echo $sel_dept; ?></option>
-                                        <?php
-
-                                    }
-
-
-                        ?>
-                    </select><br>
-                    <div class="flex items-end ">
-                        <!-- <a href="department_mgmt.php" class="w-full"> -->
-                        <button name="depView" type="submit" class="w-full bg-red-400 font-semibold rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] text-center p-2 hover:bg-gray-700 hover:text-white transition ease-out duration-300" id="depView">
-                            Submit
-                        </button>
-                        <!-- </a> -->
-                    </div>
-                    </form>
-
-                    </div>    
-            </div>
-            <div class=" col-span-3 ">
-                <div class="w-full h-full grid grid-cols-3 gap-6"> 
-                    <div class="flex items-end ">
+        <div class="flex justify-between text-white">
+            <p class="font-semibold text-2xl flex flex-cols">Departments</p>
+            <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst($_SESSION['lastname']);?></span></p>
+        </div>
+        <div class="grid grid-flow-row-dense grid-cols-6 grid-rows-3 pt-6 h-full ">
+                <div class="col-span-3  h-full"> 
+                    <div class="rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]  grid gap-6 mt-3">
                         <a href="department_mgmt.php" class="w-full">
-                        <button class=" w-full bg-white text-black font-bold rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] text-center p-2 hover:bg-gray-700 hover:text-white transition ease-out duration-500" id="manageDepartments">
-                            Manage Departments
-                        </button>
-                        </a>
-                    </div>
-                    <div class="col-span-2 grid grid-cols-2 gap-6">
-<!-- paki lagay po dito ung total ng users sa specific na department-->
-                       
-                    </div>
+                            <button class=" bg-white text-black font-bold rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] text-center p-2 hover:bg-gray-700 hover:text-white transition ease-out duration-500" id="manageDepartments">
+                                Manage Departments
+                            </button>
+                        </a>    
+                        <div class="bg-white  rounded-xl p-3">
+                            <p class="font-bold text-lg">DEPARTMENT:</p>
+                            <form method="POST">
+                                <select class="w-full p-1 border-t border-black font-semibold outline-0" id="deptSelect" name="selectDep">
+                                    <option value="">Select Department</option>
+                                    <?php
+                                        while($dp_row = mysqli_fetch_assoc($res_dep)){
+                                            $sel_dept = $dp_row['dep_name'];
+                                            ?>
+                                                <option value="<?php  echo $sel_dept; ?>"> <?php  echo $sel_dept; ?></option>
+                                            <?php
+                                        }
+                                    ?>
+                                </select>
+                                <div class="flex items-end ">
+                                    <button name="depView" type="submit" class="w-full bg-red-500 font-semibold rounded text-white  text-center p-2 hover:bg-white hover:text-red-500 hover:border border border-red-500 hover:border-red-500 transition  duration-300" id="depView">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>    
                 </div>
-            </div>
+        
 
-<!-- paki lagay po dito ung mga items na naka specific na department -->
+                <!-- paki lagay po dito ung mga items na naka specific na department -->
 
-            <div class="col-span-3 row-span-6 ">
+            <div class="col-span-3 row-span-3 mb-7 ml-6">
                 <div class="col-span-3 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] p-10 ">
                     <div class="h-full">
                     <table class="w-full" id="itemTable">
@@ -208,8 +198,8 @@
                 </div>
             </div>
 
-<!-- paki lagay po dito ung mga Users na naka specific na department -->
-            <div class="row-start-3 row-span-5 col-span-3 mb-6 ">
+    <!-- paki lagay po dito ung mga Users na naka specific na department -->
+            <div class="row-start-2 row-span-2 col-span-3 mb-7">
                 <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full p-10">
                 <table class="w-full" id="userTable">
                         

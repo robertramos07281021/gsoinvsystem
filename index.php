@@ -139,7 +139,7 @@
     <article class=" col-span-4 py-6 pr-6 w-full h-full ">
         
         <div class="flex justify-between text-white">
-            <div class="font-semibold flex flex-cols"><p>DashBoard</p></div>
+            <div class="font-semibold text-2xl flex flex-cols"><p>DashBoard</p></div>
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
         </div>
 
@@ -157,10 +157,6 @@
             </div>
 
             <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-               
-
-                
-
                 <div class="grid grid-cols-3">
                     <div class="col-span-2">
                         <p class="text-xl flex font-bold">Total Users Online</p>
@@ -172,16 +168,14 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                    <div class="grid grid-cols-3">
-                        <div class="col-span-2">
-                            <p class="text-xl flex font-bold">Total Items</p>
-                            <p class="text-lg font-semibold"><?php echo $items; ?></p>
-                        </div>
-                        <div class="flex justify-end">
-                            <i><img src="./image/packaging.png" class="h-10 w-10 rounded-full border p-2 bg-green-200"></img></i>
-                        </div>
+            <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+                <div class="grid grid-cols-3">
+                    <div class="col-span-2">
+                        <p class="text-xl flex font-bold">Total Items</p>
+                        <p class="text-lg font-semibold"><?php echo $items; ?></p>
+                    </div>
+                    <div class="flex justify-end">
+                        <i><img src="./image/item.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
                     </div>
                 </div>
             </div>
@@ -191,7 +185,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-5 mt-6 h-[73.5%] pb-6 gap-6">
+        <div class="grid grid-cols-5 mt-6 h-[73%] pb-6 gap-6">
             <div class="col-span-3 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
                 <table class="w-full">
                     <thead> 

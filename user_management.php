@@ -93,7 +93,7 @@ $errors = array();
                     </a>
                 </ul>  
             </div>
-            <div class="flex  h-full w-full items-end">
+            <div class="flex  h-full w-full items-end"> 
                 <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full justify-start items-center  py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2 transition ease-out duration-300"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
             </div>
         </div>
@@ -110,7 +110,7 @@ $errors = array();
     <article class=" col-span-4 py-6 pr-6 w-full h-full  ">
         
         <div class="flex justify-between text-white ">
-            <p class="font-semibold ">Users</p>
+            <p class="font-semibold text-2xl ">Users</p>
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst ($_SESSION['lastname']);?></span></p>
         </div>
         <div class="col-start-1 flex items-end mt-6">
@@ -118,7 +118,7 @@ $errors = array();
             </div>
         
 
-        <div class="grid grid-cols-5 mt-6 h-[87%] pb-6 gap-6">
+        <div class="grid grid-cols-5 mt-6 h-[86.5%] pb-6 gap-6">
             <div class="col-span-5  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 px-10 pt-10 ">
                 <div class="overflow-auto h-full">
                     <table class="w-full">

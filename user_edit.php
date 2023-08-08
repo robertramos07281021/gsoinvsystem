@@ -102,40 +102,55 @@ $errors = array();
     <article class=" col-span-4 py-6 pr-6 w-full h-screen  ">
         
         <div class="flex justify-between text-white ">
-            <p class="font-semibold "><a href="user_management.php">Users</a> / <span class="text-gray-300">User Profile</span></p>
+            <p class="font-semibold text-2xl "><a href="user_management.php">Users</a> / <span class="text-gray-300">User Profile</span></p>
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst ($_SESSION['lastname']);?></span></p>
         </div>
 
        
 
-        <div class="grid grid-flow-row-dense grid-cols-6 h-[96%]  grid-rows-6 mt-6 pb-6 gap-6">
-            <div class="col-span-4 row-span-3  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 ">
+        <div class="grid grid-flow-row-dense grid-cols-6 h-[95.5%]  grid-rows-6 mt-6 pb-6 gap-6">
+            <div class="col-span-3 row-span-6 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 ">
                 
-                <div class="grid grid-cols-4 h-full">
-                    <div class="border-r-2 border-gray-200 flex justify-center items-center">   
-                        <div class="text-center">
+                <div class="grid grid-rows-6 h-full ">
+                    <div class="row-span-2 flex justify-center items-center">   
+                        <div class="text-center border-b w-full flex flex-row items-center pb-6">
                             <img src="https://static.vecteezy.com/system/resources/previews/002/002/403/original/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" class="w-44 h-44">
-                            <p><?php echo ucfirst($row_view['firstname'])." ". ucfirst($row_view['lastname']); ?></p>
+                            <p class="ml-5 text-3xl font-semibold"><?php echo ucfirst($row_view['firstname'])." ". ucfirst($row_view['lastname']); ?></p>
                         </div>
                     </div>
-                    <div class="col-span-3" >             
-                        
-                        <p>Address: <?php echo $row_view['u_address']; ?> </p> 
-                        <p>Email: <?php echo $row_view['email']; ?> </p>  
-                        <p>Phone: <?php echo $row_view['phone_num']; ?> </p>  
-                        <p>Username: <?php echo $row_view['username']; ?> </p> 
-                        <p>Department: <?php echo $row_view['department']; ?> </p> 
-                        <p>Role: <?php echo $row_view['role']; ?> </p>  
-                        <p>Status: <?php echo $row_view['status']; ?> </p>
+                    <div class="row-span-3 flex flex-col justify-center ">             
+                        <div class="  pl-10 " id="detailDiv">
+                            <p class="mt-4 mb-5">Address: <?php echo $row_view['u_address']; ?> </p> 
+                            <p class="mb-5">Email: <?php echo $row_view['email']; ?> </p>  
+                            <p class="mb-5">Phone: <?php echo $row_view['phone_num']; ?> </p>  
+                            <p class="mb-5">Username: <?php echo $row_view['username']; ?> </p> 
+                            <p class="mb-5">Department: <?php echo $row_view['department']; ?> </p> 
+                            <p class="mb-5">Role: <?php echo $row_view['role']; ?> </p>  
+                            <p class="mb-5">Status: <?php echo $row_view['status']; ?> </p>
+                        </div>
+                        <div id="editDiv"  style="display:none">
+                            asdasdasd   
+                        </div>
+                      
                     </div>
+                    <div class=" flex justify-start items-end pl-6 pb-6 text-white gap-5">
+                            <button class="py-2 px-12  bg-red-500 rounded-lg" onclick="editDetails()" id="editButton">Edit</button>
+                            <button class="py-2 px-12  bg-red-500 rounded-lg hidden" id="saveButton">Save</button>
+                            <button class="py-2 px-12  bg-red-500 rounded-lg hidden" onclick="cancelEdit()" id="cancelButton">Cancel</button>
+                    </div>
+                        
                 </div>  
+                
 
             </div>
-            <div class="row-start-4 row-span-3 col-span-4 bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl">
-
+            <div class="col-start-4 row-span-6 col-span-3 bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl">
+                <div>
+                    <form action="">
+                        <label for=""></label>
+                    </form>
+                </div>
             </div>
-            <div class="col-start-5 row-span-6 col-span-2 bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl">
-            </div>
+            
         
         </div>
 
@@ -162,7 +177,9 @@ $errors = array();
     </div>
 
 <script src="./script/jscript.js"></script>
-<script src="" ></script>
+<script>
+
+</script>
 <?php endif ?>
 </body>
 </html>
