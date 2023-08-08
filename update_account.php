@@ -37,7 +37,7 @@
 
     <title>GSO Invsys Sample</title>
 </head>
-<body class=" text-black w-full h-screen grid grid-cols-5">
+<body class=" text-black w-full h-screen grid grid-cols-5 ">
    
 
 
@@ -73,7 +73,7 @@
                 </ul>  
             </div>
             <div class="flex  h-full w-full items-end">
-                <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full justify-end items-center  py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
+                <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full items-center  py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
             </div>
         </div>
     </nav>
@@ -90,24 +90,47 @@
     ?>
 
 
-    <article class="col-span-4 py-6 pr-6 w-full h-full col-start-2 ">
-        <div class="flex justify-end text-white">
+    <article class="col-span-4  py-6 pr-6 w-full h-screen col-start-2 ">
+        <div class="flex justify-between text-white ">
+        <p class="font-semibold text-3xl">My Profile</a></p>
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
         </div>
     
       
-        <div class=" grid grid-flow-row-dense grid-cols-3 grid-rows-5 gap-6 h-full pb-6">
-            <div class="bg-white row-start-2 row-span-4 col-span-2 col-start-1 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl static">
-              
-                <img src="https://media.gettyimages.com/id/1180926773/photo/studio-waist-up-portrait-of-a-beautiful-businesswoman-with-crossed-arms.jpg?s=612x612&w=gi&k=20&c=BlCz_Y26FpXviP-1E7P9uISFsbO-W9ducNo0gJ8r9jM="  class="border-4 border White h-36 w-36 rounded-full absolute -top-16 left-5 ">
-
-                
-                <div class=" grid grid-flow-row-dense grid-cols-4 grid-rows-5  h-full">
-                    <div class="col-start-2 col-span-3 pt-5 pr-5">
+        <div class=" grid grid-flow-row-dense grid-cols-3 grid-rows-6 gap-6 h-[91.5%] mt-6">
+            <div class="col-start-3 row-span-3 bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl p-6">
+                <form method="POST" class="flex flex-col justify-between h-full w-full"> 
+                    <div>
+                        <p class="w-full text-center pb-2 font-semibold text-2xl">Change Password</p>
+                        <div>
+                            <label class="font-semibold">Old Password: </label>
+                            <input type="password" name="change1" class="border w-full pl-2" placeholder="Old Password" required>
+                        </div>
+                        <div>
+                            <label class="font-semibold">New Password: </label><br>
+                            <input type="password" name="change1" class="border w-full pl-2" placeholder="Password" required>
+                        </div>
+                        <div>
+                            <label class="font-semibold">Confirm Password: </label> <br>
+                            <input type="password" name="change2" class="border w-full pl-2" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <button type="submit" name="change_pass" class="border px-5 py-1 bg-green-500 text-white">Save</button>
+                    </div>
+                </form>
+            </div>
+            <div class="bg-white row-start-1 row-span-6 col-span-2 p-5 h-full  col-start-1 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl flex flex-col justify-between">
+                <div class="flex">
+                    <img src="https://media.gettyimages.com/id/1180926773/photo/studio-waist-up-portrait-of-a-beautiful-businesswoman-with-crossed-arms.jpg?s=612x612&w=gi&k=20&c=BlCz_Y26FpXviP-1E7P9uISFsbO-W9ducNo0gJ8r9jM="  class="border-4 border-gray-500 h-36 w-36 rounded-full   ">
+                    <div class="col-start-2 col-span-3 pt-5 px-5 w-full">
                         <p class="text-4xl"><?php echo ucfirst($row['firstname']). " " .ucfirst($row['lastname'])?></p>
                         <hr class="border-2 border-[black]/60">
                     </div>
-                    <div class="row-start-2 col-span-5 row-span-4">
+                </div>
+                <div >
+                  
+                    <div>
                         <!-- php code  -->
                         <?php
                             $errors = array();
@@ -164,18 +187,18 @@
                         ?>
 
 
-                        <form class="h-full w-full grid grid-row-6 px-5 pt-5 " method="POST">
-                            <div class="row-span-5">
+                        <form class=" w-full grid grid-row-6  h-[100%]" method="POST">
+                            <div>
                                 <div class="grid grid-cols-2 gap-5 ">
                                     <div>
-                                        <label for="firstName">Firstname: </label>
+                                        <label for="firstName" class="font-semibold">Firstname: </label>
                                         <input type="text" name="firstName" id="firstName" class="border w-full pl-2" max="50" value="<?php 
                                         if(isset($_POST['post_update'])){
                                             echo $_POST['firstName'];
                                         }else{ echo ucfirst($row['firstname']); } ?>" required disabled>
                                     </div>
                                     <div>
-                                        <label for="lastName">Lastname: </label>
+                                        <label for="lastName" class="font-semibold">Lastname: </label>
                                         <input type="text" name="lastName" id="lastName" class="border w-full pl-2" max="50" value="<?php 
                                         if(isset($_POST['post_update'])){
 
@@ -187,7 +210,7 @@
                         
                                 <div class="grid grid-cols-2 gap-5 pt-3">
                                     <div>
-                                        <label for="email">Email address:</label>
+                                        <label for="email" class="font-semibold">Email address:</label>
                                         <input type="text" name="email" id="email" class="border w-full pl-2" value="<?php 
                                         if(isset($_POST['post_update'])){
 
@@ -196,7 +219,7 @@
                                             echo $row['email']; } ?>" required disabled>
                                     </div>
                                     <div>
-                                        <label for="mobileNum">Phone Number:</label>
+                                        <label for="mobileNum" class="font-semibold">Phone Number:</label>
                                         <input type="number" name="mobileNum" id="mobileNum" class="border w-full pl-2"   value="<?php 
                                         if(isset($_POST['post_update'])){
 
@@ -206,7 +229,7 @@
                                 </div>
                             </div>
                             <div class="pt-3">
-                                <label for="address">Address:</label>
+                                <label for="address" class="font-semibold">Address:</label>
                                 <input type="text" name="address" id="address" class="w-full border pl-2" max="30" value="<?php 
                                 if(isset($_POST['post_update'])){
                                     echo $_POST['address'];
@@ -214,21 +237,17 @@
                             </div>
                             <div class="grid grid-cols-2 gap-5 pt-3">
                                 <div>
-                                    <label for="userName">Username:</label>
-                                    <input type="text" name="userName" id="userName" class="border w-full pl-2" value="<?php 
-                                    if(isset($_POST['post_update'])){
-                                        echo $_POST['userName'];
-                                    }else{
-                                         echo $row['username']; }?>" required disabled>
+                                    <label for="userName" class="font-semibold">Username:</label>
+                                    <div class="pl-2 border w-full bg-gray-100"><?php echo $row['username'] ?></div>
                                 </div>
                                 <div>
-                                    <label for="role">Role:</label>
+                                    <label for="role" class="font-semibold">Role:</label>
                                     <input type="text" name="role" id="role" class="border w-full pl-2" value="<?php echo $row['role']?>" disabled>
                                 </div>
                             </div>
                             <div class="pt-3">
-                                <label for="department">Department:</label>
-                                <!-- <input type="text" name="department" id="department" class="border w-full pl-2" value="#" disabled> -->
+                                <label for="department" class="font-semibold">Department:</label>
+                                
                                 <select name="department" id="department" class="border w-full pl-2" disabled>
                                         <?php  
                                             $dp_query = "SELECT * FROM department";
@@ -246,49 +265,32 @@
                                 </select>
                             </div>
 
-                            <div class=" flex grid grid-cols-2 gap-5 pt-3 border w-full " id="changePass"  style="display:none;">
+                            <div class=" flex grid grid-cols-2 gap-5 pt-3  w-full " id="changePass"  style="display:none;">
                                 <div class=" w-full">
                                     <label for="up_pass1">To save changes, confirm current Password:</label>
                                     
                                     <input type="password" name="up_pass1" id="up_pass1"  class="border w-full pl-2" placeholder="Password" required>
                                 </div>
-                                <!-- <div class=" w-full">
-                                    <label for="up_pass2">Confirm Password:</label>
-                                    <input type="password" name="up_pass2" class="border w-full pl-2" placeholder="Confirm Password" id="passw2" required>
-                                </div> -->
+                               
                             </div>
                            
                             
                             <div class="pt-5">
-                                <div class="flex justify-end gap-5 " id="saveForm" >
-                                    <button class="border px-5 py-1" type="submit" name="post_update" style="background-color: green; color: white;">Save</button>
-                                    <div class=" border px-4 py-1 cursor-pointer" onclick="cancelButton()" style="background-color: red; color: white;">
+                                <div class="flex justify-center gap-5 hidden" id="saveForm" >
+                                    <button class="border px-5 py-1 bg-green-500 text-white " type="submit" name="post_update" >Save</button>
+                                    <div class=" border px-4 py-1 cursor-pointer " onclick="cancelButton()" style="background-color: red; color: white;" >
                                         Cancel
                                     </div>
                                 </div>
 
-                                <div class="flex justify-end" id="editButton">
-                                    <div class="border px-5 py-1" onclick="editForm()"  style="cursor:pointer;" style="background-color: #808080; color: white;">Edit</div>
-                                </div>
+                                
                             </div>
-                        </form><br>
+                        </form>
                         
-                    <h3 >Change password? </h3>
-
-                    <br>
-
-                    <form method="POST"> 
-                    <label>New Password: </label><br>
-                    <input type="password" name="change1" class="border w-full pl-2" placeholder="Password" required>
-                    <br>
-                    <label>Confirm Password: </label> <br>
-                    <input type="password" name="change2" class="border w-full pl-2" placeholder="Password" required>
-                    <br>
-                    <button type="submit" name="change_pass" class="border px-5 py-1" style="background-color: green; color: white;"> Save </button>
-                    </form>
-
                     </div> 
+                    
                 </div>
+                
                 
                    <?php
 
@@ -302,29 +304,20 @@
 
                             if($change1 !== $change2){
                                 ?>
-                                <script>
-                                                swal({title: "Sorry!", text: "Your password does not match. Try again.", type:"error", icon: "error"})
-                                                // .then(function(){ 
-                                                //     location.href="update_account.php";
-                                                // });
-                                        </script>
+                                    <script>
+                                        swal({title: "Sorry!", text: "Your password does not match. Try again.", type:"error", icon: "error"})
+                                    </script>
                                 <?php
                             }else if($change1 === $change2 && $encPass === $row['password']){
                                 ?>
-                                <script>
-                                                swal({title: "Sorry!", text: "Password already used. Please enter a new password.", type:"error", icon: "error"})
-                                                // .then(function(){ 
-                                                //     location.href="update_account.php";
-                                                // });
-                                        </script>
+                                    <script>
+                                        swal({title: "Sorry!", text: "Password already used. Please enter a new password.", type:"error", icon: "error"})
+                                    </script>
                                 <?php
                                
                             }else if($change1 === $change2 && $encPass !== $row['password']){
-
                                 $sql= "UPDATE users SET password='$encPass' WHERE user_id='$u_id' ";
-
                                 mysqli_query($db, $sql);  //update to database
-
                                  ?>
                                     <script>
                                             swal({title: "Success!", text: "You have changed your password.", type:"success"})
@@ -342,16 +335,16 @@
 
 
             </div>
-            <div class="bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] border col-start-1 row-start-2 row-span-4 col-start-3 rounded-xl">
-                                               
-
+            <div class="flex justify-center" id="editButton">
+                            <div class="border py-1 cursor-pointer w-32 text-center bg-red-500 rounded-lg text-white font-semibold" onclick="editForm()" >Edit</div>
             </div>
+            
 
         </div>
            
     </article>
 
-    <div class="absolute top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
+    <div class="fixed top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
         <div class="flex w-full h-full justify-center items-center">
             <div class="h-56 w-80 fixed rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
                 <div class="bg-white h-full w-full flex flex-col rounded-md">
@@ -380,32 +373,21 @@
 function editForm(){
     document.getElementById("saveForm").style.display="flex";
     document.querySelector("#changePass").style.display = "flex";
-    document.getElementById("editButton").hidden = true;
+    document.getElementById("editButton").style.display = 'none';
     document.getElementById("firstName").disabled = false;
     document.getElementById("lastName").disabled = false;
     document.getElementById("email").disabled = false;
     document.getElementById("mobileNum").disabled = false;
     document.getElementById("address").disabled = false;
     document.getElementById("userName").disabled = false;
-    document.getElementById("role").disabled = true;
+    document.getElementById("role").disabled = false;
     document.getElementById("department").disabled = false;
-   
 }
 
 
 function cancelButton(){
-    document.getElementById("saveForm").style.display="none";   
-    document.getElementById("changePass").style.display="none";   
-    document.getElementById("editButton").hidden = false;
-    document.getElementById("firstName").disabled = true;
-    document.getElementById("lastName").disabled = true;
-    document.getElementById("email").disabled = true;
-    document.getElementById("mobileNum").disabled = true;
-    document.getElementById("address").disabled = true;
-    document.getElementById("userName").disabled = true;
-    document.getElementById("role").disabled = true;
-    document.getElementById("department").disabled = true;
- }
+   location.reload();
+}
 
  function noLogout() {
     document.getElementById("logoutModal").style.display="none";

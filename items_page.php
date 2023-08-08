@@ -120,7 +120,7 @@ $total_active = mysqli_num_rows($active_result);
                  
                     <div class="w-full h-full grid-flow-row-dense grid grid-cols-6 grid-rows-6 gap-6 border">
 
-                        
+                    <!------------------- dito po pa lagay ng item detailssss -------------------------------->
                        
 
                     </div>
