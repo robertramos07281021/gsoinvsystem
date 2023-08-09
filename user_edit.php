@@ -98,7 +98,7 @@ $errors = array();
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
-                    <a href="#">
+                    <a href="report.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
@@ -219,12 +219,14 @@ $errors = array();
                             
                                 <div class="text-white font-semibold flex justify-between  gap-6 mt-1">
                                     <div class="flex gap-6">
-                                        <button class="py-1 w-32 bg-green-500 rounded-lg  border-green-500 border hover:bg-white hover:text-green-500  hover:border-green transition ease-out duration-300" id="saveButton">Save</button>
-                                        <div class="py-1 w-32  bg-red-500 rounded-lg  buttons border-red-500 border hover:bg-white hover:text-red-500 hover:border-red transition ease-out duration-300 text-center cursor-pointer" onclick="cancelEdit()" id="cancelButton">Cancel</div>
+                                        <button class="py-1 w-32 bg-green-500 rounded-lg  border-green-500 border hover:bg-white hover:text-green-500  hover:border-green transition ease-out duration-300" id="saveButton">
+                                            Save</button>
+                                        <div class="py-1 w-32  bg-red-500 rounded-lg  buttons border-red-500 border hover:bg-white hover:text-red-500 hover:border-red transition ease-out duration-300 text-center cursor-pointer" onclick="cancelEdit()" id="cancelButton">
+                                        Cancel</div>
                                     </div>
-                                    <div>
+                                    <!-- <div>
                                         <div class="py-1 w-52  bg-white rounded-lg text-red-500 border-red-500 border hover:bg-red-500 hover:text-white hover:border-red transition ease-out duration-300 text-center cursor-pointer" id="changePass" onclick="changePassword()">Change Password</div>
-                                    </div>
+                                    </div> -->
 
                                 </div>
                             </form>

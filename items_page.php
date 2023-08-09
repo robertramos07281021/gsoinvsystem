@@ -21,18 +21,21 @@ $total_active = mysqli_num_rows($active_result);
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
+       #logoutModal{
+            display: none;
+        }   
         #logOutButtonYes{
-    box-shadow: 2px 2px 0px 0px #000000;
-    }
-    #logOutButtonNo{
-    box-shadow: 2px 2px 0px 0px #000000;
-    }
-    #logOutButtonYes:hover{
-    box-shadow:2px 2px 0px 0px #66cc00;
-    }
-    #logOutButtonNo:hover{
-    box-shadow:2px 2px 0px 0px #ff4d4d; 
-    }
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonNo{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonYes:hover{
+            box-shadow:2px 2px 0px 0px #66cc00;
+        }
+        #logOutButtonNo:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d; 
+        }
     </style>
 
     <title>GSO Invsys</title>
@@ -80,7 +83,7 @@ $total_active = mysqli_num_rows($active_result);
                         <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
-                    <a href="#">
+                    <a href="report.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
