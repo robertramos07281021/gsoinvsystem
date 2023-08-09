@@ -296,11 +296,12 @@ $errors = array();
                                     $email = mysqli_real_escape_string($db, $_POST['email']);
                                     $phoneNum = mysqli_real_escape_string($db, $_POST['phoneNum']);
                                     $department = mysqli_real_escape_string($db, $_POST['department']);
+                                    $role = mysqli_real_escape_string($db, $_POST['roles']);
 
                                     if(!empty($firstname) && !empty($lastname) && !empty($address) && !empty($email) &&
                                     !empty($phoneNum) && !empty($department)){
                                         $sql= "UPDATE users SET firstname='$firstname',lastname='$lastname',
-                                        email='$email', phone_num='$phoneNum', u_address='$address', department='$department' WHERE user_id='$id_view' ";
+                                        email='$email', phone_num='$phoneNum', u_address='$address', department='$department', role='$role' WHERE user_id='$id_view' ";
     
                                         mysqli_query($db, $sql);  //update to database
 

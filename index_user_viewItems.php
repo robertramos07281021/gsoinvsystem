@@ -152,64 +152,31 @@
         </div>
 
         <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
-            <div class="col-span-3 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-            <table class="w-full">
-                        <thead>
-                            <tr>
-                                
-                                <th class="w-10 pb-3">ID</th>
-                                <th class="w-40 pb-3">Item</th>
-                                <th class="w-40 pb-3">Department</th>
-                                <th class="w-40 pb-3">Property Code</th>
-                                
-                                <th class="w-40 pb-3">Action</th>
-                                
-                             </tr>
-                        </thead>
+            <div class="col-span-5 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+            
+            <!-- View selected items in user page  -->
+                <?php  
+                        if(isset($_GET['id'])){
+                            $item_id = $_GET['id'];
 
-                        <tbody>
-                <?php
-                        $u_dp = $row['department'];
-                        echo $u_dp;
-                     $num = 0;
-                     $ress = mysqli_query($db,"SELECT * FROM items WHERE dep_name='$u_dp'");
-                     while($row_item = mysqli_fetch_assoc($ress)) {
-                     $num++;
-                        ?>
+                            $query_items = mysqli_query($db, "SELECT * FROM items WHERE id='$item_id'");
+                           $rowss = mysqli_fetch_assoc($query_items);
 
-
-                            <tr class="border-b">
-                                <!-- rowsss from database will be displayed -->
-                                
-                                <td class="py-3 text-center"> <?php echo  $num; ?> </td>
-                                <td class="py-3 text-center"> <?php echo  ucfirst($row_item['item_name']);?></td>
-                                <td class="py-3 text-center"> <?php echo  $row_item['dep_name'] ?>  </td>
-                                <td class="py-3 text-center"> <?php echo  $row_item['property_code'] ?>  </td>
-                                 
-                                <td class="py-3 text-center"><a href="index_user_viewItems.php?id=<?php echo $row_item['id']; ?>" class="border-r pr-2 mr-2" style='color:blue; font-weight:700;'>View</a>
-                                
-                                 
-                                 
-                                
-                                </td>
-                            </tr>
-
-
-
-
-<?php
-
-
-                     }
+                           ?>
+                                <h3>Item name:  <?php  echo " ".$rowss['item_name'];  ?></h3> 
+                                <h2>Department:  <?php  echo " ".$rowss['dep_name'];  ?></h2> 
+                                <h2>Property Code:  <?php  echo " ".$rowss['property_code'];  ?></h2> 
+                                <h2>Description:  <?php  echo " ".$rowss['description'];  ?></h2> 
+                        <?php
+                        }
+                
+                
                 ?>
-    </tbody>
-    </table>
-
             </div>
 
-            <div class="col-span-2  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+            <!-- <div class="col-span-2  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
                 items
-            </div>
+            </div> -->
         </div>
 
     </article>

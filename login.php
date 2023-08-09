@@ -97,31 +97,43 @@ if(isset($_POST['login'])){
         
 
         
-    } else if( $count === 1 && $row['status']=== $stat && $row['role'] === "user"){
-        $user_id = $row['user_id'];
-
-        if($row['username'] === $log_user && $row['password'] === $pass){
-
-        $_SESSION['username'] = $row['username'];
-        $_SESSION['firstname'] = $row['firstname'];
-        $_SESSION['lastname'] = $row['lastname'];
-        $_SESSION['user_id'] = $row['user_id'];
-
-        $mquery= "UPDATE users SET mode='$on' WHERE user_id='$user_id' ";
-        mysqli_query($db, $mquery);  //update mode as online
-
-        header('location: index_user.php');
-
-        
-        }
-
-        
+    }elseif(empty($log_user)||empty($log_password) || $row['username'] != $log_user && $row['password'] != $pass ){
+        ?>
+            <script>
+      swal({title: "Sorry", text: "Invalid credentials!", type:"error", icon: "error"});
+         </script>
+        <?php
     } 
 
 
  
 
-}elseif($row['username'] != $log_user && $row['password'] != $pass){
+}else if( $count === 1 && $row['status']=== $stat && $row['role'] === "user"){
+    $user_id = $row['user_id'];
+
+    if($row['username'] === $log_user && $row['password'] === $pass){
+
+    $_SESSION['username'] = $row['username'];
+    $_SESSION['firstname'] = $row['firstname'];
+    $_SESSION['lastname'] = $row['lastname'];
+    $_SESSION['user_id'] = $row['user_id'];
+
+    $mquery= "UPDATE users SET mode='$on' WHERE user_id='$user_id' ";
+    mysqli_query($db, $mquery);  //update mode as online
+
+    header('location: index_user.php');
+
+    
+    }elseif(empty($log_user)||empty($log_password) || $row['username'] != $log_user && $row['password'] != $pass ){
+        ?>
+            <script>
+      swal({title: "Sorry", text: "Invalid credentials!", type:"error", icon: "error"});
+         </script>
+        <?php
+    }
+
+    
+} elseif($row['username'] != $log_user && $row['password'] != $pass){
     ?>
 <script>
       swal({title: "Sorry", text: "Invalid credentials!", type:"error", icon: "error"});
