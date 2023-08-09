@@ -162,70 +162,7 @@ if(isset($_POST['submit'])){
 
 
 
-//login page
 
-if(isset($_POST['login'])){
-    $log_user = mysqli_real_escape_string($db, $_POST['log_username']);
-    $log_password = mysqli_real_escape_string($db, $_POST['log_password']);
-    $pass = md5($log_password);
-
-    $sql = "SELECT * FROM users WHERE username = '$log_user' AND password ='$pass'";
-
-    $result = mysqli_query($db, $sql);
-    $count = mysqli_num_rows($result);
-    $row = mysqli_fetch_assoc($result);
-    $stat = "active";
-
-   
-    $on = "online";
-    if( $count === 1 && $row['status']=== $stat && $row['role'] === "admin"){
-        $user_id = $row['user_id'];
-        if($row['username'] === $log_user && $row['password'] === $pass){
-        $_SESSION['username'] = $row['username'];
-        $_SESSION['firstname'] = $row['firstname'];
-        $_SESSION['lastname'] = $row['lastname'];
-        $_SESSION['user_id'] = $row['user_id'];
-
-        $mquery= "UPDATE users SET mode='$on' WHERE user_id='$user_id' ";
-        mysqli_query($db, $mquery);  //update mode as online
-
-        header('location: index.php');
-
-        
-        }elseif($row['username'] != $log_user && $row['password'] != $pass){
-            ?>
-     <script>
-              swal({title: "Invalid", text: "Invalid credentials!", type:"warning"});
-                 </script>
-            <?php
-        }
-
-        
-    } else if( $count === 1 && $row['status']=== $stat && $row['role'] === "user"){
-        $user_id = $row['user_id'];
-
-        if($row['username'] === $log_user && $row['password'] === $pass){
-
-        $_SESSION['username'] = $row['username'];
-        $_SESSION['firstname'] = $row['firstname'];
-        $_SESSION['lastname'] = $row['lastname'];
-        $_SESSION['user_id'] = $row['user_id'];
-
-        $mquery= "UPDATE users SET mode='$on' WHERE user_id='$user_id' ";
-        mysqli_query($db, $mquery);  //update mode as online
-
-        header('location: index_user.php');
-
-        
-        }
-
-        
-    } 
-
-
- 
-
-}
 
 
 

@@ -22,17 +22,20 @@ $total_active = mysqli_num_rows($active_result);
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <style>
+        #logoutModal{
+    display: none;
+        }   
         #logOutButtonYes{
-    box-shadow: 2px 2px 0px 0px #000000;
-    }
-    #logOutButtonNo{
-    box-shadow: 2px 2px 0px 0px #000000;
-    }
-    #logOutButtonYes:hover{
-    box-shadow:2px 2px 0px 0px #66cc00;
-    }
-    #logOutButtonNo:hover{
-    box-shadow:2px 2px 0px 0px #ff4d4d; 
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonNo{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #logOutButtonYes:hover{
+            box-shadow:2px 2px 0px 0px #66cc00;
+}
+#logOutButtonNo:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d; 
     }
     </style>
 
@@ -149,6 +152,9 @@ $total_active = mysqli_num_rows($active_result);
                                         ?>
                                         <script>
                                             swal({title: "Success!", text: "New Department has been added.", type:"success", icon: "success"})
+                                            .then(function(){ 
+                                                                location.href="department_mgmt.php";
+                                                            });
                                             </script>
     
                                     <?php
@@ -233,6 +239,23 @@ $total_active = mysqli_num_rows($active_result);
                                                 
                                                 }
 
+                                        } //end of edit 
+
+
+
+                                        if(isset($_GET['delid'])){    //delete function
+                                            $id = $_GET['delid'];
+
+                                            mysqli_query($db, "DELETE FROM department WHERE dep_id='$id'");
+
+                                            ?>
+                                                    <script>
+                                                            swal({title: "Removed!", text: "Department has been removed.", type:"success"})
+                                                            .then(function(){ 
+                                                                location.href="department_mgmt.php";
+                                                            });
+                                                    </script>
+                                            <?php
                                         }
                                     
 
@@ -247,7 +270,8 @@ $total_active = mysqli_num_rows($active_result);
                                         <td><?php echo $num; ?></td>
                                         <td><?php echo $rowdep['dep_name']; ?> </td>
                                         <td class="flex justify-end gap-2"><span class="border-r border-gray-500/50 px-2">
-                                            <a href="department_mgmt.php?id=<?php echo $rowdep['dep_id']; ?>" style="color: green ;">Edit</a></span><span>Delete</span></td>
+                                            <a href="department_mgmt.php?id=<?php echo $rowdep['dep_id']; ?>" style="color: green;">Edit</a></span>
+                                            <span> <a href="department_mgmt.php?delid=<?php echo $rowdep['dep_id']; ?>" style="color: red;">Delete</span></td>
                                         
                                     </tr>
 
@@ -313,13 +337,17 @@ $total_active = mysqli_num_rows($active_result);
                                                             
                                                              $allData = implode(",",$dep);
                                                            $dp =  mysqli_query($db,"INSERT INTO mergedep (m_name, old_dep) VALUES ('$newDepName', '$allData')");
+                                                           mysqli_query($db,"INSERT INTO department (dep_name,merge) VALUES ('$newDepName','no')");
                                                          
                                                             foreach ($dep as $newDep){
                                                               
                                                                 mysqli_query($db, "UPDATE department SET merge='yes', merge_name='$newDepName' WHERE dep_name='$newDep'");
                                                                 ?>
                                                                 <script>
-                                                                    swal({title: "Merged successfully!", text: "Department merged.", type:"success"});
+                                                                    swal({title: "Merged successfully!", text: "Department merged.", type:"success"})
+                                                                    .then(function(){ 
+                                                                            location.href="department_mgmt.php";
+                                                                        });
                                                                     
                                                             </script>
                                                         <?php 

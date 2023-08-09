@@ -124,7 +124,7 @@ if(isset($_POST['login'])){
 }elseif($row['username'] != $log_user && $row['password'] != $pass){
     ?>
 <script>
-      swal({title: "Invalid", text: "Invalid credentials!", type:"warning"});
+      swal({title: "Sorry", text: "Invalid credentials!", type:"error", icon: "error"});
          </script>
     <?php
 }
