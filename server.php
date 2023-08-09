@@ -176,9 +176,10 @@ if(isset($_POST['login'])){
     $row = mysqli_fetch_assoc($result);
     $stat = "active";
 
-    $user_id = $row['user_id'];
+   
     $on = "online";
     if( $count === 1 && $row['status']=== $stat && $row['role'] === "admin"){
+        $user_id = $row['user_id'];
         if($row['username'] === $log_user && $row['password'] === $pass){
         $_SESSION['username'] = $row['username'];
         $_SESSION['firstname'] = $row['firstname'];
@@ -191,11 +192,17 @@ if(isset($_POST['login'])){
         header('location: index.php');
 
         
+        }elseif($row['username'] != $log_user && $row['password'] != $pass){
+            ?>
+     <script>
+              swal({title: "Invalid", text: "Invalid credentials!", type:"warning"});
+                 </script>
+            <?php
         }
 
         
     } else if( $count === 1 && $row['status']=== $stat && $row['role'] === "user"){
-        
+        $user_id = $row['user_id'];
 
         if($row['username'] === $log_user && $row['password'] === $pass){
 
