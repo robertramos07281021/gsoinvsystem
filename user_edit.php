@@ -181,52 +181,101 @@ $errors = array();
                                     </div>
                                     <div>
                                         <label for="address">Address:</label>
-                                        <input type="text" name="address" id="address" class="border w-full" >
+                                        <input type="text" name="address" id="address" class="border w-full" 
+                                        value="<?php if(isset($_POST['saveButton'])){ echo $_POST['address']; }else{
+                                                echo $row_view['u_address'];
+                                            } ?>">
                                     </div>
                                     <div>
                                         <label for="email">Email:</label>
-                                        <input type="text" name="email" id="email" class="border w-full">
+                                        <input type="text" name="email" id="email" class="border w-full" 
+                                        value="<?php if(isset($_POST['saveButton'])){ echo $_POST['email']; }else{
+                                                echo $row_view['email'];
+                                            } ?>">
                                     </div>
                                     <div>
                                         <label for="phoneNum">Phone:</label>
-                                        <input type="number" name="phoneNum" id="phoneNum" class="border w-full">
+                                        <input type="number" name="phoneNum" id="phoneNum" class="border w-full"
+                                        value="<?php if(isset($_POST['saveButton'])){ echo $_POST['phoneNum']; }else{
+                                                echo $row_view['phone_num'];
+                                            } ?>">
                                     </div>
                                     <div class="mt-2">
-                                        <p>Username: <span>Username</span></p>
+                                        <p>Username: <span><?php echo $row_view['username']; ?></span></p>
                                     </div>
+
+                                    <!-- Department -->
                                     <div>
                                     <label for="department">Department:</label>
                                     <select name="department" id="department" class="border w-full">
-                                        <option value="select">Select Department</option>
-                                        <?php foreach($deptChoice as $deptChoices) { ?>
-                                                <option value="<?php echo $deptChoices ?>"><?php echo $deptChoices ?></option>
-                                        <?php } ?>
+                                            <?php if(isset($_POST['saveButton'])){ 
+                                                $dep_query = mysqli_query($db, "SELECT * FROM department WHERE merge='no'");
+                                                while($deprows = mysqli_fetch_assoc($dep_query)){
+                                        ?>
+                                                <option value="<?php echo $deprows['dep_name'] ?>" <?php if($_POST['department']===$deprows['dep_name']){
+                                                    echo "selected";
+                                                }else { echo ""; } ?> ><?php echo $deprows['dep_name'] ?> </option> 
+                                        <?php }
+                                                ?>
+                                                    
+                                                <?php
+                                            }else{ ?>
+                                    
+                                        <!-- <option value="select">Select Department</option> -->
+
+                                        <?php 
+                                                $dep_query = mysqli_query($db, "SELECT * FROM department WHERE merge='no'");
+                                                while($deprows = mysqli_fetch_assoc($dep_query)){
+                                        ?>
+                                                <option value="<?php echo $deprows['dep_name'] ?>" <?php if($row_view['department']===$deprows['dep_name']){
+                                                    echo "selected";
+                                                }else { echo ""; } ?> ><?php echo $deprows['dep_name'] ?> </option> 
+                                        <?php }  } ?>
                                     </select>
+
                                     </div>
+
+
                                     <div class="flex mt-2">
                                         <p>Roles:</p>
                                         <div class="flex gap-6 ml-3">
                                             <div>
-                                                <input type="radio" name="roles" id="users">
+                                                <input type="radio" name="roles" id="users" value="user" <?php if(isset($_POST['saveButton'])){
+                                                        if($_POST['roles'] === 'user' ){
+                                                            echo "checked";
+                                                        }else{ echo "";}
+                                                 }elseif($row_view['role'] === 'user'){ echo "checked" ;}else { echo ""; }
+                                                 ?>>
                                                 <label for="users" name="roles">User</label>
                                             </div>
                                             <div>
-                                                <input type="radio" name="roles" id="admin">
+                                                <input type="radio" name="roles" id="admin" value="admin" <?php if(isset($_POST['saveButton'])){
+                                                        if($_POST['roles'] === 'admin' ){
+                                                            echo "checked";
+                                                        }else{ echo "";}
+                                                 }elseif($row_view['role'] === 'admin'){ echo "checked" ;}else { echo ""; }
+                                                 ?>>
                                                 <label for="admin" name="roles">Admin</label>
+
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mt-1">
-                                        <p>Status: </p>
-                                        
+                                        <p>Status: <?php if($row_view['status']==='inactive'){?><span style="color: red; font-weight:600;"> <?php echo ucfirst($row_view['status']);
+                                         ?> </span> <?php } elseif($row_view['status']==='active'){?> <span style="color: green; font-weight:600;"> 
+                                         <?php echo ucfirst($row_view['status']);} ?> </span>  
+                                         </p>
                                     </div>
                                 </div>
 
+
+                                        
                             
                                 <div class="text-white font-semibold flex justify-between  gap-6 mt-1">
                                     <div class="flex gap-6">
-                                        <button class="py-1 w-32 bg-green-500 rounded-lg  border-green-500 border hover:bg-white hover:text-green-500  hover:border-green transition ease-out duration-300" id="saveButton">
-                                            Save</button>
+                                        <button class="py-1 w-32 bg-green-500 rounded-lg  border-green-500 border hover:bg-white hover:text-green-500  hover:border-green transition ease-out duration-300" id="saveButton"
+                                        name="SaveEdit">
+                                           Save</button>
                                         <div class="py-1 w-32  bg-red-500 rounded-lg  buttons border-red-500 border hover:bg-white hover:text-red-500 hover:border-red transition ease-out duration-300 text-center cursor-pointer" onclick="cancelEdit()" id="cancelButton">
                                         Cancel</div>
                                     </div>
@@ -236,6 +285,54 @@ $errors = array();
 
                                 </div>
                             </form>
+
+                            <?php       //Edit user 
+
+                                if(isset($_POST['SaveEdit'])){
+
+                                    $firstname = mysqli_real_escape_string($db, $_POST['firstName']);
+                                    $lastname = mysqli_real_escape_string($db, $_POST['lastName']);
+                                    $address = mysqli_real_escape_string($db, $_POST['address']);
+                                    $email = mysqli_real_escape_string($db, $_POST['email']);
+                                    $phoneNum = mysqli_real_escape_string($db, $_POST['phoneNum']);
+                                    $department = mysqli_real_escape_string($db, $_POST['department']);
+
+                                    if(!empty($firstname) && !empty($lastname) && !empty($address) && !empty($email) &&
+                                    !empty($phoneNum) && !empty($department)){
+                                        $sql= "UPDATE users SET firstname='$firstname',lastname='$lastname',
+                                        email='$email', phone_num='$phoneNum', u_address='$address', department='$department' WHERE user_id='$id_view' ";
+    
+                                        mysqli_query($db, $sql);  //update to database
+
+                                        ?>
+                                        <script>
+                                                swal({title: "Success!", text: "User info has been updated.", type:"success"})
+                                                .then(function(){ 
+                                                    location.href="user_edit.php?id=<?php echo $id_view; ?>";
+                                                });
+                                        </script>
+
+                                    <?php
+                                    }else {
+                                        ?>
+                                          <script>
+                                                swal({title: "Sorry!", text: "Please complete the form.", type:"error", icon: "error"})
+                                                // .then(function(){ 
+                                                //     location.href="update_account.php";
+                                                // });
+                                        </script>
+
+                                <?php
+                                    }
+                                }
+
+
+
+                                ?>
+
+
+
+
                         </div>
                         <!--------------------------- Change Password division ----------------------------------------->
                         <div id="changePassword" class="hidden h-full w-full px-10 py-6" >
