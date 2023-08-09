@@ -161,21 +161,27 @@ $errors = array();
 
                         <!--------------------------------edit division --------------------------------------->
                         <div id="editDiv"  style="display:none" class="px-10 w-full h-full pt-4 pb-6 ">
-                            <form action="" class="w-full h-full flex flex-col grid content-between">
+                            <form action="" class="w-full h-full flex flex-col grid content-between" method="POST">
                                 <div>
                                     <div class="flex w-full gap-5">
                                         <div>
                                             <label for="firstName">Firstname:</label>
-                                            <input type="text" name="firstName" id="firstName" class="border w-full">
+                                            <input type="text" name="firstName" id="firstName" class="border w-full"
+                                            value="<?php if(isset($_POST['saveButton'])){ echo $_POST['firstName']; }else{
+                                                echo $row_view['firstname'];
+                                            } ?>">
                                         </div>
                                         <div>
                                             <label for="lastName">Lastname:</label>
-                                            <input type="text" name="lastName" id="lastName" class="border w-full">
+                                            <input type="text" name="lastName" id="lastName" class="border w-full"
+                                            value="<?php if(isset($_POST['saveButton'])){ echo $_POST['lastName']; }else{
+                                                echo $row_view['lastname'];
+                                            } ?>">
                                         </div>
                                     </div>
                                     <div>
                                         <label for="address">Address:</label>
-                                        <input type="text" name="address" id="address" class="border w-full">
+                                        <input type="text" name="address" id="address" class="border w-full" >
                                     </div>
                                     <div>
                                         <label for="email">Email:</label>
