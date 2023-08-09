@@ -131,7 +131,16 @@
 
             <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
                
+<?php
+ $u_dp = $row['department'];
+ $name = ucfirst($row['firstname']). " ". ucfirst($row['lastname']);                      
+ $num = 0;
+ $ress = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name' ");
+ $total_request = mysqli_num_rows($ress);
 
+ $ress2 = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name' AND r_status='pending'");
+ $total_request2 = mysqli_num_rows($ress2);
+?>
                 
 
                 <div class="grid grid-cols-3">
@@ -146,16 +155,23 @@
             </div>
 
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                total item
+                 
+                <div class="col-span-2">
+                        <p class="text-xl flex font-bold">Total Requests</p>
+                        <p class="text-lg font-semibold"><?php echo $total_request; ?></p>
+                    </div>
             </div>
 
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                
+            <div class="col-span-2">
+                        <p class="text-xl flex font-bold">Total Pending Requests</p>
+                        <p class="text-lg font-semibold"><?php echo $total_request2; ?></p>
+                    </div>
             </div>
         </div>
 
         <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
-            <div class="col-span-3 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+            <div class="col-span-5 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
             <table class="w-full">
                         <thead>
                             <tr>
@@ -164,6 +180,7 @@
                                 <th class="w-40 pb-3">Item</th>
                                 <th class="w-40 pb-3">Department</th>
                                 <th class="w-40 pb-3">Property Code</th>
+                                <th class="w-40 pb-3">Status</th>
                                 
                                 <th class="w-40 pb-3">Action</th>
                                 
@@ -171,28 +188,29 @@
                         </thead>
 
                         <tbody>
-                <?php
-                        $u_dp = $row['department'];
+               
+                        <?php
                        
-                     $num = 0;
-                     $ress = mysqli_query($db,"SELECT * FROM items WHERE dep_name='$u_dp'");
-                     while($row_item = mysqli_fetch_assoc($ress)) {
+                     while($rowr = mysqli_fetch_assoc($ress)) {
                      $num++;
                         ?>
-
 
                             <tr class="border-b">
                                 <!-- rowsss from database will be displayed -->
                                 
                                 <td class="py-3 text-center"> <?php echo  $num; ?> </td>
-                                <td class="py-3 text-center"> <?php echo  ucfirst($row_item['item_name']);?></td>
-                                <td class="py-3 text-center"> <?php echo  $row_item['dep_name'] ?>  </td>
-                                <td class="py-3 text-center"> <?php echo  $row_item['property_code'] ?>  </td>
+                                <td class="py-3 text-center"> <?php echo  ucfirst($rowr['item_name']);?></td>
+                                <td class="py-3 text-center"> <?php echo  $rowr['dep_name'] ?>  </td>
+                                <td class="py-3 text-center"> <?php echo  $rowr['property_code'] ?>  </td>
+                                <td class="py-3 text-center"> <?php echo  $rowr['r_status'] ?>  </td>
+                                <td class="py-3 text-center"><a href="myrequest_view.php?id=<?php echo $rowr['r_id']; ?>" class="border-r pr-2 mr-2" style='color:blue; font-weight:700;'>View</a>
+                              
+                                <?php if($rowr['r_status']==="cancelled"){ echo "";?>  <?php }
+                                else{?>
+                                    <a href="myrequest.php?id=<?php echo $rowr['r_id']; ?>" class="border-r pr-2 mr-2" style='color:red; font-weight:700;'>Cancel</a>
                                  
-                                <td class="py-3 text-center"><a href="index_user_viewItems.php?id=<?php echo $row_item['id']; ?>" class="border-r pr-2 mr-2" style='color:blue; font-weight:700;'>View</a>
-                                <a href="index_user.php?id=<?php echo $row_item['id']; ?>" class="border-r pr-2 mr-2" style='color:red; font-weight:700;'>Request</a>
-                                 
-                                 
+                                
+                                 <?php  }  ?>
                                 
                                 </td>
                             </tr>
@@ -204,101 +222,41 @@
 
 
                      }
+
+
+                     if(isset($_GET['id'])){
+                        $idr = $_GET['id'];
+
+                        mysqli_query($db,"UPDATE requests SET r_status='cancelled' WHERE r_id='$idr'");
+                        ?>
+                                                                <script>
+                                                                    swal({title: "Request Cancelled!", text: "Your request has been cancelled.", type:"success"})
+                                                                    .then(function(){ 
+                                                                            location.href="myrequest.php";
+                                                                        });
+                                                                    
+                                                            </script>
+                                                        <?php 
+                     }
                 ?>
     </tbody>
     </table>
 
             </div>
 
-            <div class="col-span-2  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-               <center> <h2> Request Form </h2> </center>
+            <!-- <div class="col-span-2  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+                
 
-               <?php
-                        if(isset($_GET['id'])){
-                            $id = $_GET['id'];
-                            $ress = mysqli_query($db,"SELECT * FROM items WHERE id='$id'");
-                            $rowss = mysqli_fetch_assoc($ress);
-                            ?>
-                <form method="POST" style="width: 25rem;">
-                    <label>Item: <b> <?php echo $rowss['item_name']; ?> </b>  </label> <br>
-                    <label>Property Code: <b>  <?php echo $rowss['property_code']; ?>  </b> </label><br>
-                    <label>Purpose:</label> <br>  
-                    <input   name="purpose" value="<?php  if(isset($_POST['request'])){ echo $_POST['purpose']; } ?>"> 
-                    <br>
-                    <label>Date Needed:</label> <br> 
-                    <input type="date" id="txtDate" name="date_needed" value='<?php  if(isset($_POST['request'])){ echo $_POST['date_needed']; } ?>' required/>
-
-                    <br><br>
-                    <button style="background: green; color:white; " type="submit" name="request"> &nbsp; Send Request&nbsp;&nbsp;</button>
-                        
-
-                </form>
+               
 
 
-<?php
-
-
-                            //POST method submit
-
-                            if(isset($_POST['request'])){
-                                $purpose = $_POST['purpose'];
-                                $dateN = $_POST['date_needed'];
-                                $item_id = $_GET['id'];
-                                $requester = ucfirst($row['firstname']). " ". ucfirst($row['lastname']);
-                                $item_name = $rowss['item_name'];
-                                $dep_name = $u_dp;
-                                $property_code = $rowss['property_code'];
-                                $end_user = $rowss['end_user'];
-                                $description = $rowss['description'];
-                                $r_status = "pending";
-                                $date = date("Y-m-d");
-                                $t = strlen(trim($purpose));
-                                 
-                                if(!empty($purpose) && !empty($dateN) && $t != 0){
-                                        mysqli_query($db, "INSERT INTO requests (item_id,requester,item_name,dep_name,property_code,purpose,end_user,description,r_status,date,date_needed)
-                             VALUES ('$item_id','$requester','$item_name','$dep_name','$property_code','$purpose','$end_user','$description','$r_status','$date','$dateN')");
-
-                             ?>
-                                <script>
-                                                                    swal({title: "Request Sent!", text: "Please wait for approval", type:"success"})
-                                                                    .then(function(){ 
-                                                                            location.href="index_user.php";
-                                                                        });
-                                                                    
-                                                            </script>
-
-                            <?php
-                                }else{
-                                    ?>
-                                      <script>
-                                                                    swal({title: "Incomplete details", text: "Please fill up the forms.", type:"error", icon: "error"});
-                                                                    
-                                                            </script>
-
-                                <?php
-                                }
-
-                                 
-                            }
-
-                        }elseif(!isset($_GET['id'])) {
-                            ?>
-
-                            <p style="text-align: center; font-weight: 500; color:black;"> Please select item to send request. </p>
-
-                    <?php
-                        }
-
-
-                ?>
-            </div>
+ 
+ 
+                     
+            </div> -->
         </div>
 
-                        <?php
-                                //Send Request
-
-                              
-                        ?>
+                        
 
     </article>
     
