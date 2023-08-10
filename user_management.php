@@ -141,6 +141,9 @@ $errors = array();
                             $num = 0;
                             while($row = mysqli_fetch_assoc($res_query)) {
                             $num++;
+
+                            ////////////////////
+                            if($row['user_id'] != $userID){
                         ?>
                             <tr class="border-b">
                                 <!-- rowsss from database will be displayed -->
@@ -171,8 +174,31 @@ $errors = array();
 
                         <?php 
                     
-                    
-                    
+                    ////////////////
+                            }// if user id does not match
+                            elseif($row['user_id']==$userID){
+                                ?>
+                        <tr class="border-b">
+                                <!-- rowsss from database will be displayed -->
+                                
+                                <td class="py-3 text-center"> <?php echo  $row['user_id']; ?> </td>
+                                <td class="py-3 text-center"> <?php echo  ucfirst($row['firstname']); echo " "; echo ucfirst($row['lastname']) ;?></td>
+                                <td class="py-3 text-center"> <?php echo  $row['username'] ?>  </td>
+                                <td class="py-3 text-center"> <?php echo  $row['department'] ?>  </td>
+                                <td class="py-3 text-center"> <?php echo  $row['role'] ?>  </td>
+                                <td class="py-3 text-center"> <?php echo  $row['status'] ?>  </td>
+                                <td class="py-3 text-center"><a href="update_account.php" class="border-r pr-2 mr-2" style='color:green; font-weight:700;'>View Me</a>
+                                
+                                 
+                                
+                                
+                                </td>
+                            </tr>
+
+
+
+                            <?php
+                            }
                     
                     
                     

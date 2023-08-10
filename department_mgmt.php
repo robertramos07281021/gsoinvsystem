@@ -199,6 +199,9 @@ $total_active = mysqli_num_rows($active_result);
                                             <br><br>
                                             <form method="POST">
 
+                                                <!-- Display selected department name -->
+                                                <p> <?php echo $rows['dep_name']; ?> </p>
+
                                                 <input type="text" name="edit_dep" style="border:1;" placeholder="Enter Department">
                                                 <button name="edit" style="background:green; color:white;">&nbsp; Save &nbsp; </button>
 
