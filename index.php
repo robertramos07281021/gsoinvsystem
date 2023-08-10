@@ -82,8 +82,15 @@
     <?php 
     if (isset($_SESSION['username'])): 
         
-    ?>
+        $user = $_SESSION['user_id'];
+        $sql = "SELECT * FROM users WHERE user_id = '$user'";
+        $result = mysqli_query($db, $sql);
+        $row = mysqli_fetch_assoc($result);  
 
+                $rq = mysqli_query($db,"SELECT * FROM requests WHERE r_status='pending'");
+                $count_row = mysqli_num_rows($rq);
+
+            ?>
 <!-- Navbar -->
     <nav class=" p-6 fixed h-full w-[20%]">
         <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center flex flex-col ">
@@ -92,7 +99,7 @@
             <div class="text-start w-full mt-10 ">
                 <ul>
                     <a aria-current="page" href="index.php">
-                        <li class="mb-2 w-full bg-red-300/20 p-3 rounded-md font-bold flex gap-1 "><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard</li>
+                        <li class="mb-2 w-full bg-red-300/20 p-3 rounded-md font-bold flex gap-1 "><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard   </li>
                     </a>
                     <a href="user_management.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/users.png" class="bg-white p-1 rounded w-6 h-6">Users</li>
@@ -130,16 +137,12 @@
     <nav class="p-6 ">
     </nav>
 
-    <?php           $user = $_SESSION['user_id'];
-                    $sql = "SELECT * FROM users WHERE user_id = '$user'";
-                    $result = mysqli_query($db, $sql);
-                    $row = mysqli_fetch_assoc($result);  
-    ?>
+    
 
     <article class=" col-span-4 py-6 pr-6 w-full h-full ">
         
         <div class="flex justify-between text-white">
-            <div class="font-semibold text-2xl flex flex-cols"><p>DashBoard</p></div>
+            <div class="font-semibold text-2xl flex flex-cols"><p>DashBoard</p> </div>
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
         </div>
 
@@ -179,9 +182,18 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                
+            <div class="grid grid-cols-3">
+                    <div class="col-span-2">
+                        <p class="text-xl flex font-bold">For Approval</p>
+                        <p class="text-lg font-semibold"><?php echo $count_row; ?></p>
+                        <p><button> <a href="index_approval.php">Manage Approval</a> </button> </p>
+                    </div>
+                    <div class="flex justify-end">
+                        <i><img src="./image/item.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
+                    </div>
+                </div>
             </div>
         </div>
 
