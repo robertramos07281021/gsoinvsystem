@@ -10,8 +10,6 @@ include('serverAdd.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/department_mgmt.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -31,6 +29,10 @@ include('serverAdd.php');
         #logOutButtonNo:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
         }
+        .newItemsButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+
     </style>
 
     <title>GSO Invsys</title>
@@ -113,10 +115,10 @@ include('serverAdd.php');
                 <p class="font-semibold text-2xl">Items</a></p>
                 <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row  ['lastname']);?></span></p>
             </div>
-            <div class="w-full h-[92.5%]  ">
-                <div class="w-full h-full gap-6 ">
-                    <div class="container my-5">
-                        <h2>New Item</h2>
+            <div class="w-full h-[89.5%] mt-5 ">
+                <div class="w-full h-full gap-6  bg-white rounded-xl flex justify-center drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+                    <div class=" w-1/2 h-full">
+                        <h2 class="w-full  text-center text-3xl font-bold mb-10 pt-10">New Item</h2>
                         <?php
                         if (!empty($errorMessage)) {
                             echo "
@@ -127,48 +129,49 @@ include('serverAdd.php');
                             ";
                         }
                         ?>
-                        <form method="post">
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Item Name</label>
+                        <form method="post" class="w-full grid content-between  h-[80.5%]">
+                            <div>
+                            <div class=" mb-3">
+                                <label for="item_name"class="text-xl font-semibold">Item Name:</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="item_name" value="<?php echo $item_name; ?>">
+                                    <input type="text" class="w-full border-2 border-gray-200 rounded p-1 " name="item_name" id="item_name" value="<?php echo $item_name; ?>">
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">department</label>
+                            <div class="mb-3">
+                                <label for="dep_names" class="text-xl font-semibold">Department:</label>
                                 <div class="col-sm-6">
-                                    <select class="form-select" name="dep_names">
+                                    <select class="w-full border-2 border-gray-200 rounded p-1" id="dep_names" name="dep_names">
                                         <?php foreach ($dep_names as $dep_name => $dep_names) { // Loop through dep_names array
                                             echo "<option value='" . htmlspecialchars($dep_name) . "'>" . htmlspecialchars($dep_names) . "</option>";
                                         } ?>
                                     </select>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Property Code</label>
+                            <div class="mb-3">
+                                <label for="property_code" class="text-xl font-semibold">Property Code:</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="property_code" value="<?php echo $property_code; ?>">
+                                    <input type="text" class="w-full border-2 border-gray-200 rounded p-1" name="property_code" id="property_code" value="<?php echo $property_code; ?>">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="quantity" class="text-xl font-semibold">Quantity:</label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="w-full border-2 border-gray-200 rounded p-1" name="quantity" id="quantity" value="<?php echo $quantity; ?>">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="end_user" class="text-xl font-semibold">User:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="w-full border-2 border-gray-200 rounded p-1" name="end_user" id="end_user" value="<?php echo $end_user; ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Quantity</label>
+                                <label for="description" class="text-xl font-semibold">Description</label>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control" name="quantity" value="<?php echo $quantity; ?>">
+                                    <input type="text" class="w-full border-2 border-gray-200 rounded p-1" name="description" id="description" value="<?php echo $description; ?>">
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">User</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="end_user" value="<?php echo $end_user; ?>">
-                                </div>
                             </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Description</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="description" value="<?php echo $description; ?>">
-                                </div>
-                            </div>
-
                             <?php
                             if (!empty($successMessage)) {
                                 echo "
@@ -184,12 +187,12 @@ include('serverAdd.php');
                             }
                             ?>
 
-                            <div class="row mb-3">
-                                <div class="offset-sm-3 col-sm-3 d-grid">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                            <div class="flex gap-10 justify-center pb-5">
+                                <div class="">
+                                    <button type="submit" class="bg-green-500 py-1 w-32 text-white border border-green-500 font-semibold newItemsButton rounded transition ease-out duration-300 hover:text-green-500 hover:bg-white">Add Item</button>
                                 </div>
-                                <div class="col-sm-3 d-grid">
-                                    <a class="btn btn-outline-primary" href="items_page.php" role="button">Cancel</a>
+                                <div class="">
+                                    <a  href="items_page.php" role="button"><div class="bg-red-500 border border-red-500 text-white text-center font-semibold py-1 w-32 newItemsButton rounded transition ease-out duration-300 hover:text-red-500 hover:bg-white">Cancel</div></a>
                                 </div>
                             </div>
                         </form>

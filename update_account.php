@@ -15,9 +15,8 @@
         .welcomePageBg{
             background-image: url('./image/welcomeBg.jpg');
         }
-
         #logoutModal{
-    display: none;
+            display: none;
         }   
         #logOutButtonYes{
             box-shadow: 2px 2px 0px 0px #000000;
@@ -27,11 +26,29 @@
         }
         #logOutButtonYes:hover{
             box-shadow:2px 2px 0px 0px #66cc00;
-}
-#logOutButtonNo:hover{
+        }
+        #logOutButtonNo:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
-    }
-
+        }
+        .editFormButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .editFormButton:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d; 
+        }
+        .profileSaveButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .profileSaveButton:hover{
+            box-shadow:2px 2px 0px 0px #66cc00;
+        }
+        .profileCancelButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .profileCancelButton:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d; 
+        }
+        
     </style>
 
 
@@ -59,11 +76,11 @@
                     </a>
                     
 
-                    <a href="item.php">
+                    <a href="items_page.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
-                    <a href="report.php">
+                    <a href="reportPage.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
@@ -116,7 +133,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center">
-                        <button type="submit" name="change_pass" class="border px-5 py-1 bg-green-500 text-white">Save</button>
+                        <button type="submit" name="change_pass" class="border border-green-500 px-5 py-1 bg-green-500 text-white profileSaveButton rounded transition ease-out duration-300 hover:text-green-500 hover:bg-white">Save</button>
                     </div>
                 </form>
             </div>
@@ -277,8 +294,8 @@
                             
                             <div class="pt-5">
                                 <div class="flex justify-center gap-5 hidden" id="saveForm" >
-                                    <button class="border px-5 py-1 bg-green-500 text-white " type="submit" name="post_update" >Save</button>
-                                    <div class=" border px-4 py-1 cursor-pointer " onclick="cancelButton()" style="background-color: red; color: white;" >
+                                    <button class="border border-green-500 px-5 py-1 bg-green-500 text-white profileSaveButton transition ease-out duration-300 rounded hover:text-green-500 hover:bg-white" type="submit" name="post_update" >Save</button>
+                                    <div class=" border border-red-500 bg-red-500  text-white font-semibold px-4 py-1 cursor-pointer profileCancelButton transition ease-out duration-300 rounded hover:text-red-500 hover:bg-white" onclick="cancelButton()"  >
                                         Cancel
                                     </div>
                                 </div>
@@ -336,7 +353,7 @@
 
             </div>
             <div class="flex justify-center" id="editButton">
-                            <div class="border py-1 cursor-pointer w-32 text-center bg-red-500 rounded-lg text-white font-semibold" onclick="editForm()" >Edit</div>
+                <div class="border border-red-500 py-1 cursor-pointer w-32 text-center bg-red-500 rounded text-white font-semibold editFormButton transition ease-out duration-300 hover:text-red-500 hover:bg-white" onclick="editForm()">Edit</div>
             </div>
             
 

@@ -92,7 +92,7 @@ $total_active = mysqli_num_rows($active_result);
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
-                    <a href="#">
+                    <a href="reportPage.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
@@ -102,7 +102,7 @@ $total_active = mysqli_num_rows($active_result);
                 </ul>  
             </div>
             <div class="flex  h-full w-full items-end">
-                <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full justify-end items-center py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
+                <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full  items-center py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
             </div>
         </div>
     </nav>

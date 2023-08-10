@@ -16,8 +16,7 @@ $total_active = mysqli_num_rows($active_result);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/department_mgmt.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
 
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -35,6 +34,12 @@ $total_active = mysqli_num_rows($active_result);
             box-shadow:2px 2px 0px 0px #66cc00;
         }
         #logOutButtonNo:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d; 
+        }
+        .newItemButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .newItemButton:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
         }
     </style>
@@ -84,7 +89,7 @@ $total_active = mysqli_num_rows($active_result);
                         <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
-                    <a href="report.php">
+                    <a href="reportPage.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
@@ -116,14 +121,14 @@ $total_active = mysqli_num_rows($active_result);
     <article class=" col-span-4 pt-6 pr-6 w-full h-full  ">
         
             <div class="flex justify-between text-white">
-                <p class="font-semibold text-2xl">Items</a></p>
+                <p class="font-semibold text-3xl">Items</a></p>
                 <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row  ['lastname']);?></span></p>
             </div>
-            <div class="w-full h-[92.5%]  ">
-                <div class="w-full h-full gap-6 ">
+            <div class="w-full h-[89.3%] mt-5 ">
+                <div class="w-full h-full bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl">
                     <div>
-                        <div>
-                            <a class="btn btn-primary" href="items_add.php" role="button">New Item</a>
+                        <div class="p-10">
+                            <a class="bg-red-500 px-4 py-1 text-white font-semibold rounded newItemButton transition ease-out duration-300 border border-red-500 hover:text-red-500 hover:bg-white" href="items_add.php" role="button">New Item</a>
                             <br><br>
                             <!-- Add the dropdown to filter items by department -->
                             <select class="w-full p-1 border-t border-black font-semibold outline-0" id="deptSelect">

@@ -23,7 +23,7 @@ $total_active = mysqli_num_rows($active_result);
     
     <style>
         #logoutModal{
-    display: none;
+            display: none;
         }   
         #logOutButtonYes{
             box-shadow: 2px 2px 0px 0px #000000;
@@ -33,10 +33,17 @@ $total_active = mysqli_num_rows($active_result);
         }
         #logOutButtonYes:hover{
             box-shadow:2px 2px 0px 0px #66cc00;
-}
-#logOutButtonNo:hover{
+        }
+        #logOutButtonNo:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
-    }
+        }
+        #deptChangeNameSave{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #deptChangeNameSave:hover{
+            box-shadow:2px 2px 0px 0px #66cc00;
+        }
+
     </style>
 
     <title>GSO Invsys</title>
@@ -84,7 +91,7 @@ $total_active = mysqli_num_rows($active_result);
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
-                    <a href="report.php">
+                    <a href="reportPage.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
@@ -174,11 +181,11 @@ $total_active = mysqli_num_rows($active_result);
                             </form>
 
                         </div>
-                        <div class="row-start-2 col-span-3 row-span-5 border bg-white rounded-lg p-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
+                        <div class="row-start-2 col-span-3 row-span-5 grid content-between h-full bg-white rounded-lg p-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
                
                 <!-- Display department -->
 
-                <!-- sample only -->
+                        <div class=" w-full ">
                             <table class="w-full ">
                                 <thead>
                                     <tr>
@@ -187,7 +194,29 @@ $total_active = mysqli_num_rows($active_result);
                                 </thead>
                                 <tbody>
 
-                                <?php      //input text will appear when edit button is selected 
+                                
+                                <?php   
+                                    $num = 0;
+                                    while($rowdep = mysqli_fetch_assoc($res_dep)) {
+                                    $num++;
+                                            if($rowdep['merge']=='no'){
+                                ?>
+                                    <tr>   <!-- rowsss from database will be displayed -->
+                                        <td><?php echo $num; ?></td>
+                                        <td><?php echo $rowdep['dep_name']; ?> </td>
+                                        <td class="flex justify-end gap-2"><span class="border-r border-gray-500/50 px-2">
+                                            <a href="department_mgmt.php?id=<?php echo $rowdep['dep_id']; ?>" style="color: green;">Edit</a></span>
+                                            <span> <a href="department_mgmt.php?delid=<?php echo $rowdep['dep_id']; ?>" style="color: red;">Delete</span></td>
+                                        
+                                    </tr>
+
+
+                                    <?php } 
+                                    } //end of while ?>
+                                </tbody>
+                            </table>
+                        </div>
+                            <?php      //input text will appear when edit button is selected 
 
                                         if(isset($_GET['id'])){
                                             $id = $_GET['id'];
@@ -197,16 +226,18 @@ $total_active = mysqli_num_rows($active_result);
 
                                             ?>
                                             <br><br>
-                                            <form method="POST">
+                                                <div class="">
+                                                <form method="POST" class="flex gap-5 items-center w-full justify-end">
 
                                                 <!-- Display selected department name -->
-                                                <p> <?php echo $rows['dep_name']; ?> </p>
+                                                <p class="w-56 text-end"> <?php echo $rows['dep_name']; ?> </p>
+                                                <p>to</p>
+                                                <input type="text" name="edit_dep" class="border p-1" placeholder="Enter Department">
+                                                
+                                                <button name="edit" class="bg-green-500 py-1 px-4 text-white font-semibold rounded transition ease-out duration-300 hover:text-green-500 border-green-500 border hover:bg-white" id="deptChangeNameSave"> Save </button>
+                                                </div>
 
-                                                <input type="text" name="edit_dep" style="border:1;" placeholder="Enter Department">
-                                                <button name="edit" style="background:green; color:white;">&nbsp; Save &nbsp; </button>
-
-                                           </form>
-
+                                        
                                             
                                     <?php
 
@@ -263,27 +294,6 @@ $total_active = mysqli_num_rows($active_result);
                                     
 
                                     ?>
-                                <?php   
-                                    $num = 0;
-                                    while($rowdep = mysqli_fetch_assoc($res_dep)) {
-                                    $num++;
-                                            if($rowdep['merge']=='no'){
-                                ?>
-                                    <tr>   <!-- rowsss from database will be displayed -->
-                                        <td><?php echo $num; ?></td>
-                                        <td><?php echo $rowdep['dep_name']; ?> </td>
-                                        <td class="flex justify-end gap-2"><span class="border-r border-gray-500/50 px-2">
-                                            <a href="department_mgmt.php?id=<?php echo $rowdep['dep_id']; ?>" style="color: green;">Edit</a></span>
-                                            <span> <a href="department_mgmt.php?delid=<?php echo $rowdep['dep_id']; ?>" style="color: red;">Delete</span></td>
-                                        
-                                    </tr>
-
-
-                                    <?php } 
-                                    } //end of while ?>
-                                </tbody>
-                            </table>
-
                                     
                             
                         </div>

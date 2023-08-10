@@ -87,7 +87,7 @@
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
-                    <a href="report.php">
+                    <a href="reportPage.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
@@ -115,8 +115,8 @@
             <p class="font-semibold text-2xl flex flex-cols">Departments</p>
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst($_SESSION['lastname']);?></span></p>
         </div>
-        <div class="grid grid-flow-row-dense grid-cols-6 grid-rows-3 pt-6 h-full ">
-                <div class="col-span-3  h-full"> 
+        <div class="grid grid-flow-row-dense grid-cols-6 grid-rows-3  pt-6 h-[92%]">
+                <div class="col-span-3  h-full "> 
                     <div class="rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]  grid gap-6 mt-3">
                         <a href="department_mgmt.php" class="w-full">
                             <button class=" bg-white text-black font-bold rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] text-center p-2 hover:bg-gray-700 hover:text-white transition ease-out duration-500" id="manageDepartments">
