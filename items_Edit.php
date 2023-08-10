@@ -1,13 +1,6 @@
-<?php include('server.php');   
-$displayUser = "SELECT * FROM users";
-$res_query = mysqli_query($db,$displayUser);
-
-$total_users = mysqli_num_rows($res_query);
-$act = "active";
-$active_query= "SELECT * FROM users WHERE status='$act'";
-$active_result = mysqli_query($db,$active_query);
-$total_active = mysqli_num_rows($active_result);
-
+<?php
+include('server.php'); 
+include('serverEdit.php');   
 ?>
 
 <!DOCTYPE html>
@@ -16,8 +9,9 @@ $total_active = mysqli_num_rows($active_result);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/department_mgmt.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -121,121 +115,86 @@ $total_active = mysqli_num_rows($active_result);
             </div>
             <div class="w-full h-[92.5%]  ">
                 <div class="w-full h-full gap-6 ">
-                    <div>
-                        <div>
-                            <a class="btn btn-primary" href="items_add.php" role="button">New Item</a>
-                            <br><br>
-                            <!-- Add the dropdown to filter items by department -->
-                            <select class="w-full p-1 border-t border-black font-semibold outline-0" id="deptSelect">
-                                <option value="">Select Department</option>
-                                <?php
-                                $servername = "localhost";
-                                $username = "root";
-                                $password = "";
-                                $database = "gsoinventory";
+                    <div class ="container my-5">
+                        <h2>Edit Item</h2>
+                        <?php
+                        if (!empty($errorMessage)) {
+                            echo "
+                            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                            <strong>$errorMessage</strong>
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                            </div>
+                            ";
+                        }
+                        ?>
 
-                                // Connection to the database
-                                $connection = new mysqli($servername, $username, $password, $database);
-
-                                // Check connection
-                                if ($connection->connect_error) {
-                                    die("Connection failed: " . $connection->connect_error);
-                                }
-
-                                // Fetch the list of departments from the "department" table
-                                $deptChoice = array();
-                                $sql = "SELECT dep_name FROM department";
-                                $result = $connection->query($sql);
-                                if ($result && $result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        $deptChoice[] = $row['dep_name'];
-                                    }
-                                }
-                                $connection->close();
-
-                                // Loop through departments and create dropdown options
-                                if (count($deptChoice) > 0) {
-                                    foreach ($deptChoice as $deptChoices) {
-                                        echo "<option value='$deptChoices'>$deptChoices</option>";
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <br>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Item Name</th>
-                                    <th>Department Name</th>
-                                    <th>Property Code</th>
-                                    <th>Quantity</th>
-                                    <th>User</th>
-                                    <th>Description</th>
-                                    <th>Date Added</th>
-                                    <th>Action</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $servername = "localhost";
-                                $username = "root";
-                                $password = "";
-                                $database = "gsoinventory";
-
-                                // Connection to the database
-                                $connection = new mysqli($servername, $username, $password, $database);
-
-                                // Check connection
-                                if ($connection->connect_error) {
-                                    die("Connection failed: " . $connection->connect_error);
-                                }
-
-                                // Read all rows from the database table "items" and join with "department" table to get department name
-                                $sql = "SELECT items.*, department.dep_name FROM items 
-                                        LEFT JOIN department ON items.dep_name = department.dep_name";
-                                $result = $connection->query($sql);
-
-                                if (!$result) {
-                                    die("Invalid query: " . $connection->error);
-                                }
-
-                                // Initialize an array to store the item counts per department
-                                $itemCounts = array();
-
-                                // Read data of each row and display in the table
-                                while ($row = $result->fetch_assoc()) {
-                                    echo "
-                                    <tr data-dep-id='{$row['dep_name']}'>
-                                        <td>{$row['id']}</td>
-                                        <td>{$row['item_name']}</td>
-                                        <td>{$row['dep_name']}</td>
-                                        <td>{$row['property_code']}</td>
-                                        <td>{$row['quantity']}</td>
-                                        <td>{$row['end_user']}</td>
-                                        <td>{$row['description']}</td>
-                                        <td>{$row['created_at']}</td>
-                                        <td>
-                                            <a class='btn btn-primary btn-sm' href='/gsoinvsystem/items_Edit.php?id={$row['id']}'>Edit</a>
-                                            <a class='btn btn-danger btn-sm' href='/gsoinvsystem/deleteitem.php?id={$row['id']}'>Delete</a>
-                                        </td>
-                                    </tr>
-                                    ";
-
-                                    // Count the items per department and store it in the array
-                                    $department = isset($row['dep_name']) ? ucfirst($row['dep_name']) : '';
-                                    if (isset($itemCounts[$department])) {
-                                        $itemCounts[$department]++;
-                                    } else {
-                                        $itemCounts[$department] = 1;
-                                    }
-                                }
-                                
-                                ?>
-                            </tbody>
-                        </table>
+                        <form method="post">
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Item Name</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="item_name" value="<?php echo $item_name; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">department</label>
+                                <div class="col-sm-6">
+                                    <select class="form-select" name="dep_name">
+                                        <?php foreach ($dep_names as $depId => $dep_name) {
+                                            $selected = ($depId == $dep_name) ? 'selected' : '';
+                                            echo "<option value='$depId' $selected>$dep_name</option>";
+                                        } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Property Code</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="property_code" value="<?php echo $property_code; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Quantity</label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" name="quantity" value="<?php echo $quantity; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">User</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="end_user" value="<?php echo $end_user; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Description</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="description" value="<?php echo $description; ?>">
+                                </div>
+                            </div>
+                            <?php
+                            if (!empty($successMessage)) {
+                                echo "
+                                <div class='row mb-3'>
+                                    <div class='offset-sm-3 col-sm-6'>
+                                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                        <strong>$successMessage</strong>
+                                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                ";
+                            }
+                            ?>
+                            <div class="row mb-3">
+                                <div class="offset-sm-3
+                                col-sm-3 d-grid">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                                <div class="col-sm-3 d-grid">
+                                    <a class="btn btn-outline-primary" href="/gsoinvsystem/items_page.php" role="button">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
