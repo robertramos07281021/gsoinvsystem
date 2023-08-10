@@ -203,10 +203,9 @@ $total_active = mysqli_num_rows($active_result);
                                                 <p> <?php echo $rows['dep_name']; ?> </p>
 
                                                 <input type="text" name="edit_dep" style="border:1;" placeholder="Enter Department">
-                                                <button name="edit" style="background:green; color:white;">&nbsp; Save &nbsp; </button>
-
+                                                <button name="edit" style="background:green; color:white;">&nbsp; Save &nbsp; </button>&nbsp;&nbsp;
+                                                
                                            </form>
-
                                             
                                     <?php
 
@@ -221,11 +220,11 @@ $total_active = mysqli_num_rows($active_result);
                                                     if($already_exists > 0){
                                                         ?>
                                                     <script>
-                                                        swal({title: "Department already exists!", text: "Please try again. Thank you.", type:"error", icon: "error"})
+                                                        swal({title: "Invalid", text: "Please try again. Thank you.", type:"error", icon: "error"})
                                                         </script>
                 
                                                 <?php
-                                                    } elseif($already_exists == 0){
+                                                    } elseif($already_exists == 0 && !empty($edit_dep) ){
 
                                                         mysqli_query($db, "UPDATE department SET dep_name='$edit_dep' WHERE dep_id='$id'");
 
