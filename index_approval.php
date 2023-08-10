@@ -83,6 +83,7 @@
     if (isset($_SESSION['username'])): 
         
         $user = $_SESSION['user_id'];
+        $userID = $_SESSION['user_id'];
         $sql = "SELECT * FROM users WHERE user_id = '$user'";
         $result = mysqli_query($db, $sql);
         $row = mysqli_fetch_assoc($result);  

@@ -13,7 +13,7 @@ $res_dep = mysqli_query($db,$display_dep);
 
  $deptChoice = array("HR","SB","ACCOUNTING","GSO/BAC","RHU","BFP","PNP","MCR","BUDGET","MTO","BPLO","MPDO","ENGINEERING","COMELEC","BIR","ASSESOR","DILG","MSWDO","MENDO","DA","MDDRRMO","MDRRMO");
 
-$userID = $_SESSION['user_id'];
+// $userID = $_SESSION['user_id'];
 
 //if register is clicked
 
