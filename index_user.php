@@ -131,7 +131,16 @@
 
             <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
                
+            <?php
+ $u_dp = $row['department'];
+ $name = ucfirst($row['firstname']). " ". ucfirst($row['lastname']);                      
+ $num = 0;
+ $ress = mysqli_query($db,"SELECT * FROM requests WHERE user_id='$user' ");
+ $total_request = mysqli_num_rows($ress);
 
+ $ress2 = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name' AND r_status='pending'");
+ $total_request2 = mysqli_num_rows($ress2);
+?>
                 
 
                 <div class="grid grid-cols-3">
@@ -146,11 +155,18 @@
             </div>
 
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                total item
+            <div class="col-span-2">
+                        <p class="text-xl flex font-bold">Total Requests</p>
+                        <p class="text-lg font-semibold"><?php echo $total_request; ?></p>
+                    </div>
             </div>
 
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                
+            <div class="col-span-2">
+                        <p class="text-xl flex font-bold">Total Pending Requests</p>
+                        <p class="text-lg font-semibold"><?php echo $total_request2; ?></p>
+                    </div>
+            </div>
             </div>
         </div>
 

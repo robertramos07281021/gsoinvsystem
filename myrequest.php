@@ -135,7 +135,7 @@
  $u_dp = $row['department'];
  $name = ucfirst($row['firstname']). " ". ucfirst($row['lastname']);                      
  $num = 0;
- $ress = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name' ");
+ $ress = mysqli_query($db,"SELECT * FROM requests WHERE user_id='$user' ");
  $total_request = mysqli_num_rows($ress);
 
  $ress2 = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name' AND r_status='pending'");
