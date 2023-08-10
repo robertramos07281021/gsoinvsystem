@@ -59,6 +59,7 @@ $errors = array();
 
     <?php 
     if (isset($_SESSION['username'])): 
+        $userID = $_SESSION['user_id'];
     ?>
 
 <!-- Navbar -->

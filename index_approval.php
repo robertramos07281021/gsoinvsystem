@@ -83,6 +83,7 @@
     if (isset($_SESSION['username'])): 
         
         $user = $_SESSION['user_id'];
+        $userID = $_SESSION['user_id'];
         $sql = "SELECT * FROM users WHERE user_id = '$user'";
         $result = mysqli_query($db, $sql);
         $row = mysqli_fetch_assoc($result);  
@@ -198,16 +199,136 @@
         </div>
 
         <div class="grid grid-cols-5 mt-6 h-[73%] pb-6 gap-6">
-            <div class="col-span-4 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-                 
+            <div class="col-span-5 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+            <br>
+            
+             <?php
+                if(isset($_GET['did'])){  //decline request
+                    $id = $_GET['did'];
+
+                    ?>
+                    <form method="POST">
+                    <label>Reason to decline request:</label>
+                    <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="reason" value="<?php if(isset($_POST['reason'])){ echo $_POST['reason']; } ?>">
+                                </div>
+
+                                <button type="submit" style="background:tomato; color:white; border-radius:10px; margin-top:1rem;
+                                margin-bottom:1rem; " name="decline">Submit</button>
+                   </form>
+                        
+                <?php
+
+                        if(isset($_POST['decline'])){
+                            $reason = $_POST['reason'];
+                            $tr = trim($reason);
+                            $dec = "declined";
+                            $emp =  strlen($tr);
+                            if(!empty($reason) || $emp > 0){
+
+                                mysqli_query($db,"UPDATE requests SET r_status='$dec', reason='$reason' WHERE r_id='$id'");
+
+                                ?>
+                                <script>
+                                       swal({title: "Declined!", text: "Request has been declined", type:"success",icon:"success"})
+                                           .then(function(){ 
+                                              location.href="index_approval.php";
+                                               });
+                                </script>
+                    
+                                <?php
+                                
+                            }elseif(empty($reason) || $emp == 0 ){
+                                ?>
+                             <script>
+                   swal({title: "Invalid!", text: "Please indicate reason to decline.", type:"warning",icon:"warning"})
+                    //    .then(function(){ 
+                    //       location.href="index_approval.php";
+                    //        });
+                             </script>
+
+
+                        <?php
+                            }
+                        }
+
+                }
+             ?>
+            <center>For Approval </center>
+
+                 <table class="w-full">
+                    <thead>
+                    <tr >
+                            <th class="pb-3">ID</th>
+                            <th class="pb-3">Requisitioner</th>
+                            <th class="pb-3">Item Name</th>
+                            <th class="pb-3">Department</th>
+                            <th class="pb-3">Purpose</th>
+                            <th class="pb-3">Status</th>
+                            <th class="pb-3">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <?php 
+                            $num = 0;
+                            $req = mysqli_query($db,"SELECT * FROM requests WHERE r_status='pending'");
+                            while($row2 = mysqli_fetch_assoc($req)) {
+                                $num++;
+                                ?>
+                            <tr class="border-b">
+                                <td class="text-center py-2"> <?php echo $num; ?></td>
+                                <td class="text-center py-2"> <?php echo ucfirst($row2['requester']); ?></td>
+                                <td class="text-center py-2"> <?php echo ucfirst($row2['item_name']); ?></td>
+                                <td class="text-center py-2"> <?php echo ucfirst($row2['dep_name']); ?></td>
+                                <td class="text-center py-2"> <?php echo ucfirst($row2['purpose']);?></td>
+                                <td class="text-center py-2"> <?php echo ucfirst($row2['r_status']);?></td>
+                                <td class="text-center py-2"> <a href="index_approval.php?id=<?php echo $row2['r_id']; ?>" class="border-r pr-2 mr-2" style='color:green; font-weight:700;'>
+                                Approve</a>
+                                <a href="index_approval.php?did=<?php echo $row2['r_id']; ?>" class="border-r pr-2 mr-2" style='color:red; font-weight:700;'>
+                                Decline</a>
+                                </td>
+
+                            </tr>
+
+
+                        <?php
+
+                            }
+                        ?>
+                    </tbody>
+                </table>
 
             </div>
+<?php  
+        // get approve id
 
-            <div class="col-span-1  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+
+            $ap = "approved";
+
+            mysqli_query($db,"UPDATE requests SET r_status='$ap' WHERE r_id='$id'");
+
+            ?>
+            <script>
+                   swal({title: "Approved!", text: "Request for item approved.", type:"success",icon:"success"})
+                       .then(function(){ 
+                          location.href="index_approval.php";
+                           });
+            </script>
+
+            <?php
+
+
+
+        }
+?>
+            <!-- <div class="col-span-1  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
                 <div class="h-full">
                 
                 </div>
-            </div>
+            </div> -->
         </div>
 
     </article>

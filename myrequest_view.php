@@ -76,9 +76,9 @@
                     </a> -->
                     
 
-                    <a href="#">
+                    <!-- <a href="#">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">View Items</li>
-                    </a>
+                    </a> -->
 
                     <a href="#">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
@@ -137,6 +137,8 @@
  $num = 0;
  $ress = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name'");
  $total_request = mysqli_num_rows($ress);
+ $ress2 = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name' AND r_status='pending'");
+ $total_request2 = mysqli_num_rows($ress2);
 ?>
                 
 
@@ -160,15 +162,18 @@
             </div>
 
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                
+            <div class="col-span-2">
+                        <p class="text-xl flex font-bold">Total Pending Requests</p>
+                        <p class="text-lg font-semibold"><?php echo $total_request2; ?></p>
+                    </div>
             </div>
         </div>
 
         <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
             <div class="col-span-5 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
              
-                        
-               
+                        <button style="padding:.2rem; background:gray;color:white;border-radius:5px;"><a href="myrequest.php"><< Back </a> </button>
+               <br>
                         <?php
                        if(isset($_GET['id'])){
 
@@ -186,7 +191,7 @@
                          
                      
                         ?>
-
+                                <br>
                             <h3> Item: <?php echo $row1['item_name'];?> </h3>
                             <h3> Property Code: <?php echo $row1['property_code'];?> </h3>
                             <h3> Description: <?php echo $row1['description'];?> </h3>
@@ -196,7 +201,19 @@
                             <h3> Status of Request: <?php echo $row1['r_status'];?> </h3>
                             <h3> Request Date: <?php echo $row1['date'];?> </h3>
                             <h3> Date Needed: <?php echo $row1['date_needed'];?> </h3>
-                            <?php if($row1['r_status'] !== 'cancelled'){?>  <h3> Deadline: <?php echo $totaldays." Day/s to go.";?> </h3>
+
+                            <br>
+                            
+                            <?php
+                            $reason = $row1['reason'];
+                                if(!empty($reason)){
+                                    ?>
+                                    <h3> Reason for declined: <?php echo $row1['reason'];?> </h3>
+                                    <?php
+                                }else{
+                                    echo "";
+                                }
+                            if($row1['r_status'] !== 'cancelled'){?>  <h3> Deadline: <?php echo $totaldays." Day/s to go.";?> </h3>
                                   <?php } ?>
                            
 

@@ -63,6 +63,20 @@
         #logOutButtonNo:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
         }
+
+        .approve{
+            padding: .5rem;
+            background: tomato;
+            color: black;
+            margin-top: .2rem;
+            margin-bottom: .5rem;
+            border-radius: 5px;
+            margin-left: 1rem;
+        }
+
+        .approve:hover{
+            color:white;
+        }
     </style>
   
 </head>
@@ -83,6 +97,7 @@
     if (isset($_SESSION['username'])): 
         
         $user = $_SESSION['user_id'];
+        $userID = $_SESSION['user_id'];
         $sql = "SELECT * FROM users WHERE user_id = '$user'";
         $result = mysqli_query($db, $sql);
         $row = mysqli_fetch_assoc($result);  
@@ -188,7 +203,7 @@
                     <div class="col-span-2">
                         <p class="text-xl flex font-bold">For Approval</p>
                         <p class="text-lg font-semibold"><?php echo $count_row; ?></p>
-                        <p><button> <a href="index_approval.php">Manage Approval</a> </button> </p>
+                        <p><button class='approve'> <a href="index_approval.php">Manage Approval</a> </button> </p>
                     </div>
                     <div class="flex justify-end">
                         <i><img src="./image/item.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>

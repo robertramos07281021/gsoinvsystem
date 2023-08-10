@@ -230,14 +230,13 @@ $total_active = mysqli_num_rows($active_result);
                                                 <form method="POST" class="flex gap-5 items-center w-full justify-end">
 
                                                 <!-- Display selected department name -->
-                                                <p class="w-56 text-end"> <?php echo $rows['dep_name']; ?> </p>
-                                                <p>to</p>
-                                                <input type="text" name="edit_dep" class="border p-1" placeholder="Enter Department">
-                                                
-                                                <button name="edit" class="bg-green-500 py-1 px-4 text-white font-semibold rounded transition ease-out duration-300 hover:text-green-500 border-green-500 border hover:bg-white" id="deptChangeNameSave"> Save </button>
-                                                </div>
+                                                <p> <?php echo $rows['dep_name']; ?> </p>
 
-                                        
+                                                <input type="text" name="edit_dep" style="border:1;" placeholder="Enter Department">
+                                                <button name="edit" style="background:green; color:white;">&nbsp; Save &nbsp; </button>
+
+                                           </form>
+
                                             
                                     <?php
 
@@ -252,11 +251,11 @@ $total_active = mysqli_num_rows($active_result);
                                                     if($already_exists > 0){
                                                         ?>
                                                     <script>
-                                                        swal({title: "Department already exists!", text: "Please try again. Thank you.", type:"error", icon: "error"})
+                                                        swal({title: "Invalid", text: "Please try again. Thank you.", type:"error", icon: "error"})
                                                         </script>
                 
                                                 <?php
-                                                    } elseif($already_exists == 0){
+                                                    } elseif($already_exists == 0 && !empty($edit_dep) ){
 
                                                         mysqli_query($db, "UPDATE department SET dep_name='$edit_dep' WHERE dep_id='$id'");
 

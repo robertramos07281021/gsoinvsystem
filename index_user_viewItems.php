@@ -64,7 +64,7 @@
                     <a aria-current="page" href="index_user.php">
                         <li class="mb-2 w-full bg-red-300/20 p-3 rounded-md font-bold flex gap-1 "><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard</li>
                     </a>
-                    <a href="#">
+                    <a href="myrequest.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/users.png" class="bg-white p-1 rounded w-6 h-6">My Requests</li>
                     </a>
 
@@ -73,9 +73,9 @@
                     </a> -->
                     
 
-                    <a href="#">
+                    <!-- <a href="#">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">View Items</li>
-                    </a>
+                    </a> -->
 
                     <a href="#">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
@@ -141,13 +141,28 @@
                     </div>
                 </div>
             </div>
+            <?php
+ $u_dp = $row['department'];
+ $name = ucfirst($row['firstname']). " ". ucfirst($row['lastname']);                      
+ $num = 0;
+ $ress = mysqli_query($db,"SELECT * FROM requests WHERE user_id='$user' ");
+ $total_request = mysqli_num_rows($ress);
 
+ $ress2 = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name' AND r_status='pending'");
+ $total_request2 = mysqli_num_rows($ress2);
+?>
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                total item
+            <div class="col-span-2">
+                        <p class="text-xl flex font-bold">Total Requests</p>
+                        <p class="text-lg font-semibold"><?php echo $total_request; ?></p>
+                    </div>
             </div>
 
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                
+            <div class="col-span-2">
+                        <p class="text-xl flex font-bold">Total Pending Requests</p>
+                        <p class="text-lg font-semibold"><?php echo $total_request2; ?></p>
+                    </div>
             </div>
         </div>
 
@@ -167,6 +182,7 @@
                                 <h2>Department:  <?php  echo " ".$rowss['dep_name'];  ?></h2> 
                                 <h2>Property Code:  <?php  echo " ".$rowss['property_code'];  ?></h2> 
                                 <h2>Description:  <?php  echo " ".$rowss['description'];  ?></h2> 
+                                <h2>Quantity:  <?php  echo " ".$rowss['quantity'];  ?></h2> 
                         <?php
                         }
                 

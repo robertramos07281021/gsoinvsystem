@@ -144,7 +144,7 @@
                                 <td class="py-3 text-center"> <?php echo  $rowr['r_status'] ?>  </td>
                                 <td class="py-3 text-center"><a href="myrequest_view.php?id=<?php echo $rowr['r_id']; ?>" class="border-r pr-2 mr-2" style='color:blue; font-weight:700;'>View</a>
                               
-                                <?php if($rowr['r_status']==="cancelled"){ echo "";?>  <?php }
+                                <?php if($rowr['r_status']==="cancelled" || $rowr['r_status']==="declined"  ){ echo "";?>  <?php }
                                 else{?>
                                     <a href="myrequest.php?id=<?php echo $rowr['r_id']; ?>" class="border-r pr-2 mr-2" style='color:red; font-weight:700;'>Cancel</a>
                                  
