@@ -222,7 +222,7 @@
                         if(isset($_POST['decline'])){
                             $reason = $_POST['reason'];
                             $tr = trim($reason);
-                            $dec = "decline";
+                            $dec = "declined";
                             $emp =  strlen($tr);
                             if(!empty($reason) || $emp > 0){
 

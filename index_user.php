@@ -164,7 +164,7 @@
                                 <th class="w-40 pb-3">Item</th>
                                 <th class="w-40 pb-3">Department</th>
                                 <th class="w-40 pb-3">Property Code</th>
-                                
+                                <th class="w-40 pb-3"> Quantity</th>
                                 <th class="w-40 pb-3">Action</th>
                                 
                              </tr>
@@ -188,7 +188,7 @@
                                 <td class="py-3 text-center"> <?php echo  ucfirst($row_item['item_name']);?></td>
                                 <td class="py-3 text-center"> <?php echo  $row_item['dep_name'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row_item['property_code'] ?>  </td>
-                                 
+                                <td class="py-3 text-center"> <?php echo  $row_item['quantity'] ?>  </td>
                                 <td class="py-3 text-center"><a href="index_user_viewItems.php?id=<?php echo $row_item['id']; ?>" class="border-r pr-2 mr-2" style='color:blue; font-weight:700;'>View</a>
                                 <a href="index_user.php?id=<?php echo $row_item['id']; ?>" class="border-r pr-2 mr-2" style='color:red; font-weight:700;'>Request</a>
                                  
@@ -225,6 +225,9 @@
                     <label>Purpose:</label> <br>  
                     <input   name="purpose" value="<?php  if(isset($_POST['request'])){ echo $_POST['purpose']; } ?>"> 
                     <br>
+                    <label>Quantity:</label> <i>Available items <?php echo $rowss['quantity']; ?></i> <br>  
+                    <input type="number" min="1"  name="quantity" value="<?php  if(isset($_POST['request'])){ echo $_POST['quantity']; } ?>"> 
+                    <br>
                     <label>Date Needed:</label> <br> 
                     <input type="date" id="txtDate" name="date_needed" value='<?php  if(isset($_POST['request'])){ echo $_POST['date_needed']; } ?>' required/>
 
@@ -246,6 +249,9 @@
                                 $item_id = $_GET['id'];
                                 $requester = ucfirst($row['firstname']). " ". ucfirst($row['lastname']);
                                 $item_name = $rowss['item_name'];
+                                $i_quantity = $rowss['quantity'];
+                                $request_quantity= $_POST['quantity'];
+
                                 $dep_name = $u_dp;
                                 $property_code = $rowss['property_code'];
                                 $end_user = $rowss['end_user'];
@@ -255,6 +261,11 @@
                                 $t = strlen(trim($purpose));
                                  
                                 if(!empty($purpose) && !empty($dateN) && $t != 0){
+
+                                    if($i_quantity>$request_quantity){
+                                        $tquan = $i_quantity - $request_quantity;
+
+                                        mysqli_query($db,"UPDATE items SET quantity='$tquan' WHERE id='$item_id'");
                                         mysqli_query($db, "INSERT INTO requests (item_id,requester,item_name,dep_name,property_code,purpose,end_user,description,r_status,date,date_needed)
                              VALUES ('$item_id','$requester','$item_name','$dep_name','$property_code','$purpose','$end_user','$description','$r_status','$date','$dateN')");
 
@@ -268,12 +279,20 @@
                                                             </script>
 
                             <?php
+                                    }else{
+                                        ?>
+                                                <script>
+                                                  swal({title: "Invalid Quantity", text: "Must be less than available quantity of items.", type:"error", icon: "error"});
+                                                                    
+                                                 </script>
+                                        <?php
+                                    }
+
                                 }else{
                                     ?>
                                       <script>
-                                                                    swal({title: "Incomplete details", text: "Please fill up the forms.", type:"error", icon: "error"});
-                                                                    
-                                                            </script>
+                                         swal({title: "Incomplete details", text: "Please fill up the forms.", type:"error", icon: "error"});
+                                      </script>
 
                                 <?php
                                 }
