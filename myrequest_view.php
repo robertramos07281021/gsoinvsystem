@@ -172,8 +172,8 @@
         <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
             <div class="col-span-5 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
              
-                        
-               
+                        <button style="padding:.2rem; background:gray;color:white;border-radius:5px;"><a href="myrequest.php"><< Back </a> </button>
+               <br>
                         <?php
                        if(isset($_GET['id'])){
 
@@ -191,7 +191,7 @@
                          
                      
                         ?>
-
+                                <br>
                             <h3> Item: <?php echo $row1['item_name'];?> </h3>
                             <h3> Property Code: <?php echo $row1['property_code'];?> </h3>
                             <h3> Description: <?php echo $row1['description'];?> </h3>
@@ -201,7 +201,19 @@
                             <h3> Status of Request: <?php echo $row1['r_status'];?> </h3>
                             <h3> Request Date: <?php echo $row1['date'];?> </h3>
                             <h3> Date Needed: <?php echo $row1['date_needed'];?> </h3>
-                            <?php if($row1['r_status'] !== 'cancelled'){?>  <h3> Deadline: <?php echo $totaldays." Day/s to go.";?> </h3>
+
+                            <br>
+                            
+                            <?php
+                            $reason = $row1['reason'];
+                                if(!empty($reason)){
+                                    ?>
+                                    <h3> Reason for declined: <?php echo $row1['reason'];?> </h3>
+                                    <?php
+                                }else{
+                                    echo "";
+                                }
+                            if($row1['r_status'] !== 'cancelled'){?>  <h3> Deadline: <?php echo $totaldays." Day/s to go.";?> </h3>
                                   <?php } ?>
                            
 
