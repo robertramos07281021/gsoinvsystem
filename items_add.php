@@ -8,7 +8,7 @@ include('serverAdd.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <lnk rel="stylesheet" type="text/css" href="./css/department_mgmt.css">i
+    <link rel="stylesheet" type="text/css" href="./css/department_mgmt.css">
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>

@@ -216,14 +216,13 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-5 mt-6 h-[73%] pb-6 gap-6">
+        <div class="grid grid-cols-6 mt-6 h-[73%] pb-6 gap-6">
             <div class="col-span-3 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
                 <table class="w-full">
                     <thead> 
                         <tr >
                             <th class="pb-3">ID</th>
-                            <th class="pb-3">Firstname</th>
-                            <th class="pb-3">Lastname</th>
+                            <th class="pb-3">Fullname</th>
                             <th class="pb-3">Username</th>
                             <th class="pb-3">Department</th>
                             <th class="pb-3">Login Status</th>
@@ -237,8 +236,8 @@
                         ?>
                             <tr class="border-b">
                                 <td class="text-center py-2"> <?php echo $num; ?></td>
-                                <td class="text-center py-2"> <?php echo ucfirst($row['firstname']); ?></td>
-                                <td class="text-center py-2"> <?php echo ucfirst($row['lastname']); ?></td>
+                                <td class="text-center py-2"> <?php echo ucfirst($row['firstname'])." ". ucfirst($row['lastname']); ?></td>
+                              
                                 <td class="text-center py-2"> <?php echo ucfirst($row['username']); ?></td>
                                 <td class="text-center py-2"> <?php echo ucfirst($row['department']);?></td>
                                 <td class="text-center py-2">  <?php 
@@ -263,14 +262,14 @@
 
             </div>
 
-            <div class="col-span-2  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-                <div class="h-full">
+            <div class="col-span-3  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+                <div class="h-full p-10 overflow-auto">
                 <table class="w-full">
                     <thead>
                         <tr>
                             <th class="pb-3">ID</th>
                             <th class="pb-3">Item Name</th>
-                            <th class="pb-3">Department Name</th>
+                            <th class="pb-3">Department</th>
                             <th class="pb-3">Property Code</th>
                             <th class="pb-3">User</th>
 
@@ -302,15 +301,15 @@
 
                         // Read data of each row and display in the table
                         while ($row = $result->fetch_assoc()) {
-                            echo "
-                            <tr data-dep-id='{$row['dep_name']}'>
-                                <td>{$row['id']}</td>
-                                <td>{$row['item_name']}</td>
-                                <td>{$row['dep_name']}</td>
-                                <td>{$row['property_code']}</td>
-                                <td>{$row['end_user']}</td>
+                            ?>
+                            <tr data-dep-id='<?php echo $row['dep_name']?>'>
+                                <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['id']?></td>
+                                <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['item_name']?></td>
+                                <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['dep_name']?></td>
+                                <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['property_code']?></td>
+                                <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['end_user']?></td>
                             </tr>
-                            ";
+                        <?php
                         }
                         ?>
                     </tbody>

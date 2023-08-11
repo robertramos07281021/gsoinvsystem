@@ -9,12 +9,7 @@ include('serverEdit.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/department_mgmt.css">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <style>
        #logoutModal{
             display: none;
@@ -31,6 +26,19 @@ include('serverEdit.php');
         #logOutButtonNo:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
         }
+        .editItemSubmit{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .editItemCancel{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .editItemSubmit:hover{
+            box-shadow: 2px 2px 0px 0px #66cc00;
+        }
+        .editItemCancel:hover{
+            box-shadow: 2px 2px 0px 0px #ff4d4d;
+        }
+
     </style>
 
     <title>GSO Invsys</title>
@@ -110,13 +118,13 @@ include('serverEdit.php');
     <article class=" col-span-4 pt-6 pr-6 w-full h-full  ">
         
             <div class="flex justify-between text-white">
-                <p class="font-semibold text-2xl">Items</a></p>
+                <p class="font-semibold text-2xl"><a href="items_page.php">Items</a> / <span class="text-gray-200">Edit Items</span></p>
                 <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row  ['lastname']);?></span></p>
             </div>
-            <div class="w-full h-[92.5%]  ">
+            <div class="w-full h-[89.5%] mt-5  ">
                 <div class="w-full h-full gap-6 ">
-                    <div class ="container my-5">
-                        <h2>Edit Item</h2>
+                    <div class ="container w-full h-full bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] flex justify-center rounded-xl">
+                        
                         <?php
                         if (!empty($errorMessage)) {
                             echo "
@@ -128,70 +136,73 @@ include('serverEdit.php');
                         }
                         ?>
 
-                        <form method="post">
-                            <input type="hidden" name="id" value="<?php echo $id; ?>">
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Item Name</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="item_name" value="<?php echo $item_name; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">department</label>
-                                <div class="col-sm-6">
-                                    <select class="form-select" name="dep_name">
-                                        <?php foreach ($dep_names as $depId => $dep_name) {
-                                            $selected = ($depId == $dep_name) ? 'selected' : '';
-                                            echo "<option value='$depId' $selected>$dep_name</option>";
-                                        } ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Property Code</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="property_code" value="<?php echo $property_code; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Quantity</label>
-                                <div class="col-sm-6">
-                                    <input type="number" class="form-control" name="quantity" value="<?php echo $quantity; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">User</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="end_user" value="<?php echo $end_user; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Description</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="description" value="<?php echo $description; ?>">
-                                </div>
-                            </div>
-                            <?php
-                            if (!empty($successMessage)) {
-                                echo "
-                                <div class='row mb-3'>
-                                    <div class='offset-sm-3 col-sm-6'>
-                                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                                        <strong>$successMessage</strong>
-                                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                                        </div>
+                        <form method="post" class="h-full flex grid content-between w-1/2 ">
+                            <div>
+                                <h2 class="w-full text-center font-semibold text-2xl pt-4 pb-4">Edit Item</h2>
+                                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                <div class="row mb-3">
+                                    <label class="font-semibold text-lg" for="item_name">Item Name:</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="w-full border-2 border-gray-200 p-1 rounded-md" name="item_name" id="item_name" value="<?php echo $item_name; ?>">
                                     </div>
                                 </div>
-                                ";
-                            }
-                            ?>
-                            <div class="row mb-3">
+                                <div class="mb-3">
+                                    <label for="dep_name" class="font-semibold text-lg">Department:</label>
+                                    <div >
+                                        <select class="w-full border-2 border-gray-200 p-1 rounded-md" name="dep_name" id="dep_name">
+                                            <?php foreach ($dep_names as $depId => $dep_name) {
+                                                $selected = ($depId == $dep_name) ? 'selected' : '';
+                                                echo "<option value='$depId' $selected>$dep_name</option>";
+                                            } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class=" mb-3">
+                                    <label class="font-semibold text-lg" for="property_code">Property Code:</label>
+                                    <div >
+                                        <input type="text" class="w-full border-2 border-gray-200 p-1 rounded-md" id="property_code" name="property_code" value="<?php echo $property_code; ?>">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="font-semibold text-lg" for="quantity">Quantity:</label>
+                                    <div >
+                                        <input type="number" class="w-full border-2 border-gray-200 p-1 rounded-md" id="quantity" name="quantity" value="<?php echo $quantity; ?>">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="font-semibold text-lg">User:</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="w-full border-2 border-gray-200 p-1 rounded-md" name="end_user" value="<?php echo $end_user; ?>">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="font-semibold text-lg">Description</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="w-full border-2 border-gray-200 p-1 rounded-md" name="description" value="<?php echo $description; ?>">
+                                    </div>
+                                </div>
+                                <?php
+                                if (!empty($successMessage)) {
+                                    echo "
+                                    <div class='row mb-3'>
+                                        <div class='offset-sm-3 col-sm-6'>
+                                            <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                            <strong>$successMessage</strong>
+                                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ";
+                                }
+                                ?>
+                            </div>
+                            <div class="flex gap-6 mb-10 w-full  justify-center">
                                 <div class="offset-sm-3
                                 col-sm-3 d-grid">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="py-1 w-28 border border-green-500 bg-green-500 rounded transition ease-out duration-300 hover:bg-white hover:text-green-500 text-white font-semibold editItemSubmit">Submit</button>
                                 </div>
                                 <div class="col-sm-3 d-grid">
-                                    <a class="btn btn-outline-primary" href="/gsoinvsystem/items_page.php" role="button">Cancel</a>
+                                    <a href="items_page.php" ><div class="text-center py-1 w-28 border border-red-500 bg-red-500 rounded transition ease-out duration-300 hover:bg-white hover:text-red-500 text-white font-semibold editItemCancel">Cancel</div></a>
                                 </div>
                             </div>
                         </form>

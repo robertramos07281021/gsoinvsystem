@@ -42,6 +42,18 @@ $total_active = mysqli_num_rows($active_result);
         .newItemButton:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
         }
+        .itemEditButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .itemEditButton:hover{
+            box-shadow:2px 2px 0px 0px #66cc00;
+        }
+        .itemDeleteButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .itemDeleteButton:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d;
+        }
     </style>
 
     <title>GSO Invsys</title>
@@ -125,11 +137,11 @@ $total_active = mysqli_num_rows($active_result);
     <article class=" col-span-4 pt-6 pr-6 w-full h-full  ">
         
             <div class="flex justify-between text-white">
-                <p class="font-semibold text-3xl">Items</a></p>
+                <p class="font-semibold text-2xl">Items</a></p>
                 <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row  ['lastname']);?></span></p>
             </div>
-            <div class="w-full h-[89.3%] mt-5 ">
-                <div class="w-full h-full bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl">
+            <div class="w-full h-[90.3%] mt-5 ">
+                <div class="w-full h-full bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] overflow-auto mr-2 rounded-xl">
                     <div>
                         <div class="p-10">
                             <a class="bg-red-500 px-4 py-1 text-white font-semibold rounded newItemButton transition ease-out duration-300 border border-red-500 hover:text-red-500 hover:bg-white" href="items_add.php" role="button">New Item</a>
@@ -171,19 +183,19 @@ $total_active = mysqli_num_rows($active_result);
                                 ?>
                             </select>
                         </div>
-                        <br>
-                        <table class="w-full p-10 border">
-                            <thead>
+                        <div class="px-10 ">
+                        <table class="w-full p-5">
+                            <thead >
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Item Name</th>
-                                    <th>Department Name</th>
-                                    <th>Property Code</th>
-                                    <th>Quantity</th>
-                                    <th>User</th>
-                                    <th>Description</th>
-                                    <th>Date Added</th>
-                                    <th>Action</th>
+                                    <th class="pb-3">ID</th>
+                                    <th class="pb-3">Item Name</th>
+                                    <th class="pb-3">Department</th>
+                                    <th class="pb-3">Property Code</th>
+                                    <th class="pb-3">Qty</th>
+                                    <th class="pb-3">User</th>
+                                    <th class="pb-3">Description</th>
+                                    <th class="pb-3">Date Added</th>
+                                    <th class="pb-3">Action</th>
                                     
                                 </tr>
                             </thead>
@@ -217,21 +229,22 @@ $total_active = mysqli_num_rows($active_result);
                                 // Read data of each row and display in the table
                                 while ($row = $result->fetch_assoc()) {
                                 ?>
-                                    <tr data-dep-id='<?php $row['dep_name']?>'>
-                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['id']?></td>
-                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['item_name']?></td>
-                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['dep_name']?></td>
-                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['property_code']?></td>
-                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['quantity']?></td>
-                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['end_user']?></td>
-                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['description']?></td>
-                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['created_at']?></td>
-                                        <td class="border-b-2 border-gray-100 text-center">
-                                            <a class='btn btn-primary btn-sm' href='/gsoinvsystem/items_Edit.php?id=<?php echo $row['id']?>'>Edit</a>
-                                            <a class='btn btn-danger btn-sm' href='/gsoinvsystem/deleteitem.php?id=<?php echo $row['id']?>'>Delete</a>
+                               
+                                    <tr data-dep-id='<?php $row['dep_name']?>' class="border-b-2 border-gray-200">
+                                        <td><?php echo $row['id']?></td>
+                                        <td ><?php echo $row['item_name']?></td>
+                                        <td ><?php echo $row['dep_name']?></td>
+                                        <td class="text-center py-4"><?php echo $row['property_code']?></td>
+                                        <td class="text-center py-4"><?php echo $row['quantity']?></td>
+                                        <td class="text-center py-4"><?php echo $row['end_user']?></td>
+                                        <td class="text-center py-4"><?php echo $row['description']?></td>
+                                        <td class="text-center py-4"><?php echo $row['created_at']?></td>
+                                        <td class="  flex justify-center gap-2 py-4">
+                                            <a class='bg-green-500 text-center w-20 itemEditButton rounded transition ease-out text-white font-semibold duration-300 hover:bg-white hover:text-green-500 border border-green-500 ' href='items_Edit.php?id=<?php echo $row['id']?>'>Edit</a>
+                                            <a class='bg-red-500 w-20 text-center itemDeleteButton rounded transition ease-out text-white font-semibold duration-300 hover:bg-white hover:text-red-500 border border-red-500 ' href='deleteitem.php?id=<?php echo $row['id']?>'>Delete</a>
                                         </td>
                                     </tr>
-                                    
+                          
                                 <?php
                                     // Count the items per department and store it in the array
                                     $department = isset($row['dep_name']) ? ucfirst($row['dep_name']) : '';
@@ -245,6 +258,7 @@ $total_active = mysqli_num_rows($active_result);
                                 ?>
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>

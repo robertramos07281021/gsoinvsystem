@@ -151,60 +151,11 @@
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
         </div>
 
-        <div class="w-full grid grid-cols-4 mt-10 h-1/6 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-            <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                <div class="grid grid-cols-3">
-                    <div class="col-span-2">
-                        <p class="text-xl flex font-bold">Total Active User</p>
-                        <p class="text-lg font-semibold"><?php echo $total_users; ?></p>
-                    </div>
-                    <div class="flex justify-end">
-                        <i><img src="./image/icons8-account-24.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
-                    </div>
-                </div>
-            </div>
+        
 
-            <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                <div class="grid grid-cols-3">
-                    <div class="col-span-2">
-                        <p class="text-xl flex font-bold">Total Users Online</p>
-                        <p class="text-lg font-semibold"><?php echo $total_online; ?></p>
-                    </div>
-                    <div class="flex justify-end">
-                        <i><img src="./image/icons8-account-24.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                <div class="grid grid-cols-3">
-                    <div class="col-span-2">
-                        <p class="text-xl flex font-bold">Total Items</p>
-                        <p class="text-lg font-semibold"><?php echo $items; ?></p>
-                    </div>
-                    <div class="flex justify-end">
-                        <i><img src="./image/item.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] ">
-            <div class="grid grid-cols-3 p-5">
-                    <div class="col-span-2">
-                        <p class="text-xl flex font-bold">For Approval</p>
-                        <p class="text-lg font-semibold"><?php echo $count_row; ?></p>
-                         
-                    </div>
-                    <div class="flex justify-end">
-                        <i><img src="./image/icons8-approval-482.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-5 mt-6 h-[73%] pb-6 gap-6">
+        <div class="grid grid-cols-5 mt-6 h-[96%] pb-6 gap-6">
             <div class="col-span-5 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-            <br>
+           
             
              <?php
                 if(isset($_GET['did'])){  //decline request
@@ -258,7 +209,7 @@
 
                 }
              ?>
-            <center>For Approval </center>
+            <center class="mb-10 text-2xl font-bold">For Approval </center>
 
                  <table class="w-full">
                     <thead>
@@ -269,7 +220,7 @@
                             <th class="pb-3">Department</th>
                             <th class="pb-3">Purpose</th>
                             <th class="pb-3">Status</th>
-                            <th class="pb-3">Action</th>
+                            <th class="pb-3 ">Action</th>
                         </tr>
                     </thead>
 
@@ -289,7 +240,7 @@
                                 <td class="text-center py-2"> <?php echo ucfirst($row2['r_status']);?></td>
                                 <td class="text-center py-2"> <a href="index_approval.php?id=<?php echo $row2['r_id']; ?>" class="border-r pr-2 mr-2" style='color:green; font-weight:700;'>
                                 Approve</a>
-                                <a href="index_approval.php?did=<?php echo $row2['r_id']; ?>" class="border-r pr-2 mr-2" style='color:red; font-weight:700;'>
+                                <a href="index_approval.php?did=<?php echo $row2['r_id']; ?>" class=" pr-2 mr-2" style='color:red; font-weight:700;'>
                                 Decline</a>
                                 </td>
 

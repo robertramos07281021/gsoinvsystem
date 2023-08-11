@@ -41,6 +41,15 @@ $errors = array();
         #creatAccountButton:hover{
             box-shadow: 2px 2px 0px 0px white;
         }
+        .activateButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .deactivateButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .viewButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
     </style>
   
 </head>
@@ -159,15 +168,15 @@ $errors = array();
                                 <td class="py-3 text-center"> <?php echo  $row['department'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row['role'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row['status'] ?>  </td>
-                                <td class="py-3 text-center"><a href="user_edit.php?id=<?php echo $row['user_id']; ?>" class="border-r pr-2 mr-2" style='color:blue; font-weight:700;'>View</a>
+                                <td class="py-3 text-center flex justify-center"><a href="user_edit.php?id=<?php echo $row['user_id']; ?>"><div  class="border-r pr-2 mr-2 " ><p class="py-[2px] text-white bg-blue-500 border border-blue-500 w-24 rounded hover:bg-white hover:text-blue-500 transition ease-out viewButton duration-300">View </p></div> </a>
                                 
                                  
                                 <?php if($row['status'] === "inactive"){ ?>
-                                    <a href="user_management.php?id=<?php echo $row['user_id']; ?>" style="background: green; color:white; font-weight:700;">&nbsp;&nbsp; Activate&nbsp;&nbsp;</a>
+                                    <a href="user_management.php?id=<?php echo $row['user_id']; ?>" class="w-24 py-[2px] bg-green-600 border border-green-600 rounded text-white transition ease-out duration-300 activateButton hover:bg-white hover:text-green-600 ">Activate</a>
                                 
                                 <?php } elseif($row['status'] === "active"){
                                     ?>
-                                    <a href="user_management.php?id=<?php echo $row['user_id']; ?>" style="background: tomato; color:white; font-weight:700;">&nbsp;Deativate&nbsp;</a>
+                                    <a href="user_management.php?id=<?php echo $row['user_id']; ?>" class="w-24 py-[2px] bg-red-400 border border-red-400 rounded text-white deactivateButton transition ease-out duration-300 hover:bg-white hover:text-red-400">Deactivate</a>
                                     <?php
                                 } ?>
                                 
@@ -192,7 +201,7 @@ $errors = array();
                                 <td class="py-3 text-center"> <?php echo  $row['department'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row['role'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row['status'] ?>  </td>
-                                <td class="py-3 text-center"><a href="update_account.php" class="border-r pr-2 mr-2" style='color:green; font-weight:700;'>View Me</a>
+                                <td class="py-3 text-center flex justify-center"><a href="update_account.php" ><p class="w-52 border py-1 text-white bg-green-500 border-green-500 rounded transition ease-out duration-300 hover:bg-white hover:text-green-500 activateButton" >View Me</p></a>
                                 
                                  
                                 
