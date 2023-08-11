@@ -157,7 +157,7 @@
 
     <article class="col-span-4 py-6 pr-6 w-full h-full col-start-2 ">
         <div class="flex justify-between text-white">
-            <p class="text-3xl font-semibold">My Profile</p>
+            <p class="text-2xl font-semibold">My Profile</p>
             <p class="font-semibold"> Welcome &nbsp; <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
         </div>
         <div class="grid grid-flow-row-dense grid-cols-6 grid-rows-6 gap-6 h-screen pb-6 ">
@@ -167,17 +167,14 @@
                 <form method="POST" class="h-full grid content-between"> 
                     <div class="pt-5">
                         <div>
-                            <label for="change1" class="font-semibold text-xl">New Password: </label>
-                            <input type="password" name="change1" id="change1" class="border-2 border-gray-200 w-full pl-2 p-1 text-lg" placeholder="Password" required>
+                            <label for="change1" class="font-semibold text-lg">New Password: </label>
+                            <input type="password" name="change1" id="change1" class="border-2 border-gray-200 w-full pl-2 p-1 " placeholder="Password" required>
                         </div>
                         <div class="pt-2">
-                            <label class="font-semibold text-xl" for="change2">Confirm Password: </label> <br>
-                            <input type="password" name="change2"  id="change2" class="border-2 border-gray-200 w-full pl-2 p-1 text-lg" placeholder="Password" required>
+                            <label class="font-semibold text-lg" for="change2">Confirm Password: </label> <br>
+                            <input type="password" name="change2"  id="change2" class="border-2 border-gray-200 w-full pl-2 p-1 " placeholder="Password" required>
                         </div>
-                        <div class="pt-2">
-                            <label class="font-semibold text-xl" for="oldPass">Old Password: </label> <br>
-                            <input type="password" name="oldPass" id="oldPass" class="border-2 border-gray-200 w-full pl-2 p-1 text-lg" placeholder="Password" required>
-                        </div>
+                        
                     </div>
                     <div class="flex justify-center">
                         <button type="submit" name="change_pass" class="border border-green-500 w-32 py-1 mb-8 bg-green-500 text-white profileSaveButton rounded transition ease-out duration-300 hover:text-green-500 hover:bg-white" > Save </button>
@@ -190,29 +187,29 @@
 
                 <div class=" grid grid-flow-row-dense grid-cols-4 grid-rows-5 h-full">
 
-                    <div class="col-start-1 col-span-4 pt-5 pr-5 flex flex-row items-center gap-5 h-full px-5">
-                        <img src="https://media.gettyimages.com/id/1180926773/photo/studio-waist-up-portrait-of-a-beautiful-businesswoman-with-crossed-arms.jpg?s=612x612&w=gi&k=20&c=BlCz_Y26FpXviP-1E7P9uISFsbO-W9ducNo0gJ8r9jM="  class="border-4 border White h-36 w-[17%] rounded-full ">
-                        <div class="w-[83%]">
+                    <div class="col-start-1 col-span-4 pt-5 pr-5 flex flex-row items-center gap-5 h-full px-5 mt-4">
+                        <img src="https://media.gettyimages.com/id/1180926773/photo/studio-waist-up-portrait-of-a-beautiful-businesswoman-with-crossed-arms.jpg?s=612x612&w=gi&k=20&c=BlCz_Y26FpXviP-1E7P9uISFsbO-W9ducNo0gJ8r9jM="  class="border-4 border-gray-500 h-36 w-[18%] rounded-full ">
+                        <div class="w-[82%]">
                         <p class="text-4xl"><?php echo ucfirst($row['firstname']). " " .ucfirst($row['lastname'])?><hr class="border-2 border-[black]/60"></p>
                         <hr>
                         </div>
                         
                     </div>
-                    <div class="row-start-2 col-span-5 row-span-4 ">
-                        <form class="h-full w-full grid grid-row-6 px-5 pb-5 pt-10 content-between " method="POST">
+                    <div class="row-start-2 col-span-5 row-span-4 mt-3">
+                        <form class="h-full w-full grid grid-row-6 px-5 pb-5 pt-7 content-between " method="POST">
                                 <div class="row-span-5  grid content-between">
                                     <div class=" h-full">
                                         <div class="grid grid-cols-2 gap-5 ">
                                             <div>
-                                                <label for="firstName" class="text-xl font-semibold">Firstname: </label>
-                                                <input type="text" name="firstName" id="firstName" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg" max="50" value="<?php 
+                                                <label for="firstName" class=" font-semibold">Firstname: </label>
+                                                <input type="text" name="firstName" id="firstName" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-sm" max="50" value="<?php 
                                                 if(isset($_POST['post_update'])){
                                                     echo $_POST['firstName'];
                                                 }else{ echo ucfirst($row['firstname']); } ?>" required disabled>
                                             </div>
                                             <div>
-                                                <label for="lastName" class="text-xl font-semibold">Lastname: </label>
-                                                <input type="text" name="lastName" id="lastName" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg" max="50" value="<?php 
+                                                <label for="lastName" class=" font-semibold">Lastname: </label>
+                                                <input type="text" name="lastName" id="lastName" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-sm" max="50" value="<?php 
                                                 if(isset($_POST['post_update'])){
 
                                                     echo $_POST['lastName'];
@@ -223,8 +220,8 @@
                                                 
                                         <div class="grid grid-cols-2 gap-5 pt-3">
                                             <div>
-                                                <label for="email" class="text-xl font-semibold">Email address:</label>
-                                                <input type="text" name="email" id="email" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg" value="<?php 
+                                                <label for="email" class=" font-semibold">Email address:</label>
+                                                <input type="text" name="email" id="email" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-sm" value="<?php 
                                                 if(isset($_POST['post_update'])){
 
                                                     echo $_POST['email'];
@@ -232,8 +229,8 @@
                                                     echo $row['email']; } ?>" required disabled>
                                             </div>
                                             <div>
-                                                <label for="mobileNum" class="text-xl font-semibold">Phone Number:</label>
-                                                <input type="number" name="mobileNum" id="mobileNum" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg"   value="<?php 
+                                                <label for="mobileNum" class=" font-semibold">Phone Number:</label>
+                                                <input type="number" name="mobileNum" id="mobileNum" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-sm"   value="<?php 
                                                 if(isset($_POST['post_update'])){
 
                                                 echo $_POST['mobileNum'];
@@ -243,8 +240,8 @@
                                         </div>
 
                                         <div class="pt-3">
-                                            <label for="address" class="text-xl font-semibold">Address:</label>
-                                            <input type="text" name="address" id="address" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg" max="30" value="<?php 
+                                            <label for="address" class=" font-semibold">Address:</label>
+                                            <input type="text" name="address" id="address" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-sm" max="30" value="<?php 
                                             if(isset($_POST['post_update'])){
                                                 echo $_POST['address'];
                                             }else{ echo $row['u_address']; } ?>" required disabled>
@@ -252,19 +249,19 @@
 
                                         <div class="grid grid-cols-2 gap-5 pt-3">
                                             <div>
-                                                <label for="userName" class="text-xl font-semibold">Username:</label>
-                                                <div class="border-2 bg-gray-100/50 border-gray-200 rounded w-full p-1 pl-2 text-lg"><?php echo $row['username']; ?></div>
+                                                <label for="userName" class="font-semibold">Username:</label>
+                                                <div class="border-2 bg-gray-100/50 border-gray-200 rounded w-full p-1 pl-2 text-sm"><?php echo $row['username']; ?></div>
                                             </div>
                                             <div>
-                                                <label for="role" class="text-xl font-semibold">Role:</label>
-                                                <div class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg bg-gray-100/50" ><?php echo $row['role']?></div>
+                                                <label for="role" class="font-semibold">Role:</label>
+                                                <div class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-sm bg-gray-100/50" ><?php echo $row['role']?></div>
                                             </div>
                                         </div>
                                                 
                                         <div class="pt-3">
-                                            <label for="department" class="text-xl font-semibold">Department:</label>
+                                            <label for="department" class="font-semibold">Department:</label>
                                            
-                                            <select name="department" id="department" class="border-2 border-gray-200 rounded w-full p-2 pl-2 text-lg" disabled>
+                                            <select name="department" id="department" class="border-2 border-gray-200 text-sm rounded w-full p-1 pl-2 " disabled>
                                                     <?php  
                                                         $dp_query = "SELECT * FROM department";
                                                         $res_q = mysqli_query($db,$dp_query);
@@ -283,8 +280,8 @@
 
                                         <div class=" flex grid grid-cols-2 gap-5 pt-3  w-full " id="changePass"  style="display:none;">
                                             <div class=" w-full">
-                                                <label for="up_pass1" class="text-xl font-semibold">To save changes, confirm current Password:</label>
-                                                <input type="password" name="up_pass1" id="up_pass1"  class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg" placeholder="Password" required>
+                                                <label for="up_pass1" class=" font-semibold">To save changes, confirm current Password:</label>
+                                                <input type="password" name="up_pass1" id="up_pass1"  class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-sm " placeholder="Password" required>
                                             </div>
                                         </div>
 
