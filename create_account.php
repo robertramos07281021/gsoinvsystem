@@ -359,7 +359,7 @@ $total_offline = mysqli_num_rows($d2_result);
 
                     </div>
 
-                    <div class="row-start-2 row-span-5 bg-white col-span-2 rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] w-full">
+                    <div class="row-start-2 row-span-2 bg-white col-span-2 rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] w-full">
 
 <!-- pa display po ung department tapos palagyan ng total account ng department -->
                                             
