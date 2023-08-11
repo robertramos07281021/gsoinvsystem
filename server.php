@@ -133,14 +133,14 @@ if(isset($_POST['submit'])){
 
         $password = md5($password1); //encrypt password.
 
-        $sql = "INSERT INTO users (firstname, lastname, email, phone_num, u_address, username, password, department, role, status)
-                VALUES ('$firstname', '$lastname', '$email', '$phone', '$address' , '$username', '$password', '$department', '$role', 'active')";
+        $sql = "INSERT INTO users (firstname, lastname, email, phone_num, u_address, username, password, department, role, status,mode)
+                VALUES ('$firstname', '$lastname', '$email', '$phone', '$address' , '$username', '$password', '$department', '$role', 'active','offline')";
 
         mysqli_query($db, $sql);  //insert to database
 
-        $_SESSION['username'] = $username;
-        $_SESSION['firstname'] = $firstname;
-        $_SESSION['lastname'] = $lastname;
+        // $_SESSION['username'] = $username;
+        // $_SESSION['firstname'] = $firstname;
+        // $_SESSION['lastname'] = $lastname;
 
 
        
