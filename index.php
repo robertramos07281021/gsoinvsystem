@@ -128,6 +128,10 @@
                     <a href="items_page.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
+                    
+                    <a href="index_approval.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/icons8-approval-48.png"  class="bg-white p-1 rounded w-6 h-6">Manage Approval</li>
+                    </a>
 
                     <a href="reportPage.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
@@ -199,14 +203,14 @@
             </div>
             
             <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-            <div class="grid grid-cols-3">
+            <div class="grid grid-cols-3 p-5">
                     <div class="col-span-2">
                         <p class="text-xl flex font-bold">For Approval</p>
                         <p class="text-lg font-semibold"><?php echo $count_row; ?></p>
-                        <p><button class='approve'> <a href="index_approval.php">Manage Approval</a> </button> </p>
+                        
                     </div>
                     <div class="flex justify-end">
-                        <i><img src="./image/item.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
+                        <i><img src="./image/icons8-approval-482.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
                     </div>
                 </div>
             </div>

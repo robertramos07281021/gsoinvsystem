@@ -43,6 +43,13 @@ $total_active = mysqli_num_rows($active_result);
         #deptChangeNameSave:hover{
             box-shadow:2px 2px 0px 0px #66cc00;
         }
+        #deptNewNameButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        #deptNewNameButton:hover{
+            
+            box-shadow:2px 2px 0px 0px #ff4d4d;
+        }
 
     </style>
 
@@ -91,6 +98,10 @@ $total_active = mysqli_num_rows($active_result);
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
                     </a>
 
+                    <a href="index_approval.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/icons8-approval-48.png"  class="bg-white p-1 rounded w-6 h-6">Manage Approval</li>
+                    </a>
+
                     <a href="reportPage.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
@@ -126,7 +137,7 @@ $total_active = mysqli_num_rows($active_result);
                 <p class="font-semibold text-2xl"><a href="user_management_dept.php">Departments</a> / <span class="text-gray-300">Manage Departments</span></p>
                 <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row  ['lastname']);?></span></p>
             </div>
-            <div class="w-full h-[93%] ">
+            <div class="w-full h-[92.5%] ">
                 <div class="w-full h-full gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
                     <div class="w-full h-full grid-flow-row-dense grid grid-cols-6 grid-rows-6 gap-6  pt-6">
                         <div class="bg-white col-span-3 rounded-lg p-2 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
@@ -181,7 +192,7 @@ $total_active = mysqli_num_rows($active_result);
                             </form>
 
                         </div>
-                        <div class="row-start-2 col-span-3 row-span-5 grid content-between h-full bg-white rounded-lg p-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
+                        <div class="row-start-2 col-span-3 row-span-5 grid content-between h-full bg-white rounded-lg p-6" >
                
                 <!-- Display department -->
 
@@ -202,9 +213,9 @@ $total_active = mysqli_num_rows($active_result);
                                             if($rowdep['merge']=='no'){
                                 ?>
                                     <tr>   <!-- rowsss from database will be displayed -->
-                                        <td><?php echo $num; ?></td>
-                                        <td><?php echo $rowdep['dep_name']; ?> </td>
-                                        <td class="flex justify-end gap-2"><span class="border-r border-gray-500/50 px-2">
+                                        <td class="border-b-2 border-gray-100 pt-1"><?php echo $num; ?></td>
+                                        <td class="border-b-2 border-gray-100 pt-1"><?php echo $rowdep['dep_name']; ?> </td>
+                                        <td class="flex justify-end gap-2 border-b-2 border-gray-100 pt-1"><span class="border-r-2 border-gray-300 px-2">
                                             <a href="department_mgmt.php?id=<?php echo $rowdep['dep_id']; ?>" style="color: green;">Edit</a></span>
                                             <span> <a href="department_mgmt.php?delid=<?php echo $rowdep['dep_id']; ?>" style="color: red;">Delete</span></td>
                                         
@@ -226,14 +237,14 @@ $total_active = mysqli_num_rows($active_result);
 
                                             ?>
                                             <br><br>
-                                                <div class="">
+                                            
                                                 <form method="POST" class="flex gap-5 items-center w-full justify-end">
 
                                                 <!-- Display selected department name -->
-                                                <p> <?php echo $rows['dep_name']; ?> </p>
+                                                <p><?php echo $rows['dep_name']; ?><span>&nbsp;to&nbsp;</span></p>
 
-                                                <input type="text" name="edit_dep" style="border:1;" placeholder="Enter Department">
-                                                <button name="edit" style="background:green; color:white;">&nbsp; Save &nbsp; </button>
+                                                <input type="text" name="edit_dep" class="w-52 p-1 border-2 border-gray-200 rounded-lg" placeholder="New Department Name">
+                                                <button name="edit" class="px-10 py-1 border border-red-500 hover:bg-white hover:text-red-500 transition ease-out duration-300 bg-red-500 text-white font-semibold rounded " id="deptNewNameButton">Save</button>
 
                                            </form>
 
@@ -297,9 +308,9 @@ $total_active = mysqli_num_rows($active_result);
                             
                         </div>
                         <div class="col-start-4 col-span-3 row-span-3 bg-white rounded-lg p-3">
-                            <form class="flex h-[100%] flex-col " method="POST" >
-                                <p class="text-xl font-semibold">Merge Department</p>
-                                <ul class="w-full grid grid-cols-4 mt-2"> 
+                            <form class="flex h-[100%] flex-col" method="POST" >
+                                <p class="text-xl font-semibold pt-2 pl-2">Merge Department</p>
+                                <ul class="w-full grid grid-cols-4 mt-2 p-5"> 
                                 
                                     <?php 
                                     //display all departments
@@ -393,11 +404,11 @@ $total_active = mysqli_num_rows($active_result);
                                     ?>
 
 
-                        <div class="col-start-4 col-span-3 row-start-4 row-span-3 bg-white rounded-lg">
-                           <h3> Merged Departments </h3>
+                        <div class="col-start-4 col-span-3 row-start-4 row-span-3 bg-white rounded-lg p-5">
+                           <h3 class="text-xl font-semibold"> Merged Departments </h3>
 
 
-                                            <table>
+                        <table class="w-full mt-5 overflow-auto">
 
                            <?php  
                                 //display merge department
@@ -422,10 +433,10 @@ $total_active = mysqli_num_rows($active_result);
                                     $prev = $mdep['old_dep'];
 
                                     ?>
-                                <tr>
-                                    <td><?php echo $num_merge;  ?></td>  
-                                    <td><?php echo $new;  ?></td>  
-                                    <td><?php echo $prev;  ?></td>  
+                                <tr >
+                                    <td class="text-center pt-2 border-b-2 border-gray-100"><?php echo $num_merge;  ?></td>  
+                                    <td class="text-center border-b-2 border-gray-100"><?php echo $new;  ?></td>  
+                                    <td class="text-center border-b-2 border-gray-100"><?php echo $prev;  ?></td>  
                             
                                 </tr>
 
