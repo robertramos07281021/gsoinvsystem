@@ -27,8 +27,8 @@
         }
         #logOutButtonYes:hover{
             box-shadow:2px 2px 0px 0px #66cc00;
-}
-#logOutButtonNo:hover{
+        }
+        #logOutButtonNo:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
     }
     </style>

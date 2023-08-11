@@ -42,6 +42,12 @@ if ($result && $result->num_rows > 0) {
         .welcomePageBg{
             background-image: url("./image/welcomeBg.jpg");
         }
+        #printButton{
+            box-shadow:2px 2px 0px 0px #000000; 
+        }
+        #printButton:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d; 
+        }
    </style>
     
 </head>
@@ -93,7 +99,7 @@ if ($result && $result->num_rows > 0) {
     <div class=" absolute top-0 left-0 -z-10 h-80 w-full welcomePageBg">
     </div>
   
-    <article class=" col-start-2 col-span-4 mr-6">
+    <article class=" col-start-2 col-span-4 mr-6" id="reportPrintDiv">
     <?php
         //connect to db and display account details
         $user = $_SESSION['user_id'];
@@ -113,102 +119,102 @@ if ($result && $result->num_rows > 0) {
             </center>
           
     
-    <!-- Add the dropdown for selecting the department -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <label for="departmentSelect" class="font-semibold text-lg ">Select Department:</label>
-                <select id="departmentSelect" class="border-2 border-gray-100 p-1 w-60 rounded-lg">
-                    <option value="">Select Department</option>
-                    <?php foreach ($departments as $dept): ?>
-                        <option value="<?= $dept; ?>"><?= $dept; ?></option>
-                    <?php endforeach; ?>
-                </select>
+            <!-- Add the dropdown for selecting the department -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="departmentSelect" class="font-semibold text-lg ">Select Department:</label>
+                        <select id="departmentSelect" class="border-2 border-gray-100 p-1 w-60 rounded-lg">
+                            <option value="">Select Department</option>
+                            <?php foreach ($departments as $dept): ?>
+                                <option value="<?= $dept; ?>"><?= $dept; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+                            
+            <br />
+            <div class="flex flex-col grid content-between h-[79%] ">
+                <div>
+                    <table id="myTable-report" class="" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th class="pb-5">Item Name</th>
+                                <th class="pb-5">Department</th>
+                                <th class="pb-5">Property Code</th>
+                                <th class="pb-5">Quantity</th>
+                                <th class="pb-5">End User</th>
+                                <th class="pb-5">Created At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $servername = "localhost";
+                            $username = "root";
+                            $password = "";
+                            $database = "gsoinventory";
+                                
+                            // Connection to the database
+                            $connection = new mysqli($servername, $username, $password, $database);
+                                
+                            // Check connection
+                            if ($connection->connect_error) {
+                                die("Connection failed: " . $connection->connect_error);
+                            }
+                        
+                            // Read all rows from the database table "items" and join with "department" table to get department name
+                            $sql = "SELECT items.*, department.dep_name FROM items 
+                                    LEFT JOIN department ON items.dep_name = department.dep_name";
+                            $result = $connection->query($sql);
+                        
+                            if (!$result) {
+                                die("Invalid query: " . $connection->error);
+                            }
+                        
+                            // Initialize an array to store the item counts per department
+                            $itemCounts = array();
+                        
+                            // Read data of each row and display in the table
+                            while ($row = $result->fetch_assoc()) {
+                                ?>
+                                <tr data-dep-id='<?php echo $row['dep_name']?>'>
+                                    <td class="text-center border-b-2 border-gray-100 pb-2"><?php echo  $row['item_name']?></td>
+                                    <td class="text-center border-b-2 border-gray-100 pb-2"><?php echo $row['dep_name']?></td>
+                                    <td class="text-center border-b-2 border-gray-100 pb-2"><?php echo $row['property_code']?></td>
+                                    <td class="text-center border-b-2 border-gray-100 pb-2"><?php echo $row['quantity']?></td>
+                                    <td class="text-center border-b-2 border-gray-100 pb-2"><?php echo $row['end_user']?></td>
+                                    <td class="text-center border-b-2 border-gray-100 pb-2"><?php echo $row['created_at']?></td>
+                                </tr>
+                            <?php   
+
+                                // Count the items per department and store it in the array
+                                $department = isset($row['dep_name']) ? ucfirst($row['dep_name']) : '';
+                                if (isset($itemCounts[$department])) {
+                                    $itemCounts[$department]++;
+                                } else {
+                                    $itemCounts[$department] = 1;
+                                }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                    
+                <div class="w-full  flex justify-end">
+                
+                     
+                            <a href=""><button id="printButton" class="w-36 py-1 bg-red-500 text-white text-lg font-semibold rounded transition ease-out duration-300 border border-red-500 hover:text-red-500 hover:bg-white ">Print Report</button></a>
+                            
+                </div>  
             </div>
         </div>
-    </div>
-    
-    <br />
-    <div class="table-responsive">
-        <table id="myTable-report" class="table table-bordered table-hover" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>Item Name</th>
-                    <th>Department</th>
-                    <th>Property Code</th>
-                    <th>Quantity</th>
-                    <th>End User</th>
-                    <th>Created At</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $database = "gsoinventory";
-
-                // Connection to the database
-                $connection = new mysqli($servername, $username, $password, $database);
-
-                // Check connection
-                if ($connection->connect_error) {
-                    die("Connection failed: " . $connection->connect_error);
-                }
-
-                // Read all rows from the database table "items" and join with "department" table to get department name
-                $sql = "SELECT items.*, department.dep_name FROM items 
-                        LEFT JOIN department ON items.dep_name = department.dep_name";
-                $result = $connection->query($sql);
-
-                if (!$result) {
-                    die("Invalid query: " . $connection->error);
-                }
-
-                // Initialize an array to store the item counts per department
-                $itemCounts = array();
-
-                // Read data of each row and display in the table
-                while ($row = $result->fetch_assoc()) {
-                    echo "
-                    <tr data-dep-id='{$row['dep_name']}'>
-                        <td>{$row['item_name']}</td>
-                        <td>{$row['dep_name']}</td>
-                        <td>{$row['property_code']}</td>
-                        <td>{$row['quantity']}</td>
-                        <td>{$row['end_user']}</td>
-                        <td>{$row['created_at']}</td>
-                    </tr>
-                    ";
-
-                    // Count the items per department and store it in the array
-                    $department = isset($row['dep_name']) ? ucfirst($row['dep_name']) : '';
-                    if (isset($itemCounts[$department])) {
-                        $itemCounts[$department]++;
-                    } else {
-                        $itemCounts[$department] = 1;
-                    }
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <button id="printButton" class="btn btn-primary">Print Report</button>
-            </div>
-        </div>
-    </div>  
-        </div>
-
-
     </article>
     <script>
-        document.getElementById('printButton').addEventListener('click', function () {
+        // document.getElementById('printButton').addEventListener('click', function () {
         // Call the browser's print function
-        window.print();
-        });
+        // window.print();
+        // });
         // Add event listener to the department select dropdown
         document.getElementById('departmentSelect').addEventListener('change', function () {
             var selectedDepartment = this.value;
