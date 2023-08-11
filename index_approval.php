@@ -40,7 +40,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="../GSOInvSys/css/style.css">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>GSO Invsys</title>
@@ -211,8 +210,8 @@
              ?>
             <center class="mb-10 text-2xl font-bold">For Approval </center>
 
-                 <table class="w-full">
-                    <thead>
+                 <table class="w-full border">
+                    <thead class="border">
                     <tr >
                             <th class="pb-3">ID</th>
                             <th class="pb-3">Requisitioner</th>

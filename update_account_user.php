@@ -54,7 +54,7 @@
                     </a>
 
 
-                    <a href="#">
+                    <a href="reportPageRequest.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
@@ -91,10 +91,11 @@
     
       
         <div class=" grid grid-flow-row-dense grid-cols-6 grid-rows-5 gap-6 h-full pb-6">
-            <div class="bg-white row-start-1 row-span-5 col-span-4 col-start-1 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl static">
-              
-                <div class=" grid grid-flow-row-dense grid-cols-4 grid-rows-5  h-full">
-                    <div class="col-start-1 col-span-4 pt-5 pr-5 flex border flex-row justify-between h-full">
+            <div class="bg-white row-start-1  col-span-4  col-start-1 mt-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl ">
+
+                <div class=" grid grid-flow-row-dense grid-cols-4 grid-rows-5 h-full">
+
+                    <div class="col-start-1 col-span-4 pt-5 pr-5 flex flex-row justify-between h-full">
                         <img src="https://media.gettyimages.com/id/1180926773/photo/studio-waist-up-portrait-of-a-beautiful-businesswoman-with-crossed-arms.jpg?s=612x612&w=gi&k=20&c=BlCz_Y26FpXviP-1E7P9uISFsbO-W9ducNo0gJ8r9jM="  class="border-4 border White h-36 w-36 rounded-full ">
                         <p class="text-4xl"><?php echo ucfirst($row['firstname']). " " .ucfirst($row['lastname'])?><hr class="border-2 border-[black]/60"></p>
                         
@@ -281,6 +282,9 @@
 
                     </div> 
                 </div>
+                <div class="border col-span-2 row-start-">
+
+                </div>
                 
                    <?php
 
@@ -334,11 +338,7 @@
 
 
             </div>
-            <div class="bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] border col-start-1 row-start-2 row-span-4 col-start-3 rounded-xl">
-                                               
-
-            </div>
-
+          
         </div>
            
     </article>

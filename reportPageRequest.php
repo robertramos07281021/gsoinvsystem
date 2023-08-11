@@ -62,7 +62,7 @@ if ($result && $result->num_rows > 0) {
             <hr class="mt-5 border border-black">
             <div class="text-start w-full mt-10">
                 <ul>
-                <a aria-current="page" href="index.php">
+                <a aria-current="page" href="index_user.php">
                         <li class="mb-2 w-full hover:bg-red-300/20 p-3 rounded-md font-semibold flex gap-1 "><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard</li>
                     </a>
                     <a href="myrequest.php">
@@ -70,14 +70,14 @@ if ($result && $result->num_rows > 0) {
                     </a>
 
                     <a href="reportPageRequest.php">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 requests-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
+                        <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 requests-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
-                    <a href="update_account.php">
+                    <a href="update_account_user.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 requests-center"><img src="./image/user.png"  class="bg-white p-1 rounded w-6 h-6">My Profile</li>
                     </a>
                 </ul>  
             </div>
-            <div class="flex  h-full w-full requests-end">
+            <div class="flex  h-full w-full items-end">
                 <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full requests-center  py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex requests-center">Log Out</p></button>
             </div>
         </div>
