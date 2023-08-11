@@ -171,8 +171,12 @@
                             <input type="password" name="change1" id="change1" class="border-2 border-gray-200 w-full pl-2 p-1 text-lg" placeholder="Password" required>
                         </div>
                         <div class="pt-2">
-                            <label class="font-semibold text-xl">Confirm Password: </label> <br>
-                            <input type="password" name="change2" class="border-2 border-gray-200 w-full pl-2 p-1 text-lg" placeholder="Password" required>
+                            <label class="font-semibold text-xl" for="change2">Confirm Password: </label> <br>
+                            <input type="password" name="change2"  id="change2" class="border-2 border-gray-200 w-full pl-2 p-1 text-lg" placeholder="Password" required>
+                        </div>
+                        <div class="pt-2">
+                            <label class="font-semibold text-xl" for="oldPass">Old Password: </label> <br>
+                            <input type="password" name="oldPass" id="oldPass" class="border-2 border-gray-200 w-full pl-2 p-1 text-lg" placeholder="Password" required>
                         </div>
                     </div>
                     <div class="flex justify-center">
@@ -197,7 +201,7 @@
                     <div class="row-start-2 col-span-5 row-span-4 ">
                         <form class="h-full w-full grid grid-row-6 px-5 pb-5 pt-10 content-between " method="POST">
                                 <div class="row-span-5  grid content-between">
-                                    <div class="border h-full">
+                                    <div class=" h-full">
                                         <div class="grid grid-cols-2 gap-5 ">
                                             <div>
                                                 <label for="firstName" class="text-xl font-semibold">Firstname: </label>
@@ -260,7 +264,7 @@
                                         <div class="pt-3">
                                             <label for="department" class="text-xl font-semibold">Department:</label>
                                            
-                                            <select name="department" id="department" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg" disabled>
+                                            <select name="department" id="department" class="border-2 border-gray-200 rounded w-full p-2 pl-2 text-lg" disabled>
                                                     <?php  
                                                         $dp_query = "SELECT * FROM department";
                                                         $res_q = mysqli_query($db,$dp_query);
