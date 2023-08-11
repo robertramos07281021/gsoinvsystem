@@ -17,7 +17,7 @@
         }
 
         #logoutModal{
-    display: none;
+            display: none;
         }   
         #logOutButtonYes{
             box-shadow: 2px 2px 0px 0px #000000;
@@ -30,13 +30,31 @@
         }
         #logOutButtonNo:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
-    }
+        }
+        .editFormButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .editFormButton:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d; 
+        }
+        .profileSaveButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .profileSaveButton:hover{
+            box-shadow:2px 2px 0px 0px #66cc00;
+        }
+        .profileCancelButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .profileCancelButton:hover{
+            box-shadow:2px 2px 0px 0px #ff4d4d; 
+        }
     </style>
 
 
     <title>GSO Invsys Sample</title>
 </head>
-<body class=" text-black w-full h-screen grid grid-cols-5">
+<body class=" text-black w-full h-screen grid grid-cols-5 overflow-hidden">
    
 
 
@@ -82,27 +100,8 @@
         $row = mysqli_fetch_assoc($result);
     ?>
 
-
-    <article class="col-span-4 py-6 pr-6 w-full h-full col-start-2 ">
-        <div class="flex justify-between text-white">
-            <p class="text-3xl font-semibold">My Profile</p>
-            <p class="font-semibold"> Welcome &nbsp; <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
-        </div>
-    
-      
-        <div class=" grid grid-flow-row-dense grid-cols-6 grid-rows-5 gap-6 h-full pb-6">
-            <div class="bg-white row-start-1  col-span-4  col-start-1 mt-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl ">
-
-                <div class=" grid grid-flow-row-dense grid-cols-4 grid-rows-5 h-full">
-
-                    <div class="col-start-1 col-span-4 pt-5 pr-5 flex flex-row justify-between h-full">
-                        <img src="https://media.gettyimages.com/id/1180926773/photo/studio-waist-up-portrait-of-a-beautiful-businesswoman-with-crossed-arms.jpg?s=612x612&w=gi&k=20&c=BlCz_Y26FpXviP-1E7P9uISFsbO-W9ducNo0gJ8r9jM="  class="border-4 border White h-36 w-36 rounded-full ">
-                        <p class="text-4xl"><?php echo ucfirst($row['firstname']). " " .ucfirst($row['lastname'])?><hr class="border-2 border-[black]/60"></p>
-                        
-                    </div>
-                    <div class="row-start-2 col-span-5 row-span-4">
-                        <!-- php code  -->
-                        <?php
+<!-- php code  -->
+<?php
                             $errors = array();
                             //update user Account
                             if(isset($_POST['post_update'])){
@@ -156,137 +155,163 @@
                             }
                         ?>
 
+    <article class="col-span-4 py-6 pr-6 w-full h-full col-start-2 ">
+        <div class="flex justify-between text-white">
+            <p class="text-3xl font-semibold">My Profile</p>
+            <p class="font-semibold"> Welcome &nbsp; <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
+        </div>
+        <div class="grid grid-flow-row-dense grid-cols-6 grid-rows-6 gap-6 h-screen pb-6 ">
+            <div class=" col-start-5 row-start-1 col-span-2 row-span-3 mt-5 rounded-xl p-5 bg-white drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
 
-                        <form class="h-full w-full grid grid-row-6 px-5 pt-5 " method="POST">
-                            <div class="row-span-5">
-                                <div class="grid grid-cols-2 gap-5 ">
-                                    <div>
-                                        <label for="firstName">Firstname: </label>
-                                        <input type="text" name="firstName" id="firstName" class="border w-full pl-2" max="50" value="<?php 
-                                        if(isset($_POST['post_update'])){
-                                            echo $_POST['firstName'];
-                                        }else{ echo ucfirst($row['firstname']); } ?>" required disabled>
-                                    </div>
-                                    <div>
-                                        <label for="lastName">Lastname: </label>
-                                        <input type="text" name="lastName" id="lastName" class="border w-full pl-2" max="50" value="<?php 
-                                        if(isset($_POST['post_update'])){
+                <center class="text-2xl font-bold">Change password</center>
+                <form method="POST" class="h-full grid content-between"> 
+                    <div class="pt-5">
+                        <div>
+                            <label for="change1" class="font-semibold text-xl">New Password: </label>
+                            <input type="password" name="change1" id="change1" class="border-2 border-gray-200 w-full pl-2 p-1 text-lg" placeholder="Password" required>
+                        </div>
+                        <div class="pt-2">
+                            <label class="font-semibold text-xl">Confirm Password: </label> <br>
+                            <input type="password" name="change2" class="border-2 border-gray-200 w-full pl-2 p-1 text-lg" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <button type="submit" name="change_pass" class="border border-green-500 w-32 py-1 mb-8 bg-green-500 text-white profileSaveButton rounded transition ease-out duration-300 hover:text-green-500 hover:bg-white" > Save </button>
+                    </div>
+                </form>
 
-                                            echo $_POST['lastName'];
-                                        }else{
-                                            echo ucfirst($row['lastname']); } ?>" required disabled>
-                                    </div>
-                                </div>
+
+            </div>
+            <div class="bg-white row-span-6 col-span-4 h-[90%] mt-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] rounded-xl ">
+
+                <div class=" grid grid-flow-row-dense grid-cols-4 grid-rows-5 h-full">
+
+                    <div class="col-start-1 col-span-4 pt-5 pr-5 flex flex-row items-center gap-5 h-full px-5">
+                        <img src="https://media.gettyimages.com/id/1180926773/photo/studio-waist-up-portrait-of-a-beautiful-businesswoman-with-crossed-arms.jpg?s=612x612&w=gi&k=20&c=BlCz_Y26FpXviP-1E7P9uISFsbO-W9ducNo0gJ8r9jM="  class="border-4 border White h-36 w-[17%] rounded-full ">
+                        <div class="w-[83%]">
+                        <p class="text-4xl"><?php echo ucfirst($row['firstname']). " " .ucfirst($row['lastname'])?><hr class="border-2 border-[black]/60"></p>
+                        <hr>
+                        </div>
                         
-                                <div class="grid grid-cols-2 gap-5 pt-3">
-                                    <div>
-                                        <label for="email">Email address:</label>
-                                        <input type="text" name="email" id="email" class="border w-full pl-2" value="<?php 
-                                        if(isset($_POST['post_update'])){
+                    </div>
+                    <div class="row-start-2 col-span-5 row-span-4 ">
+                        <form class="h-full w-full grid grid-row-6 px-5 pb-5 pt-10 content-between " method="POST">
+                                <div class="row-span-5  grid content-between">
+                                    <div class="border h-full">
+                                        <div class="grid grid-cols-2 gap-5 ">
+                                            <div>
+                                                <label for="firstName" class="text-xl font-semibold">Firstname: </label>
+                                                <input type="text" name="firstName" id="firstName" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg" max="50" value="<?php 
+                                                if(isset($_POST['post_update'])){
+                                                    echo $_POST['firstName'];
+                                                }else{ echo ucfirst($row['firstname']); } ?>" required disabled>
+                                            </div>
+                                            <div>
+                                                <label for="lastName" class="text-xl font-semibold">Lastname: </label>
+                                                <input type="text" name="lastName" id="lastName" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg" max="50" value="<?php 
+                                                if(isset($_POST['post_update'])){
 
-                                            echo $_POST['email'];
-                                        }else{
-                                            echo $row['email']; } ?>" required disabled>
+                                                    echo $_POST['lastName'];
+                                                }else{
+                                                    echo ucfirst($row['lastname']); } ?>" required disabled>
+                                            </div>
+                                        </div>
+                                                
+                                        <div class="grid grid-cols-2 gap-5 pt-3">
+                                            <div>
+                                                <label for="email" class="text-xl font-semibold">Email address:</label>
+                                                <input type="text" name="email" id="email" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg" value="<?php 
+                                                if(isset($_POST['post_update'])){
+
+                                                    echo $_POST['email'];
+                                                }else{
+                                                    echo $row['email']; } ?>" required disabled>
+                                            </div>
+                                            <div>
+                                                <label for="mobileNum" class="text-xl font-semibold">Phone Number:</label>
+                                                <input type="number" name="mobileNum" id="mobileNum" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg"   value="<?php 
+                                                if(isset($_POST['post_update'])){
+
+                                                echo $_POST['mobileNum'];
+                                            }else{
+                                                echo $row['phone_num']; } ?>" required disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="pt-3">
+                                            <label for="address" class="text-xl font-semibold">Address:</label>
+                                            <input type="text" name="address" id="address" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg" max="30" value="<?php 
+                                            if(isset($_POST['post_update'])){
+                                                echo $_POST['address'];
+                                            }else{ echo $row['u_address']; } ?>" required disabled>
+                                        </div>
+
+                                        <div class="grid grid-cols-2 gap-5 pt-3">
+                                            <div>
+                                                <label for="userName" class="text-xl font-semibold">Username:</label>
+                                                <div class="border-2 bg-gray-100/50 border-gray-200 rounded w-full p-1 pl-2 text-lg"><?php echo $row['username']; ?></div>
+                                            </div>
+                                            <div>
+                                                <label for="role" class="text-xl font-semibold">Role:</label>
+                                                <div class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg bg-gray-100/50" ><?php echo $row['role']?></div>
+                                            </div>
+                                        </div>
+                                                
+                                        <div class="pt-3">
+                                            <label for="department" class="text-xl font-semibold">Department:</label>
+                                           
+                                            <select name="department" id="department" class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg" disabled>
+                                                    <?php  
+                                                        $dp_query = "SELECT * FROM department";
+                                                        $res_q = mysqli_query($db,$dp_query);
+                                                        while($deprow = mysqli_fetch_assoc($res_q)){
+                                                            ?>
+
+                                                        <option value="<?php echo $deprow['dep_name']; ?>" >
+                                                        <?php echo $deprow['dep_name']; ?>  </option>
+                                                            <?php
+
+                                                        }
+
+                                                    ?>
+                                            </select>
+                                        </div>
+
+                                        <div class=" flex grid grid-cols-2 gap-5 pt-3  w-full " id="changePass"  style="display:none;">
+                                            <div class=" w-full">
+                                                <label for="up_pass1" class="text-xl font-semibold">To save changes, confirm current Password:</label>
+                                                <input type="password" name="up_pass1" id="up_pass1"  class="border-2 border-gray-200 rounded w-full p-1 pl-2 text-lg" placeholder="Password" required>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div>
-                                        <label for="mobileNum">Phone Number:</label>
-                                        <input type="number" name="mobileNum" id="mobileNum" class="border w-full pl-2"   value="<?php 
-                                        if(isset($_POST['post_update'])){
 
-                                        echo $_POST['mobileNum'];
-                                    }else{
-                                        echo $row['phone_num']; } ?>" required disabled>
-                                </div>
-                            </div>
-                            <div class="pt-3">
-                                <label for="address">Address:</label>
-                                <input type="text" name="address" id="address" class="w-full border pl-2" max="30" value="<?php 
-                                if(isset($_POST['post_update'])){
-                                    echo $_POST['address'];
-                                }else{ echo $row['u_address']; } ?>" required disabled>
-                            </div>
-                            <div class="grid grid-cols-2 gap-5 pt-3">
-                                <div>
-                                    <label for="userName">Username:</label>
-                                    <input type="text" name="userName" id="userName" class="border w-full pl-2" value="<?php 
-                                    if(isset($_POST['post_update'])){
-                                        echo $_POST['userName'];
-                                    }else{
-                                         echo $row['username']; }?>" required disabled>
-                                </div>
-                                <div>
-                                    <label for="role">Role:</label>
-                                    <input type="text" name="role" id="role" class="border w-full pl-2" value="<?php echo $row['role']?>" disabled>
-                                </div>
-                            </div>
-                            <div class="pt-3">
-                                <label for="department">Department:</label>
-                                <!-- <input type="text" name="department" id="department" class="border w-full pl-2" value="#" disabled> -->
-                                <select name="department" id="department" class="border w-full pl-2" disabled>
-                                        <?php  
-                                            $dp_query = "SELECT * FROM department";
-                                            $res_q = mysqli_query($db,$dp_query);
-                                            while($deprow = mysqli_fetch_assoc($res_q)){
-                                                ?>
+                   
 
-                                            <option value="<?php echo $deprow['dep_name']; ?>" >
-                                            <?php echo $deprow['dep_name']; ?>  </option>
-                                                <?php
+                                    <div class="pt-5">
+                                        <div class="flex justify-center gap-5 hidden" id="saveForm" >
+                                            <button class="border border-green-500 px-5 py-1 bg-green-500 text-white profileSaveButton transition ease-out duration-300 rounded hover:text-green-500 hover:bg-white" type="submit" name="post_update" >Save</button>
+                                            <div class=" border border-red-500 bg-red-500  text-white font-semibold px-4 py-1 cursor-pointer profileCancelButton transition ease-out duration-300 rounded hover:text-red-500 hover:bg-white" onclick="cancelButton()" >
+                                                Cancel
+                                            </div>
+                                        </div>
 
-                                            }
-
-                                        ?>
-                                </select>
-                            </div>
-
-                            <div class=" flex grid grid-cols-2 gap-5 pt-3 border w-full " id="changePass"  style="display:none;">
-                                <div class=" w-full">
-                                    <label for="up_pass1">To save changes, confirm current Password:</label>
-                                    
-                                    <input type="password" name="up_pass1" id="up_pass1"  class="border w-full pl-2" placeholder="Password" required>
-                                </div>
-                                <!-- <div class=" w-full">
-                                    <label for="up_pass2">Confirm Password:</label>
-                                    <input type="password" name="up_pass2" class="border w-full pl-2" placeholder="Confirm Password" id="passw2" required>
-                                </div> -->
-                            </div>
-                           
+                                        <div class="flex justify-center" id="editButton">
+                                            <div class="border border-red-500 py-1 cursor-pointer w-32 text-center bg-red-500 rounded text-white font-semibold editFormButton transition ease-out duration-300 hover:text-red-500 hover:bg-white" onclick="editForm()" >Edit</div>
+                                        </div>
+                                    </div>
                             
-                            <div class="pt-5">
-                                <div class="flex justify-end gap-5 " id="saveForm" >
-                                    <button class="border px-5 py-1" type="submit" name="post_update" style="background-color: green; color: white;">Save</button>
-                                    <div class=" border px-4 py-1 cursor-pointer" onclick="cancelButton()" style="background-color: red; color: white;">
-                                        Cancel
-                                    </div>
                                 </div>
-
-                                <div class="flex justify-end" id="editButton">
-                                    <div class="border px-5 py-1" onclick="editForm()"  style="cursor:pointer;" style="background-color: #808080; color: white;">Edit</div>
-                                </div>
-                            </div>
-                        </form><br>
+                        </form>
                         
-                    <h3 >Change password? </h3>
-
-                    <br>
-
-                    <form method="POST"> 
-                    <label>New Password: </label><br>
-                    <input type="password" name="change1" class="border w-full pl-2" placeholder="Password" required>
-                    <br>
-                    <label>Confirm Password: </label> <br>
-                    <input type="password" name="change2" class="border w-full pl-2" placeholder="Password" required>
-                    <br>
-                    <button type="submit" name="change_pass" class="border px-5 py-1" style="background-color: green; color: white;"> Save </button>
-                    </form>
-
+                        
                     </div> 
                 </div>
-                <div class="border col-span-2 row-start-">
-
-                </div>
-                
-                   <?php
+            </div>
+            
+        </div>
+    </article>
+    <?php
 
                         //update Password
                         if(isset($_POST['change_pass'])){
@@ -337,13 +362,6 @@
                     ?>
 
 
-            </div>
-          
-        </div>
-           
-    </article>
-
-
     <div class="absolute top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
         <div class="flex w-full h-full justify-center items-center">
             <div class="h-56 w-80 fixed rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
@@ -372,31 +390,19 @@
 function editForm(){
     document.getElementById("saveForm").style.display="flex";
     document.querySelector("#changePass").style.display = "flex";
-    document.getElementById("editButton").hidden = true;
+    document.getElementById("editButton").style.display = "none";
     document.getElementById("firstName").disabled = false;
     document.getElementById("lastName").disabled = false;
     document.getElementById("email").disabled = false;
     document.getElementById("mobileNum").disabled = false;
     document.getElementById("address").disabled = false;
-    document.getElementById("userName").disabled = false;
-    document.getElementById("role").disabled = true;
     document.getElementById("department").disabled = false;
    
 }
 
 
 function cancelButton(){
-    document.getElementById("saveForm").style.display="none";   
-    document.getElementById("changePass").style.display="none";   
-    document.getElementById("editButton").hidden = false;
-    document.getElementById("firstName").disabled = true;
-    document.getElementById("lastName").disabled = true;
-    document.getElementById("email").disabled = true;
-    document.getElementById("mobileNum").disabled = true;
-    document.getElementById("address").disabled = true;
-    document.getElementById("userName").disabled = true;
-    document.getElementById("role").disabled = true;
-    document.getElementById("department").disabled = true;
+    location.reload();
  }
 
 
