@@ -268,7 +268,7 @@
                                 <?php }
                                 } //if not equal to zero total users
                                     elseif($total_users == 0){
-                                        echo "<p style='font-weight:700; color:black;' > No users found under <u>$dept</u>. </p>";
+                                        echo "<p style='font-weight:700; color:black;'> No users found under <u>$dept</u>. </p>";
                                     }
 
                                 }

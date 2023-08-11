@@ -68,16 +68,8 @@
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/users.png" class="bg-white p-1 rounded w-6 h-6">My Requests</li>
                     </a>
 
-                    <!-- <a href="#">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/department.png"  class="bg-white p-1 rounded w-6 h-6">Departments</li>
-                    </a> -->
-                    
 
-                    <!-- <a href="#">
-                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">View Items</li>
-                    </a> -->
-
-                    <a href="#">
+                    <a href="reportPageRequest.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
@@ -109,64 +101,24 @@
     <article class=" col-span-4 py-6 pr-6 w-full h-full ">
         
         <div class="flex justify-between text-white">
-            <div class="font-semibold flex flex-cols"><p>DashBoard</p><p></p></div>
+            <div class="font-semibold text-2xl flex flex-cols"><a href="index_user.php"><p>Dashboard</p> </a>/<p class="text-gray-200"> ItemView</p></div>
             <p class="font-semibold"> Welcome  &nbsp; <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
         </div>
 
-        <div class="w-full grid grid-cols-4 mt-10 h-1/6 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-            <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                <div class="grid grid-cols-3">
-                    <div class="col-span-2">
-                        <p class="text-xl flex font-bold">Total Active User</p>
-                        <p class="text-lg font-semibold"><?php echo $total_users; ?></p>
-                    </div>
-                    <div class="flex justify-end">
-                        <i><img src="./image/icons8-account-24.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
-                    </div>
-                </div>
-            </div>
+    
 
-            <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-               
+        <?php
+            $u_dp = $row['department'];
+            $name = ucfirst($row['firstname']). " ". ucfirst($row['lastname']);                      
+            $num = 0;
+            $ress = mysqli_query($db,"SELECT * FROM requests WHERE user_id='$user' ");
+            $total_request = mysqli_num_rows($ress);
 
-                
+            $ress2 = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name' AND r_status='pending'");
+            $total_request2 = mysqli_num_rows($ress2);
+        ?>
 
-                <div class="grid grid-cols-3">
-                    <div class="col-span-2">
-                        <p class="text-xl flex font-bold">Total Users Online</p>
-                        <p class="text-lg font-semibold"><?php echo $total_online; ?></p>
-                    </div>
-                    <div class="flex justify-end">
-                        <i><img src="./image/icons8-account-24.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
-                    </div>
-                </div>
-            </div>
-            <?php
- $u_dp = $row['department'];
- $name = ucfirst($row['firstname']). " ". ucfirst($row['lastname']);                      
- $num = 0;
- $ress = mysqli_query($db,"SELECT * FROM requests WHERE user_id='$user' ");
- $total_request = mysqli_num_rows($ress);
-
- $ress2 = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name' AND r_status='pending'");
- $total_request2 = mysqli_num_rows($ress2);
-?>
-            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-            <div class="col-span-2">
-                        <p class="text-xl flex font-bold">Total Requests</p>
-                        <p class="text-lg font-semibold"><?php echo $total_request; ?></p>
-                    </div>
-            </div>
-
-            <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-            <div class="col-span-2">
-                        <p class="text-xl flex font-bold">Total Pending Requests</p>
-                        <p class="text-lg font-semibold"><?php echo $total_request2; ?></p>
-                    </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-5 mt-6 h-full pb-6 gap-6">
+        <div class="grid grid-cols-5 mt-6 h-[95.5%] pb-6 gap-6">
             <div class="col-span-5 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
             
             <!-- View selected items in user page  -->

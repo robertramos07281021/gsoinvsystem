@@ -140,8 +140,8 @@ if (isset($_POST['add_department'])) {
                         <td>{$row['dep_id']}</td>
                         <td>{$row['dep_name']}</td>
                         <td>
-                            <a class='btn btn-primary btn-sm' href='/gsoinvsystem/editdep.php?id={$row['dep_id']}'>Edit</a>
-                            <a class='btn btn-danger btn-sm' href='/gsoinvsystem/deletedepartment.php?id={$row['dep_id']}'>Delete</a>
+                            <a class='btn btn-primary btn-sm' href='editdep.php?id={$row['dep_id']}'>Edit</a>
+                            <a class='btn btn-danger btn-sm' href='deletedepartment.php?id={$row['dep_id']}'>Delete</a>
                         </td>
                     </tr>
                     ";

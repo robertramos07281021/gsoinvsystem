@@ -33,6 +33,12 @@
         #logOutButtonNo:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
         }
+        .requestFormButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .requestFormButton:hover{
+            box-shadow: 2px 2px 0px 0px #66cc00;
+        }
     </style>
   
 </head>
@@ -196,7 +202,7 @@
                         <input type="date" id="txtDate" name="date_needed" value='<?php  if(isset($_POST['request'])){ echo $_POST['date_needed']; } ?>' required class="w-full border-2 border-gray text-base py-1 px-2 rounded" />
                     </div>
                     <div class="w-full flex justify-center mt-10">
-                        <button class="border border-green-500 bg-green-500 text-white font-semibold w-52 py-1" type="submit" name="request">Send Request</button>
+                        <button class="border border-green-500 bg-green-500 text-white font-semibold w-52 py-1 requestFormButton rounded transition ease-out duration-300 hover:bg-white hover:text-green-500" type="submit" name="request">Send Request</button>
                     </div>
 
                 </form>
