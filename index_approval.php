@@ -152,67 +152,14 @@
 
         
 
-        <div class="grid grid-cols-5 mt-6 h-[96%] pb-6 gap-6">
-            <div class="col-span-5 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-           
-            
-             <?php
-                if(isset($_GET['did'])){  //decline request
-                    $id = $_GET['did'];
+        <div class="grid grid-cols-5 mt-6 h-[95.2%] pb-6 gap-6">
+            <div class="col-span-5 p-10 h-full bg-white grid content-between rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+                <div>
+                <center class="mb-10 text-2xl font-bold">For Approval </center>
 
-                    ?>
-                    <form method="POST">
-                    <label>Reason to decline request:</label>
-                    <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="reason" value="<?php if(isset($_POST['reason'])){ echo $_POST['reason']; } ?>">
-                                </div>
-
-                                <button type="submit" style="background:tomato; color:white; border-radius:10px; margin-top:1rem;
-                                margin-bottom:1rem; " name="decline">Submit</button>
-                   </form>
-                        
-                <?php
-
-                        if(isset($_POST['decline'])){
-                            $reason = $_POST['reason'];
-                            $tr = trim($reason);
-                            $dec = "declined";
-                            $emp =  strlen($tr);
-                            if(!empty($reason) || $emp > 0){
-
-                                mysqli_query($db,"UPDATE requests SET r_status='$dec', reason='$reason' WHERE r_id='$id'");
-
-                                ?>
-                                <script>
-                                       swal({title: "Declined!", text: "Request has been declined", type:"success",icon:"success"})
-                                           .then(function(){ 
-                                              location.href="index_approval.php";
-                                               });
-                                </script>
-                    
-                                <?php
-                                
-                            }elseif(empty($reason) || $emp == 0 ){
-                                ?>
-                             <script>
-                   swal({title: "Invalid!", text: "Please indicate reason to decline.", type:"warning",icon:"warning"})
-                    //    .then(function(){ 
-                    //       location.href="index_approval.php";
-                    //        });
-                             </script>
-
-
-                        <?php
-                            }
-                        }
-
-                }
-             ?>
-            <center class="mb-10 text-2xl font-bold">For Approval </center>
-
-                 <table class="w-full border">
-                    <thead class="border">
-                    <tr >
+                 <table class="w-full ">
+                    <thead>
+                        <tr>
                             <th class="pb-3">ID</th>
                             <th class="pb-3">Requisitioner</th>
                             <th class="pb-3">Item Name</th>
@@ -252,8 +199,58 @@
                         ?>
                     </tbody>
                 </table>
+                </div>  
+
+                <?php
+                    if(isset($_GET['did'])){  //decline request
+                    $id = $_GET['did'];
+                ?>
+                    <div>
+                        <form method="POST" class="flex justify-end gap-4 ">
+
+                                <div class="col-sm-2">
+                                    <label>Reason to decline request:</label>
+                                    <input type="text" class="border-2 border-gray-300 rounded py-1 pl-2 w-60" name="reason"  value="<?php if(isset($_POST['reason'])){ echo $_POST['reason']; } ?>">
+                                </div>
+                                <button type="submit" class="w-32 bg-red-500 rounded text-white font-semibold duration-300 ease-out transition hover:text-red-500 hover:bg-white py-1 border border-red-500" name="decline">Submit</button>
+                        </form>
+                    </div>
+                <?php
+                        if(isset($_POST['decline'])){
+                            $reason = $_POST['reason'];
+                            $tr = trim($reason);
+                            $dec = "declined";
+                            $emp =  strlen($tr);
+                            if(!empty($reason) || $emp > 0){
+
+                                mysqli_query($db,"UPDATE requests SET r_status='$dec', reason='$reason' WHERE r_id='$id'");
+
+                                ?>
+                                <script>
+                                       swal({title: "Declined!", text: "Request has been declined", type:"success",icon:"success"})
+                                           .then(function(){ 
+                                              location.href="index_approval.php";
+                                               });
+                                </script>
+                    
+                                <?php
+                                
+                            }elseif(empty($reason) || $emp == 0 ){
+                                ?>
+                             <script>
+                                swal({title: "Invalid!", text: "Please indicate reason to decline.", type:"warning",icon:"warning"})
+                             </script>
+
+
+                        <?php
+                            }
+                        }
+
+                }
+             ?>
 
             </div>
+            
 <?php  
         // get approve id
 

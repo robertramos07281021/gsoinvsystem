@@ -19,7 +19,7 @@
             background-image: url('./image/welcomeBg.jpg');
         }
         #logoutModal{
-    display: none;
+            display: none;
         }   
         #logOutButtonYes{
             box-shadow: 2px 2px 0px 0px #000000;
@@ -29,10 +29,16 @@
         }
         #logOutButtonYes:hover{
             box-shadow:2px 2px 0px 0px #66cc00;
-}
-#logOutButtonNo:hover{
+        }
+        #logOutButtonNo:hover{
             box-shadow:2px 2px 0px 0px #ff4d4d; 
-    }
+        }
+        .requestFormButton{
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        .requestFormButton:hover{
+            box-shadow: 2px 2px 0px 0px #66cc00;
+        }
     </style>
   
 </head>
@@ -142,8 +148,8 @@
                                 <td class="py-3 text-center"> <?php echo  $row_item['dep_name'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row_item['property_code'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row_item['quantity'] ?>  </td>
-                                <td class="py-3 text-center"><a href="index_user_viewItems.php?id=<?php echo $row_item['id']; ?>" class="border-r pr-2 mr-2" style='color:blue; font-weight:700;'>View</a>
-                                <a href="index_user.php?id=<?php echo $row_item['id']; ?>" class="border-r pr-2 mr-2" style='color:red; font-weight:700;'>Request</a>
+                                <td class="py-3 justify-center flex"><a href="index_user_viewItems.php?id=<?php echo $row_item['id']; ?>" class="border-r pr-2 mr-2" style='color:blue; font-weight:700;'>View</a>
+                                <a href="index_user.php?id=<?php echo $row_item['id']; ?>" class=" pr-2 mr-2" style='color:red; font-weight:700;'>Request</a>
                                  
                                  
                                 
@@ -163,8 +169,8 @@
 
             </div>
 
-            <div class="col-span-2  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-               <center> <h2> Request Form </h2> </center>
+            <div class="col-span-2 pt-6 px-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+               <center class="font-bold text-xl mb-2"> <h2> Request Form </h2> </center>
 
                <?php
                         if(isset($_GET['id'])){
@@ -172,21 +178,32 @@
                             $ress = mysqli_query($db,"SELECT * FROM items WHERE id='$id'");
                             $rowss = mysqli_fetch_assoc($ress);
                             ?>
-                <form method="POST" style="width: 25rem;">
-                    <label>Item: <b> <?php echo $rowss['item_name']; ?> </b>  </label> <br>
-                    <label>Property Code: <b>  <?php echo $rowss['property_code']; ?>  </b> </label><br>
-                    <label>Purpose:</label> <br>  
-                    <input   name="purpose" value="<?php  if(isset($_POST['request'])){ echo $_POST['purpose']; } ?>"> 
-                    <br>
-                    <label>Quantity:</label> <i>Available items <?php echo $rowss['quantity']; ?></i> <br>  
-                    <input type="number" min="1"  name="quantity" value="<?php  if(isset($_POST['request'])){ echo $_POST['quantity']; } ?>"> 
-                    <br>
-                    <label>Date Needed:</label> <br> 
-                    <input type="date" id="txtDate" name="date_needed" value='<?php  if(isset($_POST['request'])){ echo $_POST['date_needed']; } ?>' required/>
-
-                    <br><br>
-                    <button style="background: green; color:white; " type="submit" name="request"> &nbsp; Send Request&nbsp;&nbsp;</button>
-                        
+                <form method="POST" class=" mt-10">
+                    <div class="mb-2">
+                        <label class="text-lg font-bold">Item:</label>
+                        <div class="border-2 border-gray text-base py-1 px-2 rounded "><?php echo $rowss['item_name']; ?></div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="text-lg font-bold">Property Code:</label>
+                        <div class="border-2 border-gray text-base py-1 px-2 rounded "><?php echo $rowss['property_code']; ?></div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="text-lg font-bold">Purpose:</label> 
+                        <input   name="purpose" value="<?php  if(isset($_POST['request'])){ echo $_POST['purpose']; } ?>" class="w-full border-2 border-gray text-base py-1 px-2 rounded "> 
+                    </div>
+                    <div class="mb-2">
+                        <label class="text-lg font-bold">Quantity:</label> <i>Available items <?php echo $rowss['quantity']; ?></i>
+                        <input type="number" min="1"  name="quantity" value="<?php  if(isset($_POST['request'])){ echo $_POST['quantity']; } ?>" class="w-full border-2 border-gray text-base py-1 px-2 rounded ">
+                    
+                    </div>
+                     
+                    <div>
+                        <label class="text-lg font-bold">Date Needed:</label> 
+                        <input type="date" id="txtDate" name="date_needed" value='<?php  if(isset($_POST['request'])){ echo $_POST['date_needed']; } ?>' required class="w-full border-2 border-gray text-base py-1 px-2 rounded" />
+                    </div>
+                    <div class="w-full flex justify-center mt-10">
+                        <button class="border border-green-500 bg-green-500 text-white font-semibold w-52 py-1 requestFormButton rounded transition ease-out duration-300 hover:bg-white hover:text-green-500" type="submit" name="request">Send Request</button>
+                    </div>
 
                 </form>
 

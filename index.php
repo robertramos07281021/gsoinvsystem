@@ -158,19 +158,19 @@
 
     
 
-    <article class=" col-span-4 py-6 pr-6 w-full h-full ">
+    <article class=" col-span-4 py-6 pr-6 w-full h-screen ">
         
         <div class="flex justify-between text-white">
             <div class="font-semibold text-2xl flex flex-cols"><p>DashBoard</p> </div>
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
         </div>
 
-        <div class="w-full grid grid-cols-4 mt-10 h-1/6 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
+        <div class="w-full h-1/6 grid grid-cols-4 mt-10 gap-6 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] ">
             <div class="bg-white rounded-xl p-5 drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
                 <div class="grid grid-cols-3">
                     <div class="col-span-2">
-                        <p class="text-xl flex font-bold">Total Active User</p>
-                        <p class="text-lg font-semibold"><?php echo $total_users; ?></p>
+                        <p class="text-lg flex font-bold">Total Active User</p>
+                        <p class=" font-semibold"><?php echo $total_users; ?></p>
                     </div>
                     <div class="flex justify-end">
                         <i><img src="./image/icons8-account-24.png" class="h-10 w-10 rounded-full border p-2 bg-red-200"></img></i>
@@ -216,7 +216,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-6 mt-6 h-[73%] pb-6 gap-6">
+        <div class="grid grid-cols-6 mt-6 h-[73%]  pb-6 gap-6">
             <div class="col-span-3 p-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
                 <table class="w-full">
                     <thead> 
@@ -261,62 +261,66 @@
                 </table>
 
             </div>
+            
+                <div class=" col-span-3 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 overflow-x-auto">
+                    <div class="h-full p-10 ">
+                        <table class="w-full">
+                            <thead>
+                                <tr>
+                                    <th class="pb-3">ID</th>
+                                    <th class="pb-3">Item Name</th>
+                                    <th class="pb-3">Department</th>
+                                    <th class="pb-3">Property Code</th>
+                                    <th class="pb-3">User</th>
 
-            <div class="col-span-3  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
-                <div class="h-full p-10 overflow-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr>
-                            <th class="pb-3">ID</th>
-                            <th class="pb-3">Item Name</th>
-                            <th class="pb-3">Department</th>
-                            <th class="pb-3">Property Code</th>
-                            <th class="pb-3">User</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $servername = "localhost";
+                                $username = "root";
+                                $password = "";
+                                $database = "gsoinventory";
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        $database = "gsoinventory";
+                                // Connection to the database
+                                $connection = new mysqli($servername, $username, $password, $database);
 
-                        // Connection to the database
-                        $connection = new mysqli($servername, $username, $password, $database);
+                                // Check connection
+                                if ($connection->connect_error) {
+                                    die("Connection failed: " . $connection->connect_error);
+                                }
 
-                        // Check connection
-                        if ($connection->connect_error) {
-                            die("Connection failed: " . $connection->connect_error);
-                        }
+                                // Read all rows from the database table "items" and join with "department" table to get department name
+                                $sql = "SELECT items.*, department.dep_name FROM items 
+                                        LEFT JOIN department ON items.dep_name = department.dep_name";
+                                $result = $connection->query($sql);
 
-                        // Read all rows from the database table "items" and join with "department" table to get department name
-                        $sql = "SELECT items.*, department.dep_name FROM items 
-                                LEFT JOIN department ON items.dep_name = department.dep_name";
-                        $result = $connection->query($sql);
+                                if (!$result) {
+                                    die("Invalid query: " . $connection->error);
+                                }
 
-                        if (!$result) {
-                            die("Invalid query: " . $connection->error);
-                        }
-
-                        // Read data of each row and display in the table
-                        while ($row = $result->fetch_assoc()) {
-                            ?>
-                            <tr data-dep-id='<?php echo $row['dep_name']?>'>
-                                <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['id']?></td>
-                                <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['item_name']?></td>
-                                <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['dep_name']?></td>
-                                <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['property_code']?></td>
-                                <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['end_user']?></td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                                // Read data of each row and display in the table
+                                while ($row = $result->fetch_assoc()) {
+                                    ?>
+                                    <tr data-dep-id='<?php echo $row['dep_name']?>'>
+                                        <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['id']?></td>
+                                        <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['item_name']?></td>
+                                        <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['dep_name']?></td>
+                                        <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['property_code']?></td>
+                                        <td class="text-center border-b-2 border-gray-200 py-2"><?php echo $row['end_user']?></td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            
+
         </div>
+        
 
     </article>
     

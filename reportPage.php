@@ -110,7 +110,7 @@ if ($result && $result->num_rows > 0) {
     ?>
 
         <div class="flex justify-between text-white">
-            <p class="font-semibold text-3xl mt-5">My Profile</a></p>
+            <p class="font-semibold text-2xl mt-5">Reports</a></p>
             <p class="font-semibold mt-5"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
         </div>
         <div class="bg-white pt-5 rounded-xl h-[87%] drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] p-10 mt-5">

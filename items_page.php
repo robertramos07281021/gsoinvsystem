@@ -231,15 +231,15 @@ $total_active = mysqli_num_rows($active_result);
                                 ?>
                                
                                     <tr data-dep-id='<?php $row['dep_name']?>' class="border-b-2 border-gray-200">
-                                        <td><?php echo $row['id']?></td>
-                                        <td ><?php echo $row['item_name']?></td>
-                                        <td ><?php echo $row['dep_name']?></td>
-                                        <td class="text-center py-4"><?php echo $row['property_code']?></td>
-                                        <td class="text-center py-4"><?php echo $row['quantity']?></td>
-                                        <td class="text-center py-4"><?php echo $row['end_user']?></td>
-                                        <td class="text-center py-4"><?php echo $row['description']?></td>
-                                        <td class="text-center py-4"><?php echo $row['created_at']?></td>
-                                        <td class="  flex justify-center gap-2 py-4">
+                                        <td class="text-center py-2"><?php echo $row['id']?></td>
+                                        <td class="text-center py-2"><?php echo $row['item_name']?></td>
+                                        <td class="text-center py-2"><?php echo $row['dep_name']?></td>
+                                        <td class="text-center py-2"><?php echo $row['property_code']?></td>
+                                        <td class="text-center py-2"><?php echo $row['quantity']?></td>
+                                        <td class="text-center py-2"><?php echo $row['end_user']?></td>
+                                        <td class="text-center py-2"><?php echo $row['description']?></td>
+                                        <td class="text-center py-2"><?php echo $row['created_at']?></td>
+                                        <td class="  flex justify-center gap-2 py-2 ">
                                             <a class='bg-green-500 text-center w-20 itemEditButton rounded transition ease-out text-white font-semibold duration-300 hover:bg-white hover:text-green-500 border border-green-500 ' href='items_Edit.php?id=<?php echo $row['id']?>'>Edit</a>
                                             <a class='bg-red-500 w-20 text-center itemDeleteButton rounded transition ease-out text-white font-semibold duration-300 hover:bg-white hover:text-red-500 border border-red-500 ' href='deleteitem.php?id=<?php echo $row['id']?>'>Delete</a>
                                         </td>

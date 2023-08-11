@@ -114,7 +114,7 @@ include('serverAdd.php');
     <article class=" col-span-4 pt-6 pr-6 w-full h-full  ">
         
             <div class="flex justify-between text-white">
-                <p class="font-semibold text-2xl">Items</a></p>
+                <p class="font-semibold text-2xl"><a href="items_page.php">Items</a> / <span class="text-gray-200 ">New Item</span></p>
                 <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row  ['lastname']);?></span></p>
             </div>
             <div class="w-full h-[89.5%] mt-5 ">
