@@ -13,6 +13,12 @@ $total_active = mysqli_num_rows($active_result);
  
 $deactive_result = mysqli_query($db,"SELECT * FROM users WHERE status='deactivated'");
 $total_deactive = mysqli_num_rows($deactive_result);
+
+$d1_result = mysqli_query($db,"SELECT * FROM users WHERE mode='online'");
+$total_online= mysqli_num_rows($d1_result);
+
+$d2_result = mysqli_query($db,"SELECT * FROM users WHERE mode='offline'");
+$total_offline = mysqli_num_rows($d2_result);
 ?>
 
 <!DOCTYPE html>
@@ -361,21 +367,21 @@ $total_deactive = mysqli_num_rows($deactive_result);
                             <thead>
                             <tr>
                                 <th>
-                                    Department
+                                   Total Users
                                 </th>
                                 <th>
-                                    User active
+                                    User Online
                                 </th>
                                 <th>
-                                    User w/ deactivated
+                                    User Offline
                                 </th>
                             </tr>  
                             </thead> 
                             <tbody>
                                 <tr>
-                                    <td class="text-center">HR</td>
-                                    <td class="text-center">24</td>
-                                    <td class="text-center">36</td>
+                                    <td class="text-center"><?php echo $total_users; ?></td>
+                                    <td class="text-center"><?php echo $total_online; ?></td>
+                                    <td class="text-center"><?php echo $total_offline; ?></td>
                                     
                                 </tr>
                             </tbody>
