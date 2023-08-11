@@ -1,3 +1,4 @@
+<?php include('server.php'); ?>
 <?php
 $servername = "localhost";
 $username = "root";
@@ -33,27 +34,91 @@ if ($result && $result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <title>GSO Invsys</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.min.css">
-    <link href="../assets/css/dataTables.bootstrap.min.css" rel="stylesheet">
+   <style>
+        .welcomePageBg{
+            background-image: url("./image/welcomeBg.jpg");
+        }
+   </style>
+    
 </head>
-<body>
-    <center>
-        <h2>GSO Invsys Inventory Report</h2>
-        <h3>As of <?= date('m-d-Y'); ?></h3>
-    </center>
-    <br />
+<body class=" text-black w-full h-screen grid grid-cols-5 ">
+   
+
+
+<nav class=" p-6 fixed h-full w-[20%]">
+        <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center flex flex-col">
+            <a href="index.php" class="text-2xl font-bold"><span class="text-[red]">GSO</span> InvSystem</a>
+            <hr class="mt-5 border border-black">
+            <div class="text-start w-full mt-10">
+                <ul>
+                <a aria-current="page" href="index.php">
+                        <li class="mb-2 w-full hover:bg-red-300/20 p-3 rounded-md font-semibold flex gap-1 "><img src="./image/dashboard.png" class="rounded w-6 h-6">Dashboard</li>
+                    </a>
+                    <a href="user_management.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/users.png" class="bg-white p-1 rounded w-6 h-6">Users</li>
+                    </a>
+
+                    <a href="user_management_dept.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/department.png"  class="bg-white p-1 rounded w-6 h-6">Departments</li>
+                    </a>
+                    
+
+                    <a href="items_page.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
+                    </a>
+
+                    <a href="index_approval.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/icons8-approval-48.png"  class="bg-white p-1 rounded w-6 h-6">Manage Approval</li>
+                    </a>
+
+                    <a href="reportPage.php">
+                        <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 items-center"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
+                    </a>
+
+                    <a href="update_account.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center"><img src="./image/user.png"  class="bg-white p-1 rounded w-6 h-6">My Profile</li>
+                    </a>
+                </ul>  
+            </div>
+            <div class="flex  h-full w-full items-end">
+                <button onclick="logoutModal()" class="font-semibold hover:font-bold w-full items-center  py-2 pl-2 flex rounded-md hover:bg-red-300/20 hover:pr-2"><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20"><p class="flex items-center">Log Out</p></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class=" absolute top-0 left-0 -z-10 h-80 w-full welcomePageBg">
+    </div>
+  
+    <article class=" col-start-2 col-span-4 mr-6">
+    <?php
+        //connect to db and display account details
+        $user = $_SESSION['user_id'];
+        $sql = "SELECT * FROM users WHERE user_id = '$user'";
+        $result = mysqli_query($db, $sql);
+        $row = mysqli_fetch_assoc($result);
+    ?>
+
+        <div class="flex justify-between text-white">
+            <p class="font-semibold text-3xl mt-5">My Profile</a></p>
+            <p class="font-semibold mt-5"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($row['firstname']) ." ".ucfirst ($row['lastname']);?></span></p>
+        </div>
+        <div class="bg-white pt-5 rounded-xl h-[87%] drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] p-10 mt-5">
+            <center class="mb-5 text-2xl font-semibold">
+            <h2>GSO Invsys Inventory Report</h2>
+            <h3>As of <?= date('m-d-Y'); ?></h3>
+            </center>
+          
     
     <!-- Add the dropdown for selecting the department -->
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <label for="departmentSelect">Select Department:</label>
-                <select id="departmentSelect" class="form-control">
+                <label for="departmentSelect" class="font-semibold text-lg ">Select Department:</label>
+                <select id="departmentSelect" class="border-2 border-gray-100 p-1 w-60 rounded-lg">
                     <option value="">Select Department</option>
                     <?php foreach ($departments as $dept): ?>
                         <option value="<?= $dept; ?>"><?= $dept; ?></option>
@@ -135,6 +200,10 @@ if ($result && $result->num_rows > 0) {
             </div>
         </div>
     </div>  
+        </div>
+
+
+    </article>
     <script>
         document.getElementById('printButton').addEventListener('click', function () {
         // Call the browser's print function

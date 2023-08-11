@@ -8,9 +8,7 @@ include('serverAdd.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./css/department_mgmt.css">
-
-
+    <lnk rel="stylesheet" type="text/css" href="./css/department_mgmt.css">i
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
@@ -78,6 +76,10 @@ include('serverAdd.php');
 
                     <a href="items_page.php">
                         <li class="mb-2 w-full p-3 bg-red-300/20 rounded-md font-bold flex gap-1 items-center transition ease-out duration-300"><img src="./image/packaging.png"  class="bg-white p-1 rounded w-6 h-6">Items</li>
+                    </a>
+
+                    <a href="index_approval.php">
+                        <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/icons8-approval-48.png"  class="bg-white p-1 rounded w-6 h-6">Manage Approval</li>
                     </a>
 
                     <a href="report.php">

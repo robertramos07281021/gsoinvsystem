@@ -172,7 +172,7 @@ $total_active = mysqli_num_rows($active_result);
                             </select>
                         </div>
                         <br>
-                        <table class="table">
+                        <table class="w-full p-10 border">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -216,23 +216,23 @@ $total_active = mysqli_num_rows($active_result);
 
                                 // Read data of each row and display in the table
                                 while ($row = $result->fetch_assoc()) {
-                                    echo "
-                                    <tr data-dep-id='{$row['dep_name']}'>
-                                        <td>{$row['id']}</td>
-                                        <td>{$row['item_name']}</td>
-                                        <td>{$row['dep_name']}</td>
-                                        <td>{$row['property_code']}</td>
-                                        <td>{$row['quantity']}</td>
-                                        <td>{$row['end_user']}</td>
-                                        <td>{$row['description']}</td>
-                                        <td>{$row['created_at']}</td>
-                                        <td>
-                                            <a class='btn btn-primary btn-sm' href='/gsoinvsystem/items_Edit.php?id={$row['id']}'>Edit</a>
-                                            <a class='btn btn-danger btn-sm' href='/gsoinvsystem/deleteitem.php?id={$row['id']}'>Delete</a>
+                                ?>
+                                    <tr data-dep-id='<?php $row['dep_name']?>'>
+                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['id']?></td>
+                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['item_name']?></td>
+                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['dep_name']?></td>
+                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['property_code']?></td>
+                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['quantity']?></td>
+                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['end_user']?></td>
+                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['description']?></td>
+                                        <td class="border-b-2 border-gray-100 text-center"><?php echo $row['created_at']?></td>
+                                        <td class="border-b-2 border-gray-100 text-center">
+                                            <a class='btn btn-primary btn-sm' href='/gsoinvsystem/items_Edit.php?id=<?php echo $row['id']?>'>Edit</a>
+                                            <a class='btn btn-danger btn-sm' href='/gsoinvsystem/deleteitem.php?id=<?php echo $row['id']?>'>Delete</a>
                                         </td>
                                     </tr>
-                                    ";
-
+                                    
+                                <?php
                                     // Count the items per department and store it in the array
                                     $department = isset($row['dep_name']) ? ucfirst($row['dep_name']) : '';
                                     if (isset($itemCounts[$department])) {
