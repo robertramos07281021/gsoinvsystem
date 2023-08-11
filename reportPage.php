@@ -1,4 +1,5 @@
 <?php include('server.php'); ?>
+
 <?php
 $servername = "localhost";
 $username = "root";
@@ -124,7 +125,7 @@ if ($result && $result->num_rows > 0) {
                 <div class="row">
                     <div class="col-md-4">
                         <label for="departmentSelect" class="font-semibold text-lg ">Select Department:</label>
-                        <select id="departmentSelect" class="border-2 border-gray-100 p-1 w-60 rounded-lg">
+                        <select id="departmentSelect" class="border-2 border-gray-100 p-1 w-60 rounded-lg" onchange="redirectToReport(this)">
                             <option value="">Select Department</option>
                             <?php foreach ($departments as $dept): ?>
                                 <option value="<?= $dept; ?>"><?= $dept; ?></option>
@@ -202,36 +203,46 @@ if ($result && $result->num_rows > 0) {
                 </div>
                     
                 <div class="w-full  flex justify-end">
-                
-                     
-                            <a href=""><button id="printButton" class="w-36 py-1 bg-red-500 text-white text-lg font-semibold rounded transition ease-out duration-300 border border-red-500 hover:text-red-500 hover:bg-white ">Print Report</button></a>
-                            
-                </div>  
+                    <!-- Include the redirect function directly in the onclick attribute -->
+                    <button id="printButton" class="w-36 py-1 bg-red-500 text-white text-lg font-semibold rounded transition ease-out duration-300 border border-red-500 hover:text-red-500 hover:bg-white"
+                    onclick="redirectToReportInNewTab()">Print Report</button>
+                </div>
             </div>
         </div>
     </article>
-    <script>
-        // document.getElementById('printButton').addEventListener('click', function () {
-        // Call the browser's print function
-        // window.print();
-        // });
-        // Add event listener to the department select dropdown
-        document.getElementById('departmentSelect').addEventListener('change', function () {
-            var selectedDepartment = this.value;
-            var rows = document.querySelectorAll('#myTable-report tbody tr');
+    <script> 
+        function redirectToReportInNewTab() {
+            var selectedDepartment = document.getElementById('departmentSelect').value;
+            var url = 'reportfunction.php?department=' + encodeURIComponent(selectedDepartment);
+            var newTab = window.open(url, '_blank');
+            newTab.focus();
+        }
+      
+        function filterTableByDepartment(selectedDepartment) {
+        var rows = document.querySelectorAll("#myTable-report tbody tr");
 
-            for (var i = 0; i < rows.length; i++) {
-                var row = rows[i];
-                var department = row.getAttribute('data-dep-id');
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i];
+            var department = row.getAttribute("data-dep-id");
 
-                // If no department is selected or the row's department matches the selected department, show the row
-                if (!selectedDepartment || department === selectedDepartment) {
-                    row.style.display = 'table-row';
-                } else {
-                    row.style.display = 'none';
-                }
+            // If no department is selected or the row's department matches the selected department, show the row
+            if (!selectedDepartment || department === selectedDepartment) {
+            row.style.display = "table-row";
+            } else {
+            row.style.display = "none";
             }
+        }
+        }
+        
+
+        document
+        .getElementById("departmentSelect")
+        .addEventListener("change", function () {
+            var selectedDepartment = this.value;
+            filterTableByDepartment(selectedDepartment); // Call the function with the selected department
         });
+
+        
     </script>
 </body>
 </html>
