@@ -10,7 +10,9 @@ $active_query= "SELECT * FROM users WHERE status='$act'";
 $active_result = mysqli_query($db,$active_query);
 $total_active = mysqli_num_rows($active_result);
 
-
+ 
+$deactive_result = mysqli_query($db,"SELECT * FROM users WHERE status='deactivated'");
+$total_deactive = mysqli_num_rows($deactive_result);
 ?>
 
 <!DOCTYPE html>
@@ -337,16 +339,16 @@ $total_active = mysqli_num_rows($active_result);
                 <div class="w-full h-full grid grid-flow-row-dense grid-rows-5 grid-cols-2 gap-6">
                     <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
 <!-- pa display po ng total account user kasama ung inactive user -->
-                        total user with Deactivated user
-
+<center> <b>  Total  Deactivated user </b> <br><br>
+<?php echo $total_deactive;  ?></center>
 
 
                     </div>
 
                     <div class="bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
 <!-- pa display po ng total active user -->
-                        total active user only
-
+                                        <center> <b>Total active user </b> <br><br>
+                                         <?php echo $total_active;  ?></center>
 
 
                     </div>
@@ -354,7 +356,7 @@ $total_active = mysqli_num_rows($active_result);
                     <div class="row-start-2 row-span-5 bg-white col-span-2 rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] w-full">
 
 <!-- pa display po ung department tapos palagyan ng total account ng department -->
-                                            example
+                                            
                         <table class="w-full">
                             <thead>
                             <tr>
