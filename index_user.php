@@ -309,7 +309,7 @@
                                  
                             }
 
-                        }elseif(!isset($_GET['id'])) {
+                        }elseif(!isset($_GET['id'])&&!isset($_GET['vid'])) {
                             ?>
 
                             <p style="text-align: center; font-weight: 500; color:black;"> Please select item to send request. </p>
