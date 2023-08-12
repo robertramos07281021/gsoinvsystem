@@ -19,6 +19,9 @@ $res_dep = mysqli_query($db,$display_dep);
 
 //display total users, active users and online users  
 
+ 
+ 
+
 $displayUser = "SELECT * FROM users";
 $res_query = mysqli_query($db,$displayUser);
 
