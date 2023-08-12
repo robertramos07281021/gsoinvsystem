@@ -175,8 +175,18 @@
 
 <!-- VIEW ITEMS -->
 <?php  
+//  $u_dp = $row['department'];
+//  $name = ucfirst($row['firstname']). " ". ucfirst($row['lastname']);                      
+//  $num = 0;
+//  $ress = mysqli_query($db,"SELECT * FROM requests WHERE user_id='$user' ");
+//  $total_request = mysqli_num_rows($ress);
+
+//  $ress2 = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name' AND r_status='pending'");
+//  $total_request2 = mysqli_num_rows($ress2);
+
+
                         if(isset($_GET['vid'])){
-                            $item_id = $_GET['id'];
+                            $item_id = $_GET['vid'];
 
                             $query_items = mysqli_query($db, "SELECT * FROM items WHERE id='$item_id'");
                            $rowss = mysqli_fetch_assoc($query_items);
@@ -188,6 +198,11 @@
                                 <h2>Description:  <?php  echo " ".$rowss['description'];  ?></h2> 
                                 <h2>Quantity:  <?php  echo " ".$rowss['quantity'];  ?></h2> 
                         <?php
+                        }else{
+                           ?>
+
+<p style="text-align: center; font-weight: 500; color:black;"> Please select item to send request. </p>
+<?php
                         }
                 
                 
