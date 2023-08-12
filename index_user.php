@@ -214,7 +214,7 @@
                         }else{
                            ?>
 
-<p style="text-align: center; font-weight: 500; color:black;"> Please select item to send request. </p>
+<p style="text-align: center; font-weight: 500; color:black;">  </p>
 <?php
                         }
                 
