@@ -169,7 +169,7 @@
 
             </div>
 
-            <div class="col-span-2 pt-6 px-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5">
+            <div class="col-span-2 pt-6 px-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 w-full">
                <center class="font-bold text-xl mb-2"> <h2> Request Form </h2> </center>
 
                <?php
@@ -178,7 +178,7 @@
                             $ress = mysqli_query($db,"SELECT * FROM items WHERE id='$id'");
                             $rowss = mysqli_fetch_assoc($ress);
                             ?>
-                <form method="POST" class=" mt-10">
+                <form method="POST" class=" mt-10 w-full">
                     <div class="mb-2">
                         <label class="text-lg font-bold">Item:</label>
                         <div class="border-2 border-gray text-base py-1 px-2 rounded "><?php echo $rowss['item_name']; ?></div>
