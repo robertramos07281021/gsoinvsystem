@@ -28,7 +28,7 @@ if ($result) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (!isset($_GET["id"])) {
-        header("Location: /gsoinvsystem/additem.php");
+        header("Location: additem.php");
         exit;
     }
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $row = $result->fetch_assoc();
 
     if (!$row) {
-        header("Location: /gsoinvsystem/additem.php");
+        header("Location: additem.php");
         exit;
     }
 
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         } else {
             $successMessage = "Item Updated";
 
-            header("Location: /gsoinvsystem/items_page.php");
+            header("Location: items_page.php");
             exit;
         }
     }
