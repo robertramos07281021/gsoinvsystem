@@ -236,8 +236,8 @@
                                         $tquan = $i_quantity - $request_quantity;
 
                                         mysqli_query($db,"UPDATE items SET quantity='$tquan' WHERE id='$item_id'");
-                                        mysqli_query($db, "INSERT INTO requests (item_id,user_id,requester,item_name,dep_name,property_code,purpose,end_user,description,r_status,date,date_needed)
-                             VALUES ('$item_id','$user','$requester','$item_name','$dep_name','$property_code','$purpose','$end_user','$description','$r_status','$date','$dateN')");
+                                        mysqli_query($db, "INSERT INTO requests (item_id,user_id,requester,item_name,dep_name,property_code,purpose,end_user,description,r_status,date,date_needed,quantity)
+                             VALUES ('$item_id','$user','$requester','$item_name','$dep_name','$property_code','$purpose','$end_user','$description','$r_status','$date','$dateN','$request_quantity')");
 
                              ?>
                                 <script>
