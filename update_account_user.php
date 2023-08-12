@@ -112,7 +112,7 @@
                                 $email = mysqli_real_escape_string($db, $_POST['email']);
                                 $address = mysqli_real_escape_string($db, $_POST['address']);
                                 $phone = mysqli_real_escape_string($db, $_POST['mobileNum']);
-                                
+                                $dep = mysqli_real_escape_string($db, $_POST['department']);
                                 $pass1 = mysqli_real_escape_string($db, $_POST['up_pass1']);
                                 // $pass2 = mysqli_real_escape_string($db, $_POST['up_pass2']);
                                 
@@ -125,7 +125,7 @@
                                         if($pass_enc === $row['password']){
 
                                     $sql= "UPDATE users SET firstname='$firstname',lastname='$lastname',
-                                    email='$email', phone_num='$phone', u_address='$address' WHERE user_id='$u_id' ";
+                                    email='$email', phone_num='$phone', u_address='$address',department='$dep' WHERE user_id='$u_id' ";
 
                                     mysqli_query($db, $sql);  //update to database
                         ?>
