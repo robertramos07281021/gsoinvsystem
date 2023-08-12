@@ -148,7 +148,7 @@
                                 <td class="py-3 text-center"> <?php echo  $row_item['dep_name'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row_item['property_code'] ?>  </td>
                                 <td class="py-3 text-center"> <?php echo  $row_item['quantity'] ?>  </td>
-                                <td class="py-3 justify-center flex"><a href="index_user_viewItems.php?id=<?php echo $row_item['id']; ?>" class="border-r pr-2 mr-2" style='color:blue; font-weight:700;'>View</a>
+                                <td class="py-3 justify-center flex"><a href="index_user.php?vid=<?php echo $row_item['id']; ?>" class="border-r pr-2 mr-2" style='color:blue; font-weight:700;'>View</a>
                                 <a href="index_user.php?id=<?php echo $row_item['id']; ?>" class=" pr-2 mr-2" style='color:red; font-weight:700;'>Request</a>
                                  
                                  
@@ -171,6 +171,45 @@
 
             <div class="col-span-2 pt-6 px-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 w-full">
                <center class="font-bold text-xl mb-2"> <h2> Request Form </h2> </center>
+
+
+<!-- VIEW ITEMS -->
+<?php  
+//  $u_dp = $row['department'];
+//  $name = ucfirst($row['firstname']). " ". ucfirst($row['lastname']);                      
+//  $num = 0;
+//  $ress = mysqli_query($db,"SELECT * FROM requests WHERE user_id='$user' ");
+//  $total_request = mysqli_num_rows($ress);
+
+//  $ress2 = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name' AND r_status='pending'");
+//  $total_request2 = mysqli_num_rows($ress2);
+
+
+                        if(isset($_GET['vid'])){
+                            $item_id = $_GET['vid'];
+
+                            $query_items = mysqli_query($db, "SELECT * FROM items WHERE id='$item_id'");
+                           $rowss = mysqli_fetch_assoc($query_items);
+
+                           ?>
+                                <h3>Item name:  <?php  echo " ".$rowss['item_name'];  ?></h3> 
+                                <h2>Department:  <?php  echo " ".$rowss['dep_name'];  ?></h2> 
+                                <h2>Property Code:  <?php  echo " ".$rowss['property_code'];  ?></h2> 
+                                <h2>Description:  <?php  echo " ".$rowss['description'];  ?></h2> 
+                                <h2>Quantity:  <?php  echo " ".$rowss['quantity'];  ?></h2> 
+                        <?php
+                        }else{
+                           ?>
+
+<p style="text-align: center; font-weight: 500; color:black;"> Please select item to send request. </p>
+<?php
+                        }
+                
+                
+                ?>
+
+
+
 
                <?php
                         if(isset($_GET['id'])){
@@ -270,7 +309,7 @@
                                  
                             }
 
-                        }elseif(!isset($_GET['id'])) {
+                        }elseif(!isset($_GET['id'])&&!isset($_GET['vid'])) {
                             ?>
 
                             <p style="text-align: center; font-weight: 500; color:black;"> Please select item to send request. </p>
