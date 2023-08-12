@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $successMessage = "Item added correctly";
             // Redirect to a success page
-            header("Location: /gsoinvsystem/items_page.php");
+            header("Location: items_page.php");
             exit;
         }
     }
