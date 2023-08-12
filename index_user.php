@@ -170,7 +170,8 @@
             </div>
 
             <div class="col-span-2 pt-6 px-10 h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 w-full">
-               <center class="font-bold text-xl mb-2"> <h2> Request Form </h2> </center>
+                
+            
 
 
                 <!-- VIEW ITEMS -->
@@ -185,17 +186,36 @@
                            $rowss = mysqli_fetch_assoc($query_items);
 
                            ?>
-                                <h3>Item name:  <?php  echo " ".$rowss['item_name'];  ?></h3> 
-                                <h2>Department:  <?php  echo " ".$rowss['dep_name'];  ?></h2> 
-                                <h2>Property Code:  <?php  echo " ".$rowss['property_code'];  ?></h2> 
-                                <h2>Description:  <?php  echo " ".$rowss['description'];  ?></h2> 
-                                <h2>Quantity:  <?php  echo " ".$rowss['quantity'];  ?></h2> 
+                            <center class="font-bold text-xl mb-2"> <h2> Item View </h2> </center>
+                                <div>
+                                    <div>
+                                        <h3 class="text-xl font-bold">Item name:  </h3> 
+                                        <div class="w-full border-2 border-gray-200 p-1 pl-2 font-semibold"><?php  echo $rowss['item_name'];  ?></div>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-xl font-bold">Department:</h2> 
+                                        <div class="w-full border-2 border-gray-200 p-1 pl-2  font-semibold"><?php  echo $rowss['dep_name'];  ?></div>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-xl font-bold">Property Code:</h2> 
+                                        <div class="w-full border-2 border-gray-200 p-1 pl-2  font-semibold"><?php  echo $rowss['property_code'];  ?></div>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-xl font-bold">Description:</h2> 
+                                        <div class="w-full border-2 border-gray-200 p-1 pl-2 font-semibold"><?php  echo $rowss['description'];  ?></div>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-xl font-bold">Quantity:</h2> 
+                                        <div class="w-full border-2 border-gray-200 p-1 pl-2 font-semibold"><?php  echo $rowss['quantity'];  ?></div>
+                                    </div>
+                                </div>
+
                         <?php
                         }else{
                            ?>
 
-                            <p style="text-align: center; font-weight: 500; color:black;">  </p>
-                            <?php
+<p style="text-align: center; font-weight: 500; color:black;"> Please select item to send request. </p>
+<?php
                         }
                 
                 
@@ -209,7 +229,9 @@
                             $id = $_GET['id'];
                             $ress = mysqli_query($db,"SELECT * FROM items WHERE id='$id'");
                             $rowss = mysqli_fetch_assoc($ress);
-                            ?>
+                        ?>  
+                <center class="font-bold text-xl mb-2"> <h2> Request Form </h2> </center>
+
                 <form method="POST" class=" mt-10 w-full">
                     <div class="mb-2">
                         <label class="text-lg font-bold">Item:</label>
@@ -305,7 +327,7 @@
                         }elseif(!isset($_GET['id']) ||!isset($_GET['vid'])) {
                             ?>
 
-                            <p style="text-align: center; font-weight: 500; color:black;"> Please select item to send request. </p>
+                            <p class="text-xl font-bold text-center"> Select Action </p>
 
                     <?php
                         }
