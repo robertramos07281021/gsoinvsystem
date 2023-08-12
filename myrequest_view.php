@@ -200,9 +200,11 @@
                             <h3> Purpose of Request: <?php echo $row1['purpose'];?> </h3>
                             <h3> Status of Request: <?php echo $row1['r_status'];?> </h3>
                             <h3> Request Date: <?php echo $row1['date'];?> </h3>
+                            <h3> Quantity: <?php echo $row1['quantity'];?> </h3>
+                            <br>
                             <h3> Date Needed: <?php echo $row1['date_needed'];?> </h3>
 
-                            <br>
+                            
                             
                             <?php
                             $reason = $row1['reason'];
