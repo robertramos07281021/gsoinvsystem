@@ -119,7 +119,7 @@
             <p class="font-semibold text-2xl flex flex-cols">Departments</p>
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst($_SESSION['lastname']);?></span></p>
         </div>
-        <div class="grid grid-flow-row-dense grid-cols-6 grid-rows-3  pt-6 h-[92%]">
+        <div class="grid grid-flow-row-dense grid-cols-6 grid-rows-3  pt-6 h-full">
                 <div class="col-span-3  h-full "> 
                     <div class="rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]  grid gap-6 mt-3">
                         <a href="department_mgmt.php" class="w-full">
