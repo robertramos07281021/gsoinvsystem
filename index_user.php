@@ -173,16 +173,9 @@
                <center class="font-bold text-xl mb-2"> <h2> Request Form </h2> </center>
 
 
-<!-- VIEW ITEMS -->
-<?php  
-//  $u_dp = $row['department'];
-//  $name = ucfirst($row['firstname']). " ". ucfirst($row['lastname']);                      
-//  $num = 0;
-//  $ress = mysqli_query($db,"SELECT * FROM requests WHERE user_id='$user' ");
-//  $total_request = mysqli_num_rows($ress);
-
-//  $ress2 = mysqli_query($db,"SELECT * FROM requests WHERE requester='$name' AND r_status='pending'");
-//  $total_request2 = mysqli_num_rows($ress2);
+                <!-- VIEW ITEMS -->
+                <?php  
+                
 
 
                         if(isset($_GET['vid'])){
@@ -201,8 +194,8 @@
                         }else{
                            ?>
 
-<p style="text-align: center; font-weight: 500; color:black;"> Please select item to send request. </p>
-<?php
+                            <p style="text-align: center; font-weight: 500; color:black;">  </p>
+                            <?php
                         }
                 
                 
@@ -280,28 +273,28 @@
 
                              ?>
                                 <script>
-                                                                    swal({title: "Request Sent!", text: "Please wait for approval", type:"success"})
-                                                                    .then(function(){ 
-                                                                            location.href="index_user.php";
-                                                                        });
+                                         swal({title: "Request Sent!", text: "Please wait for approval", type:"success"})
+                                         .then(function(){ 
+                                         location.href="index_user.php";
+                                    });
                                                                     
-                                                            </script>
+                                </script>
 
                             <?php
                                     }else{
                                         ?>
-                                                <script>
-                                                  swal({title: "Invalid Quantity", text: "Must be less than available quantity of items.", type:"error", icon: "error"});
+                                 <script>
+                                    swal({title: "Invalid Quantity", text: "Must be less than available quantity of items.", type:"error", icon: "error"});
                                                                     
-                                                 </script>
-                                        <?php
+                                 </script>
+                            <?php
                                     }
 
                                 }else{
                                     ?>
-                                      <script>
+                                   <script>
                                          swal({title: "Incomplete details", text: "Please fill up the forms.", type:"error", icon: "error"});
-                                      </script>
+                                   </script>
 
                                 <?php
                                 }
@@ -309,7 +302,7 @@
                                  
                             }
 
-                        }elseif(!isset($_GET['id'])&&!isset($_GET['vid'])) {
+                        }elseif(!isset($_GET['id']) ||!isset($_GET['vid'])) {
                             ?>
 
                             <p style="text-align: center; font-weight: 500; color:black;"> Please select item to send request. </p>
