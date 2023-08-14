@@ -32,58 +32,7 @@
 
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" type="text/css" href="../GSOInvSys/css/style.css">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <title>GSO Invsys</title>
-    <style>
-        .welcomePageBg{
-            background-image: url('./image/welcomeBg.jpg');
-        }
-        #logoutModal{
-            display: none;
-        }   
-        #logOutButtonYes{
-            box-shadow: 2px 2px 0px 0px #000000;
-        }
-        #logOutButtonNo{
-            box-shadow: 2px 2px 0px 0px #000000;
-        }
-        #logOutButtonYes:hover{
-            box-shadow:2px 2px 0px 0px #66cc00;
-        }
-        #logOutButtonNo:hover{
-            box-shadow:2px 2px 0px 0px #ff4d4d; 
-        }
-
-        .approve{
-            padding: .5rem;
-            background: tomato;
-            color: black;
-            margin-top: .2rem;
-            margin-bottom: .5rem;
-            border-radius: 5px;
-            margin-left: 1rem;
-        }
-
-        .approve:hover{
-            color:white;
-        }
-    </style>
-  
-</head>
-
-<body class=" text-black w-full h-screen grid grid-cols-5">
-
-    <?php 
+<?php 
         if (isset($_SESSION['success'])): 
     ?>
 
@@ -106,6 +55,26 @@
                 $count_row = mysqli_num_rows($rq);
 
             ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>GSO Invsys</title>
+  
+</head>
+
+<body class=" text-black w-full h-screen grid grid-cols-5">
+
+    <article class="lg:hidden 2xl:hidden 2xl:hidden absolute w-[100%] h-[100%] bg-white z-10">
+        <div class="w-full h-full flex justify-center items-center">
+        <p>This site accesible on computer only.</p>
+        </div>
+    </article>
 <!-- Navbar -->
     <nav class=" p-6 fixed h-full w-[20%]">
         <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center flex flex-col ">
@@ -150,7 +119,7 @@
         </div>
     </nav>
 
-    <div class=" absolute top-0 left-0 -z-10 h-80 w-full welcomePageBg">
+    <div class=" absolute top-0 left-0 -z-10 h-80 w-full " id="welcomePageBg" style="background-image: url('./image/welcomeBg.jpg');background-repeat: no-repeat; background-size: 100% 100%;">
     </div>
 
     <nav class="p-6 ">
@@ -206,7 +175,7 @@
             <div class="grid grid-cols-3 p-5">
                     <div class="col-span-2">
                         <p class="text-xl flex font-bold">For Approval</p>
-                        <p class="text-lg font-semibold"><?php echo $count_row; ?></p>
+                        <p class="text-lg font-semibold <?php if($count_row > 0) { echo "animate-pulse"; }?> "><?php echo $count_row; ?></p>
                         
                     </div>
                     <div class="flex justify-end">
@@ -244,12 +213,12 @@
                                 
                                     if($row['mode'] ==="online" ){
                                         ?>
-                                            <p style='color: green; font-weight: 700;'> <?php echo ucfirst($row['mode']);  ?>  </p>
+                                            <p class="text-green-500 font-semibold animate-pulse"> <?php echo ucfirst($row['mode']);  ?>  </p>
 
                                     <?php
                                     }else if($row['mode'] ==="offline" ){
                                         ?>
-                                             <p style='color: black; font-weight: 700;'> <?php echo ucfirst($row['mode']);  ?>  </p>
+                                             <p class="font-semibold"> <?php echo ucfirst($row['mode']);  ?>  </p>
                                         <?php
                                     }
                                 
@@ -324,7 +293,7 @@
 
     </article>
     
-    <div class="fixed top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
+    <div class="fixed top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm hidden" id="logoutModal" >
         <div class="flex w-full h-full justify-center items-center">
             <div class="h-56 w-80 fixed rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
                 <div class="bg-white h-full w-full flex flex-col rounded-md">
@@ -332,9 +301,9 @@
                     <div class="text-center flex flex-col justify-center border w-full h-full">
                         <p class="font-semibold">Do you want to logout?</p>
                         <div class="flex justify-center gap-10 mt-10">
-                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1  w-20 bg-green-500 rounded text-white border border-green-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-green-500 hover:border-green-500" id="logOutButtonYes">Yes</button></a>
+                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1  w-20 bg-green-500 rounded text-white border border-green-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-green-500 hover:border-green-500 hover:drop-shadow-[2px_2px_0px_#22c55e] drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]" >Yes</button></a>
                             
-                            <button class="p-1 w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" onclick="noLogout()" id="logOutButtonNo">No</button>
+                            <button class="p-1 w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500 hover:drop-shadow-[2px_2px_0px_#ef4444] drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]" onclick="noLogout()" >No</button>
                         </div>    
                     </div>
                 </div>
@@ -342,7 +311,7 @@
         </div>
     </div>
 
-<script src="./script/jscript.js"> 
+<script src="./script/jscript.js">
 
  </script>
 <?php endif ?>

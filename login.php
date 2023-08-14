@@ -1,20 +1,6 @@
 <?php include('server.php'); ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-    <link rel="stylesheet" type="text/css" href="./css/style2.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <title>GSO Invsys Sample</title>
-</head>
-
-<body class="h-screen bg-red-500/90">
-
-    <?php
+<?php
         if(isset($_SESSION['register']) && $_SESSION['register'] != ''){
     ?> 
     <script>
@@ -23,10 +9,22 @@
     <?php
     unset($_SESSION['register']);
         }
-    ?>  
+    ?> 
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>GSO Invsys Sample</title>
+</head>
 
+
+<body class="h-screen bg-red-500/90">
     <div class="w-full p-12 h-full ">    
-        <div class="w-full grid grid-cols-3 loginRight h-full rounded-[20px] drop-shadow-[0_0px_10px_rgba(0,0,0,0.5)]">
+        <div class="w-full grid grid-cols-3 loginRight h-full rounded-[20px] drop-shadow-[0_0px_10px_rgba(0,0,0,0.5)]" style="background-image: url('./image/bg2.jpg'); background-repeat: no-repeat; background-size: 100% 100%;">
             <div class="w-full h-full p-9 ">
                 <div class="border w-full h-full bg-white flex justify-center items-center rounded-lg">
                     <div class=" w-64 ">
@@ -50,7 +48,7 @@
                             </div>
 
                             <div class="mt-8">
-                                <button type="submit" name="login" class="font-bold text-white border px-4 py-1 rounded-lg w-full flex justify-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" id="btnLog">
+                                <button type="submit" name="login" class="font-bold text-white border px-4 py-1 rounded-lg w-full flex justify-center items-center transition ease-in-out delay-150  hover:bg-white hover:border-[red] hover:text-[red] bg-[red] duration-300 drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:drop-shadow-[2px_2px_0px_red]" id="btnLog">
                                     <img src="./image/icons8-login-64.png" class="w-6 h-6">
                                     Login
                             </button>
@@ -63,6 +61,11 @@
         </div>
     </div>   
 
+    <div class="w-full h-full z-10 bg-white absolute lg:hidden 2xl:hidden xl:hidden top-0 right-0">
+        <div class="flex justify-center items-center w-full h-full">
+            <p>This site is accesibble on computer only.</p>
+        </div>
+    </div>
 <?php
     //login page
 
@@ -108,7 +111,7 @@ if(isset($_POST['login'])){
 
  
 
-}else if( $count === 1 && $row['status']=== $stat && $row['role'] === "user"){
+    }else if( $count === 1 && $row['status']=== $stat && $row['role'] === "user"){
     $user_id = $row['user_id'];
 
     if($row['username'] === $log_user && $row['password'] === $pass){
@@ -135,7 +138,7 @@ if(isset($_POST['login'])){
     
 } elseif($row['username'] != $log_user && $row['password'] != $pass){
     ?>
-<script>
+    <script>
       swal({title: "Sorry", text: "Invalid credentials!", type:"error", icon: "error"});
          </script>
     <?php
@@ -143,7 +146,5 @@ if(isset($_POST['login'])){
 
 }
 ?>
-
-
 </body>
 </html>
