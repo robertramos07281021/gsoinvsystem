@@ -65,7 +65,7 @@ $errors = array();
         </div>
     </nav>
     
-    <div class=" absolute top-0 left-0 -z-10 h-80 w-full " style="background-image: url('./image/welcomeBg.jpg');background-repeat: no-repeat; background-size: 100% 100%;">
+    <div class="absolute top-0 left-0 -z-10 h-80 w-full " style="background-image: url('./image/welcomeBg.jpg');background-repeat: no-repeat; background-size: 100% 100%;">
     </div>
    
     <article class="col-start-2 col-span-4 py-6 pr-6 w-full h-full  ">
@@ -75,11 +75,9 @@ $errors = array();
             <p class="font-semibold"> Welcome  Admin <span class="font-bold text-xl" ><?php echo ucfirst($_SESSION['firstname']) ." ".ucfirst ($_SESSION['lastname']);?></span></p>
         </div>
         <div class="col-start-1 flex items-end mt-6">
-                <a href="create_account.php"><button class="p-2 bg-white rounded-md hover:bg-gray-700 hover:text-white font-semibold transition ease-out duration-300" id="creatAccountButton">Create Account</button></a>
+                <a href="create_account.php"><button class="p-2 bg-white rounded-md hover:bg-gray-700 hover:text-white font-semibold transition ease-out duration-300 drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:drop-shadow-[2px_2px_0px_white]" id="creatAccountButton">Create Account</button></a>
             </div>
-        
-
-        <div class="grid grid-cols-5 mt-6 h-[86.5%] pb-6 gap-6">
+        <div class="grid grid-cols-5 mt-6 h-[86%] pb-6 gap-6">
             <div class="col-span-5  h-full bg-white rounded-xl drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] mb-5 px-10 pt-10 ">
                 <div class="overflow-auto h-full">
                     <table class="w-full">
@@ -92,11 +90,9 @@ $errors = array();
                                 <th class="w-40 pb-3">Department</th>
                                 <th class="w-40 pb-3">Role</th>
                                 <th class="w-40 pb-3">Status</th>
-                                <th class="w-40 pb-3">Action</th>
-                                
+                                <th class="w-40 pb-3">Action</th>  
                              </tr>
                         </thead>
-
                         <tbody>
                         <?php   
                             while( $row = mysqli_fetch_assoc ( $res_query ) ) {

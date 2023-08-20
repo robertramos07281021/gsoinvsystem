@@ -1,6 +1,28 @@
 <?php
-include('server.php'); 
-include('serverAdd.php');   
+    include('server.php'); 
+    include('serverAdd.php');   
+?>
+
+<?php 
+    if (isset($_SESSION['success'])): 
+?>
+
+<?php
+    echo $_SESSION['success'];
+    unset($_SESSION['success']);
+?>
+
+<?php endif ?>
+
+<?php 
+    if (isset($_SESSION['username'])):    
+?>
+
+<?php           
+    $user = $_SESSION['user_id'];
+    $sql = "SELECT * FROM users WHERE user_id = '$user'";
+    $result = mysqli_query($db, $sql);
+    $row = mysqli_fetch_assoc($result);  
 ?>
 
 <!DOCTYPE html>
@@ -8,53 +30,11 @@ include('serverAdd.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./css/department_mgmt.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <style>
-       #logoutModal{
-            display: none;
-        }   
-        #logOutButtonYes{
-            box-shadow: 2px 2px 0px 0px #000000;
-        }
-        #logOutButtonNo{
-            box-shadow: 2px 2px 0px 0px #000000;
-        }
-        #logOutButtonYes:hover{
-            box-shadow:2px 2px 0px 0px #66cc00;
-        }
-        #logOutButtonNo:hover{
-            box-shadow:2px 2px 0px 0px #ff4d4d; 
-        }
-        .newItemsButton{
-            box-shadow: 2px 2px 0px 0px #000000;
-        }
-
-    </style>
-
     <title>GSO Invsys</title>
-    
-  
 </head>
 
 <body class=" text-black w-full h-screen grid grid-cols-5">
-
-    <?php 
-        if (isset($_SESSION['success'])): 
-    ?>
-
-    <?php
-        echo $_SESSION['success'];
-        unset($_SESSION['success']);
-    ?>
-    <?php endif ?>
-
-    <?php 
-    if (isset($_SESSION['username'])): 
-        
-    ?>
-
 <!-- Navbar -->
     <nav class=" p-6 fixed h-full w-[20%]">
         <div class="drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)] h-full w-full rounded-xl bg-white p-8 text-center flex flex-col ">
@@ -82,7 +62,7 @@ include('serverAdd.php');
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/icons8-approval-48.png"  class="bg-white p-1 rounded w-6 h-6">Manage Approval</li>
                     </a>
 
-                    <a href="report.php">
+                    <a href="reportPage.php">
                         <li class="mb-2 w-full p-3 hover:bg-red-300/20 rounded-md font-semibold flex gap-1 items-center transition ease-out duration-300"><img src="./image/report.png"  class="bg-white p-1 rounded w-6 h-6">Reports</li>   
                     </a>
 
@@ -99,19 +79,10 @@ include('serverAdd.php');
         </div>
     </nav>
 
-    <div class=" absolute top-0 left-0 -z-10 h-80 w-full welcomePageBg">
+    <div class="absolute top-0 left-0 -z-10 h-80 w-full " style="background-image: url('./image/welcomeBg.jpg');background-repeat: no-repeat; background-size: 100% 100%;">
     </div>
 
-    <nav class="p-6 ">
-    </nav>
-
-    <?php           $user = $_SESSION['user_id'];
-                    $sql = "SELECT * FROM users WHERE user_id = '$user'";
-                    $result = mysqli_query($db, $sql);
-                    $row = mysqli_fetch_assoc($result);  
-    ?>
-
-    <article class=" col-span-4 pt-6 pr-6 w-full h-full  ">
+    <article class=" col-span-4 pt-6 pr-6 w-full h-full col-start-2 ">
         
             <div class="flex justify-between text-white">
                 <p class="font-semibold text-2xl"><a href="items_page.php">Items</a> / <span class="text-gray-200 ">New Item</span></p>
@@ -119,19 +90,20 @@ include('serverAdd.php');
             </div>
             <div class="w-full h-[89.5%] mt-5 ">
                 <div class="w-full h-full gap-6  bg-white rounded-xl flex justify-center drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]">
-                    <div class=" w-1/2 h-full">
-                        <h2 class="w-full  text-center text-3xl font-bold mb-10 pt-10">New Item</h2>
+                    <div class=" w-1/2 h-full flex flex-col grid content-between">
+                        <div class="my-8">
+                            <h2 class="w-full  text-center text-3xl font-bold ">New Item</h2>
                         <?php
-                        if (!empty($errorMessage)) {
-                            echo "
-                            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                            <strong>$errorMessage</strong>
-                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                            </div>
-                            ";
-                        }
+                            if (!empty($errorMessage)) {
                         ?>
-                        <form method="post" class="w-full grid content-between  h-[80.5%]">
+                                <div class='text-center w-full' >
+                                    <p class="text-red-500"><?php echo $errorMessage; ?></p>
+                                </div>
+                        <?php
+                    }
+                        ?>
+                        </div>  
+                        <form method="post" class="w-full grid content-between pb-2 h-[80.5%]">
                             <div>
                             <div class=" mb-3">
                                 <label for="item_name"class="text-xl font-semibold">Item Name:</label>
@@ -181,7 +153,7 @@ include('serverAdd.php');
                                         <div class='offset-sm-3 col-sm-6'>
                                             <div class='alert alert-success alert-dismissible fade show' role='alert'>
                                             <strong>$successMessage</strong>
-                                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'>close</button>
                                             </div>
                                         </div>
                                 </div>
@@ -191,10 +163,10 @@ include('serverAdd.php');
 
                             <div class="flex gap-10 justify-center pb-5">
                                 <div class="">
-                                    <button type="submit" class="bg-green-500 py-1 w-32 text-white border border-green-500 font-semibold newItemsButton rounded transition ease-out duration-300 hover:text-green-500 hover:bg-white">Add Item</button>
+                                    <button type="submit" class="bg-green-500 py-1 w-32 text-white border border-green-500 font-semibold newItemsButton rounded transition ease-out duration-300 hover:text-green-500 hover:bg-white drop-shadow-[2px_2px_0px_black] hover:drop-shadow-[2px_2px_0px_#22c55e]">Add Item</button>
                                 </div>
                                 <div class="">
-                                    <a  href="items_page.php" role="button"><div class="bg-red-500 border border-red-500 text-white text-center font-semibold py-1 w-32 newItemsButton rounded transition ease-out duration-300 hover:text-red-500 hover:bg-white">Cancel</div></a>
+                                    <a  href="items_page.php" role="button"><div class="bg-red-500 border border-red-500 text-white text-center font-semibold py-1 w-32 newItemsButton rounded transition ease-out duration-300 hover:text-red-500 hover:bg-white drop-shadow-[2px_2px_0px_black] hover:drop-shadow-[2px_2px_0px_#ef4444]">Cancel</div></a>
                                 </div>
                             </div>
                         </form>
@@ -203,17 +175,17 @@ include('serverAdd.php');
             </div>
     </article>
     
-    <div class="fixed top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm" id="logoutModal" >
+    <div class="fixed top-0 left-0 h-full w-full bg-white/30 backdrop-blur-sm hidden" id="logoutModal" >
         <div class="flex w-full h-full justify-center items-center">
             <div class="h-56 w-80 fixed rounded drop-shadow-[0_0px_3px_rgba(0,0,0,0.5)]" >
                 <div class="bg-white h-full w-full flex flex-col rounded-md">
-                    <p class="text-black font-bold pl-2 py-2 self-start border w-full flex "><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20">Log Out</p>
-                    <div class="text-center flex flex-col justify-center border w-full h-full">
+                    <p class="text-black font-bold pl-2 py-2 self-start border-b w-full flex "><img src="./image/icons8-logout-64.png" alt="logut" width="20" height="20">Log Out</p>
+                    <div class="text-center flex flex-col justify-center  w-full h-full">
                         <p class="font-semibold">Do you want to logout?</p>
                         <div class="flex justify-center gap-10 mt-10">
-                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1  w-20 bg-green-500 rounded text-white border border-green-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-green-500 hover:border-green-500" id="logOutButtonYes">Yes</button></a>
+                            <a href="index.php?logout='1'" class=" font-bold"><button class="p-1  w-20 bg-green-500 rounded text-white border border-green-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-green-500 hover:border-green-500 drop-shadow-[2px_2px_0px_black] hover:drop-shadow-[2px_2px_0px_#22c55e]" id="logOutButtonYes">Yes</button></a>
                             
-                            <button class="p-1 w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500" onclick="noLogout()" id="logOutButtonNo">No</button>
+                            <button class="p-1 w-20 bg-red-500 rounded text-white border border-red-500 font-semibold transition ease-out duration-300 hover:bg-white hover:text-red-500 hover:border-red-500 drop-shadow-[2px_2px_0px_black] hover:drop-shadow-[2px_2px_0px_#ef4444]" onclick="noLogout()" id="logOutButtonNo">No</button>
                         </div>    
                     </div>
                 </div>
@@ -221,7 +193,7 @@ include('serverAdd.php');
         </div>
     </div>
 
-<script src="./script/jscript.js" ></script>
+<script src="./script/jscript.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function () {
